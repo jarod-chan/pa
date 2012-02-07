@@ -1,0 +1,20 @@
+mysql 编码设置
+
+MySQL的默认编码是Latin1，不支持中文，那么如何修改MySQL的默认编码呢，下面以UTF-8为例来说明 
+
+需要注意的是，要修改的地方非常多，相应的修改方法也很多。下面是一种最简单最彻底的方法： 
+
+一、Windows 
+1、中止MySQL服务 
+2、在MySQL的安装目录下找到my.ini，如果没有就把my-medium.ini复制为一个my.ini即可 
+3、打开my.ini以后，在[client]和[mysqld]下面均加上default-character-set=utf8，保存并关闭 
+4、启动MySQL服务 
+
+二、Linux 
+1、中止MySQL服务（bin/mysqladmin -u root shutdown） 
+2、在/etc/下找到my.cnf，如果没有就把MySQL的安装目录下的support-files目录下的my-medium.cnf复制到/etc/下并改名为my.cnf即可 
+3、打开my.cnf以后，在[client]和[mysqld]下面均加上default-character-set=utf8，保存并关闭 
+4、启动MySQL服务（bin/mysqld_safe &） 
+
+非常简单，这样的修改一劳永逸，今后MySQL一切相关的默认编码均为UTF-8了，创建新表格的时候无需再次设置 
+需要注意的是，当前数据库中已经存在的数据仍保留现有的编码方式，因此需要自行转码，方法在网上有很多，不再赘述

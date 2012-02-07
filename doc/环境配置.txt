@@ -1,0 +1,47 @@
+1.安装jdk 1.6
+
+2.下载eclipse 3.7 j2ee
+
+3.安装eclipse maven 插件
+ 从这里更新maven eclipse 插件
+http://m2eclipse.sonatype.org/sites/m2e 
+
+4.使用m2eclipse 
+设置eclipse配置文件 eclipse.ini文件
+-vm
+C:/Program Files/Java/jdk1.6.0_20/bin/javaw.exe
+
+5.直接运行maven项目
+安装run-jetty-run插件，直接运行maven项目
+修改相关项目文件，该插件会自动重新启动项目
+http://run-jetty-run.googlecode.com/svn/trunk/updatesite
+
+6.安装egeit插件
+http://download.eclipse.org/egit/updates
+
+
+
+
+
+FAQ 
+maven test时总报错： 
+Unable to locate the Javac Compiler in: 
+D:\Program Files\Java\jdk1.6.0_20\..\lib\tools.jar。。。 
+
+解决办法： 
+Window -> Preferences -> Java -> Installed JREs, 点击"Add"按钮，选择默认的"Standard VM", 点击"Next >", 点击"JRE home"右边的"Directory"选择文件夹D:\Program Files\Java\jdk1.6.0_20\jre，一路“确定”，回到"Installed JREs"界面，在刚添加的"jdk1.6.0_20"打上勾。 
+再选择目录树中的"Execution Environments"， 点选界面左侧的"J2SE-1.5"，然后在右侧点选"jdk1.6.0_20"。 
+另外，在这之前，我还在eclipse.ini文件中加了两行(一定要加在-vmargs之前，而且-vm后面有回车)： 
+-vm 
+D:\Program Files\Java\jdk1.6.0_20\bin\javaw.exe 
+
+重启Eclipse,一切OK了。
+
+
+
+eclipse默认编码改成utf-8？
+Window -> Preferences -> General ->Workspace  :text file encoding 
+
+
+
+
