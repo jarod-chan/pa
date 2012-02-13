@@ -32,9 +32,9 @@
 	<tr>
 	<td>${person.id}</td> <td>${person.name}  </td><td>${person.chkstr}</td><td>${person.department}</td><td>${person.manage.name}</td><td>${person.type.name}</td>
 	<td>
-	<input type="button" value="修改" onclick="javascript:window.open('person/${person.id}','_self')"/>
+	<input type="button" value="修改" onclick="javascript:window.open('/pa/person/${person.id}','_self')"/>
 	<input type="button" value="删除" onclick="  if(confirm('确定删除？')){
-												 $('<form/>',{action:'person/${person.id}',method:'post'})
+												 $('<form/>',{action:'/pa/person/${person.id}',method:'post'})
 												.append($('<input/>',{type:'hidden',name:'_method',value:'delete'})) 
 												.submit();
 												} "/>

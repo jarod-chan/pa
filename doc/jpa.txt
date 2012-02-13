@@ -59,3 +59,6 @@ jpa 创建查询是表查而不是对象查
 
 枚举类型数据库默认保存序号，指定为保存枚举字面值，jpa2 只支持这两种
 @Enumerated(EnumType.STRING)
+
+直接使用sql的查询，一定要有查询id，不知道为什么
+return entityManager.createNativeQuery(sql).getResultList() 

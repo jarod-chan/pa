@@ -65,7 +65,15 @@ public class PersonCtl {
 	
     /** 保存新增 */  
     @RequestMapping(value="",method=RequestMethod.POST)  
-    public ModelAndView create(@Valid Person person,BindingResult result) throws Exception {  
+    public ModelAndView create(@Valid Person person,BindingResult result) throws Exception {
+    	if(result.hasErrors()){
+			ModelAndView mav=new ModelAndView();
+			mav.addObject("typeEnum",EnumUtil.enumToMap(TypeEnum.values()));
+			mav.addObject("manageEnum",EnumUtil.enumToMap(ManageEnum.values()));
+			mav.addObject("person", person);
+			mav.setViewName("person/new");
+			return mav;
+		}
     	personDao.save(person);  
         return new ModelAndView("redirect:/person");  
     }  
@@ -87,7 +95,6 @@ public class PersonCtl {
 	@RequestMapping(value="/{personId}",method=RequestMethod.PUT)
 	public ModelAndView update(@PathVariable("personId")Long personId,@Valid Person person,BindingResult result){
 		if(result.hasErrors()){
-			result.rejectValue("name", "errorcode","测试");
 			person.setId(personId);
 			ModelAndView mav=new ModelAndView();
 			mav.addObject("typeEnum",EnumUtil.enumToMap(TypeEnum.values()));
@@ -113,11 +120,6 @@ public class PersonCtl {
 		return mav;
 	}
 	
-	
-	
-	
-	
-
 	@RequestMapping(method=RequestMethod.POST,value="/password")
 	public ModelAndView initPassword(@RequestParam(value="passlen",required=false) Long passlen,@RequestParam(value="type",required=false) String type,@CookieValue(value="chkstr",required=false) String cookieChkstr) {
 		logger.info("post initPassword");

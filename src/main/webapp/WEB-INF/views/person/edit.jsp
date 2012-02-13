@@ -23,14 +23,14 @@
 </style> 
 </head>
 <body>
-<h1>所有员工</h1>
+<h1>员工修改</h1>
 <c:if test="${msg!=null}">
  <div id="msg" style="background-color:red;width:300px">${msg}</div>
 </c:if>
 
 <form:form method="put" commandName="person" action="/pa/person/${person.id}">
 用户名：
-<form:input path="name"  maxlength="4" />
+<form:input path="name" />
 <form:errors path="name" cssClass="error" /><br/>
 密码：
 <form:input path="chkstr" />
