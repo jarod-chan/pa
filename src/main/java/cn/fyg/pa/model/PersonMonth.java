@@ -20,4 +20,30 @@ public class PersonMonth implements Serializable {
 	private Long year;
 	
 	private Long month;
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public Long getYear() {
+		return year;
+	}
+
+	public void setYear(Long year) {
+		this.year = year;
+	}
+
+	public Long getMonth() {
+		return month;
+	}
+
+	public void setMonth(Long month) {
+		this.month = month;
+	}
+	
+	
 }
