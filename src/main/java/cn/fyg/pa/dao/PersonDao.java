@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.model.Person;
+import cn.fyg.pa.model.enums.TypeEnum;
 
 
 @Repository
@@ -23,7 +24,7 @@ public class PersonDao {
 	
 	@SuppressWarnings("unchecked")
 	public Person findByName(String personname) {
-		List<Person> ret=entityManager.createQuery("select p from Person p where p.name=:personname order by p.id asc").setParameter("personname",personname).getResultList();
+		List<Person> ret=entityManager.createQuery("select p from fyperson p where p.name=:personname order by p.id asc").setParameter("personname",personname).getResultList();
 		return ret.isEmpty()?null:(Person)ret.get(0);
 	}
 	
@@ -34,8 +35,8 @@ public class PersonDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Person> getAllFypersonSameTypeAndNotSelfAndNotManage(Long id,String type) {
-		return entityManager.createQuery("select p from Person p where p.id!=:id and type=:type and manage='N' order by p.id asc")
+	public List<Person> getAllFypersonSameTypeAndNotSelfAndNotManage(Long id,TypeEnum type) {
+		return entityManager.createQuery("select p from fyperson p where p.id!=:id and type=:type and manage='N' order by p.id asc")
 				.setParameter("id",id)
 				.setParameter("type",type)
 				.getResultList();
@@ -43,7 +44,7 @@ public class PersonDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Person> getAllFypersonSameDepartmentAndNotSelf(Long id,String department) {
-		return entityManager.createQuery("select p from Person p where p.id!=:id and department=:department order by p.id asc")
+		return entityManager.createQuery("select p from fyperson p where p.id!=:id and department=:department order by p.id asc")
 				.setParameter("id",id)
 				.setParameter("department",department)
 				.getResultList();

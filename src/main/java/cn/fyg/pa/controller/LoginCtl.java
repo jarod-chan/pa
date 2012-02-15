@@ -85,7 +85,8 @@ public class LoginCtl {
 			Person retperson) {
 		CookieUtil.setChkstrCookie(request, response, retperson.getChkstr());
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:fycheck/list?personId="+retperson.getId());
+		//mav.setViewName("redirect:fycheck/list?personId="+retperson.getId());
+		mav.setViewName("redirect:monthchk/new?personId="+retperson.getId());
 		return mav;
 	}
 	
@@ -110,7 +111,7 @@ public class LoginCtl {
 		mav.addObject("msg","用户名或者密码错误!");
 		mav.addObject("username",pageperson.getName());
 		mav.addObject("password",pageperson.getChkstr());
-		mav.setViewName("fy/list_login");
+		mav.setViewName("login");
 		return mav;
 	}
 

@@ -74,7 +74,7 @@ public class FycheckController {
 		List<Fycheck> check=fycheckDao.getFycheckByUserid(personId);
 		hasCheckMap=changeCheckToMap(check);
 		
-		List<Person> people = null;//fypersonDao.getAllFypersonSameTypeAndNotSelfAndNotManage(personId,currPerson.getType());
+		List<Person> people = fypersonDao.getAllFypersonSameTypeAndNotSelfAndNotManage(personId,currPerson.getType());
 		List<List<Cell>> tableData=makeTableList(people);
 		
 		List<Cell> tableHead=tableData.get(0);

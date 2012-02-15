@@ -22,7 +22,7 @@ text-align:center;
 <div class="center"><h1>方远房产2011年度横向考核系统</h1></div>
 <div class="center">
 <form action="login" method="post">
-<img src="resources/img/logo.jpg">
+<img src="/pa/resources/img/logo.jpg">
 <br/>
 用户：<input type="text" name="name"  value="${username}"/> 
 <br/>
