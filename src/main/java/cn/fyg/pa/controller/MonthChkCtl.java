@@ -13,7 +13,7 @@ public class MonthChkCtl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MonthChkCtl.class);
 	
-	@RequestMapping(value="/new")
+	@RequestMapping(value="/{person}")
 	public ModelAndView _new(){
 		logger.info("_new");
 

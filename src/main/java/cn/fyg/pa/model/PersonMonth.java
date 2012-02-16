@@ -3,9 +3,11 @@ package cn.fyg.pa.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class PersonMonth implements Serializable {
@@ -13,7 +15,10 @@ public class PersonMonth implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@OneToOne  
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	@ManyToOne  
     @JoinColumn(name = "person_id")  
 	private Person person;
 	
@@ -43,6 +48,14 @@ public class PersonMonth implements Serializable {
 
 	public void setMonth(Long month) {
 		this.month = month;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	

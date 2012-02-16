@@ -10,9 +10,6 @@ import javax.persistence.Id;
 @Entity
 public class Fychkmange implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
