@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.model.MonthChk;
 import cn.fyg.pa.model.MonthChkItem;
+import cn.fyg.pa.model.Person;
 
 @Repository
 public class MonthChkDao {
@@ -31,7 +32,6 @@ public class MonthChkDao {
 			oldMonthChk.subtractMonthChkItemsById(monthChk.getMonthChkItems());
 			
 			for(MonthChkItem item:oldMonthChk.getMonthChkItems()){
-				System.out.println("delete item id:"+item.getId());
 				entityManager.remove(item);
 			}
 			return entityManager.merge(monthChk);
@@ -43,6 +43,19 @@ public class MonthChkDao {
 	@Transactional
 	public void remove(MonthChk monthChk) {
 		entityManager.remove(entityManager.merge(monthChk));		
+	}
+
+	public MonthChk getMonthChk(Person person, Long year, Long month) {
+		List<MonthChk> retList=entityManager.createQuery("select c from MonthChk c where c.person=:person and c.year=:year and c.month=:month", MonthChk.class)
+				.setParameter("person", person)
+				.setParameter("year", year)
+				.setParameter("month", month)
+		.getResultList();
+		if(retList.isEmpty()){
+			return new MonthChk();
+		}
+		return retList.get(0);
+		
 	}	
 
 }

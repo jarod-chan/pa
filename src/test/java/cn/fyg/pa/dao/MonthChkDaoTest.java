@@ -1,5 +1,7 @@
 package cn.fyg.pa.dao;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.fyg.pa.model.MonthChk;
 import cn.fyg.pa.model.MonthChkItem;
+import cn.fyg.pa.model.Person;
 
 @ContextConfiguration("/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -60,5 +63,17 @@ public class MonthChkDaoTest {
 		monthChkDao.remove(monthChk);
 		MonthChkItem getItem=monthChkItemDao.find(1L);
 		System.out.println(getItem);
+	}
+	
+	@Test
+	public void testExistMonthChk(){
+		MonthChk monthChk=new MonthChk();
+		monthChk.setYear(2012L);
+		monthChk.setMonth(2L);
+		monthChkDao.save(monthChk);
+		
+		MonthChk monthChkNew=monthChkDao.getMonthChk(new Person(), 2012L, 2L);
+		
+		Assert.assertEquals(1, monthChkNew.getId().intValue());
 	}
 }
