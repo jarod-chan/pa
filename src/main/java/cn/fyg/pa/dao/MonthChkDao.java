@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.fyg.pa.model.MonthChk;
 import cn.fyg.pa.model.MonthChkItem;
 import cn.fyg.pa.model.Person;
+import cn.fyg.pa.tool.CMonthChk;
 
 @Repository
 public class MonthChkDao {
@@ -52,10 +53,29 @@ public class MonthChkDao {
 				.setParameter("month", month)
 		.getResultList();
 		if(retList.isEmpty()){
-			return new MonthChk();
+			MonthChk monthChk=new MonthChk();
+			monthChk.setPerson(person);
+			monthChk.setYear(year);
+			monthChk.setMonth(month);
+			return monthChk;
 		}
 		return retList.get(0);
-		
 	}	
+	
+	public MonthChk getCurrMonthChk(Person person){
+		List<MonthChk> retList=entityManager.createQuery("select c from MonthChk c where c.person=:person order by c.year desc,c.month desc", MonthChk.class)
+				.setParameter("person", person)
+				.setMaxResults(1)
+		.getResultList();
+		if(retList.isEmpty()){
+			//TODO 该处代码应该放在别处
+			MonthChk monthChk=new MonthChk();
+			monthChk.setPerson(person);
+			monthChk.setYear(CMonthChk.INIT_YEAR);
+			monthChk.setMonth(CMonthChk.INIT_MONTH);
+			return monthChk;
+		}
+		return retList.get(0);
+	}
 
 }

@@ -58,10 +58,10 @@ public class MonthChkCtl {
 
 	
 	@RequestMapping(value="")
-	public ModelAndView monthchk(@PathVariable("personId") Long personId ){
+	public ModelAndView monthchk(@ModelAttribute("person")Person person ){
 		logger.info("monthchk");
 		
-		MonthChk monthChk=initMonthchk(personId);
+		MonthChk monthChk=monthChkDao.getCurrMonthChk(person);
 
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("monthChk", monthChk);
@@ -77,9 +77,11 @@ public class MonthChkCtl {
 		MonthChk monthChk=monthChkDao.getMonthChk(person, monthChkPage.getYear(), monthChkPage.getMonth());
 		monthChkPage.updateMonthChk(monthChk);
 		
-		monthChkDao.save(monthChk);
+		monthChk=monthChkDao.save(monthChk);
 
 		ModelAndView mav=new ModelAndView();
+		mav.addObject("monthChk", monthChk);
+		mav.addObject("currMonth", NumToChinese.monthChinese(monthChk.getMonth()));
 		mav.setViewName("monthchk/monthchk");
 		return mav;
 	}

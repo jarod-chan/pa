@@ -54,7 +54,7 @@ public class LoginCtl {
 		}
 		
 		if(checkPerson(pageperson,retperson)){
-			return sucessMav(request,response, retperson);
+			return personMav(request,response, retperson);
 		}
 		
 		return failMav(pageperson);
@@ -81,12 +81,12 @@ public class LoginCtl {
 		return true;
 	}
 	
-	private ModelAndView sucessMav(HttpServletRequest request,HttpServletResponse response,
+	private ModelAndView personMav(HttpServletRequest request,HttpServletResponse response,
 			Person retperson) {
 		CookieUtil.setChkstrCookie(request, response, retperson.getChkstr());
 		ModelAndView mav = new ModelAndView();
 		//mav.setViewName("redirect:fycheck/list?personId="+retperson.getId());
-		mav.setViewName("redirect:monthchk/new?personId="+retperson.getId());
+		mav.setViewName("redirect:/person/"+retperson.getId()+"/monthchk");
 		return mav;
 	}
 	
