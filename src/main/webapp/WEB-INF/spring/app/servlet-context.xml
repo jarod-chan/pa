@@ -26,13 +26,5 @@
 	<!-- Imports user-defined @Controller beans that process client requests -->
 	<beans:import resource="controllers.xml" />
 	
-	<!-- 校验 -->
-	<beans:bean id="validator"
-		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-	
-	<!-- 错误信息 -->
-	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-		<beans:property name="basename" value="messages" />
-	</beans:bean>
-	
+
 </beans:beans>
