@@ -22,8 +22,6 @@ public class MonthChkPage {
 
 	private List<String> monthChkItems_task;
 	
-	
-
 	public Long getYear() {
 		return year;
 	}

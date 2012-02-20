@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.fyg.pa.dao.MonthChkDao;
 import cn.fyg.pa.dao.PersonDao;
 import cn.fyg.pa.model.MonthChk;
-import cn.fyg.pa.model.MonthChkItem;
 import cn.fyg.pa.model.Person;
+import cn.fyg.pa.model.enums.StateEnum;
 import cn.fyg.pa.page.MonthChkPage;
 import cn.fyg.pa.tool.NumToChinese;
 
@@ -36,25 +36,6 @@ public class MonthChkCtl {
 		logger.info("initPerson");
 		return personDao.find(personId);
 	}
-	
-//=	@ModelAttribute("monthChk")
-	public MonthChk initMonthchk(@PathVariable("personId") Long personId ){
-		logger.info("initMonthchk");
-		MonthChk monthChk=new MonthChk();
-		monthChk.setYear(2012L);
-		monthChk.setMonth(2L);
-		monthChk.setPerson(personDao.find(personId));
-		MonthChkItem item=new MonthChkItem();
-		item.setSn(1L);
-		item.setTask("task");
-		monthChk.getMonthChkItems().add(item);
-		item=new MonthChkItem();
-		item.setSn(2L);
-		item.setTask("task2");
-		monthChk.getMonthChkItems().add(item);
-		
-		return monthChk;
-	}
 
 	
 	@RequestMapping(value="")
@@ -70,7 +51,7 @@ public class MonthChkCtl {
 		return mav;
 	}
 	
-	@RequestMapping(value="",method=RequestMethod.POST)
+	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public ModelAndView save(MonthChkPage monthChkPage,@ModelAttribute("person")Person person){
 		logger.info("save");
 		
@@ -78,6 +59,24 @@ public class MonthChkCtl {
 		monthChkPage.updateMonthChk(monthChk);
 		
 		monthChk=monthChkDao.save(monthChk);
+		monthChk.setState(StateEnum.SAVED);
+
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("monthChk", monthChk);
+		mav.addObject("currMonth", NumToChinese.monthChinese(monthChk.getMonth()));
+		mav.setViewName("monthchk/monthchk");
+		return mav;
+	}
+	
+	@RequestMapping(value="/commit",method=RequestMethod.POST)
+	public ModelAndView commit(MonthChkPage monthChkPage,@ModelAttribute("person")Person person){
+		logger.info("commit");
+		
+		MonthChk monthChk=monthChkDao.getMonthChk(person, monthChkPage.getYear(), monthChkPage.getMonth());
+		monthChkPage.updateMonthChk(monthChk);
+		
+		monthChk=monthChkDao.save(monthChk);
+		monthChk.setState(StateEnum.SUBMITTED);
 
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("monthChk", monthChk);

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.fyg.pa.model.MonthChk;
 import cn.fyg.pa.model.MonthChkItem;
 import cn.fyg.pa.model.Person;
+import cn.fyg.pa.model.enums.StateEnum;
 import cn.fyg.pa.tool.CMonthChk;
 
 @Repository
@@ -73,6 +74,7 @@ public class MonthChkDao {
 			monthChk.setPerson(person);
 			monthChk.setYear(CMonthChk.INIT_YEAR);
 			monthChk.setMonth(CMonthChk.INIT_MONTH);
+			monthChk.setState(StateEnum.SAVED);
 			return monthChk;
 		}
 		return retList.get(0);
