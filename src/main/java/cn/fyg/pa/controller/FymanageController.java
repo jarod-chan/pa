@@ -52,7 +52,7 @@ public class FymanageController {
 		mav.addObject("currPerson",currPerson);
 		mav.addObject("tabData", tabData);
 		mav.addObject("msg", msg);
-		mav.setViewName("fy/manage_list");
+		mav.setViewName("fy/manageuser_list");
 		return mav;
 	}
 

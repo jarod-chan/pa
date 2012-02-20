@@ -23,6 +23,11 @@ public class MonthChkDaoTest {
 	private MonthChkItemDao monthChkItemDao;
 	
 	@Test
+	public void testNull(){
+		
+	}
+	
+//	@Test
 	public void testSave(){
 		MonthChk monthChk=new MonthChk();
 		monthChk.setMonth(2000L);
@@ -53,7 +58,7 @@ public class MonthChkDaoTest {
 		MonthChk result=monthChkDao.find(1L);
 	}
 	
-	@Test
+//	@Test
 	public void testRemove(){
 		MonthChk monthChk=new MonthChk();
 		MonthChkItem item=new MonthChkItem();
@@ -65,7 +70,7 @@ public class MonthChkDaoTest {
 		System.out.println(getItem);
 	}
 	
-	@Test
+//	@Test
 	public void testExistMonthChk(){
 		MonthChk monthChk=new MonthChk();
 		monthChk.setYear(2012L);
