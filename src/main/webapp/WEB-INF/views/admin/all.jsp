@@ -15,6 +15,6 @@
 <input type="button" value="退出"  onclick="javascript:window.open('/pa','_self')"/><br><br>
 <a href="/pa/person">用户管理</a><br>
 <br>
-<a href="/pa/rpt/point">考核报表</a><br>
+<a href="/pa/rpt/point/desc">考核报表</a><br>
 </body>
 </html>
