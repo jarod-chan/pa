@@ -105,8 +105,10 @@
 	
 	function commit(){
 		var oldAction=$("#monthChk").attr("action");
-		var msg="";
-		if(confirm())
+		var msg="提交以后，单据将交由经理审核，无法修改该，确定提交？";
+		if(confirm(msg)){
+			$("#monthChk").attr("action",oldAction+"/commit").submit();
+		}
 	}
 	
 </script>  
