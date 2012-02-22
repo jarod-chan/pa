@@ -73,7 +73,9 @@ public class MonthChkPage {
 		
 		List<MonthChkItem> newItems=new ArrayList<MonthChkItem>();
 		
-		for(int i=0,len=monthChkItems_id.size();i<len;i++){
+		filterAllItem();
+		
+		for(int i=0,len=monthChkItems_sn.size();i<len;i++){
 			String itemid=monthChkItems_id.get(i);
 			Long sn=new Long(monthChkItems_sn.get(i));
 			String task=monthChkItems_task.get(i);
@@ -87,6 +89,22 @@ public class MonthChkPage {
 		}
 		
 		monthChk.setMonthChkItems(newItems);
+	}
+
+	private void filterAllItem() {
+		filterEmptyList(monthChkItems_id);
+		filterEmptyList(monthChkItems_sn);
+		filterEmptyList(monthChkItems_task);
+	}
+
+	/**
+	 * 过滤参数中出现null 或者为空等情况
+	 */
+	private void filterEmptyList(List<String> list) {
+		String empty="";
+		if(list.isEmpty()){
+			list.add(empty);
+		}
 	}
 
 }

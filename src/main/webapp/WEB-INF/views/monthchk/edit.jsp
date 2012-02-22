@@ -105,7 +105,7 @@
 	
 	function commit(){
 		var oldAction=$("#monthChk").attr("action");
-		var msg="提交以后，单据将交由经理审核，无法修改该，确定提交？";
+		var msg="提交以后，单据将交由经理审核，无法再次修改，确定提交？";
 		if(confirm(msg)){
 			$("#monthChk").attr("action",oldAction+"/commit").submit();
 		}
@@ -113,7 +113,11 @@
 	
 </script>  
 <body>
-员工${monthChk.person.name}${currMonth}月份工完成情况
+员工${monthChk.person.name}${currMonth}月份工完成情况【${monthChk.state.name}】
+
+<c:if test="${msg!=null}">
+ <div id="msg" style="background-color:red;width:300px">${msg}</div>
+</c:if>
 
 <form id="monthChk" action="/${ctx}/person/${monthChk.person.id}/monthchk" method="post">
 
