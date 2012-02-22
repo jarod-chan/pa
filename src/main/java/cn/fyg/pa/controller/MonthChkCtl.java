@@ -23,7 +23,6 @@ import cn.fyg.pa.model.MonthChkItem;
 import cn.fyg.pa.model.Person;
 import cn.fyg.pa.model.enums.StateEnum;
 import cn.fyg.pa.page.MonthChkPage;
-import cn.fyg.pa.tool.NumToChinese;
 
 @Controller
 @RequestMapping("/person/{personId}/monthchk")
@@ -63,7 +62,6 @@ public class MonthChkCtl {
 	private ModelAndView getShowMav(MonthChk monthChk) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("monthChk", monthChk);
-		mav.addObject("currMonth", NumToChinese.monthChinese(monthChk.getMonth()));
 		if(monthChk.getState().equals(StateEnum.SAVED)){
 			mav.setViewName("monthchk/edit");
 		}else{

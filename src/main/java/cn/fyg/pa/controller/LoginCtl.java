@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.dao.PersonDao;
 import cn.fyg.pa.model.Person;
+import cn.fyg.pa.model.enums.ManageEnum;
 import cn.fyg.pa.tool.Constant;
 import cn.fyg.pa.tool.CookieUtil;
 
@@ -93,7 +94,7 @@ public class LoginCtl {
 	private boolean checkManage(Person pageperson,Person realperson){
 		if(realperson==null) return false;
 		if(realperson.getManage()==null) return false;
-		if(!realperson.getManage().equals("Y")) return false;
+		if(!realperson.getManage().equals(ManageEnum.Y)) return false;
 		if(realperson.getChkstr()==null) return false;
 		if(!realperson.getChkstr().equals(pageperson.getChkstr())) return false;
 		return true;
@@ -102,7 +103,8 @@ public class LoginCtl {
 	private ModelAndView manageMav(HttpServletRequest request,HttpServletResponse response, Person retperson) {
 		CookieUtil.setChkstrCookie(request, response, retperson.getChkstr());
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:fymanage/list?personId="+retperson.getId());
+		//mav.setViewName("redirect:fymanage/list?personId="+retperson.getId());
+		mav.setViewName("redirect:/mange/"+retperson.getId()+"/monthchk");
 		return mav;
 	}
 	

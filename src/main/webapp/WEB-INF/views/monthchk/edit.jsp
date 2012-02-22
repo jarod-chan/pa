@@ -113,7 +113,7 @@
 	
 </script>  
 <body>
-员工${monthChk.person.name}${currMonth}月份工完成情况【${monthChk.state.name}】
+员工${monthChk.person.name}${monthChk.year}年${monthChk.month}月份工完成情况【${monthChk.state.name}】
 
 <c:if test="${msg!=null}">
  <div id="msg" style="background-color:red;width:300px">${msg}</div>
@@ -159,6 +159,7 @@
 
 <input type="button" value="保存" onclick="save()"/>
 <input type="button" value="提交" onclick="commit()"/>
+ <input type="button" value="退出" " onclick="javascript:window.open('../','_self')"/>
 </form>
 
 </body>

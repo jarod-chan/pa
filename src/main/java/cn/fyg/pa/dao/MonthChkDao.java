@@ -58,6 +58,7 @@ public class MonthChkDao {
 			monthChk.setPerson(person);
 			monthChk.setYear(year);
 			monthChk.setMonth(month);
+			monthChk.setState(StateEnum.SAVED);
 			return monthChk;
 		}
 		return retList.get(0);
@@ -77,7 +78,33 @@ public class MonthChkDao {
 			monthChk.setState(StateEnum.SAVED);
 			return monthChk;
 		}
-		return retList.get(0);
+		MonthChk retMonthChk=retList.get(0);
+		if(retMonthChk.getState()==StateEnum.FINISHED){
+			//TODO 重构
+			MonthChk monthChk=new MonthChk();
+			monthChk.setPerson(person);
+			if(retMonthChk.getMonth().intValue()==12){
+				monthChk.setYear(retMonthChk.getYear()+1);
+				monthChk.setMonth(1L);
+			}else{
+				monthChk.setYear(retMonthChk.getYear());
+				monthChk.setMonth(retMonthChk.getMonth()+1);
+			}
+			
+			monthChk.setState(StateEnum.SAVED);
+			return monthChk;
+		}
+		return retMonthChk;
+	}
+
+	public List<MonthChk> getAllCommitMonthChkByDept(String department,StateEnum state) {
+		String sql = "select c from MonthChk c where c.person.department=:department and c.state=:state " +
+				"order by c.year desc,c.month desc,c.id asc";
+		List<MonthChk> retList=entityManager.createQuery(sql, MonthChk.class)
+				.setParameter("department", department)
+				.setParameter("state", state)
+				.getResultList();
+		return retList;
 	}
 
 }
