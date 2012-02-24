@@ -24,7 +24,6 @@ import cn.fyg.pa.model.enums.TypeEnum;
 import cn.fyg.pa.tool.CommonModelAndView;
 import cn.fyg.pa.tool.Constant;
 import cn.fyg.pa.tool.EnumUtil;
-import cn.fyg.pa.tool.PasswordPage;
 import cn.fyg.pa.tool.Tool;
 
 
@@ -151,43 +150,6 @@ public class PersonCtl {
 		return mav;
 		
 	}
-	
-	
-	
-	@RequestMapping(value="/{personId}/initpassword")
-	public ModelAndView showInitPassword(@PathVariable("personId")Long personId){
-		logger.info("showInitPassword");
-		Person person=personDao.find(personId);
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("person", person);
-		mav.setViewName("person/password");
-		return mav;
-	}
-
-	@RequestMapping(value="/{personId}/initpassword",method=RequestMethod.POST)
-	public ModelAndView saveInitPassword(PasswordPage passwordPage,@PathVariable("personId")Long personId){
-		logger.info("initpassword");
-		Person person=personDao.find(personId);
-		if(!passwordPage.verifyPassword()){
-			ModelAndView mav=new ModelAndView();
-			mav.addObject("person", person);
-			mav.addObject("msg", passwordPage.getMessage());
-			mav.setViewName("person/password");
-			return mav;
-		}
-		
-		person.setChkstr(passwordPage.getConfirmchkstr());
-		person.setEnabled(Boolean.TRUE);
-		personDao.save(person);
-		
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("redirect:../../");
-		return mav;
-	}
-	
-
-	
-	
 	
 
 }
