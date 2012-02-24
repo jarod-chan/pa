@@ -69,6 +69,20 @@ public class MangeMonthChkCtl {
 		return mav;
 	}
 	
+	@RequestMapping(value="/histroy")
+	public ModelAndView histroy(@ModelAttribute("person")Person person,HttpSession session){
+		logger.info("histroy");
+		
+		List<MonthChk> monthChks=monthChkDao.getAllFinishMonthChkByDept(person.getDepartment());
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("mange", person);
+		mav.addObject("monthChks", monthChks);
+		mav.addObject("msg",new SessionMPR(session).getMessage());
+		mav.setViewName("mangemonthchk/histroy");
+		return mav;
+	}
+	
 	@RequestMapping(value="/{monthchkId}/save",method=RequestMethod.POST)
 	public ModelAndView save(ManageMonthChkPage manageMonthChkPage,@ModelAttribute("person")Person person,@PathVariable("monthchkId") Long monthchkId,HttpSession session){
 		

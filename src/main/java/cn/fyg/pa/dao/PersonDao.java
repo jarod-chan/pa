@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.model.Person;
+import cn.fyg.pa.model.enums.ManageEnum;
 import cn.fyg.pa.model.enums.TypeEnum;
 
 
@@ -20,6 +21,21 @@ public class PersonDao {
 	
 	public Person find(Long id) {
 		return entityManager.find(Person.class, id);
+	}
+	
+	/**
+	 * 通过部门名称查找项目经理
+	 * @param department
+	 * @return
+	 */
+	public Person findDeptMange(String department){
+		String sql="select p from fyperson p where p.department=:department and p.manage=:manage";
+		List<Person> ret=entityManager.createQuery(sql,Person.class)
+				.setParameter("department", department)
+				.setParameter("manage", ManageEnum.Y)
+				.setMaxResults(1)
+				.getResultList();
+		return ret.isEmpty()?null:ret.get(0);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -96,5 +112,6 @@ public class PersonDao {
 		Person person=entityManager.find(Person.class, id);
 		entityManager.remove(person);
 	}
+	
 	
 }

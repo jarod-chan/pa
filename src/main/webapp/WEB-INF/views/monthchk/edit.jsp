@@ -23,6 +23,11 @@
 		$("#tbl tr").removeClass("currRow");
 		$(this).addClass("currRow");
 	};
+	
+	var sel=$("<select>").attr({name:"monthChkItems_worktype"});
+	<c:forEach var="workType" items="${workTypes}">
+		sel.append("<option value='${workType.id}'>${workType.worktype}</option>");
+	</c:forEach>
 
 	var tr = $("<tr>")
 			.append("<td>")
@@ -32,6 +37,10 @@
 			.css("display","none")
 			.end()
 			.append("<td>")
+			.append("<td>")
+				.find("td:last")
+				.append(sel)
+				.end()
 			.append("<td>")
 			.find("td:last")
 			.append($("<input type='text' name='monthChkItems_task'/>").css(taskSize).attr(taskMaxlength))
@@ -113,23 +122,25 @@
 	
 </script>  
 <body>
-员工${monthChk.person.name}${monthChk.year}年${monthChk.month}月份工完成情况【${monthChk.state.name}】
-
+员工:${monthChk.person.name}&nbsp;&nbsp;部门:${monthChk.person.department}&nbsp;&nbsp;上级主管:${mange.name}<br>
+考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}<input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/histroy','_self')"/>
+<br>
 <c:if test="${msg!=null}">
- <div id="msg" style="background-color:red;width:300px">${msg}</div>
+	<font id="msg" style="color:red;" >${msg}</font>
 </c:if>
-
+<br>
 <form id="monthChk" action="/${ctx}/person/${monthChk.person.id}/monthchk" method="post">
 
 <input name="year" type="hidden" value="${monthChk.year}" /> 
 <input name="month" type="hidden" value="${monthChk.month}" /> 
 
-<table border=1 style="table-layout:fixed;width:800px;">
+<table border=1 style="table-layout:fixed;width:900px;">
 <thead>
 	<tr>
-		<th style="width:50px;">序号</th>
-		<th style="width:600px;">工作内容<font style="color:red">[字数限制：40个]</font></th>
-		<th style="width:150px;">操作<input type="button" class="addLast" value="+"  /></th>
+		<td style="width:50px;">序号</td>
+		<td style="width:100px;">工作性质</td>
+		<td style="width:600px;">工作内容<font style="color:red">[字数限制：40个]</font></td>
+		<td style="width:150px;">操作<input type="button" class="addLast" value="+"  /></td>
 	</tr>
 </thead>
 <tbody id="tbl">
@@ -141,6 +152,13 @@
 			</td>
 			<td>
 				${item.sn}
+			</td>
+			<td>
+				<select name="monthChkItems_worktype">
+				<c:forEach var="workType" items="${workTypes}">
+					<option value="${workType.id}" <c:if test="${item.workType.id==workType.id}">selected="true"</c:if> >${workType.worktype}</option>
+				</c:forEach>
+				</select>
 			</td>
 			<td>
 				<input type="text" name="monthChkItems_task" value="${item.task}" />

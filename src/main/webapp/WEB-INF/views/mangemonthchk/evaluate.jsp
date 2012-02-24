@@ -48,16 +48,19 @@
 <body>
 经理${mange.name}对员工${monthChk.person.name}${monthChk.year}年${monthChk.month}月份工完成情况评价
 
+<br>
 <c:if test="${msg!=null}">
- <div id="msg" style="background-color:red;width:300px">${msg}</div>
+	<font id="msg" style="color:red;" >${msg}</font>
 </c:if>
+<br>
 
 <form id="monthChk" action="/${ctx}/mange/${mange.id}/monthchk/${monthChk.id}" method="post">
 
-<table border=1 style="table-layout:fixed;width:800px;">
+<table border=1 style="table-layout:fixed;width:900px;">
 <thead>
 	<tr>
 		<th style="width:50px;">序号</th>
+		<th style="width:100px;">工作性质</th>
 		<th style="width:600px;">工作内容</th>
 		<th style="width:150px;">评价</th>
 	</tr>
@@ -70,6 +73,9 @@
 			</td>
 			<td>
 				${item.sn}
+			</td>
+			<td>
+				${item.workType.worktype}
 			</td>
 			<td>
 				${item.task}

@@ -24,6 +24,10 @@ public class MonthChkItem implements Serializable {
 	
 	private Long sn;
 	
+	@ManyToOne
+    @JoinColumn(name = "worktype_id")  
+	private WorkType workType;
+	
 	private String task;
 	
 	private Long point;
@@ -67,6 +71,13 @@ public class MonthChkItem implements Serializable {
 	public void setPoint(Long point) {
 		this.point = point;
 	}
-	
+
+	public WorkType getWorkType() {
+		return workType;
+	}
+
+	public void setWorkType(WorkType workType) {
+		this.workType = workType;
+	}
 	
 }

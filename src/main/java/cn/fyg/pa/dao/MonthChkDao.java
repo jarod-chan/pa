@@ -106,5 +106,25 @@ public class MonthChkDao {
 				.getResultList();
 		return retList;
 	}
-
+	
+	public List<MonthChk> getAllFinishMonthChkByPerson(Person person) {
+		String sql = "select c from MonthChk c where c.person=:person and c.state=:state " +
+				"order by c.year desc,c.month desc,c.id asc";
+		List<MonthChk> retList=entityManager.createQuery(sql, MonthChk.class)
+				.setParameter("person", person)
+				.setParameter("state", StateEnum.FINISHED)
+				.getResultList();
+		return retList;
+	}
+	
+	public List<MonthChk> getAllFinishMonthChkByDept(String department) {
+		String sql = "select c from MonthChk c where c.person.department=:department and c.state=:state " +
+				"order by c.year desc,c.month desc,c.id asc";
+		List<MonthChk> retList=entityManager.createQuery(sql, MonthChk.class)
+				.setParameter("department", department)
+				.setParameter("state", StateEnum.FINISHED)
+				.getResultList();
+		return retList;
+	}
+	
 }

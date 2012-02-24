@@ -50,6 +50,11 @@ public class LoginCtl {
 			return adminMAV(request,response,pageperson);
 		}
 		Person retperson=fypersonDao.findByName(pageperson.getName());
+		
+		if(checkEnabled(pageperson,retperson)){
+			return passwordMav(retperson);
+		}
+		
 		if(checkManage(pageperson,retperson)){
 			return manageMav(request,response,retperson);
 		}
@@ -60,7 +65,20 @@ public class LoginCtl {
 		
 		return failMav(pageperson);
 	}
+
+	private boolean checkEnabled(Person pageperson,Person retperson) {
+		if(retperson==null) return false;
+		if(retperson.getEnabled()!=null&&retperson.getEnabled().booleanValue()==true) return false;
+		if(!pageperson.getChkstr().equals(Constant.INIT_PASSWORD)) return false;
+		return true;
+	}
 	
+	private ModelAndView passwordMav(Person person) {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("redirect:person/"+person.getId()+"/initpassword");
+		return mav;
+	}
+
 	private boolean isAdmin(Person pageperson) {
 		if (pageperson.getName().equals("admin")
 				&& pageperson.getChkstr().equals(Constant.ADMIN_PASSWORD))

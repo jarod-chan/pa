@@ -2,6 +2,7 @@ package cn.fyg.pa.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,7 +10,6 @@ import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-
 
 import cn.fyg.pa.model.enums.ManageEnum;
 import cn.fyg.pa.model.enums.TypeEnum;
@@ -33,7 +33,14 @@ public class Person implements Serializable  {
 	@Enumerated(EnumType.STRING)
 	private ManageEnum manage;
 	
-
+	private Boolean enabled;
+	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
 	public String getDepartment() {
 		return department;
 	}

@@ -1,6 +1,8 @@
 package cn.fyg.pa.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -16,11 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.dao.MonthChkDao;
 import cn.fyg.pa.dao.PersonDao;
+import cn.fyg.pa.dao.WorkTypeDao;
 import cn.fyg.pa.message.MessagePasser;
 import cn.fyg.pa.message.imp.SessionMPR;
 import cn.fyg.pa.model.MonthChk;
 import cn.fyg.pa.model.MonthChkItem;
 import cn.fyg.pa.model.Person;
+import cn.fyg.pa.model.WorkType;
 import cn.fyg.pa.model.enums.StateEnum;
 import cn.fyg.pa.page.MonthChkPage;
 
@@ -36,6 +40,9 @@ public class MonthChkCtl {
 	@Autowired
 	MonthChkDao monthChkDao;
 	
+	@Autowired
+	WorkTypeDao workTypeDao;
+	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
 		logger.info("initPerson");
@@ -47,9 +54,14 @@ public class MonthChkCtl {
 	public ModelAndView monthchk(@ModelAttribute("person")Person person,HttpSession session){
 		logger.info("monthchk");
 		MonthChk monthChk=monthChkDao.getCurrMonthChk(person);
+		Person mange=personDao.findDeptMange(person.getDepartment());
+		List<WorkType> workTypes=workTypeDao.getAll();
+		
 		ModelAndView mav = getShowMav(monthChk);
 		MessagePasser mpr=new SessionMPR(session);
 		mav.addObject("msg",mpr.getMessage());
+		mav.addObject("mange", mange);
+		mav.addObject("workTypes", workTypes);
 		return mav;
 	}
 
@@ -69,6 +81,21 @@ public class MonthChkCtl {
 		}
 		return mav;
 	}
+	
+	@RequestMapping(value="/histroy")
+	public ModelAndView histroy(@ModelAttribute("person")Person person,HttpSession session){
+		logger.info("monthchk");
+		List<MonthChk> monthChks=monthChkDao.getAllFinishMonthChkByPerson(person);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("monthChks", monthChks);
+		mav.addObject("person", person);
+		MessagePasser mpr=new SessionMPR(session);
+		mav.addObject("msg",mpr.getMessage());
+		mav.setViewName("monthchk/histroy");
+		return mav;
+	}
+	
+	
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public ModelAndView save(MonthChkPage monthChkPage,@ModelAttribute("person")Person person,HttpSession session){
