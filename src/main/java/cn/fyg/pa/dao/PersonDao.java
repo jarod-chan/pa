@@ -112,6 +112,11 @@ public class PersonDao {
 		Person person=entityManager.find(Person.class, id);
 		entityManager.remove(person);
 	}
+
+	public String getMailAdressByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

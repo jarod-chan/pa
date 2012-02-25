@@ -18,9 +18,9 @@ public class Mail {
 	private String sign;	 //邮件签名
 	private boolean isMarkSubject;//是否启用主题标识
 	private boolean isDefaultSign;//是否启用邮件签名
-	public static final String markSubject;
-	public static final String defaultSepatate;
-	public static final String defaultSign;
+	private static final String markSubject; //邮件主题
+	private static final String defaultSepatate; //内容和签名分隔符
+	private static final String defaultSign; // 默认签名
 	
 	static {
 		prop = PropertLoder.loadProperties(resStr);
@@ -36,6 +36,10 @@ public class Mail {
 
 	public void setDefaultSign(boolean isDefaultSign) {
 		this.isDefaultSign = isDefaultSign;
+	}
+	
+	public Mail(String subject, String context,String to){
+		this.init(subject, context,null,to==null?null:new String[]{to});
 	}
 
 	public Mail(String subject, String context,List<String> to){
@@ -67,8 +71,9 @@ public class Mail {
 	}
 
 	public String getSubject() {
-		return subject;
+		return subject+"--"+(isMarkSubject?markSubject:"");
 	}
+
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
@@ -94,7 +99,7 @@ public class Mail {
 		return date;
 	}
 	public String getSign() {
-		return sign;
+		return (isDefaultSign?defaultSign:sign);
 	}
 	public void setSign(String sign) {
 		this.sign = sign;

@@ -33,6 +33,7 @@ text-align:center;
  <div id="msg" style="background-color:red;width:200px;margin-left:auto;margin-right:auto;">${msg}</div>
  </c:if>
  <input type="submit" value="登录"/>
+ <input type="button" value="忘记密码" " onclick="javascript:window.open('/pa/fetchcsr','_self')"/>
 </form>
 </div> 
 </body>
