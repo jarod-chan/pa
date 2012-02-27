@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class TestProperties {
 	
-	@Test
+//	@Test
 	public void testProp(){
 		Properties prop=new Properties();
 		InputStream in = Object.class.getResourceAsStream("/mail/mailsetting.properties");

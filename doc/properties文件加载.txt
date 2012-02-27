@@ -1,0 +1,5 @@
+分析PropertLoder 的代码 
+采用targetClass.getResourceAsStream(resString) 来加载一个类的话 ，具体路径跟targetClass的位置有关 
+要保证读取正确的配置文件 ，需要取得相应的类才可以
+如用Object 类来执行 ，那么可能读到类的位置为是jre对用的路径
+有待进一步验证

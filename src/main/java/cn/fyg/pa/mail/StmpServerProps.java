@@ -24,7 +24,7 @@ class StmpServerProps {
 	private String sslfactory="javax.net.ssl.SSLSocketFactory";
 	
 	public StmpServerProps(){
-		Properties prop = PropertLoder.loadProperties(resStr);
+		Properties prop = PropertLoder.loadProperties(StmpServerProps.class,resStr);
 		this.username=prop.getProperty("username");
 		this.password=prop.getProperty("password");
 		this.host=prop.getProperty("host");

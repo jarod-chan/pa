@@ -32,6 +32,14 @@ public class Person implements Serializable  {
 	@Enumerated(EnumType.STRING)
 	private ManageEnum manage;
 	
+	private String email;
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getDepartment() {
 		return department;
 	}

@@ -9,6 +9,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.stereotype.Component;
+
+@Component("Sender")
 class SenderImp implements Sender {
 
 	public int sendMail(Mail mail){
@@ -38,7 +41,10 @@ class SenderImp implements Sender {
 				msg.addRecipient(RecipientType.TO, toaddress);
 			}
 			msg.setSubject(mail.getSubject());
-			msg.setText(mail.getContext()+ mail.getSign());
+			//msg.setText(mail.getContext()+ mail.getSign());
+			//指定邮箱内容及ContentType和编码方式
+			msg.setContent(mail.getContext()+ mail.getSign(), "text/html;charset=utf-8");
+			
 			msg.setSentDate(mail.getDate());
 			Transport.send(msg);
 			result = 1;

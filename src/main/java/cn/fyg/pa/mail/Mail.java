@@ -23,9 +23,9 @@ public class Mail {
 	private static final String defaultSign; // 默认签名
 	
 	static {
-		prop = PropertLoder.loadProperties(resStr);
+		prop = PropertLoder.loadProperties(Mail.class,resStr);
 		markSubject=prop.getProperty("markSubject");
-		defaultSepatate="\n\n"+prop.getProperty("defaultSepatate")+"\n";
+		defaultSepatate="<br>"+prop.getProperty("defaultSepatate")+"<br>";
 		defaultSign=defaultSepatate+prop.getProperty("defaultSign");
 	}
 

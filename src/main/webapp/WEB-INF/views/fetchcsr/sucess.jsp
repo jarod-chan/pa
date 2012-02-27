@@ -11,17 +11,14 @@
  
 </head>
 <body>
-输入用户名，密码将自动发送到你的公司邮箱<font style="color:red;" >[系统暂时不支持密码重置功能]</font>
+
 <br>
 <c:if test="${msg!=null}">
 	<font id="msg" style="color:red;" >${msg}</font>
 </c:if>
-<form action="/${ctx}/fetchcsr" method="post">
-用户名：<input type="text" name="username" />
-<br>
-<input type="submit" value="取回密码" />
+${username},你好！<br>
+你的用户密码已经发送到你的公司邮箱<font style="color:red;" >${email}</font>中。<br>
+请取回后，重新登录系统！<br>
 <input type="button" value="重新登录" onclick="javascript:window.open('/${ctx}','_self')"/>
-</form>
-
 </body>
 </html>
