@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class TestProperties {
 	
-//	@Test
+	@Test
 	public void testProp(){
 		Properties prop=new Properties();
 		InputStream in = Object.class.getResourceAsStream("/mail/mailsetting.properties");
@@ -19,7 +19,7 @@ public class TestProperties {
 			e.printStackTrace();
 		}
 		if(!prop.isEmpty()) {
-			Enumeration enum1 = prop.propertyNames();
+			Enumeration<?> enum1 = prop.propertyNames();
 			while (enum1.hasMoreElements()) {
 				String strKey = (String) enum1.nextElement();
 				String strValue = prop.getProperty(strKey);
