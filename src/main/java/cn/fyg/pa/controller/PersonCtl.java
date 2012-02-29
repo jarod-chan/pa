@@ -3,7 +3,6 @@ package cn.fyg.pa.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +60,7 @@ public class PersonCtl {
 	
     /** 保存新增 */  
     @RequestMapping(value="",method=RequestMethod.POST)  
-    public ModelAndView create(@Valid Person person,BindingResult result) throws Exception {
+    public ModelAndView create(Person person,BindingResult result) throws Exception {
     	if(result.hasErrors()){
 			ModelAndView mav=new ModelAndView();
 			mav.addObject("typeEnum",EnumUtil.enumToMap(TypeEnum.values()));
@@ -89,7 +88,7 @@ public class PersonCtl {
 	
 	/**保存编辑*/
 	@RequestMapping(value="/{personId}",method=RequestMethod.PUT)
-	public ModelAndView update(@PathVariable("personId")Long personId,@Valid Person person,BindingResult result){
+	public ModelAndView update(@PathVariable("personId")Long personId,Person person,BindingResult result){
 		if(result.hasErrors()){
 			person.setId(personId);
 			ModelAndView mav=new ModelAndView();

@@ -22,7 +22,8 @@
 <input type="button" value="新增" onclick="javascript:window.open('/${ctx}/admin/person/new','_self');"/> 
 <input type="submit" value="初始密码"/>
 <input type="button" value="重置密码"  onclick="javascript:$('#type').val('reset');$('#form').submit();"/>
-<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/admin/all','_self')"/>
+<input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/admin/all','_self')"/>
+
 </form>
 <table border=1>
 <tr>

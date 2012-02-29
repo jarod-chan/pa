@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,14 +23,15 @@ public class RptCtl {
 	@Autowired
 	private RptDao rptDao;
 	
-	@RequestMapping(value="/point")
-	public ModelAndView point(){
+	@RequestMapping(value="/point/{order}")
+	public ModelAndView point(@PathVariable("order")String order){
 		logger.info("show point");
 		
 		PointUtil pointUtil=new PointUtil(rptDao.getCheckPoint(),rptDao.getVal());
 		List<Point> points=null;
 		pointUtil.calculate();
 		try {
+			pointUtil.orderByPoint(order);
 			points = pointUtil.getResult();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

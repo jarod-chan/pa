@@ -2,11 +2,13 @@ package cn.fyg.pa.tool;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import cn.fyg.pa.help.rptComparator.PointDescComparator;
 import cn.fyg.pa.page.Point;
 
 public class PointUtil {
@@ -209,6 +211,18 @@ public class PointUtil {
 	public List<Point> getResult() throws Exception{
 		if(!hasCalculate) throw new Exception("point dont  calculate!");
 		return rptList;
+	}
+	
+	public void orderByPoint(String order) throws Exception{
+		if(!hasCalculate) throw new Exception("point dont  calculate!");
+		Collections.sort(rptList, new PointDescComparator<Point>());
+		int i=1;
+		for (Point point : rptList) {
+			point.ranking(i++);
+		}
+		if(order.equals("asc")){
+			Collections.reverse(rptList);
+		}
 	}
 
 }

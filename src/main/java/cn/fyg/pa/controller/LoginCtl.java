@@ -94,8 +94,8 @@ public class LoginCtl {
 			Person retperson) {
 		CookieUtil.setChkstrCookie(request, response, retperson.getChkstr());
 		ModelAndView mav = new ModelAndView();
-		//mav.setViewName("redirect:fycheck/list?personId="+retperson.getId());
-		mav.setViewName("redirect:/person/"+retperson.getId()+"/monthchk");
+		mav.setViewName("redirect:fycheck/list?personId="+retperson.getId());
+		//mav.setViewName("redirect:/person/"+retperson.getId()+"/monthchk");
 		return mav;
 	}
 	

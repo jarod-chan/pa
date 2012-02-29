@@ -7,8 +7,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import cn.fyg.pa.model.enums.ManageEnum;
 import cn.fyg.pa.model.enums.TypeEnum;
@@ -21,10 +19,9 @@ public class Person implements Serializable  {
 
 	@Id
 	private Long id;
-	@NotEmpty
-	@NotBlank
+
 	private String name;
-	@NotEmpty
+
 	private String chkstr;
 	@Enumerated(EnumType.STRING)
 	private TypeEnum type;

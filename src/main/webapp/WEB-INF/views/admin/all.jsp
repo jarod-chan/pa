@@ -12,7 +12,10 @@
 <c:if test="${msg!=null}">
  <div id="msg" style="background-color:red;width:300px">${msg}</div>
 </c:if>
-<a href="/${ctx}/admin/person">用户</a><br>
-<a href="/${ctx}/admin/rpt/point">报表</a><br>
+
+<a href="/${ctx}/admin/person">用户管理</a><br>
+<a href="/${ctx}/admin/rpt/point/asc">考核报表</a><br>
+
+<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/><br>
 </body>
 </html>

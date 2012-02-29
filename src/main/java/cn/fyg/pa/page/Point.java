@@ -42,6 +42,8 @@ public class Point {
 	
 	//横向考核得分
 	private BigDecimal val=null;
+	//最终排名
+	private int ranking=0;
 	//最终得分
 	private BigDecimal result=null;
 	
@@ -162,8 +164,15 @@ public class Point {
 		return this;
 	}
 
-	
-	
+	public Point ranking(int ranking) {
+		this.ranking = ranking;
+		return this;
+	}
+
+	public int getRanking() {
+		return ranking;
+	}
+
 	public Long getPersonId() {
 		return personId;
 	}

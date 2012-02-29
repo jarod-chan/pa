@@ -11,12 +11,12 @@ public enum StateEnum implements CommonEnum {
 		this.name=name;
 	}
 
-	@Override
+//	@Override
 	public String getName() {
 		return this.name;
 	}
 
-	@Override
+//	@Override
 	public void setName(String name) {
 		this.name=name;
 	}
