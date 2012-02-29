@@ -46,6 +46,16 @@
 		<filter-name>HiddenHttpMethodFilter</filter-name>
 		<servlet-name>appServlet</servlet-name>
 	</filter-mapping>  
+	
+	<!-- Filter 登陆过滤开始-->
+	<filter>
+		<filter-name>urlFilter</filter-name>
+		<filter-class>cn.fyg.pa.security.UrlFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>urlFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>  
 
 
 </web-app>

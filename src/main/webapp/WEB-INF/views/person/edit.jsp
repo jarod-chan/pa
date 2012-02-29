@@ -28,7 +28,7 @@
  <div id="msg" style="background-color:red;width:300px">${msg}</div>
 </c:if>
 
-<form:form method="put" commandName="person" action="/pa/person/${person.id}">
+<form:form method="put" commandName="person" action="/${ctx}/admin/person/${person.id}">
 用户名：
 <form:input path="name" />
 <form:errors path="name" cssClass="error" /><br/>
@@ -43,7 +43,7 @@
 <form:select path="manage" items="${manageEnum}"></form:select><br/>
 
 <input type="submit" value="保存"/>
-<input type="button" value="返回" onclick="javascript:window.open('/pa/person','_self')"/>
+<input type="button" value="返回" onclick="javascript:window.open('/${ctx}/admin/person','_self')"/>
 </form:form>
 </body>
 </html>

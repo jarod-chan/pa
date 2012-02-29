@@ -24,7 +24,9 @@
 	
 </script>  
 <body>
-员工${monthChk.person.name}${monthChk.year}年${monthChk.month}月份工完成情况【${monthChk.state.name}】 <input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/histroy','_self')"/>
+员工:${monthChk.person.name}&nbsp;&nbsp;部门:${monthChk.person.department}&nbsp;&nbsp;上级主管:${mange.name}<br>
+考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}
+<input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/histroy','_self')"/>
 <br>
 <c:if test="${msg!=null}">
 	<font id="msg" style="color:red;" >${msg}</font>
@@ -68,7 +70,7 @@
 </tbody>
 </table>
  
- <input type="button" value="退出"  onclick="javascript:window.open('../','_self')"/>
+<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
 
 </body>
 </html>

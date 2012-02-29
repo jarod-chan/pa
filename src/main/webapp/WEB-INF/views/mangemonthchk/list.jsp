@@ -13,7 +13,7 @@
 <body>
 经理${mange.name}对${mange.department}员工的月工作评价
 <input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/histroy','_self')"/>
-<input type="button" value="退出" " onclick="javascript:window.open('/${ctx}','_self')"/>
+<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
 <br>
 <c:if test="${msg!=null}">
 	<font id="msg" style="color:red;" >${msg}</font>

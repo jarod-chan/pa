@@ -14,7 +14,7 @@ import cn.fyg.pa.page.Point;
 import cn.fyg.pa.tool.PointUtil;
 
 @Controller
-@RequestMapping("/rpt")
+@RequestMapping("/admin/rpt")
 public class RptCtl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(RptCtl.class);

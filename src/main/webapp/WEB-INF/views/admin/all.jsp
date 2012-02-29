@@ -12,7 +12,7 @@
 <c:if test="${msg!=null}">
  <div id="msg" style="background-color:red;width:300px">${msg}</div>
 </c:if>
-<a href="/pa/person">用户</a><br>
-<a href="/pa/rpt/point">报表</a><br>
+<a href="/${ctx}/admin/person">用户</a><br>
+<a href="/${ctx}/admin/rpt/point">报表</a><br>
 </body>
 </html>

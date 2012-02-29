@@ -40,7 +40,10 @@ public class PersonDao {
 	
 	@SuppressWarnings("unchecked")
 	public Person findByName(String personname) {
-		List<Person> ret=entityManager.createQuery("select p from fyperson p where p.name=:personname order by p.id asc").setParameter("personname",personname).getResultList();
+		List<Person> ret=entityManager.createQuery("select p from fyperson p where p.name=:personname order by p.id asc")
+				.setParameter("personname",personname)
+				.setMaxResults(1)
+				.getResultList();
 		return ret.isEmpty()?null:(Person)ret.get(0);
 	}
 	

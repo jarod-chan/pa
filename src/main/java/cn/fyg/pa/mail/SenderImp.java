@@ -11,7 +11,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.stereotype.Component;
 
-@Component("Sender")
+@Component
 class SenderImp implements Sender {
 
 	public int sendMail(Mail mail){

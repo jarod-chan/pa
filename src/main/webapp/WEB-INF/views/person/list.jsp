@@ -15,14 +15,14 @@
 <c:if test="${msg!=null}">
  <div id="msg" style="background-color:red;width:300px">${msg}</div>
 </c:if>
-<form id="form" action="/pa/person/password" method="post">
+<form id="form" action="/${ctx}/admin/person/password" method="post">
 密码长度：
 <input type="text" name="passlen" value="3"/>
 <input type="hidden" id="type" name="type" value="init"/>
-<input type="button" value="新增" onclick="javascript:window.open('person/new','_self');"/> 
+<input type="button" value="新增" onclick="javascript:window.open('/${ctx}/admin/person/new','_self');"/> 
 <input type="submit" value="初始密码"/>
 <input type="button" value="重置密码"  onclick="javascript:$('#type').val('reset');$('#form').submit();"/>
-<input type="button" value="退出"  onclick="javascript:window.open('/pa/admin/all','_self')"/>
+<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/admin/all','_self')"/>
 </form>
 <table border=1>
 <tr>
@@ -32,9 +32,9 @@
 	<tr>
 	<td>${person.id}</td> <td>${person.name}  </td><td>${person.chkstr}</td><td>${person.department}</td><td>${person.manage.name}</td><td>${person.type.name}</td>
 	<td>
-	<input type="button" value="修改" onclick="javascript:window.open('/pa/person/${person.id}','_self')"/>
+	<input type="button" value="修改" onclick="javascript:window.open('/${ctx}/admin/person/${person.id}','_self')"/>
 	<input type="button" value="删除" onclick="  if(confirm('确定删除？')){
-												 $('<form/>',{action:'/pa/person/${person.id}',method:'post'})
+												 $('<form/>',{action:'/${ctx}/admin/person/${person.id}',method:'post'})
 												.append($('<input/>',{type:'hidden',name:'_method',value:'delete'})) 
 												.submit();
 												} "/>

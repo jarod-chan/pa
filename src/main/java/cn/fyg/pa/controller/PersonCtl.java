@@ -28,7 +28,7 @@ import cn.fyg.pa.tool.Tool;
 
 
 @Controller
-@RequestMapping("/person")
+@RequestMapping("/admin/person")
 public class PersonCtl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PersonCtl.class);
@@ -37,12 +37,8 @@ public class PersonCtl {
 	private PersonDao personDao;
 	
 	@RequestMapping(value="")
-	public ModelAndView index(@CookieValue(value="chkstr",required=false) String cookieChkstr) {
-		logger.info("get list");
-		
-		if(!Constant.ADMIN_PASSWORD.equals(cookieChkstr)){
-			return CommonModelAndView.getHomeModelAndView();
-		}
+	public ModelAndView index() {
+		logger.info("index");
 		
 		ModelAndView mav = new ModelAndView();
 		List<Person> persons = personDao.getAllFyperson();
@@ -53,7 +49,7 @@ public class PersonCtl {
 	
 	@RequestMapping(value="/new")
 	public ModelAndView _new(){
-		logger.info("get user not with id");
+		logger.info("_new");
 		Person person=new Person();
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("typeEnum",EnumUtil.enumToMap(TypeEnum.values()));
@@ -75,7 +71,7 @@ public class PersonCtl {
 			return mav;
 		}
     	personDao.save(person);  
-        return new ModelAndView("redirect:/person");  
+        return new ModelAndView("redirect:person");  
     }  
       
 	/**显示编辑*/
@@ -107,7 +103,7 @@ public class PersonCtl {
 		person.setId(personId);
 		personDao.save(person);
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("redirect:/person");
+		mav.setViewName("redirect:../person");
 		return mav;
 	}
 	
@@ -116,7 +112,7 @@ public class PersonCtl {
 		logger.info("post user");
 		personDao.remove(personId);
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("redirect:/person");
+		mav.setViewName("redirect:person");
 		return mav;
 	}
 	
@@ -146,7 +142,7 @@ public class PersonCtl {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("persons",people);
 		mav.addObject("msg","操作成功");
-		mav.setViewName("redirect:/person");
+		mav.setViewName("redirect:person");
 		return mav;
 		
 	}

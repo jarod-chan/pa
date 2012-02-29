@@ -7,60 +7,67 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.dao.PersonDao;
 import cn.fyg.pa.model.Person;
 import cn.fyg.pa.model.enums.ManageEnum;
+import cn.fyg.pa.page.LoginPage;
+import cn.fyg.pa.page.LoginRet;
+import cn.fyg.pa.service.PersonService;
 import cn.fyg.pa.tool.Constant;
 import cn.fyg.pa.tool.CookieUtil;
+import cn.fyg.pa.tool.SessionUtil;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/login")
 public class LoginCtl {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginCtl.class);
 	
 	@Autowired
-	private PersonDao fypersonDao;
+	private PersonService personService;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView home(Model model) {
-		logger.info("show login page!");
+	public ModelAndView getLogin() {
+		logger.info("getLogin");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login");
 		return mav;
 	}
 	
-	/**
-	 * @param pageperson
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute Person pageperson,HttpServletRequest request, HttpServletResponse response) {
-		logger.info("action login");
-		if(isAdmin(pageperson)){
-			return adminMAV(request,response,pageperson);
-		}
-		Person retperson=fypersonDao.findByName(pageperson.getName());
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ModelAndView postLogin(LoginPage loginPage,HttpServletRequest request, HttpServletResponse response) {
+		logger.info("postLogin");
 		
-		if(checkManage(pageperson,retperson)){
-			return manageMav(request,response,retperson);
-		}
+		LoginRet loginRet=personService.checkLoginPerson(loginPage);
 		
-		if(checkPerson(pageperson,retperson)){
-			return personMav(request,response, retperson);
+		if(loginRet.isPass()){
+			new SessionUtil(request).setValue("loginRet",loginRet);
+			return dispatcherMav();
 		}
-		
-		return failMav(pageperson);
+				
+		return reLoginMav(loginPage);
 	}
+
+	private ModelAndView dispatcherMav() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("forward:/dispatcher");
+		return mav;
+	}
+	
+	private ModelAndView reLoginMav(LoginPage loginPage) {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("login");
+		mav.addObject("loginPage",loginPage);
+		mav.addObject("msg","用户名或者密码错误!");
+		return mav;
+	}
+
+	
+	
 
 	private boolean isAdmin(Person pageperson) {
 		if (pageperson.getName().equals("admin")
@@ -109,13 +116,5 @@ public class LoginCtl {
 		return mav;
 	}
 	
-	private ModelAndView failMav(Person pageperson) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("msg","用户名或者密码错误!");
-		mav.addObject("username",pageperson.getName());
-		mav.addObject("password",pageperson.getChkstr());
-		mav.setViewName("login");
-		return mav;
-	}
 
 }

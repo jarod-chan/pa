@@ -3,6 +3,7 @@ package cn.fyg.pa.tool;
 import java.math.BigDecimal;
 
 public class Constant {
+	public static String ADMIN_USERNAME="admin";
 	public static String ADMIN_PASSWORD="fyg9900";
 	public static String INIT_PASSWORD="123456";
 	public static String COOKIE_FLAG="chkstr";

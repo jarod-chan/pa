@@ -34,7 +34,7 @@ id：<input type="text" name="id" /> <br/>
  <br/>
 
 <input type="submit" value="保存"/>
-<input type="button" value="返回" onclick="javascript:window.open('/pa/person','_self')"/>
+<input type="button" value="返回" onclick="javascript:window.open('/${ctx}/admin/person','_self')"/>
 </form>
 --%>
 
@@ -43,7 +43,7 @@ id：<input type="text" name="id" /> <br/>
  <div id="msg" style="background-color:red;width:300px">${msg}</div>
 </c:if>
 
-<form:form method="post" commandName="person" action="/pa/person">
+<form:form method="post" commandName="person" action="/${ctx}/admin/person">
 id：
 <form:input path="id" />
 <form:errors path="id" cssClass="error" /><br/>
@@ -61,7 +61,7 @@ id：
 <form:select path="manage" items="${manageEnum}"></form:select><br/>
 
 <input type="submit" value="保存"/>
-<input type="button" value="返回" onclick="javascript:window.open('/pa/person','_self')"/>
+<input type="button" value="返回" onclick="javascript:window.open('/${ctx}/admin/person','_self')"/>
 </form:form> 
 
 </body>
