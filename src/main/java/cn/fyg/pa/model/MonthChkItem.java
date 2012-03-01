@@ -1,7 +1,9 @@
 package cn.fyg.pa.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +32,24 @@ public class MonthChkItem implements Serializable {
 	
 	private String task;
 	
+	@Column
+	private BigDecimal workhour;
+	
 	private Long point;
+	
+	public BigDecimal getWorkhour() {
+		return this.workhour == null ?
+				null : 
+				workhour.setScale(1,BigDecimal.ROUND_HALF_UP);
+	}
+
+	public void setWorkhour(BigDecimal workhour) {
+		if(workhour==null){
+			this.workhour=null;
+			return;
+		}
+		this.workhour = workhour.setScale(1, BigDecimal.ROUND_HALF_UP);
+	}
 
 	public Long getId() {
 		return id;

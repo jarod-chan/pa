@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.fyg.pa.page.LoginRet;
+import cn.fyg.pa.tool.SessionUtil;
+
 /**  TODO 这里有重复逻辑
  * 用户访问权限的过滤器  
  * @author viano  
@@ -27,7 +30,7 @@ public class UrlFilter implements Filter {
 	/**
 	 * 非过滤url
 	 */
-	private static final List<String> noFilterUrl=Arrays.asList("/pa/","/pa/fetchcsr","/pa/fail");
+	private static final List<String> noFilterUrl=Arrays.asList("/pa/","/pa/login","/pa/fetchcsr","/pa/fail","/pa/dispatcher");
 	
 	/**
 	 * 资源url
@@ -37,17 +40,17 @@ public class UrlFilter implements Filter {
 	/**
 	 * 职员url
 	 */
-	private static final List<String> personUrl=Arrays.asList("/pa/","/pa/fetchcsr");
+	private static final List<String> personUrl=Arrays.asList("/pa/person");
 	
 	/**
 	 * 经理url
 	 */
-	private static final List<String> mangeUrl=Arrays.asList("/pa/","/pa/fetchcsr");
+	private static final List<String> mangeUrl=Arrays.asList("/pa/mange");
 	
 	/**
 	 * 管理员url
 	 */
-	private static final List<String> adminUrl=Arrays.asList("/pa/","/pa/fetchcsr");
+	private static final List<String> adminUrl=Arrays.asList("/pa/admin");
 
   
     public void destroy() {   
@@ -71,32 +74,40 @@ public class UrlFilter implements Filter {
         String url = req.getRequestURI(); 
         String method=req.getMethod();
         logger.info(method+":"+url);
-        
-        chain.doFilter(request, response);if(true) return;
+            
         
         if(isNofilterUrl(url)){
         	chain.doFilter(request, response);
+        	return;
         }
         if(isIndexOf(url,resFilterUrl)){
         	chain.doFilter(request, response);
+        	return;
         }
-        if(isIndexOf(url,personUrl)){
-        	chain.doFilter(request, response);
-        }
-        if(isIndexOf(url,mangeUrl)){
-        	chain.doFilter(request, response);
-        }
-        if(isIndexOf(url,adminUrl)){
-        	chain.doFilter(request, response);
-        }
+        SessionUtil session=new SessionUtil(req);
+		LoginRet loginRet = session.getValue("loginRet", LoginRet.class);
 		
+		if(loginRet!=null){			
+			if (isIndexOf(url, personUrl) && loginRet.getMange().equals("N")) {
+				chain.doFilter(request, response);
+				return;
+			}
+			if (isIndexOf(url, mangeUrl) && loginRet.getMange().equals("Y")) {
+				chain.doFilter(request, response);
+				return;
+			}
+			if (isIndexOf(url, adminUrl) && loginRet.getMange().equals("A")) {
+				chain.doFilter(request, response);
+				return;
+			}
+		}
 		
 		res.sendRedirect("/pa/fail");
 	}
 
 	private boolean isIndexOf(String url, List<String> targetUrl) {
 		for (String urlPattern : targetUrl) {
-			if(url.indexOf(urlPattern)>0){
+			if(url.indexOf(urlPattern)>=0){
 				return true;
 			}
 		}

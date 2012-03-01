@@ -56,12 +56,13 @@
 
 <form id="monthChk" action="/${ctx}/mange/${mange.id}/monthchk/${monthChk.id}" method="post">
 
-<table border=1 style="table-layout:fixed;width:900px;">
+<table border=1 style="table-layout:fixed;width:950px;">
 <thead>
 	<tr>
 		<th style="width:50px;">序号</th>
 		<th style="width:100px;">工作性质</th>
 		<th style="width:600px;">工作内容</th>
+		<th style="width:50px;">用时</th>
 		<th style="width:150px;">评价</th>
 	</tr>
 </thead>
@@ -79,6 +80,9 @@
 			</td>
 			<td>
 				${item.task}
+			</td>
+			<td>
+				${item.workhour}
 			</td>
 			<td>
 				<select name="monthChkItems_point" >

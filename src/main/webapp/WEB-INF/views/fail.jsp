@@ -18,7 +18,7 @@ text-align:center;
 
 </head>
 <body>
-<div style='margin: 100 auto;text-align: center;font: bold 18px 宋体;color: #0066CC;vertical-align: middle'> 
+<div style="margin: 100 auto; text-align:center;font: bold 18px; color: #0066CC;vertical-align: middle"> 
 Sorry,您没有权限访问该资源!
 </div>
 </body>

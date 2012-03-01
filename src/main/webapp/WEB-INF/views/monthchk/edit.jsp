@@ -15,7 +15,8 @@
 	var leftcss={"float":"left","width":"22px"};
 	var leftAndMargin={"float":"left","margin-left":"10px","width":"22px"};
 	var taskSize={"width":"580px"};
-	var taskMaxlength={"maxlength":"40"};
+	var taskMaxlength={"maxlength":"50"};
+	var hourCss={"width":"40px"};
 	
 	var rowClick=function (){
 		$("#tbl tr td:last-child :button").hide();
@@ -42,9 +43,13 @@
 				.append(sel)
 				.end()
 			.append("<td>")
-			.find("td:last")
-			.append($("<input type='text' name='monthChkItems_task'/>").css(taskSize).attr(taskMaxlength))
-			.end()
+				.find("td:last")
+				.append($("<input type='text' name='monthChkItems_task'/>").css(taskSize).attr(taskMaxlength))
+				.end()
+			.append("<td>")
+				.find("td:last")
+				.append($("<input type='text' name='monthChkItems_workhour'/>").css(hourCss))
+				.end()
 			.append("<td>")
 			.find("td:last")
 			.append(
@@ -66,6 +71,7 @@
 		$(".remove").add(".up").add(".down").css(leftAndMargin).hide();
 		$("#tbl tr").click(rowClick);
 		$(":input[name='monthChkItems_task']").css(taskSize).attr(taskMaxlength);
+		$(":input[name='monthChkItems_workhour']").css(hourCss);
 		$(".addLast").click(function(){
  			var newtr=tr.clone();
 			newtr.click(rowClick);
@@ -135,12 +141,13 @@
 <input name="year" type="hidden" value="${monthChk.year}" /> 
 <input name="month" type="hidden" value="${monthChk.month}" /> 
 
-<table border=1 style="table-layout:fixed;width:900px;">
+<table border=1 style="table-layout:fixed;width:950px;">
 <thead>
 	<tr>
 		<td style="width:50px;">序号</td>
 		<td style="width:100px;">工作性质</td>
-		<td style="width:600px;">工作内容<font style="color:red">[字数限制：40个]</font></td>
+		<td style="width:600px;">工作内容<font style="color:red">[字数限制：50个]</font></td>
+		<td style="width:50px;">用时</td>
 		<td style="width:150px;">操作<input type="button" class="addLast" value="+"  /></td>
 	</tr>
 </thead>
@@ -163,6 +170,9 @@
 			</td>
 			<td>
 				<input type="text" name="monthChkItems_task" value="${item.task}" />
+			</td>
+			<td>
+				<input type="text" name="monthChkItems_workhour" value="${item.workhour}" />
 			</td>
 			<td>
 				<input type="button" class="add" onclick='add(this)' value="+"  />

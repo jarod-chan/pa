@@ -106,7 +106,7 @@ public class MonthChkCtl {
 		
 		if(!isCanSave(monthChk)){
 			MessagePasser mpr=new SessionMPR(session);
-			mpr.setMessage("提交失败[单据已经提交]！");
+			mpr.setMessage("提交失败[单据重复提交]！");
 		}else{			
 			monthChk.setState(StateEnum.SAVED);
 			monthChk=monthChkDao.save(monthChk);
@@ -138,7 +138,7 @@ public class MonthChkCtl {
 			monthChk.setState(StateEnum.SAVED);
 			monthChk=monthChkDao.save(monthChk);
 			MessagePasser mpr=new SessionMPR(session);
-			mpr.setMessage("提交失败[工作内容不能为空]！");
+			mpr.setMessage("提交失败[工作内容和用时都不能为空]！");
 		}else{
 			monthChk.setState(StateEnum.SUBMITTED);
 			monthChk=monthChkDao.save(monthChk);
@@ -155,6 +155,9 @@ public class MonthChkCtl {
 	private boolean isCanCommint(MonthChk monthChk) {
 		for(MonthChkItem item:monthChk.getMonthChkItems()){
 			if(StringUtils.isBlank(item.getTask())){
+				return false;
+			}
+			if(item.getWorkhour()==null){
 				return false;
 			}
 		}

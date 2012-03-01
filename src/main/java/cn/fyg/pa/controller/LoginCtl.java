@@ -11,13 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.model.Person;
-import cn.fyg.pa.model.enums.ManageEnum;
 import cn.fyg.pa.page.LoginPage;
 import cn.fyg.pa.page.LoginRet;
 import cn.fyg.pa.service.PersonService;
-import cn.fyg.pa.tool.Constant;
-import cn.fyg.pa.tool.CookieUtil;
+import cn.fyg.pa.tool.Dispatcher;
 import cn.fyg.pa.tool.SessionUtil;
 
 
@@ -46,15 +43,15 @@ public class LoginCtl {
 		
 		if(loginRet.isPass()){
 			new SessionUtil(request).setValue("loginRet",loginRet);
-			return dispatcherMav();
+			return dispatcherMav(loginRet);
 		}
 				
 		return reLoginMav(loginPage);
 	}
 
-	private ModelAndView dispatcherMav() {
+	private ModelAndView dispatcherMav(LoginRet loginRet) {
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("forward:/dispatcher");
+		mav.setViewName(Dispatcher.dispatcher(loginRet));
 		return mav;
 	}
 	
@@ -65,56 +62,5 @@ public class LoginCtl {
 		mav.addObject("msg","用户名或者密码错误!");
 		return mav;
 	}
-
-	
-	
-
-	private boolean isAdmin(Person pageperson) {
-		if (pageperson.getName().equals("admin")
-				&& pageperson.getChkstr().equals(Constant.ADMIN_PASSWORD))
-			return true;
-		return false;
-	}
-	
-	private ModelAndView adminMAV(HttpServletRequest request,HttpServletResponse response, Person pageperson) {
-		CookieUtil.setChkstrCookie(request, response, pageperson.getChkstr());
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:admin/all");
-		return mav;
-	}
-	
-	private boolean checkPerson(Person pageperson,Person realperson){
-		if(realperson==null) return false;
-		if(realperson.getChkstr()==null) return false;
-		if(!realperson.getChkstr().equals(pageperson.getChkstr())) return false;
-		return true;
-	}
-	
-	private ModelAndView personMav(HttpServletRequest request,HttpServletResponse response,
-			Person retperson) {
-		CookieUtil.setChkstrCookie(request, response, retperson.getChkstr());
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:fycheck/list?personId="+retperson.getId());
-		//mav.setViewName("redirect:/person/"+retperson.getId()+"/monthchk");
-		return mav;
-	}
-	
-	private boolean checkManage(Person pageperson,Person realperson){
-		if(realperson==null) return false;
-		if(realperson.getManage()==null) return false;
-		if(!realperson.getManage().equals(ManageEnum.Y)) return false;
-		if(realperson.getChkstr()==null) return false;
-		if(!realperson.getChkstr().equals(pageperson.getChkstr())) return false;
-		return true;
-	}
-	
-	private ModelAndView manageMav(HttpServletRequest request,HttpServletResponse response, Person retperson) {
-		CookieUtil.setChkstrCookie(request, response, retperson.getChkstr());
-		ModelAndView mav = new ModelAndView();
-		//mav.setViewName("redirect:fymanage/list?personId="+retperson.getId());
-		mav.setViewName("redirect:/mange/"+retperson.getId()+"/monthchk");
-		return mav;
-	}
-	
 
 }

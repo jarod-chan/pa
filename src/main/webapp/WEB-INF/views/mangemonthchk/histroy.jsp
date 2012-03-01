@@ -38,7 +38,7 @@
 					<ol>
 						<c:forEach var="chkitem" items="${item.monthChkItems}">
 							<li>
-							[${chkitem.workType.worktype}]${chkitem.task}--
+							[${chkitem.workType.worktype}]${chkitem.task}&nbsp;&nbsp;&nbsp;&nbsp;用时:${chkitem.workhour}&nbsp;&nbsp;评价:
 							<c:choose>
 				     			<c:when test="${chkitem.point=='5'}">优秀</c:when>
 				     			<c:when test="${chkitem.point=='4'}">良好</c:when>

@@ -33,12 +33,13 @@
 </c:if>
 <br>
 
-<table border=1 style="table-layout:fixed;width:900px;">
+<table border=1 style="table-layout:fixed;width:950px;">
 <thead>
 	<tr>
 		<th style="width:50px;">序号</th>
 		<th style="width:100px;">工作性质</th>
 		<th style="width:600px;">工作内容</th>
+		<td style="width:50px;">用时</td>
 		<th style="width:150px;">评价</th>
 	</tr>
 </thead>
@@ -53,6 +54,9 @@
 			</td>
 			<td>
 				${item.task}
+			</td>
+			<td>
+				${item.workhour}
 			</td>
 			<td>
 			<c:if test="${monthChk.state=='FINISHED'}">
