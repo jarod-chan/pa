@@ -1,7 +1,12 @@
-#Wed Feb 15 20:51:33 CST 2012
+#Thu Mar 01 14:41:56 CST 2012
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/db_memory.properties=ISO-8859-1
+encoding//src/main/resources/db_mysql_local.properties=UTF-8
+encoding//src/main/resources/db_mysql_product.properties=UTF-8
+encoding//src/main/resources/db_mysql_test.properties=UTF-8
+encoding//src/main/resources/mail/mailsetting.properties=UTF-8
+encoding//src/main/resources/mail/stmpserver.properties=UTF-8
 encoding//src/test/java=UTF-8
 encoding//src/test/resources=UTF-8
-encoding/<project>=UTF-8
