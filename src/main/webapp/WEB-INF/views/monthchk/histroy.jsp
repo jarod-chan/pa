@@ -11,7 +11,7 @@
  
 </head>
 <body>
-员工${person.name}评价历史
+<h2>员工月度工作任务完成历史</h2>
 <input type="button" value="<<当前考核" onclick="javascript:window.open('/${ctx}/person/${person.id}/monthchk','_self')"/>
 <br>
 <c:if test="${msg!=null}">

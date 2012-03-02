@@ -46,8 +46,10 @@
 	
 </script>  
 <body>
-经理${mange.name}对员工${monthChk.person.name}${monthChk.year}年${monthChk.month}月份工完成情况评价
+<h2>员工月度工作任务评价</h2>
 
+经理:${mange.name}&nbsp;&nbsp;部门:${mange.department}&nbsp;&nbsp;考核员工:${monthChk.person.name}&nbsp;&nbsp;<br>
+考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}
 <br>
 <c:if test="${msg!=null}">
 	<font id="msg" style="color:red;" >${msg}</font>

@@ -19,7 +19,7 @@ text-align:center;
 </head>
 <body>
 
-<div class="center"><h1>方远房产2011年度横向考核系统</h1></div>
+<div class="center"><h1>方远房产卓越绩效管理平台</h1></div>
 <div class="center">
 <form action="login" method="post">
 <img src="/pa/resources/img/logo.jpg">

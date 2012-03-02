@@ -3,13 +3,11 @@ package cn.fyg.pa.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,8 +18,6 @@ import cn.fyg.pa.dao.PersonDao;
 import cn.fyg.pa.model.Person;
 import cn.fyg.pa.model.enums.ManageEnum;
 import cn.fyg.pa.model.enums.TypeEnum;
-import cn.fyg.pa.tool.CommonModelAndView;
-import cn.fyg.pa.tool.Constant;
 import cn.fyg.pa.tool.EnumUtil;
 import cn.fyg.pa.tool.Tool;
 
@@ -116,11 +112,8 @@ public class PersonCtl {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/password")
-	public ModelAndView initPassword(@RequestParam(value="passlen",required=false) Long passlen,@RequestParam(value="type",required=false) String type,@CookieValue(value="chkstr",required=false) String cookieChkstr) {
+	public ModelAndView initPassword(@RequestParam(value="passlen",required=false) Long passlen,@RequestParam(value="type",required=false) String type) {
 		logger.info("post initPassword");
-		if(!Constant.ADMIN_PASSWORD.equals(cookieChkstr)){
-			return CommonModelAndView.getHomeModelAndView();
-		}
 		
 		List<Person> people = personDao.getAllFyperson();
 		List<Person> peopleHasPassword=new ArrayList<Person>();
@@ -141,7 +134,7 @@ public class PersonCtl {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("persons",people);
 		mav.addObject("msg","操作成功");
-		mav.setViewName("redirect:person");
+		mav.setViewName("redirect:");
 		return mav;
 		
 	}

@@ -27,11 +27,11 @@
 </form>
 <table border=1>
 <tr>
-	<td>id</td><td>用户名</td><td>密码</td><td>部门</td><td>是否经理</td><td>职能部室</td><td>操作</td>
+	<td>id</td><td>用户名</td><td>密码</td><td>部门</td><td>是否经理</td><td>职能部室</td><td>邮箱</td><td>操作</td>
 </tr>
 <c:forEach var="person" items="${persons}" >
 	<tr>
-	<td>${person.id}</td> <td>${person.name}  </td><td>${person.chkstr}</td><td>${person.department}</td><td>${person.manage.name}</td><td>${person.type.name}</td>
+	<td>${person.id}</td> <td>${person.name}  </td><td>${person.chkstr}</td><td>${person.department}</td><td>${person.manage.name}</td><td>${person.type.name}</td><td>${person.email}</td>
 	<td>
 	<input type="button" value="修改" onclick="javascript:window.open('/${ctx}/admin/person/${person.id}','_self')"/>
 	<input type="button" value="删除" onclick="  if(confirm('确定删除？')){

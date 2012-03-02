@@ -11,7 +11,8 @@
  
 </head>
 <body>
-经理${mange.name}对${mange.department}员工的月工作评价
+<h2>员工月度工作任务评价</h2>
+经理:${mange.name}&nbsp;&nbsp;部门:${mange.department}&nbsp;&nbsp;
 <input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/histroy','_self')"/>
 <input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
 <br>
