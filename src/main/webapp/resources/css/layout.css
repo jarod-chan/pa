@@ -1,0 +1,19 @@
+//表格左右分列样式，右侧自适应
+body {margin:0;}
+
+#container {margin:0 auto; width:100%;}
+#sidebar { float:left; width:100px; height:500px; }
+#content { margin-left:105px !important; margin-left:102px; }
+
+/*ie6 默认form 有距离*/
+form {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+h2{
+	margin:0 auto;
+}
+
+.head{
+	font-weight:800;
+}

@@ -10,12 +10,6 @@ margin-right:auto;
 text-align:center;
 } 
 </style>
-<script type="text/javascript">
-	$(document).ready(function() {
-		setTimeout(function(){$("#msg").slideToggle(1000);},3000);
-	 });
-</script>  
-
 </head>
 <body>
 

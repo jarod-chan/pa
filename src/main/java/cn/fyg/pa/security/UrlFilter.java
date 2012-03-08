@@ -19,7 +19,8 @@ import org.slf4j.LoggerFactory;
 import cn.fyg.pa.page.LoginRet;
 import cn.fyg.pa.tool.SessionUtil;
 
-/**  TODO 这里有重复逻辑
+/**  TODO 这里有重复逻辑  
+ *  TODO url 还是可以越权操作    要重新考虑这里的实现
  * 用户访问权限的过滤器  
  * @author viano  
  */  
@@ -36,6 +37,11 @@ public class UrlFilter implements Filter {
 	 * 资源url
 	 */
 	private static final List<String> resFilterUrl=Arrays.asList("/pa/resources");
+	
+	/**
+	 * 公共url
+	 */
+	private static final List<String> commonUrl=Arrays.asList("/pa/common");
 	
 	/**
 	 * 职员url
@@ -75,10 +81,10 @@ public class UrlFilter implements Filter {
         String method=req.getMethod();
         logger.info(method+":"+url);
          
-//        if(true){
-//        	chain.doFilter(request, response);
-//        	return;
-//        }
+        if(true){
+        	chain.doFilter(request, response);
+        	return;
+        }
         
         if(isNofilterUrl(url)){
         	chain.doFilter(request, response);
@@ -91,7 +97,11 @@ public class UrlFilter implements Filter {
         SessionUtil session=new SessionUtil(req);
 		LoginRet loginRet = session.getValue("loginRet", LoginRet.class);
 		
-		if(loginRet!=null){			
+		if(loginRet!=null){		
+			if(isIndexOf(url,commonUrl)){
+				chain.doFilter(request, response);
+				return;
+			}
 			if (isIndexOf(url, personUrl) && loginRet.getMange().equals("N")) {
 				chain.doFilter(request, response);
 				return;

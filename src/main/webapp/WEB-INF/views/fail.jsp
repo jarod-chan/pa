@@ -19,7 +19,8 @@ text-align:center;
 </head>
 <body>
 <div style="margin: 100 auto; text-align:center;font: bold 18px; color: #0066CC;vertical-align: middle"> 
-Sorry,您没有权限访问该资源!
+访问失败，请确认你已经登录系统并且你访问的地址是正确的。<br />
+<input type="button" value="点此重新登录系统" onclick="javascript:window.open('/${ctx}/login','_self')"/>
 </div>
 </body>
 </html>

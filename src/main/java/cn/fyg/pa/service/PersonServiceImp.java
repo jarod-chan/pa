@@ -1,6 +1,7 @@
 package cn.fyg.pa.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import cn.fyg.pa.dao.PersonDao;
@@ -12,7 +13,7 @@ import cn.fyg.pa.tool.Constant;
 @Service
 public class PersonServiceImp implements PersonService {
 	
-	@Autowired
+	@Resource
 	private PersonDao personDao;
 	
 	public LoginRet checkLoginPerson(LoginPage login){
@@ -58,6 +59,16 @@ public class PersonServiceImp implements PersonService {
 		ret.setChkstr(Constant.ADMIN_PASSWORD);
 		ret.setMange("A");
 		return ret;
+	}
+
+	@Override
+	public Person save(Person person) {
+		return personDao.save(person);
+	}
+
+	@Override
+	public Person find(Long id) {
+		return personDao.find(id);
 	}
 
 }

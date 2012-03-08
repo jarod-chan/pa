@@ -14,6 +14,7 @@
 <h2>员工月度工作任务评价</h2>
 经理:${mange.name}&nbsp;&nbsp;部门:${mange.department}&nbsp;&nbsp;
 <input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/histroy','_self')"/>
+<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${mange.id}/password?backurl=/pa/mange/${mange.id}/monthchk','_self')"/>
 <input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
 <br>
 <c:if test="${msg!=null}">
