@@ -15,6 +15,7 @@
 
 <a href="/${ctx}/admin/person">用户管理</a><br>
 <a href="/${ctx}/admin/rpt/point/asc">考核报表</a><br>
+<a href="/${ctx}/admin/idrtype">指标类型</a><br>
 
 <input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/><br>
 </body>

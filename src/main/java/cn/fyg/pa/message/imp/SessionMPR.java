@@ -15,13 +15,13 @@ public class SessionMPR implements MessagePasser {
 
 	@Override
 	public void setMessage(String message) {
-		session.setAttribute(Constant.COOKIE_MSG, message);
+		session.setAttribute(Constant.MESSAGE_NAME, message);
 	}
 
 	@Override
 	public String getMessage() {
-		Object obj=session.getAttribute(Constant.COOKIE_MSG);
-		session.setAttribute(Constant.COOKIE_MSG, null);
+		Object obj=session.getAttribute(Constant.MESSAGE_NAME);
+		session.setAttribute(Constant.MESSAGE_NAME, null);
 		return obj==null?null:(String) obj;
 	}
 

@@ -25,13 +25,13 @@ public class CookieMsg {
 		Cookie[] cookies = request.getCookies();
 		int len = (cookies == null ? 0 : cookies.length);
 		for (int i = 0; i < len; i++) {
-			if (cookies[i].getName().equalsIgnoreCase(Constant.COOKIE_MSG)) {
+			if (cookies[i].getName().equalsIgnoreCase(Constant.MESSAGE_NAME)) {
 				msgCookie = cookies[i];
 				msgCookie.setValue(message);
 			}
 		}
 		if(msgCookie==null){
-			msgCookie= new Cookie(Constant.COOKIE_MSG,message);
+			msgCookie= new Cookie(Constant.MESSAGE_NAME,message);
 			msgCookie.setMaxAge(-1);
 		}
 		return msgCookie;
@@ -41,7 +41,7 @@ public class CookieMsg {
 		Cookie[] cookies = request.getCookies();
 		int len = (cookies == null ? 0 : cookies.length);
 		for (int i = 0; i < len; i++) {
-			if (cookies[i].getName().equalsIgnoreCase(Constant.COOKIE_MSG)) {
+			if (cookies[i].getName().equalsIgnoreCase(Constant.MESSAGE_NAME)) {
 				return cookies[i].getValue();
 			}
 		}

@@ -19,6 +19,7 @@ import cn.fyg.pa.model.Person;
 import cn.fyg.pa.page.LoginRet;
 import cn.fyg.pa.page.PasswordPage;
 import cn.fyg.pa.service.PersonService;
+import cn.fyg.pa.tool.Constant;
 import cn.fyg.pa.tool.SessionUtil;
 
 @Controller
@@ -42,7 +43,7 @@ public class PasswordCtl {
 		logger.info("showPassword");
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("person",person);
-		mav.addObject("msg",new SessionMPR(session).getMessage());
+		mav.addObject(Constant.MESSAGE_NAME,new SessionMPR(session).getMessage());
 		mav.addObject("backurl",backurl);
 		mav.setViewName("password/password");
 		return mav;
@@ -60,7 +61,7 @@ public class PasswordCtl {
 			personService.save(person);
 			SessionUtil util=new SessionUtil(session);
 			util.remove("loginRet");
-			mav.addObject("msg","密码修改成功！");
+			mav.addObject(Constant.MESSAGE_NAME,"密码修改成功！");
 			mav.setViewName("password/sucess");
 		}else{
 			MessagePasser mpr=new SessionMPR(session);
