@@ -1,9 +1,19 @@
-//表格左右分列样式，右侧自适应
-body {margin:0;}
+
+body {
+	margin:0;
+	
+}
 
 #container {margin:0 auto; width:100%;}
 #sidebar { float:left; width:100px; height:500px; }
 #content { margin-left:105px !important; margin-left:102px; }
+
+ body
+{
+	margin-left:20px;
+    font-family:'Verdana','宋体';
+    font-size:14px;
+}
 
 /*ie6 默认form 有距离*/
 form {
@@ -16,4 +26,9 @@ h2{
 
 .head{
 	font-weight:800;
+}
+
+table.tbldef {
+	border-collapse: separate;
+	empty-cells: show
 }

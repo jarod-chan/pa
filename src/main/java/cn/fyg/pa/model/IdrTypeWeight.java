@@ -8,9 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class IdrTypeWight {
+public class IdrTypeWeight {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,16 +19,16 @@ public class IdrTypeWight {
 	
 	private Long sn;//sn
 	
-	@Column
+	@ManyToOne
 	@JoinColumn(name="idryear_id")
 	private IdrYear idrYear;//权重年度
 	
-	@Column
+	@ManyToOne
 	@JoinColumn(name="idrtype_id")
 	private IdrType idrType;
 	
 	@Column(precision=12, scale=2)
-	private BigDecimal wight;
+	private BigDecimal weight;
 
 	public Long getId() {
 		return id;
@@ -53,12 +54,18 @@ public class IdrTypeWight {
 		this.idrType = idrType;
 	}
 
-	public BigDecimal getWight() {
-		return wight;
+	public BigDecimal getWeight() {
+		return this.weight==null?
+				null:
+				weight.setScale(1, BigDecimal.ROUND_HALF_UP);
 	}
 
-	public void setWight(BigDecimal wight) {
-		this.wight = wight;
+	public void setWeight(BigDecimal weight) {
+		if(weight==null){
+			this.weight =null;
+			return;
+		}	
+		this.weight = weight.setScale(1, BigDecimal.ROUND_HALF_UP);
 	}
 
 	public Long getSn() {

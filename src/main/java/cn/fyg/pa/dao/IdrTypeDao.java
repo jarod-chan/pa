@@ -12,14 +12,28 @@ import org.springframework.stereotype.Repository;
 import cn.fyg.pa.model.IdrType;
 
 @Repository
-public class IdrTypeDao {
+public class IdrTypeDao implements BaseDao<IdrType> {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
 
-
+	@Override
 	public IdrType find(Long id) {
 		return entityManager.find(IdrType.class, id);
+	}
+	
+	@Override
+	public IdrType save(IdrType idrType) {
+		if(idrType.getId()==null){
+			entityManager.persist(idrType);
+			return idrType;
+		}else
+			return entityManager.merge(idrType);
+	}
+
+	@Override
+	public void remove(IdrType idrType) {
+		entityManager.remove(idrType);
 	}
 	
 	public List<IdrType> findAll() {
@@ -30,19 +44,4 @@ public class IdrTypeDao {
 		query.orderBy(builder.asc(root.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
-	
-	public IdrType save(IdrType idrType) {
-		if(idrType.getId()==null){
-			entityManager.persist(idrType);
-			return idrType;
-		}else
-			return entityManager.merge(idrType);
-	}
-
-	public void remove(IdrType idrType) {
-		entityManager.remove(idrType);
-	}
-	
-	
-
 }

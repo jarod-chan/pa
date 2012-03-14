@@ -18,6 +18,8 @@ public class IdrCompany{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;//id
 	
+	private Long sn;//sn
+	
 	@ManyToOne
 	@JoinColumn(name = "idryear_id")
 	private IdrYear idrYear;//指标年度
@@ -48,7 +50,7 @@ public class IdrCompany{
 	private BigDecimal weight;//权重
 	
 	@Column(precision=12, scale=2)
-	private BigDecimal realWight;//实际权重
+	private BigDecimal realWeight;//实际权重
 
 	public Long getId() {
 		return id;
@@ -56,6 +58,14 @@ public class IdrCompany{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getSn() {
+		return sn;
+	}
+
+	public void setSn(Long sn) {
+		this.sn = sn;
 	}
 
 	public IdrYear getIdrYear() {
@@ -130,13 +140,14 @@ public class IdrCompany{
 		this.weight = weight;
 	}
 
-	public BigDecimal getRealWight() {
-		return realWight;
+	public BigDecimal getRealWeight() {
+		return realWeight;
 	}
 
-	public void setRealWight(BigDecimal realWight) {
-		this.realWight = realWight;
+	public void setRealWeight(BigDecimal realWeight) {
+		this.realWeight = realWeight;
 	}
-	
+
+
 	
 }

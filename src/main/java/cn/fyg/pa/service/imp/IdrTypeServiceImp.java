@@ -12,7 +12,7 @@ import cn.fyg.pa.model.IdrType;
 import cn.fyg.pa.service.IdrTypeService;
 
 @Service
-public class IdrServiceImp implements IdrTypeService {
+public class IdrTypeServiceImp implements IdrTypeService {
 	
 	@Resource
 	IdrTypeDao idrTypeDao;

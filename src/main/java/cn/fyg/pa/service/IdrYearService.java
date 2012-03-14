@@ -4,10 +4,9 @@ import cn.fyg.pa.model.IdrYear;
 
 public interface IdrYearService {
 	
-	IdrYear find(Long id);
+	IdrYear findByYear(Long year);
 	
 	IdrYear save(IdrYear idrYear);
-	
 	
 
 }

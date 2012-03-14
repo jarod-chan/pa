@@ -7,11 +7,10 @@
 
 	<persistence-unit name="acme" transaction-type="RESOURCE_LOCAL">
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-			<property name="hibernate.show_sql" value="false"/>
-			<property name="hibernate.transaction.flush_before_completion"
-				value="true" />
-			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" />
+			<property name="hibernate.hbm2ddl.auto" value="update" /><!-- 数据库表结构自动更新  -->
+			<property name="hibernate.show_sql" value="true" /><!-- 显示sql  -->
+			<property name="hibernate.format_sql" value="true" /><!-- 格式化数据库sql -->
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" /><!-- hibernate 自定义的CacheProvider的类名 不知道具体作用 -->
 		</properties>
 	</persistence-unit>
 
