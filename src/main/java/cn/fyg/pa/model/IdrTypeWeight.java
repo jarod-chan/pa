@@ -18,10 +18,10 @@ public class IdrTypeWeight {
 	private Long id;//id
 	
 	private Long sn;//sn
-	
+		
 	@ManyToOne
-	@JoinColumn(name="idryear_id")
-	private IdrYear idrYear;//权重年度
+	@JoinColumn(name="idrIdrYearTypeWeight_id")
+	private IdrYearTypeWeight idrYearTypeWeight;//权重年度
 	
 	@ManyToOne
 	@JoinColumn(name="idrtype_id")
@@ -38,14 +38,6 @@ public class IdrTypeWeight {
 		this.id = id;
 	}
 
-	public IdrYear getIdrYear() {
-		return idrYear;
-	}
-
-	public void setIdrYear(IdrYear idrYear) {
-		this.idrYear = idrYear;
-	}
-
 	public IdrType getIdrType() {
 		return idrType;
 	}
@@ -55,17 +47,11 @@ public class IdrTypeWeight {
 	}
 
 	public BigDecimal getWeight() {
-		return this.weight==null?
-				null:
-				weight.setScale(1, BigDecimal.ROUND_HALF_UP);
+		return this.weight;
 	}
 
 	public void setWeight(BigDecimal weight) {
-		if(weight==null){
-			this.weight =null;
-			return;
-		}	
-		this.weight = weight.setScale(1, BigDecimal.ROUND_HALF_UP);
+		this.weight = weight;
 	}
 
 	public Long getSn() {
@@ -76,5 +62,12 @@ public class IdrTypeWeight {
 		this.sn = sn;
 	}
 
-	
+	public IdrYearTypeWeight getIdrYearTypeWeight() {
+		return idrYearTypeWeight;
+	}
+
+	public void setIdrYearTypeWeight(IdrYearTypeWeight idrYearTypeWeight) {
+		this.idrYearTypeWeight = idrYearTypeWeight;
+	}
+
 }

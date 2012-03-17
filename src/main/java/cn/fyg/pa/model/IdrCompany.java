@@ -21,15 +21,15 @@ public class IdrCompany{
 	private Long sn;//sn
 	
 	@ManyToOne
-	@JoinColumn(name = "idryear_id")
-	private IdrYear idrYear;//指标年度
+	@JoinColumn(name = "idryearcompany_id")
+	private IdrYearCompany idrYearCompany;//指标年度
 	
 	@Column(length=16)
 	private String number;//编码
 	
 	@ManyToOne
-	@JoinColumn(name = "idrtype_id")
-	private IdrType idrType;//指标类型
+	@JoinColumn(name = "idrtypeweight_id")
+	private IdrTypeWeight idrTypeWeight;//指标类型
 	
 	@Column(length=128)
 	private String context;//内容
@@ -49,7 +49,7 @@ public class IdrCompany{
 	@Column(precision=12, scale=2)
 	private BigDecimal weight;//权重
 	
-	@Column(precision=12, scale=2)
+	@Column(precision=12, scale=4)
 	private BigDecimal realWeight;//实际权重
 
 	public Long getId() {
@@ -68,12 +68,13 @@ public class IdrCompany{
 		this.sn = sn;
 	}
 
-	public IdrYear getIdrYear() {
-		return idrYear;
+
+	public IdrYearCompany getIdrYearCompany() {
+		return idrYearCompany;
 	}
 
-	public void setIdrYear(IdrYear idrYear) {
-		this.idrYear = idrYear;
+	public void setIdrYearCompany(IdrYearCompany idrYearCompany) {
+		this.idrYearCompany = idrYearCompany;
 	}
 
 	public String getNumber() {
@@ -84,12 +85,12 @@ public class IdrCompany{
 		this.number = number;
 	}
 
-	public IdrType getIdrType() {
-		return idrType;
+	public IdrTypeWeight getIdrTypeWeight() {
+		return idrTypeWeight;
 	}
 
-	public void setIdrType(IdrType idrType) {
-		this.idrType = idrType;
+	public void setIdrTypeWeight(IdrTypeWeight idrTypeWeight) {
+		this.idrTypeWeight = idrTypeWeight;
 	}
 
 	public String getContext() {

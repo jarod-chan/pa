@@ -72,6 +72,7 @@
 		$(".addLast").click(function(){
  			var newtr=tr.clone();
 			newtr.click(rowClick);
+			newtr.find(":input[name='IdrTypeWeight_weight']").bind("blur",numberBlur);
 			$(".tbldef tbody").append(newtr); 
 			reIndexTable();
 		})
@@ -80,6 +81,7 @@
 	function add(obj) {
 		var newtr=tr.clone();
 		newtr.click(rowClick);
+		newtr.find(":input[name='IdrTypeWeight_weight']").bind("blur",numberBlur);
 		$(obj).parent().parent().after(newtr);
 		reIndexTable();
 	}
@@ -132,7 +134,7 @@
 年度：${idrYear.year}
 <%@ include file="../common/message.jsp"%>
 <form id="typeweight" action="/${ctx}/admin/idrtypeweight" method="post">
-<input type="hidden" name="year"  value="${idrYear.year}" />
+<input type="hidden" name="year"  value="${idrYearTypeWeight.year}" />
 <table border="1" class="tbldef">
 		<thead>
 			<tr>
@@ -144,7 +146,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="item" items="${idrYear.idrTypeWeight}">
+			<c:forEach var="item" items="${idrYearTypeWeight.idrTypeWeight}">
 			<tr>
 				<td  style="display:none">
 					<input type="text" name="idrTypeWeight_id"   value="${item.id}" />
