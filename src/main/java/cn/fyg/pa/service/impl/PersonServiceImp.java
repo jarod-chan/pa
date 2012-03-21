@@ -1,4 +1,4 @@
-package cn.fyg.pa.service;
+package cn.fyg.pa.service.impl;
 
 import javax.annotation.Resource;
 
@@ -8,6 +8,7 @@ import cn.fyg.pa.dao.PersonDao;
 import cn.fyg.pa.model.Person;
 import cn.fyg.pa.page.LoginPage;
 import cn.fyg.pa.page.LoginRet;
+import cn.fyg.pa.service.PersonService;
 import cn.fyg.pa.tool.Constant;
 
 @Service
