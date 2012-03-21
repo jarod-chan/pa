@@ -7,6 +7,7 @@ public interface IdrYearCompanyService {
 	IdrYearCompany findByYear(Long year);
 	
 	IdrYearCompany save(IdrYearCompany idrYear);
-	
 
+	IdrYearCompany sortIdrCompanyByIdrTypeWeight(IdrYearCompany idrYearCompany);
+	
 }

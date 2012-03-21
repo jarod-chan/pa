@@ -37,5 +37,13 @@ public class IdrYearCompanyServiceImp implements IdrYearCompanyService {
 	public IdrYearCompany save(IdrYearCompany idrYearCompany) {
 		return idrYearCompanyDao.save(idrYearCompany);
 	}
+	
+	@Override
+	@Transactional
+	public IdrYearCompany sortIdrCompanyByIdrTypeWeight(IdrYearCompany idrYearCompany){
+		idrYearCompany=idrYearCompanyDao.save(idrYearCompany);
+		idrYearCompany.sortIdrCompanyByIdrTypeWeight();
+		return idrYearCompany;
+	}
 
 }

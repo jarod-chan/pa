@@ -29,6 +29,9 @@
 		newtr.click(rowClick);
 		newtr.find("select[name='idrCompany_idrTypeWeight.id']").bind("change",typeWeightChange);
 		newtr.find(":input[name='idrCompany_weight']").bind("blur",numberBlur);
+		if($('#triggerCol').val()=="->"){
+			newtr.find('td:gt(4):lt(4)').hide();
+		}
 		$(".tbldef tbody").append(newtr); 
 		reIndexTable();
 	}
@@ -53,8 +56,20 @@
 		tr.find(":input[name='idrCompany_weight']").triggerHandler("blur");
 	}
 	
+	var triggerCol=function(){
+		if($(this).val()=="<-"){
+			$(this).val("->");
+			$('thead tr').find('th:gt(4):lt(4)').hide();
+			$('tbody tr').find('td:gt(4):lt(4)').hide();
+		}else{
+			$(this).val("<-");
+			$('thead tr').find('th:gt(4):lt(4)').show();
+			$('tbody tr').find('td:gt(4):lt(4)').show();
+		}
+	}
+	
 
-	var sel=$("<select>").attr({name:"idrCompany_idrTypeWeight.id"});
+	var sel=$("<select name='idrCompany_idrTypeWeight.id' ></select>");
 	<c:forEach var="idrTypeWeight" items="${idrYearTypeWeight.idrTypeWeight}">
 		sel.append("<option value='${idrTypeWeight.id}'>${idrTypeWeight.idrType.name}</option>");
 	</c:forEach>
@@ -62,34 +77,34 @@
 	var tr = $("<tr>");
 	tr.append("<td>")
 		.find("td:last")
-		.append($("<input>").attr({type:'text',name:'idrCompany_id'}))
-		.append($("<input>").attr({type:'text',name:'idrCompany_sn'}))
+		.append($("<input type='text' name='idrCompany_id' />"))
+		.append($("<input type='text' name='idrCompany_sn' />"))
 		.css("display","none");
 	tr.append("<td>");
 	tr.append("<td>")
 		.find("td:last")
-		.append($("<input>").attr({type:'text',name:'idrCompany_number'}));
+		.append($("<input type='text' name='idrCompany_number' />"));
 	tr.append("<td>")
 		.find("td:last")
 		.append(sel);
 	tr.append("<td>")
 		.find("td:last")
-		.append($("<input>").attr({type:'text',name:'idrCompany_context'}));
+		.append($("<input type='text' name='idrCompany_context' />"));
 	tr.append("<td>")
 		.find("td:last")
-		.append($("<input>").attr({type:'text',name:'idrCompany_quantization'}));
+		.append($("<input type='text' name='idrCompany_quantization'/>"));
 	tr.append("<td>")
 		.find("td:last")
-		.append($("<input>").attr({type:'text',name:'idrCompany_standard'}));
+		.append($("<input type='text' name='idrCompany_standard' />"));
 	tr.append("<td>")
 		.find("td:last")
-		.append($("<input>").attr({type:'text',name:'idrCompany_computeMode'}));
+		.append($("<input type='text' name='idrCompany_computeMode' />"));
 	tr.append("<td>")
 		.find("td:last")
-		.append($("<input>").attr({type:'text',name:'idrCompany_period'}));
+		.append($("<input type='text' name='idrCompany_period' />"));
 	tr.append("<td>")
 		.find("td:last")
-		.append($("<input>").attr({type:'text',name:'idrCompany_weight'}));
+		.append($("<input type='text' name='idrCompany_weight' />"));
 	tr.append("<td>")
 		.find("td:last")
 		.append($("<span>").attr({'class':'typeweight'}).html(idrTypeWeightsJson[0].weight));
@@ -118,6 +133,7 @@
 		$(":input[name='idrCompany_weight']").bind("blur",numberBlur);
 		$("select[name='idrCompany_idrTypeWeight.id']").bind("change",typeWeightChange)
 		$(".addLast").bind('click',addLastRow);
+		$("#triggerCol").bind('click',triggerCol).triggerHandler("click");
 	});
 	
 	function add(obj) {
@@ -125,6 +141,9 @@
 		newtr.click(rowClick);
 		newtr.find("select[name='idrCompany_idrTypeWeight.id']").bind("change",typeWeightChange);
 		newtr.find(":input[name='idrCompany_weight']").bind("blur",numberBlur);
+		if($("#triggerCol").val()=="->"){
+			newtr.find('td:gt(4):lt(4)').hide();
+		}
 		$(obj).parent().parent().after(newtr);
 		reIndexTable();
 	}
@@ -162,6 +181,13 @@
 		actionFrom.attr("action",oldAction+"/save").submit();
 	}
 	
+	function sort(){
+		var actionFrom=$("#idrcompany");
+		var oldAction=actionFrom.attr("action");
+		$(".tbldef tbody").formatName();
+		actionFrom.attr("action",oldAction+"/sort").submit();
+	}
+	
 	function commit(){
 		var oldAction=$("#idrcompany").attr("action");
 		var msg="确定提交？";
@@ -185,7 +211,7 @@
 				<th >序号</th>
 				<th >编码</th>
 				<th >类别</th>
-				<th>指标类容</th>
+				<th>指标类容<input type="button" id="triggerCol" value="<-"  /></th>
 				<th>量化指标</th>
 				<th>工作标准</th>
 				<th>计算方式</th>
@@ -193,7 +219,7 @@
 				<th>权重<font style="color:red">[一位小数]</font></th>
 				<th>类别权重</th>
 				<th>实际权重</th>
-				<th style="width:150px;">操作<input type="button" class="addLast" value="+"  /></th>
+				<th style="width:150px;white-space:nowrap;overflow:hidden;">操作<input type="button" class="addLast" value="+"  /></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -251,6 +277,7 @@
 		</tbody>
 </table>
 <input type="button" value="保存" onclick="save()"/>
+<input type="button" value="排序" onclick="sort()"/>
 <input type="button" value="提交" onclick="commit()"/>
 </form>
 </body>

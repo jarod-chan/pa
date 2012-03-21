@@ -44,4 +44,11 @@ public class IdrCompanyCtl {
 		 new SessionMPR(session).setMessage("保存成功！");
 		return "redirect:edit/"+idrYearCompanyForm.getYear();
 	}
+	
+	@RequestMapping(value="sort",method=RequestMethod.POST)
+	public String sort(IdrYearCompany idrYearCompanyForm,HttpSession session){
+		idrYearCompanyForm=idrYearCompanyService.sortIdrCompanyByIdrTypeWeight(idrYearCompanyForm);
+		 new SessionMPR(session).setMessage("排序完成！");
+		return "redirect:edit/"+idrYearCompanyForm.getYear();
+	}
 }
