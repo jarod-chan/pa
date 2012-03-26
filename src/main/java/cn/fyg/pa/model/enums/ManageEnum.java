@@ -1,6 +1,7 @@
 package cn.fyg.pa.model.enums;
 
 public enum ManageEnum implements CommonEnum {
+	G("总经理"),
 	Y("经理"),
 	N("职员");
 	

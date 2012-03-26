@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class IdrTask {
@@ -20,8 +21,9 @@ public class IdrTask {
     @JoinColumn(name = "idrtaskbill_id")  
 	private IdrTaskBill idrTaskBill;//任务单id
 	
-	@ManyToOne
-    @JoinColumn(name = "parent_id")  
+//	@ManyToOne
+//    @JoinColumn(name = "parent_id")  
+	@Transient
 	private IdrTask parent;//父任务
 	
 	private String context;//工作内容

@@ -9,6 +9,7 @@
 <link type="text/css" rel="stylesheet" href="/${ctx}/resources/css/layout.css" /> 
 
 <script type="text/javascript" src="/${ctx}/resources/js/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="/${ctx}/resources/js/myplug.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		setTimeout(function(){$("#msg").slideToggle(1000);},3000);

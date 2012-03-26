@@ -1,6 +1,8 @@
 package cn.fyg.pa.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -13,6 +15,7 @@ public class IdrMonthPlanBill extends IdrTaskBill {
 	
 	private Long month;//月度
 	
+	@Enumerated(EnumType.STRING)
 	private IdrMonthPlanEnum state;//单据状体
 	
 	@ManyToOne
@@ -49,6 +52,16 @@ public class IdrMonthPlanBill extends IdrTaskBill {
 
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+
+	public void next() throws StateChangeException {
+		state.setIdrMonthPlanBill(this);
+		this.state.next();
+	}
+	
+	public void back() throws StateChangeException{
+		state.setIdrMonthPlanBill(this);
+		this.state.back();
 	}
 	
 }

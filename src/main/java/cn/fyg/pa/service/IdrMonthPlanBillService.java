@@ -1,7 +1,12 @@
 package cn.fyg.pa.service;
 
+
+import java.util.List;
+
 import cn.fyg.pa.model.Department;
 import cn.fyg.pa.model.IdrMonthPlanBill;
+import cn.fyg.pa.model.StateChangeException;
+import cn.fyg.pa.model.enums.IdrMonthPlanEnum;
 
 public interface IdrMonthPlanBillService {
 	
@@ -11,5 +16,12 @@ public interface IdrMonthPlanBillService {
 
 
 	IdrMonthPlanBill getCurrentIdrMonthPlanBill(Department department);
+	
+	IdrMonthPlanBill next(Long id) throws StateChangeException;
+
+
+	List<IdrMonthPlanBill> getAllIdrMonthPlanBillState(IdrMonthPlanEnum... state);
+
+	IdrMonthPlanBill back(Long id)throws StateChangeException;
 
 }
