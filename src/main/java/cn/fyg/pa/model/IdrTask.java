@@ -22,7 +22,8 @@ public class IdrTask {
 	private IdrTaskBill idrTaskBill;//任务单id
 	
 //	@ManyToOne
-//    @JoinColumn(name = "parent_id")  
+//  @JoinColumn(name = "parent_id")  
+//  暂时屏蔽该字段
 	@Transient
 	private IdrTask parent;//父任务
 	

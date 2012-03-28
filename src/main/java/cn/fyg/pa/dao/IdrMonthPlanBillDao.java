@@ -1,5 +1,6 @@
 package cn.fyg.pa.dao;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
@@ -79,6 +81,28 @@ public class IdrMonthPlanBillDao {
 		query.select(root);
 		if(states.length>0){
 			query.where(root.get("state").in((Object[])states));
+		}
+		query.orderBy(builder.desc(root.get("year")),builder.desc(root.get("month")));
+		return entityManager.createQuery(query).getResultList();
+	}
+
+
+	public List<IdrMonthPlanBill> findBillByDepartmentAndState(Department[] department, IdrMonthPlanEnum... states) {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<IdrMonthPlanBill> query=builder.createQuery(IdrMonthPlanBill.class);
+		Root<IdrMonthPlanBill> root=query.from(IdrMonthPlanBill.class);
+		query.select(root);
+		List<Predicate> criteria=new ArrayList<Predicate>();
+		if(department!=null&&department.length>0){
+			criteria.add(root.get("department").in((Object[])department));
+		}
+		if(states!=null&&states.length>0){
+			criteria.add(root.get("state").in((Object[])states));
+		}
+		if(criteria.size()==1){
+			query.where(criteria.get(0));
+		}else{
+			query.where(builder.and(criteria.toArray(new Predicate[0])));
 		}
 		query.orderBy(builder.desc(root.get("year")),builder.desc(root.get("month")));
 		return entityManager.createQuery(query).getResultList();

@@ -54,6 +54,11 @@ public class UrlFilter implements Filter {
 	private static final List<String> mangeUrl=Arrays.asList("/pa/mange");
 	
 	/**
+	 * 分管副总url
+	 */
+	private static final List<String> gmangeUrl=Arrays.asList("/pa/gmange");
+	
+	/**
 	 * 管理员url
 	 */
 	private static final List<String> adminUrl=Arrays.asList("/pa/admin");
@@ -107,6 +112,10 @@ public class UrlFilter implements Filter {
 				return;
 			}
 			if (isIndexOf(url, mangeUrl) && loginRet.getMange().equals("Y")) {
+				chain.doFilter(request, response);
+				return;
+			}
+			if (isIndexOf(url, gmangeUrl) && loginRet.getMange().equals("G")) {
 				chain.doFilter(request, response);
 				return;
 			}

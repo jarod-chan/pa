@@ -31,5 +31,14 @@ public class DepartmentDao {
 		}
 		return ret.get(0);
 	}
+	
+	public List<Department> findByPerson(Long personId){
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Department> query=builder.createQuery(Department.class);
+		Root<Department> root=query.from(Department.class);
+		query.select(root);
+		query.where(builder.equal(root.get("gmange_id"), personId));
+		return entityManager.createQuery(query).getResultList();
+	}
 
 }

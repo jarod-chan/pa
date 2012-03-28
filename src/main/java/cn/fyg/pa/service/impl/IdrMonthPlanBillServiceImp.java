@@ -7,9 +7,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.fyg.pa.dao.DepartmentDao;
 import cn.fyg.pa.dao.IdrMonthPlanBillDao;
 import cn.fyg.pa.model.Department;
 import cn.fyg.pa.model.IdrMonthPlanBill;
+import cn.fyg.pa.model.Person;
 import cn.fyg.pa.model.StateChangeException;
 import cn.fyg.pa.model.enums.IdrMonthPlanEnum;
 import cn.fyg.pa.service.IdrMonthPlanBillService;
@@ -19,6 +21,9 @@ import cn.fyg.pa.tool.CMonthPlanBill;
 public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 	@Resource
 	IdrMonthPlanBillDao idrMonthPlanBillDao;
+	
+	@Resource
+	DepartmentDao departmentDao;
 	
 	@Override
 	@Transactional
@@ -90,8 +95,21 @@ public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 		return idrMonthPlanBill;
 	}
 
+	@Override
 	public List<IdrMonthPlanBill> getAllIdrMonthPlanBillState(IdrMonthPlanEnum... state) {
 		return idrMonthPlanBillDao.findBillByState(state);
+	}
+
+	@Override
+	public List<IdrMonthPlanBill> getIdrMonthPlanBillByDepartmentAndState(Department department, IdrMonthPlanEnum... state) {
+		return idrMonthPlanBillDao.findBillByDepartmentAndState(new Department[]{department},state);
+	}
+
+	@Override
+	public List<IdrMonthPlanBill> getIdrMonthPlanBillByGmangeAndState(Person gmange, IdrMonthPlanEnum... state) {
+		List<Department> departmentsList=departmentDao.findByPerson(gmange.getId());
+		Department[] departmentsArray=departmentsList.toArray(new Department[departmentsList.size()]);
+		return idrMonthPlanBillDao.findBillByDepartmentAndState(departmentsArray,state);
 	}
 
 }
