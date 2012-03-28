@@ -112,4 +112,9 @@ public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 		return idrMonthPlanBillDao.findBillByDepartmentAndState(departmentsArray,state);
 	}
 
+	@Override
+	public List<IdrMonthPlanBill> getIdrMonthPlanBillByPeriodAndState(Long year, Long month, IdrMonthPlanEnum... state) {
+		return idrMonthPlanBillDao.findByPeriodAndState(year, month,state);
+	}
+
 }

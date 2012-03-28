@@ -41,7 +41,7 @@ public class UrlFilter implements Filter {
 	/**
 	 * 公共url
 	 */
-	private static final List<String> commonUrl=Arrays.asList("/pa/common");
+	private static final List<String> commonUrl=Arrays.asList("/pa/common/settings/person");
 	
 	/**
 	 * 职员url
@@ -86,6 +86,7 @@ public class UrlFilter implements Filter {
         String method=req.getMethod();
         logger.info(method+":"+url);
          
+        //开发临时去掉url过滤
         if(true){
         	chain.doFilter(request, response);
         	return;
@@ -102,20 +103,23 @@ public class UrlFilter implements Filter {
         SessionUtil session=new SessionUtil(req);
 		LoginRet loginRet = session.getValue("loginRet", LoginRet.class);
 		
-		if(loginRet!=null){		
-			if(isIndexOf(url,commonUrl)){
+		if(loginRet!=null){	
+			
+			String suffixId="/"+loginRet.getPersonid();
+			
+			if(isIndexOf(url,commonUrl,suffixId)){
 				chain.doFilter(request, response);
 				return;
 			}
-			if (isIndexOf(url, personUrl) && loginRet.getMange().equals("N")) {
+			if (isIndexOf(url, personUrl,suffixId) && loginRet.getMange().equals("N")) {
 				chain.doFilter(request, response);
 				return;
 			}
-			if (isIndexOf(url, mangeUrl) && loginRet.getMange().equals("Y")) {
+			if (isIndexOf(url, mangeUrl,suffixId) && loginRet.getMange().equals("Y")) {
 				chain.doFilter(request, response);
 				return;
 			}
-			if (isIndexOf(url, gmangeUrl) && loginRet.getMange().equals("G")) {
+			if (isIndexOf(url, gmangeUrl,suffixId) && loginRet.getMange().equals("G")) {
 				chain.doFilter(request, response);
 				return;
 			}
@@ -127,10 +131,26 @@ public class UrlFilter implements Filter {
 		
 		res.sendRedirect("/pa/fail");
 	}
-
+	
 	private boolean isIndexOf(String url, List<String> targetUrl) {
 		for (String urlPattern : targetUrl) {
 			if(url.indexOf(urlPattern)>=0){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 过滤用户可能出现的直接通过url访问其它人信息
+	 * @param url
+	 * @param targetUrl
+	 * @param suffix 
+	 * @return
+	 */
+	private boolean isIndexOf(String url, List<String> targetUrl,String suffix) {
+		for (String urlPattern : targetUrl) {
+			if(url.indexOf(urlPattern+suffix)>=0){
 				return true;
 			}
 		}

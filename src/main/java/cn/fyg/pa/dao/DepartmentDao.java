@@ -41,4 +41,13 @@ public class DepartmentDao {
 		return entityManager.createQuery(query).getResultList();
 	}
 
+	public List<Department> findAllDepartmentsOrderById() {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Department> query=builder.createQuery(Department.class);
+		Root<Department> root=query.from(Department.class);
+		query.select(root);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}
+
 }

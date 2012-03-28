@@ -41,6 +41,8 @@ public class LoginCtl {
 		
 		LoginRet loginRet=personService.checkLoginPerson(loginPage);
 		
+		loginRet=doChangeForSpecialPerson(loginPage,loginRet);
+		
 		if(loginRet.isPass()){
 			new SessionUtil(request).setValue("loginRet",loginRet);
 			return dispatcherMav(loginRet);
@@ -48,6 +50,16 @@ public class LoginCtl {
 				
 		return reLoginMav(loginPage);
 	}
+
+	private LoginRet doChangeForSpecialPerson(LoginPage loginPage,
+			LoginRet loginRet) {
+		String username=loginPage.getUsername().trim();
+		if(username.equals("牟一琦")||username.equals("陆兆贤")){
+			loginRet.setMange(loginPage.getSpecialPerson());
+		}
+		return loginRet;
+	}
+
 
 	private ModelAndView dispatcherMav(LoginRet loginRet) {
 		ModelAndView mav=new ModelAndView();

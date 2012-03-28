@@ -1,9 +1,14 @@
 package cn.fyg.pa.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -126,5 +131,35 @@ public class MonthChkDao {
 				.getResultList();
 		return retList;
 	}
+
+	public List<MonthChk> findByPeriodAndState(Long year, Long month,String department,StateEnum... states) {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<MonthChk> query=builder.createQuery(MonthChk.class);
+		Root<MonthChk> root=query.from(MonthChk.class);
+		query.select(root);
+		List<Predicate> criteria=new ArrayList<Predicate>();
+		if(year!=null){
+			criteria.add(builder.equal(root.get("year"), year));
+		}
+		if(month!=null){
+			criteria.add(builder.equal(root.get("month"), month));
+		}
+		if(states!=null&&states.length>0){
+			criteria.add(root.get("state").in((Object[])states));
+		}
+		if(department!=null){
+			criteria.add(builder.equal(root.get("person").get("department"), department));
+		}
+		
+		if(criteria.size()==1){
+			query.where(criteria.get(0));
+		}else{
+			query.where(builder.and(criteria.toArray(new Predicate[0])));
+		}
+		query.orderBy(builder.asc(root.get("person")));
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+
 	
 }

@@ -4,6 +4,8 @@ public class LoginPage {
 	
 	private String username;
 	private String password;
+	
+	private String specialPerson;
 
 	public String getUsername() {
 		return username;
@@ -16,6 +18,12 @@ public class LoginPage {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getSpecialPerson() {
+		return specialPerson;
+	}
+	public void setSpecialPerson(String specialPerson) {
+		this.specialPerson = specialPerson;
 	}
 
 }

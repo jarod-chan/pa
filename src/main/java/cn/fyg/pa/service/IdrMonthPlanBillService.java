@@ -19,7 +19,8 @@ public interface IdrMonthPlanBillService {
 	IdrMonthPlanBill getCurrentIdrMonthPlanBill(Department department);
 	
 	IdrMonthPlanBill next(Long id) throws StateChangeException;
-
+	
+	IdrMonthPlanBill back(Long id)throws StateChangeException;
 
 	List<IdrMonthPlanBill> getAllIdrMonthPlanBillState(IdrMonthPlanEnum... state);
 	
@@ -27,6 +28,6 @@ public interface IdrMonthPlanBillService {
 	
 	List<IdrMonthPlanBill> getIdrMonthPlanBillByGmangeAndState(Person gmange,IdrMonthPlanEnum... state);
 
-	IdrMonthPlanBill back(Long id)throws StateChangeException;
+	List<IdrMonthPlanBill> getIdrMonthPlanBillByPeriodAndState(Long year,Long month,IdrMonthPlanEnum... state);
 
 }

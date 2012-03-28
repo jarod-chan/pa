@@ -9,6 +9,8 @@
 <h2>部门月度工作执行情况</h2>
 ${person.department}:${person.name}&nbsp;&nbsp;
 <input type="button" value="历史记录>>" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan/history','_self')"/>
+<input type="button" value="公司部门月度工作查询" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/query/idrmonthplan','_blank')"/>
+<input type="button" value="公司员工月度工作查询" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/query/monthchk','_blank')"/>
 <input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${person.id}/password?backurl=/pa/gmange/${person.id}/idrmonthplan','_self')"/>
 <input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
 <br>

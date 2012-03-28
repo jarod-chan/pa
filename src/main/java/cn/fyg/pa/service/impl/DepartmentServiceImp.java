@@ -1,5 +1,7 @@
 package cn.fyg.pa.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -17,6 +19,11 @@ public class DepartmentServiceImp implements DepartmentService {
 	@Override
 	public Department findByName(String name) {
 		return departmentDao.findByName(name);
+	}
+	
+	@Override
+	public List<Department> getAllDepartmentsOrderById(){
+		return departmentDao.findAllDepartmentsOrderById();
 	}
 
 }
