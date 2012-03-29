@@ -8,7 +8,7 @@
 
 	var summaryCss={"width":"530","vertical-align":"top"};
 	var summaryLength={"maxlength":"500"};
-	var summaryOption={minHeight:60,extraSpace:3};
+	var summaryOption={ minHeight:60,extraSpace:3};
 	
 	$(document).ready(function() { 
 		$("textarea[name='idrTasks_summary']").css(summaryCss).attr(summaryLength).autoResize(summaryOption);
@@ -44,10 +44,8 @@
 				<ol>
 				<c:forEach var="item" items="${bill.idrTasks}">
 					<li>
-					<c:if test="${item.context!=null}">
-						<div>计划：${item.sn}</div>
-					</c:if>
-						<div>总结：<textarea style="border-style:none;background:transparent;"  readonly="readonly" name="idrTasks_summary">${item.summary}</textarea></div>
+						<div>计划：${item.context}</div>
+						<div>总结：<textarea style="border-style:none;background:transparent;"  readonly="readonly" name="idrTasks_summary">${item.summary}</textarea></div> 
 					</li>
 				</c:forEach>
 				</ol>

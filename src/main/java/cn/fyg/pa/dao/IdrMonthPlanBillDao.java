@@ -33,6 +33,12 @@ public class IdrMonthPlanBillDao {
 	public IdrMonthPlanBill save(IdrMonthPlanBill idrMonthPlanBill) {
 		for(IdrTask idrTask:idrMonthPlanBill.getIdrTasks()){
 			idrTask.setIdrTaskBill(idrMonthPlanBill);
+			if(idrTask.getContext()!=null){
+				idrTask.setContext(idrTask.getContext().trim());
+			}
+			if(idrTask.getSummary()!=null){
+				idrTask.setSummary(idrTask.getSummary().trim());
+			}
 		}
 		if(idrMonthPlanBill.getId()==null){
 			return create(idrMonthPlanBill);

@@ -32,7 +32,7 @@
 		var newtr=tr.clone();
 		newtr.click(rowClick);
 		$(".tbldef tbody").append(newtr); 
-		$(newtr).find("textarea[name='idrTasks_summary']").css(summaryCss).attr(summaryLength).autoResize(summaryOption);
+		$(newtr).find("textarea[name='idrTasks_summary']").css(summaryCss).attr(summaryLength).autoResize(summaryOption).iemaxlength();
 		reIndexTable();
 	}
 	
@@ -67,7 +67,7 @@
 		$(".add").css(leftcss).hide();
 		$(".remove").add(".up").add(".down").css(leftAndMargin).hide();
 		$(".tbldef tbody tr").click(rowClick);
-		$("textarea[name='idrTasks_summary']").css(summaryCss).attr(summaryLength).autoResize(summaryOption);
+		$("textarea[name='idrTasks_summary']").css(summaryCss).attr(summaryLength).autoResize(summaryOption).iemaxlength();
 		$(".tbldef tbody tr").find("td:last").slice(0,contextSize).each(function(index){
 			if(index+1==contextSize){
 				$(this).html("<input type='button' class='addLast' value='+' />");
@@ -82,7 +82,7 @@
 		var newtr=tr.clone();
 		newtr.click(rowClick);
 		$(obj).parent().parent().after(newtr);
-		$(newtr).find("textarea[name='idrTasks_summary']").css(summaryCss).attr(summaryLength).autoResize(summaryOption);
+		$(newtr).find("textarea[name='idrTasks_summary']").css(summaryCss).attr(summaryLength).autoResize(summaryOption).iemaxlength();
 		reIndexTable();
 	}
 

@@ -12,6 +12,8 @@ text-align:center;
 </style>
 <script type="text/javascript">
 
+
+
 	//特殊人员事件
 	function blurUsername(){
 		var username=$(this).val().trim();
@@ -43,8 +45,8 @@ text-align:center;
  <br/>
 <div id="specSel">
 角色：<select name="specialPerson" style="width:150px;">
-		<option value="Y">部门经理</option>
 		<option value="G">分管副总</option>
+		<option value="Y">部门经理</option>
 	</select>
 </div>
  <c:if test="${msg!=null}">
@@ -52,7 +54,7 @@ text-align:center;
  </c:if>
  <br/>
  <input type="submit" value="登录"/>
- <input type="button" value="忘记密码" " onclick="javascript:window.open('/pa/fetchcsr','_self')"/>
+ <input type="button" value="忘记密码"  onclick="javascript:window.open('/pa/fetchcsr','_self')"/>
 </form>
 </div> 
 </body>

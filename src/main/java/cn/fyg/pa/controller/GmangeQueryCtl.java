@@ -6,17 +6,14 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.bean.IdrMonthPlanQueryPage;
 import cn.fyg.pa.bean.MonthchkQueryPage;
-import cn.fyg.pa.dao.PersonDao;
 import cn.fyg.pa.model.Department;
 import cn.fyg.pa.model.IdrMonthPlanBill;
 import cn.fyg.pa.model.MonthChk;
-import cn.fyg.pa.model.Person;
 import cn.fyg.pa.model.enums.IdrMonthPlanEnum;
 import cn.fyg.pa.model.enums.StateEnum;
 import cn.fyg.pa.service.DepartmentService;
@@ -35,9 +32,6 @@ public class GmangeQueryCtl {
 	
 	@Resource
 	DepartmentService departmentService;
-	
-	@Resource
-	PersonDao personDao;
 
 	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
 	public String queryIdrMonthPlan(IdrMonthPlanQueryPage page,Map<String,Object> map){
@@ -70,9 +64,8 @@ public class GmangeQueryCtl {
 	}
 
 	@RequestMapping(value="/monthchk",method=RequestMethod.GET)
-	public String queryMonthchk(@PathVariable("personId")Long personId,MonthchkQueryPage page,Map<String,Object> map){
-		Person person=personDao.find(personId);
-		page=initMonthchkQueryPage(page,person.getDepartment());
+	public String queryMonthchk(MonthchkQueryPage page,Map<String,Object> map){
+		page=initMonthchkQueryPage(page,"办公室");
 		List<Department> departments=departmentService.getAllDepartmentsOrderById();
 		List<MonthChk> monthChks=monthChkService.getMonthChkByPeriodAndState(page.getYear(), page.getMonth(),page.getDepartment(), StateEnum.FINISHED);
 		DateTool dtl=new DateTool();

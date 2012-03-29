@@ -28,6 +28,11 @@ public class ManageCtl {
 		map.put("title", title);
 		map.put("urls", list);
 		
+		//如果是产品部经理，则无法看到员工月度工作任务评价，id是101
+		if(personId.equals(101L)){
+			list.remove(0);
+		}
+		
 		return "route/all";
 	}
 

@@ -44,9 +44,7 @@
 				<ol>
 				<c:forEach var="item" items="${bill.idrTasks}">
 					<li>
-					<c:if test="${item.context!=null}">
 						<div>计划：${item.context}</div>
-					</c:if>
 						<div>总结：<textarea style="border-style:none;background:transparent;"  readonly="readonly" name="idrTasks_summary">${item.summary}</textarea></div>
 					</li>
 				</c:forEach>

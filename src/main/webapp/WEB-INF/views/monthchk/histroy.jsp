@@ -3,11 +3,6 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
-<script type="text/javascript">
-	$(document).ready(function() {
-		setTimeout(function(){$("#msg").slideToggle(1000);},3000);
-	 });
-</script>
  
 </head>
 <body>

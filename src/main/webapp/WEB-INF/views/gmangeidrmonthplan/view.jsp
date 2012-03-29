@@ -24,6 +24,12 @@
 	$(document).ready(function() { 
 		$(".tbldef tbody tr").click(rowClick);
 		$("textarea[name='idrTasks_summary']").css(summaryCss).attr(summaryLength).autoResize(summaryOption);
+		//解决ie下默认高度错误
+		if($.browser.msie) { 
+			$("textarea[name='idrTasks_summary']").each(function(){
+				$(this).append(" ").triggerHandler("change");
+			})
+		}
 	});
 	
 </script>  

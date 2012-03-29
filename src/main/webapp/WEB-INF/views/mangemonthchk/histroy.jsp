@@ -3,11 +3,6 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
-<script type="text/javascript">
-	$(document).ready(function() {
-		setTimeout(function(){$("#msg").slideToggle(1000);},3000);
-	 });
-</script>
  
 </head>
 <body>
@@ -15,10 +10,7 @@
 经理:${mange.name}&nbsp;&nbsp;部门:${mange.department}&nbsp;&nbsp;
 <input type="button" value="<<当前考核" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk','_self')"/>
 <br>
-<c:if test="${msg!=null}">
-	<font id="msg" style="color:red;" >${msg}</font>
-</c:if>
-<br>
+
 <table border=1 style="table-layout:fixed;width:800px;">
 <thead>
 	<tr>

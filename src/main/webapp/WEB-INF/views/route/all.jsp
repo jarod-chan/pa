@@ -14,7 +14,7 @@
 </c:if>
 
 <c:forEach var="item" items="${urls}">
-<a href="${item.url}">${item.name}</a><br>
+<a href="${item.url}">${item.name}</a><br/><br/>
 </c:forEach>
 
 <br/>
