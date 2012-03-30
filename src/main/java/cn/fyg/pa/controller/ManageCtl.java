@@ -28,8 +28,9 @@ public class ManageCtl {
 		map.put("title", title);
 		map.put("urls", list);
 		
-		//如果是产品部经理，则无法看到员工月度工作任务评价，id是101
-		if(personId.equals(101L)){
+		//如果是产品部，则无法看到员工月度工作任务评价，id是101
+		//如果是办公室，作相同处理，id102
+		if(personId.equals(101L)||personId.equals(102L)){
 			list.remove(0);
 		}
 		
