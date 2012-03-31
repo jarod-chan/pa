@@ -16,9 +16,6 @@
 	};
 	
 	$(document).ready(function() {
-		setTimeout(function() {
-			$("#msg").slideToggle(1000);
-		}, 3000);
 		$("#tbl tr").click(rowClick);
 	});
 	

@@ -11,7 +11,7 @@
  
 </head>
 <body>
-输入用户名，密码将自动发送到你的公司邮箱<font style="color:red;" >[系统暂时不支持密码重置功能]</font>
+输入用户名，密码将自动发送到你的公司邮箱<font style="color:red;" >[登录系统后可以重新修改密码]</font>
 <br>
 <c:if test="${msg!=null}">
 	<font id="msg" style="color:red;" >${msg}</font>

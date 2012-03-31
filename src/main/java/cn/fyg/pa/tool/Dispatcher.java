@@ -18,8 +18,11 @@ public class Dispatcher {
 		if(loginRet.getMange().equals("A")){
 			return "redirect:admin/all";
 		}
+		if(loginRet.getMange().equals("G")){
+			return "redirect:gmange/"+loginRet.getPersonid()+"/idrmonthplan";
+		}
 		if(loginRet.getMange().equals("Y")){
-			return "redirect:/mange/"+loginRet.getPersonid()+"/monthchk";
+			return "redirect:/mange/"+loginRet.getPersonid()+"/all";
 		}
 		if (loginRet.getMange().equals("N")) {
 			return "redirect:/person/"+loginRet.getPersonid()+"/monthchk";

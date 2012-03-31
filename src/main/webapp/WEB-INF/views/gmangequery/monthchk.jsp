@@ -6,11 +6,30 @@
  
 </head>
 <body>
-<h2>员工月度工作任务评价历史</h2>
-经理:${mange.name}&nbsp;&nbsp;部门:${mange.department}&nbsp;&nbsp;
-<input type="button" value="<<当前考核" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk','_self')"/>
+<h2>公司员工月度工作查询</h2>
+<form action="" method="get">
+年份：
+<select name="year">
+	<c:forEach var="item" items="${years}">
+		<option value="${item}" <c:if test="${item==queryPage.year}">selected="true"</c:if> >${item}</option>
+	</c:forEach>
+</select>
+月份：
+<select name="month">
+	<c:forEach var="item" items="${months}">
+		<option value="${item}" <c:if test="${item==queryPage.month}">selected="true"</c:if> >${item}</option>
+	</c:forEach>
+</select>
+部门:
+<select name="department">
+	<c:forEach var="item" items="${departments}">
+		<option value="${item.name}" <c:if test="${item.name==queryPage.department}">selected="true"</c:if>>${item.name}</option>
+	</c:forEach>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="submit" value="查询" />
+</form>
 <br>
-
 <table border=1 style="table-layout:fixed;width:800px;">
 <thead>
 	<tr>
@@ -23,7 +42,7 @@
 				<tr>
 					<td rowspan="2">${status.count}</td>
 					<td>
-						${item.year}年${item.month}月份${item.person.name}工完成情况【${item.state.name}】
+						${item.year}年${item.month}月份${item.person.name}工完成情况【${item.person.department}】
 					</td>
 				</tr>
 				<tr>
