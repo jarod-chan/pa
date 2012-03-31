@@ -199,7 +199,7 @@
 	}
 	
 	function preview(){
-		window.open('/${ctx}/admin/idrcompany/preview/${idrYearCompany.year}','_blank');
+		window.open('/${ctx}/admin/idrcompany/perview/${idrYearCompany.year}','_blank');
 	}
 </script>
 </head>
@@ -207,84 +207,67 @@
 <h2>公司KPI分解</h2>
 年度：${idrYearCompany.year}
 <%@ include file="../common/message.jsp"%>
-<form id="idrcompany" action="/${ctx}/admin/idrcompany" method="post">
-<input type="hidden" name="year"  value="${idrYearCompany.year}" />
+
 <table border="1" class="tbldef" >
 		<thead>
 			<tr>
-				<th style="display:none">none</th>
 				<th >序号</th>
 				<th >编码</th>
 				<th >类别</th>
-				<th>指标类容<input type="button" id="triggerCol" value="<-"  /></th>
+				<th>指标类容</th>
 				<th>量化指标</th>
 				<th>工作标准</th>
 				<th>计算方式</th>
 				<th>考核周期</th>
-				<th>权重<font style="color:red">[一位小数]</font></th>
+				<th>权重</th>
 				<th>类别权重</th>
 				<th>实际权重</th>
-				<th style="width:150px;white-space:nowrap;overflow:hidden;">操作<input type="button" class="addLast" value="+"  /></th>
 			</tr>
 		</thead>
 		<tbody>
 	  		 <c:forEach var="item" items="${idrYearCompany.idrCompany}">
 			<tr>
-				<td  style="display:none">
-					<input type="text" name="idrCompany_id"   value="${item.id}" />
-					<input type="text" name="idrCompany_sn"   value="${item.sn}" />
-				</td>
 				<td>
 					${item.sn}
 				</td>
 				<td>
-					<input type="text" name="idrCompany_number"   value="${item.number}" />
+					${item.number}
+				</td>
+				<c:if test="${rowSpan[item.sn]!=null}">
+					<td rowspan="${rowSpan[item.sn]}">
+						${item.idrTypeWeight.idrType.name}
+					</td>
+				</c:if>
+				<td>
+					${item.context}
 				</td>
 				<td>
-					<select name="idrCompany_idrTypeWeight.id">
-					<c:forEach var="idrTypeWeight" items="${idrYearTypeWeight.idrTypeWeight}">
-						<option value="${idrTypeWeight.id}" <c:if test="${idrTypeWeight.id==item.idrTypeWeight.id}">selected="true"</c:if> >${idrTypeWeight.idrType.name}</option>
-					</c:forEach>
-					</select>
+					${item.quantization}
 				</td>
 				<td>
-					<input type="text" name="idrCompany_context"   value="${item.context}" />
+					${item.standard}
 				</td>
 				<td>
-					<input type="text" name="idrCompany_quantization"   value="${item.quantization}" />
+					${item.computeMode}
 				</td>
 				<td>
-					<input type="text" name="idrCompany_standard"   value="${item.standard}" />
+					${item.period}
 				</td>
 				<td>
-					<input type="text" name="idrCompany_computeMode"   value="${item.computeMode}" />
+					${item.weight}
 				</td>
+				<c:if test="${rowSpan[item.sn]!=null}">
+					<td rowspan="${rowSpan[item.sn]}">
+						${item.idrTypeWeight.weight}
+					</td>
+				</c:if>
 				<td>
-					<input type="text" name="idrCompany_period"   value="${item.period}" />
-				</td>
-				<td>
-					<input type="text" name="idrCompany_weight"   value="${item.weight}" />
-				</td>
-				<td>
-					<span class="typeweight">${item.idrTypeWeight.weight}</span>
-				</td>
-				<td>
-					<span class="realweight">${item.realWeight}</span>
-				</td>
-				<td>
-					<input type="button" class="add" onclick='add(this)' value="+"  />
-					<input type="button" class="remove" onclick='remove(this)' value="-"  />
-					<input type="button" class="up" onclick='up(this)' value="/\" />
-					<input type="button" class="down" onclick='down(this)' value="\/" />
+					${item.realWeight}
 				</td>
 			</tr>
 			</c:forEach> 
 		</tbody>
 </table>
-<input type="button" value="保存" onclick="save()"/>
-<input type="button" value="排序" onclick="sort()"/>
-<input type="button" value="提交" onclick="commit()"/>
-<input type="button" value="预览" onclick="preview()"/>
-</form>
+
 </body>
 </html>

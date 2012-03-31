@@ -1,5 +1,7 @@
 package cn.fyg.pa.dao;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +22,16 @@ public class CheckitemTest {
 	private FychkitemDao fychkitemDao;
 	
 	@Test
-	@Transactional
 	public void testMerge() {
 		Fychkitem chkitem=new Fychkitem();
 		Long id=1L;
 		chkitem.setId(id);
 		chkitem.setContent("test");
-		//fychkitemDao.persist(chkitem);
-		fychkitemDao.merge(chkitem);
+		fychkitemDao.persist(chkitem);
+		
+		Fychkitem fk1=fychkitemDao.find(1L);
+		Fychkitem fk2=fychkitemDao.find(1L);
+		Assert.assertFalse(fk1.equals(fk2));
 	}
 
 }

@@ -28,6 +28,10 @@ public class Result {
 		return this.pass;
 	}
 	
+	public boolean notPass(){
+		return !this.pass;
+	}
+	
 	public String cause(){
 		return this.cause;
 	}

@@ -1,5 +1,7 @@
 package cn.fyg.pa.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.message.imp.SessionMPR;
+import cn.fyg.pa.model.IdrCompany;
 import cn.fyg.pa.model.IdrYearCompany;
 import cn.fyg.pa.model.IdrYearTypeWeight;
+import cn.fyg.pa.model.Result;
 import cn.fyg.pa.service.IdrYearCompanyService;
 import cn.fyg.pa.service.IdrYearTypeWeightService;
 import cn.fyg.pa.tool.JsonUtil;
@@ -48,7 +52,50 @@ public class IdrCompanyCtl {
 	@RequestMapping(value="sort",method=RequestMethod.POST)
 	public String sort(IdrYearCompany idrYearCompanyForm,HttpSession session){
 		idrYearCompanyForm=idrYearCompanyService.sortIdrCompanyByIdrTypeWeight(idrYearCompanyForm);
-		 new SessionMPR(session).setMessage("排序完成！");
+		new SessionMPR(session).setMessage("排序完成！");
 		return "redirect:edit/"+idrYearCompanyForm.getYear();
+	}
+	
+	@RequestMapping(value="commit",method=RequestMethod.POST)
+	public String commit(IdrYearCompany idrYearCompanyForm,HttpSession session){
+		idrYearCompanyForm=idrYearCompanyService.sortIdrCompanyByIdrTypeWeight(idrYearCompanyForm);
+		Result result=idrYearCompanyForm.verifySelf();
+		if(result.pass()){
+			new SessionMPR(session).setMessage("提交通过！");
+		}else{
+			new SessionMPR(session).setMessage(String.format("提交失败，%s!", result.cause()));
+		}
+		return "redirect:edit/"+idrYearCompanyForm.getYear();
+	}
+	
+	@RequestMapping(value="preview/{year}",method=RequestMethod.GET)
+	public String preview(@PathVariable("year")Long year,Map<String,Object> map,HttpSession session){
+		IdrYearCompany idrYearCompany=idrYearCompanyService.findByYear(year);
+		Map<Long,Integer> rowSpan=getRowSpan(idrYearCompany.getIdrCompany());
+		map.put("idrYearCompany", idrYearCompany);
+		map.put("rowSpan", rowSpan);
+		map.put("message", new SessionMPR(session).getMessage());
+		return "idrcompany/view";
+	}
+
+	private Map<Long, Integer> getRowSpan(List<IdrCompany> idrCompanyList) {
+		Map<Long,Integer> rowSpan=new HashMap<Long,Integer>();
+		if(idrCompanyList.isEmpty()){
+			return rowSpan;
+		}
+		Long idrTypeWeightId=idrCompanyList.get(0).getIdrTypeWeight().getId();
+		Long sn=idrCompanyList.get(0).getSn();
+		int rowNum=0;
+		for(IdrCompany idrCompany:idrCompanyList){
+			if(!idrCompany.getIdrTypeWeight().getId().equals(idrTypeWeightId)){
+				rowSpan.put(sn, rowNum);
+				idrTypeWeightId=idrCompany.getIdrTypeWeight().getId();
+				sn=idrCompany.getSn();
+				rowNum=0;
+			}
+			rowNum++;
+		}
+		rowSpan.put(sn, rowNum);
+		return rowSpan;
 	}
 }
