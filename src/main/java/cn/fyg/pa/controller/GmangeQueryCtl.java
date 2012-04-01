@@ -15,7 +15,7 @@ import cn.fyg.pa.model.Department;
 import cn.fyg.pa.model.IdrMonthPlanBill;
 import cn.fyg.pa.model.MonthChk;
 import cn.fyg.pa.model.enums.IdrMonthPlanEnum;
-import cn.fyg.pa.model.enums.StateEnum;
+import cn.fyg.pa.model.enums.MonthChkEnum;
 import cn.fyg.pa.service.DepartmentService;
 import cn.fyg.pa.service.IdrMonthPlanBillService;
 import cn.fyg.pa.service.MonthChkService;
@@ -67,7 +67,7 @@ public class GmangeQueryCtl {
 	public String queryMonthchk(MonthchkQueryPage page,Map<String,Object> map){
 		page=initMonthchkQueryPage(page,"办公室");
 		List<Department> departments=departmentService.getAllDepartmentsOrderById();
-		List<MonthChk> monthChks=monthChkService.getMonthChkByPeriodAndState(page.getYear(), page.getMonth(),page.getDepartment(), StateEnum.FINISHED);
+		List<MonthChk> monthChks=monthChkService.getMonthChkByPeriodAndState(page.getYear(), page.getMonth(),page.getDepartment(), MonthChkEnum.FINISHED);
 		DateTool dtl=new DateTool();
 		map.put("years", dtl.getAllYears());
 		map.put("months", dtl.getAllMonths());

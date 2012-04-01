@@ -12,11 +12,7 @@
 <input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${mange.id}/password?backurl=/pa/mange/${mange.id}/monthchk','_self')"/>
 <input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/mange/${mange.id}/all','_self')"/>
 <input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
-<br>
-<c:if test="${msg!=null}">
-	<font id="msg" style="color:red;" >${msg}</font>
-</c:if>
-<br>
+<%@ include file="../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:800px;">
 <thead>
 	<tr>

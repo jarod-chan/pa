@@ -11,18 +11,20 @@ public class TestString {
 	public void testString(){
 		String str="xxx";
 		String ret = changeStr(str);
-//		str = "abcdefg";
 		assertTrue(str == ret);
-//		assertTrue(new String("abc") == new String("abc"));
 		System.out.println(str);
 	}
 	
 	public String changeStr(String str){
-
-		int a;
-		String s = new String("abc");
-//		str = "a\bcdefg";
-		return s;
+		str = "xxx";
+		return str;
+	}
+	
+	@Test
+	public void testStringFormat(){
+		Long l=213L;
+		String str=String.format("%s",l);
+		assertEquals("213", str);
 	}
 
 }

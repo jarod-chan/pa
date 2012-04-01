@@ -8,11 +8,7 @@
 <body>
 <h2>员工月度工作任务完成历史</h2>
 <input type="button" value="<<当前考核" onclick="javascript:window.open('/${ctx}/person/${person.id}/monthchk','_self')"/>
-<br>
-<c:if test="${msg!=null}">
-	<font id="msg" style="color:red;" >${msg}</font>
-</c:if>
-<br>
+<%@ include file="../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:800px;">
 <thead>
 	<tr>

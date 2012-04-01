@@ -56,9 +56,8 @@ public class IdrYearCompanyDao implements BaseDao<IdrYearCompany> {
 		IdrYearCompany oldIdrYear=entityManager.find(IdrYearCompany.class, idrYearCompany.getYear());
 		if(oldIdrYear==null){
 			return create(idrYearCompany);
-		}else{
-			return update(idrYearCompany,oldIdrYear);
 		}
+		return update(idrYearCompany,oldIdrYear);
 	}
 
 	private void calculateRealWeight(IdrCompany idrCompany) {

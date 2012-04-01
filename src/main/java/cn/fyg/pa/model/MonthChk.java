@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-import cn.fyg.pa.model.enums.StateEnum;
+import cn.fyg.pa.model.enums.MonthChkEnum;
 
 @Entity
 public class MonthChk implements Serializable {
@@ -33,10 +33,11 @@ public class MonthChk implements Serializable {
 	private Person person;
 
 	private Long year;
+	
 	private Long month;
 
 	@Enumerated(EnumType.STRING)
-	private StateEnum state;
+	private MonthChkEnum state;
 
 	@OneToMany(mappedBy = "monthChk",
 			fetch = FetchType.EAGER, 
@@ -45,7 +46,7 @@ public class MonthChk implements Serializable {
 	@OrderBy("sn ASC")
 	private List<MonthChkItem> monthChkItems=new ArrayList<MonthChkItem>();
 	
-	
+	//TODO 重构
 	/**
 	 * 减去另外一个明细集合
 	 * @param anotherMonthChkItems
@@ -99,11 +100,11 @@ public class MonthChk implements Serializable {
 		this.month = month;
 	}
 
-	public StateEnum getState() {
+	public MonthChkEnum getState() {
 		return state;
 	}
 
-	public void setState(StateEnum state) {
+	public void setState(MonthChkEnum state) {
 		this.state = state;
 	}
 
@@ -113,6 +114,16 @@ public class MonthChk implements Serializable {
 
 	public void setMonthChkItems(List<MonthChkItem> monthChkItems) {
 		this.monthChkItems = monthChkItems;
+	}
+	
+	public void next() throws StateChangeException{
+		this.state.setMonthChk(this);
+		this.state.next();
+	}
+	
+	public void back() throws StateChangeException{
+		this.state.setMonthChk(this);
+		this.state.back();
 	}
 
 }

@@ -72,4 +72,9 @@ public class PersonServiceImp implements PersonService {
 		return personDao.find(id);
 	}
 
+	@Override
+	public Person getDeptMange(String department) {
+		return personDao.findDeptMange(department);
+	}
+
 }

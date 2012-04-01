@@ -12,24 +12,28 @@
 <script type="text/javascript">
 
 	var rowClick=function (){
-		$("#tbl tr").removeClass("currRow");
+		$(".tbldef tbody tr").removeClass("currRow");
 		$(this).addClass("currRow");
 	};
 	
 	$(document).ready(function() {
-		$("#tbl tr").click(rowClick);
+		$(".tbldef tbody tr").click(rowClick);
 	});
-	
+
 	function save(){
-		var oldAction=$("#monthChk").attr("action");
-		$("#monthChk").attr("action",oldAction+"/save").submit();
+		var actionFrom=$("form");
+		var oldAction=actionFrom.attr("action");
+		$(".tbldef tbody").formatName();
+		actionFrom.attr("action",oldAction+"/save").submit();
 	}
 	
 	function finish(){
-		var oldAction=$("#monthChk").attr("action");
+		var actionFrom=$("form");
+		var oldAction=actionFrom.attr("action");
 		var msg="单据完成以后，将无法撤销，确定完成？";
 		if(confirm(msg)){
-			$("#monthChk").attr("action",oldAction+"/finish").submit();
+			$(".tbldef tbody").formatName();
+			actionFrom.attr("action",oldAction+"/finish").submit();
 		}
 	}
 	
@@ -47,15 +51,11 @@
 
 经理:${mange.name}&nbsp;&nbsp;部门:${mange.department}&nbsp;&nbsp;考核员工:${monthChk.person.name}&nbsp;&nbsp;<br>
 考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}
-<br>
-<c:if test="${msg!=null}">
-	<font id="msg" style="color:red;" >${msg}</font>
-</c:if>
-<br>
+<%@ include file="../common/message.jsp"%>
 
 <form id="monthChk" action="/${ctx}/mange/${mange.id}/monthchk/${monthChk.id}" method="post">
 
-<table border=1 style="table-layout:fixed;width:950px;">
+<table class="tbldef" border=1 style="table-layout:fixed;width:950px;">
 <thead>
 	<tr>
 		<th style="width:50px;">序号</th>
@@ -65,7 +65,7 @@
 		<th style="width:150px;">评价</th>
 	</tr>
 </thead>
-<tbody id="tbl">
+<tbody>
 	<c:forEach var="item" items="${monthChk.monthChkItems}">
 		<tr>
 			<td style="display:none">

@@ -16,16 +16,16 @@
 	var leftAndMargin={"float":"left","margin-left":"10px","width":"22px"};
 	var taskSize={"width":"580px"};
 	var taskMaxlength={"maxlength":"50"};
-	var hourCss={"width":"40px"};
+	var hourCss={"width":"60px"};
 	
 	var rowClick=function (){
-		$("#tbl tr td:last-child :button").hide();
+		$(".tbldef tbody tr td:last-child :button").hide();
 		$(this).find("td:last").find(":button").show();
-		$("#tbl tr").removeClass("currRow");
+		$(".tbldef tbody tr").removeClass("currRow");
 		$(this).addClass("currRow");
 	};
 	
-	var sel=$("<select>").attr({name:"monthChkItems_worktype"});
+	var sel=$("<select>").attr({name:"monthChkItems_workType.id"});
 	<c:forEach var="workType" items="${workTypes}">
 		sel.append("<option value='${workType.id}'>${workType.worktype}</option>");
 	</c:forEach>
@@ -63,47 +63,63 @@
 			.append("&nbsp;")
 			.end();
 	
+	function cloneTR(){
+		var newtr=tr.clone();
+		newtr.find(":input[name='monthChkItems_workhour']").bind('blur',numberBlur);
+		newtr.click(rowClick);
+		return newtr;
+	}
+	
+	function numberBlur(){
+		var workhour=$(this).val().trim();
+		if(!IsFloat(workhour,"+")){
+			$(this).val("");
+		}else{
+			$(this).val(hold(workhour,1));
+		}
+	}
+	
 	$(document).ready(function() {
 		$(".add").css(leftcss).hide();
 		$(".remove").add(".up").add(".down").css(leftAndMargin).hide();
-		$("#tbl tr").click(rowClick);
+		$(".tbldef tbody tr").click(rowClick);
 		$(":input[name='monthChkItems_task']").css(taskSize).attr(taskMaxlength);
-		$(":input[name='monthChkItems_workhour']").css(hourCss);
-		$(".addLast").click(function(){
- 			var newtr=tr.clone();
-			newtr.click(rowClick);
-			$("#tbl").append(newtr); 
-			reIndexTable();
-		})
+		$(":input[name='monthChkItems_workhour']").css(hourCss).bind('blur',numberBlur);
+		$(".addLast").bind('click',addLastRow);
 	});
+	
+	function addLastRow(){
+		var tr=$(".tbldef tbody tr:last");
+		tr.after(cloneTR()); 
+		reIndexTable();
+	}
 
 	function add(obj) {
-		var newtr=tr.clone();
-		newtr.click(rowClick);
-		$(obj).parent().parent().after(newtr);
+		var tr = $(obj).parents("tr");
+		tr.after(cloneTR()); 
 		reIndexTable();
 	}
 
 	function remove(obj) {
-		$(obj).parent().parent().remove();
+		$(obj).parents("tr").remove();
 		reIndexTable();
 	}
 
 	function up(obj) {
-		var tr = $(obj).parent().parent();
+		var tr = $(obj).parents("tr");
 		tr.prev().before(tr);
 		reIndexTable();
 	}
 
 	function down(obj) {
-		var tr = $(obj).parent().parent();
+		var tr =  $(obj).parents("tr");
 		tr.next().after(tr);
 		reIndexTable();
 	}
 	
 	function reIndexTable(){
 		var index=1;
-		$("#tbl").find("tr").each(function(){
+		$(".tbldef tbody").find("tr").each(function(){
 			$(this).find("td").eq(0).find("[name='monthChkItems_sn']").val(index);
 			$(this).find("td").eq(1).html(index);
 			index++;
@@ -111,15 +127,19 @@
 	}
 	
 	function save(){
-		var oldAction=$("#monthChk").attr("action");
-		$("#monthChk").attr("action",oldAction+"/save").submit();
+		var actionFrom=$("form");
+		var oldAction=actionFrom.attr("action");
+		$(".tbldef tbody").formatName();
+		actionFrom.attr("action",oldAction+"/save").submit();
 	}
-	
+		
 	function commit(){
-		var oldAction=$("#monthChk").attr("action");
+		var actionFrom=$("form");
+		var oldAction=actionFrom.attr("action");
 		var msg="提交以后，单据将交由经理审核，无法再次修改，确定提交？";
 		if(confirm(msg)){
-			$("#monthChk").attr("action",oldAction+"/commit").submit();
+			$(".tbldef tbody").formatName();
+			actionFrom.attr("action",oldAction+"/commit").submit();
 		}
 	}
 	
@@ -130,27 +150,25 @@
 考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}
 <input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/histroy','_self')"/>
 <input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${monthChk.person.id}/password?backurl=/${ctx}/person/${monthChk.person.id}/monthchk','_self')"/>
-<br>
-<c:if test="${msg!=null}">
-	<font id="msg" style="color:red;" >${msg}</font>
-</c:if>
-<br>
-<form id="monthChk" action="/${ctx}/person/${monthChk.person.id}/monthchk" method="post">
 
+<%@ include file="../common/message.jsp"%>
+
+<form id="monthChk" action="/${ctx}/person/${monthChk.person.id}/monthchk" method="post">
+<input name="id" type="hidden" value="${monthChk.id}" /> 
+<input name="person.id" type="hidden" value="${monthChk.person.id}" /> 
 <input name="year" type="hidden" value="${monthChk.year}" /> 
 <input name="month" type="hidden" value="${monthChk.month}" /> 
-
-<table border=1 style="table-layout:fixed;width:980px;">
+<table class="tbldef" border=1 style="table-layout:fixed;width:980px;" >
 <thead>
 	<tr>
-		<td style="width:50px;">序号</td>
-		<td style="width:100px;">工作性质</td>
-		<td style="width:600px;">工作内容<font style="color:red">[字数限制：50个]</font></td>
-		<td style="width:80px;">用时<font style="color:red">[小时]</font></td>
-		<td style="width:150px;">操作<input type="button" class="addLast" value="+"  /></td>
+		<th style="width:50px;">序号</th>
+		<th style="width:100px;">工作性质</th>
+		<th style="width:600px;">工作内容<font style="color:red">[字数限制：50个]</font></th>
+		<th style="width:80px;">用时<font style="color:red">[小时]</font></th>
+		<th style="width:150px;">操作<input type="button" class="addLast" value="+"  /></th>
 	</tr>
 </thead>
-<tbody id="tbl">
+<tbody>
 	<c:forEach var="item" items="${monthChk.monthChkItems}">
 		<tr>
 			<td style="display:none">
@@ -161,7 +179,7 @@
 				${item.sn}
 			</td>
 			<td>
-				<select name="monthChkItems_worktype">
+				<select name="monthChkItems_workType.id">
 				<c:forEach var="workType" items="${workTypes}">
 					<option value="${workType.id}" <c:if test="${item.workType.id==workType.id}">selected="true"</c:if> >${workType.worktype}</option>
 				</c:forEach>

@@ -11,4 +11,6 @@ public interface PersonService {
 	Person save(Person person);
 	
 	Person find(Long id);
+	
+	Person getDeptMange(String department);
 }

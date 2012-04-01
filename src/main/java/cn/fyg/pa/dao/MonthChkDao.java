@@ -1,7 +1,9 @@
 package cn.fyg.pa.dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.fyg.pa.model.MonthChk;
 import cn.fyg.pa.model.MonthChkItem;
 import cn.fyg.pa.model.Person;
-import cn.fyg.pa.model.enums.StateEnum;
+import cn.fyg.pa.model.enums.MonthChkEnum;
 import cn.fyg.pa.tool.CMonthChk;
 
 @Repository
@@ -29,24 +31,60 @@ public class MonthChkDao {
 		return entityManager.find(MonthChk.class, id);
 	}
 	
-	@Transactional
 	public MonthChk save(MonthChk monthChk) {
-		if (monthChk.getId() == null) {
-			entityManager.persist(monthChk);
-			return monthChk;
-		} else {
-			MonthChk oldMonthChk=this.find(monthChk.getId());
-			oldMonthChk.subtractMonthChkItemsById(monthChk.getMonthChkItems());
-			
-			for(MonthChkItem item:oldMonthChk.getMonthChkItems()){
-				entityManager.remove(item);
+		for (MonthChkItem monthChkItem : monthChk.getMonthChkItems()) {
+			monthChkItem.setMonthChk(monthChk);
+		}
+		MonthChk oldMonthChk = null;
+		if (monthChk.getId() != null) {
+			oldMonthChk = entityManager.find(MonthChk.class, monthChk.getId());
+		}
+		if(oldMonthChk==null){
+			return create(monthChk);
+		}
+		return update(monthChk,oldMonthChk);
+	}
+	
+	private MonthChk create(MonthChk monthChk) {
+		entityManager.persist(monthChk);
+		return monthChk;
+	}
+	
+	private MonthChk update(MonthChk monthChk, MonthChk oldMonthChk) {
+		Set<Long> monthChkItemIds=new HashSet<Long>();
+		for(MonthChkItem monthChkItem:monthChk.getMonthChkItems()){
+			monthChkItemIds.add(monthChkItem.getId());
+		}
+		for(MonthChkItem monthChkItem:oldMonthChk.getMonthChkItems()){
+			if(!monthChkItemIds.contains(monthChkItem.getId())){
+				entityManager.remove(monthChkItem);
 			}
-			return entityManager.merge(monthChk);
-		}		
-	}	
+		}
+		return entityManager.merge(monthChk);
+	}
+
+	
+	
+//	@Transactional
+//	public MonthChk save(MonthChk monthChk) {
+//		if (monthChk.getId() == null) {
+//			entityManager.persist(monthChk);
+//			return monthChk;
+//		} else {
+//			MonthChk oldMonthChk=this.find(monthChk.getId());
+//			oldMonthChk.subtractMonthChkItemsById(monthChk.getMonthChkItems());
+//			
+//			for(MonthChkItem item:oldMonthChk.getMonthChkItems()){
+//				entityManager.remove(item);
+//			}
+//			return entityManager.merge(monthChk);
+//		}		
+//	}	
 	
 
 	
+
+
 	@Transactional
 	public void remove(MonthChk monthChk) {
 		entityManager.remove(entityManager.merge(monthChk));		
@@ -63,7 +101,7 @@ public class MonthChkDao {
 			monthChk.setPerson(person);
 			monthChk.setYear(year);
 			monthChk.setMonth(month);
-			monthChk.setState(StateEnum.SAVED);
+			monthChk.setState(MonthChkEnum.SAVED);
 			return monthChk;
 		}
 		return retList.get(0);
@@ -80,11 +118,11 @@ public class MonthChkDao {
 			monthChk.setPerson(person);
 			monthChk.setYear(CMonthChk.INIT_YEAR);
 			monthChk.setMonth(CMonthChk.INIT_MONTH);
-			monthChk.setState(StateEnum.SAVED);
+			monthChk.setState(MonthChkEnum.SAVED);
 			return monthChk;
 		}
 		MonthChk retMonthChk=retList.get(0);
-		if(retMonthChk.getState()==StateEnum.FINISHED){
+		if(retMonthChk.getState()==MonthChkEnum.FINISHED){
 			//TODO 重构
 			MonthChk monthChk=new MonthChk();
 			monthChk.setPerson(person);
@@ -96,13 +134,13 @@ public class MonthChkDao {
 				monthChk.setMonth(retMonthChk.getMonth()+1);
 			}
 			
-			monthChk.setState(StateEnum.SAVED);
+			monthChk.setState(MonthChkEnum.SAVED);
 			return monthChk;
 		}
 		return retMonthChk;
 	}
 
-	public List<MonthChk> getAllCommitMonthChkByDept(String department,StateEnum state) {
+	public List<MonthChk> getAllCommitMonthChkByDept(String department,MonthChkEnum state) {
 		String sql = "select c from MonthChk c where c.person.department=:department and c.state=:state " +
 				"order by c.year desc,c.month desc,c.id asc";
 		List<MonthChk> retList=entityManager.createQuery(sql, MonthChk.class)
@@ -117,7 +155,7 @@ public class MonthChkDao {
 				"order by c.year desc,c.month desc,c.id asc";
 		List<MonthChk> retList=entityManager.createQuery(sql, MonthChk.class)
 				.setParameter("person", person)
-				.setParameter("state", StateEnum.FINISHED)
+				.setParameter("state", MonthChkEnum.FINISHED)
 				.getResultList();
 		return retList;
 	}
@@ -127,12 +165,12 @@ public class MonthChkDao {
 				"order by c.year desc,c.month desc,c.id asc";
 		List<MonthChk> retList=entityManager.createQuery(sql, MonthChk.class)
 				.setParameter("department", department)
-				.setParameter("state", StateEnum.FINISHED)
+				.setParameter("state", MonthChkEnum.FINISHED)
 				.getResultList();
 		return retList;
 	}
 
-	public List<MonthChk> findByPeriodAndState(Long year, Long month,String department,StateEnum... states) {
+	public List<MonthChk> findByPeriodAndState(Long year, Long month,String department,MonthChkEnum... states) {
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<MonthChk> query=builder.createQuery(MonthChk.class);
 		Root<MonthChk> root=query.from(MonthChk.class);
