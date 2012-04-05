@@ -1,12 +1,12 @@
 package cn.fyg.pa.bean;
 
-public class UrlName {
+public class UrlNameBean {
 	
 	private String name;
 	
 	private String url;
 	
-	public UrlName(String name, String url) {
+	public UrlNameBean(String name, String url) {
 		super();
 		this.name = name;
 		this.url = url;

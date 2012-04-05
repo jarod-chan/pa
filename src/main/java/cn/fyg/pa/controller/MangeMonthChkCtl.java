@@ -9,23 +9,22 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.dao.MonthChkDao;
+import cn.fyg.pa.bean.ManageMonthChkQueryBean;
 import cn.fyg.pa.message.imp.SessionMPR;
 import cn.fyg.pa.model.MonthChk;
 import cn.fyg.pa.model.Person;
+import cn.fyg.pa.model.StateChangeException;
 import cn.fyg.pa.model.enums.MonthChkEnum;
-import cn.fyg.pa.page.ManageMonthChkPage;
 import cn.fyg.pa.service.MonthChkService;
 import cn.fyg.pa.service.PersonService;
+import cn.fyg.pa.tool.DateTool;
 
 @Controller
 @RequestMapping("/mange/{personId}/monthchk")
@@ -39,9 +38,6 @@ public class MangeMonthChkCtl {
 	@Resource
 	MonthChkService monthChkService;
 	
-	@Autowired
-	MonthChkDao monthChkDao;
-	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
 		logger.info("initPerson");
@@ -49,7 +45,7 @@ public class MangeMonthChkCtl {
 	}
 	
 	
-	@RequestMapping(value="")
+	@RequestMapping(value="",method=RequestMethod.GET)
 	public String toList(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		logger.info("toList");
 		List<MonthChk> monthChks=monthChkService.getMonthChkByDepartmentAndState(person.getDepartment(), MonthChkEnum.SUBMITTED);
@@ -59,7 +55,7 @@ public class MangeMonthChkCtl {
 		return "mangemonthchk/list";
 	}
 	
-	@RequestMapping(value="/{monthchkId}")
+	@RequestMapping(value="/{monthchkId}",method=RequestMethod.GET)
 	public String toEvaluate(@ModelAttribute("person")Person person,@PathVariable("monthchkId") Long monthchkId,Map<String,Object> map,HttpSession session){
 		logger.info("toEvaluate");
 		MonthChk monthChk=monthChkService.find(monthchkId);
@@ -77,49 +73,49 @@ public class MangeMonthChkCtl {
 		binder.bind(request);	
 		monthChkService.save(monthChk);
 		new SessionMPR(session).setMessage("保存成功！");
-		return "redirect:/mange/"+person.getId()+"/monthchk/"+monthchkId;
-
+		return "redirect:../"+monthchkId;
 	}
 
 	@RequestMapping(value="/{monthchkId}/finish",method=RequestMethod.POST)
-	public String finish(ManageMonthChkPage manageMonthChkPage,@ModelAttribute("person")Person person,@PathVariable("monthchkId") Long monthchkId, HttpServletRequest request,HttpSession session){
+	public String finish(@ModelAttribute("person")Person person,@PathVariable("monthchkId") Long monthchkId, HttpServletRequest request,HttpSession session){
 		logger.info("finish");
 		MonthChk monthChk=monthChkService.find(monthchkId);
 		ServletRequestDataBinder binder = new ServletRequestDataBinder(monthChk);//XXX 能否修改这里的逻辑？
 		binder.bind(request);	
 		monthChkService.save(monthChk);
-		new SessionMPR(session).setMessage("单据已完成！");
-		//TODO   工作到此处暂停 ，此方法没有完成
-		return "redirect:/mange/"+person.getId()+"/monthchk";
+		String message="单据已完成！";
+		try {
+			monthChkService.next(monthChk.getId());
+		} catch (StateChangeException e) {
+			message=String.format("完成失败，原因：%s", e.getMessage());
+		}
+		new SessionMPR(session).setMessage(message);
+		return "redirect:../../monthchk";
 	}
 
 
-	@RequestMapping(value="/histroy")
-	public ModelAndView histroy(@ModelAttribute("person")Person person,HttpSession session){
-		logger.info("histroy");
-		
-		List<MonthChk> monthChks=monthChkDao.getAllFinishMonthChkByDept(person.getDepartment());
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("mange", person);
-		mav.addObject("monthChks", monthChks);
-		mav.addObject("msg",new SessionMPR(session).getMessage());
-		mav.setViewName("mangemonthchk/histroy");
-		return mav;
-	}
-	
 	@RequestMapping(value="/{monthchkId}/back",method=RequestMethod.POST)
-	public ModelAndView back(ManageMonthChkPage manageMonthChkPage,@ModelAttribute("person")Person person,@PathVariable("monthchkId") Long monthchkId,HttpSession session){
-		
-		MonthChk monthChk=monthChkDao.find(monthchkId);	
-		manageMonthChkPage.initMonthChk(monthChk);
-		monthChk.setState(MonthChkEnum.SAVED);
-		monthChkDao.save(monthChk);
-		new SessionMPR(session).setMessage("单据已打回！");
-		
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("redirect:/mange/"+person.getId()+"/monthchk");
-		return mav;
+	public String back(@ModelAttribute("person")Person person,@PathVariable("monthchkId") Long monthchkId,HttpSession session){
+		String message="单据已打回！";
+		try {
+			monthChkService.back(monthchkId);
+		} catch (StateChangeException e) {
+			message=String.format("打回失败，原因：%s", e.getMessage());
+		}
+		new SessionMPR(session).setMessage(message);
+		return "redirect:../../monthchk";
+	}
+
+
+	@RequestMapping(value="/histroy",method=RequestMethod.GET)
+	public String histroy(ManageMonthChkQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map){
+		logger.info("histroy");
+		List<MonthChk> monthChks=monthChkService.getMonthChkByPeriodAndDepartmentAndState(queryBean.getYear(), queryBean.getMonth(),person.getDepartment(), MonthChkEnum.FINISHED);
+		map.put("dateTool", new DateTool());
+		map.put("mange", person);
+		map.put("monthChks", monthChks);
+		map.put("queryBean", queryBean);
+		return "mangemonthchk/histroy";
 	}
 	
 }

@@ -1,10 +1,22 @@
 package cn.fyg.pa.bean;
 
-public class MonthchkQueryPage {
+import cn.fyg.pa.tool.DateTool;
+
+public class MonthchkQueryBean {
+	
+	public static final String DEFAULT_DEPARTMENT="办公室";
 	
 	private Long year;
 	private Long month;
 	private String department;
+	
+	public MonthchkQueryBean() {
+		DateTool dateTool=new DateTool();
+		this.year = dateTool.getCurrentYear();
+		this.month = dateTool.getCurrentMonth();
+		this.department = DEFAULT_DEPARTMENT;
+	}
+	
 	
 	public Long getYear() {
 		return year;

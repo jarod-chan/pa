@@ -38,14 +38,27 @@ public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 
 	@Override
 	public IdrMonthPlanBill getCurrentIdrMonthPlanBill(Department department) {
-		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillDao.getMaxMonthIdrMonthPlanBill(department);
+		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillDao.findMaxMonthIdrMonthPlanBill(department);
 		if(idrMonthPlanBill==null){
 			return initIdrMonthPlanBill(department);
 		}
-		if(maxMonthIsFinished(idrMonthPlanBill)){
+		if(isMaxMonthFinished(idrMonthPlanBill)){
 			return nextMonthIdrMonthPlanBill(idrMonthPlanBill);
 		}
 		return idrMonthPlanBill;
+	}
+
+	private IdrMonthPlanBill initIdrMonthPlanBill(Department department) {
+		IdrMonthPlanBill idrMonthPlanBill=new IdrMonthPlanBill();
+		idrMonthPlanBill.setDepartment(department);
+		idrMonthPlanBill.setState(IdrMonthPlanEnum.SAVED);
+		idrMonthPlanBill.setYear(CMonthPlanBill.INIT_YEAR);
+		idrMonthPlanBill.setMonth(CMonthPlanBill.INIT_MONTH);
+		return idrMonthPlanBill;
+	}
+
+	private boolean isMaxMonthFinished(IdrMonthPlanBill idrMonthPlanBill) {
+		return idrMonthPlanBill.getState()==IdrMonthPlanEnum.FINISHED;
 	}
 
 	private IdrMonthPlanBill nextMonthIdrMonthPlanBill(
@@ -62,19 +75,6 @@ public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 			idrMonthPlanBill.setYear(currentYear);
 			idrMonthPlanBill.setMonth(currentMonth+1L);
 		}
-		return idrMonthPlanBill;
-	}
-
-	private boolean maxMonthIsFinished(IdrMonthPlanBill idrMonthPlanBill) {
-		return idrMonthPlanBill.getState()==IdrMonthPlanEnum.FINISHED;
-	}
-
-	private IdrMonthPlanBill initIdrMonthPlanBill(Department department) {
-		IdrMonthPlanBill idrMonthPlanBill=new IdrMonthPlanBill();
-		idrMonthPlanBill.setDepartment(department);
-		idrMonthPlanBill.setState(IdrMonthPlanEnum.SAVED);
-		idrMonthPlanBill.setYear(CMonthPlanBill.INIT_YEAR);
-		idrMonthPlanBill.setMonth(CMonthPlanBill.INIT_MONTH);
 		return idrMonthPlanBill;
 	}
 

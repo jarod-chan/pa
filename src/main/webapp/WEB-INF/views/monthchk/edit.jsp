@@ -89,8 +89,8 @@
 	});
 	
 	function addLastRow(){
-		var tr=$(".tbldef tbody tr:last");
-		tr.after(cloneTR()); 
+		var tbody=$(".tbldef tbody");
+		tbody.append(cloneTR()); 
 		reIndexTable();
 	}
 

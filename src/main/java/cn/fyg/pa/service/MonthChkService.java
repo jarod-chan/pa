@@ -15,13 +15,15 @@ public interface MonthChkService {
 	
 	MonthChk getCurrentMonthChk(Person person);
 	
-	List<MonthChk> getMonthChkByPeriodAndState(Long year,Long month,String department,MonthChkEnum... states);
+	List<MonthChk> getMonthChkByPeriodAndDepartmentAndState(Long year,Long month,String department,MonthChkEnum... states);
 	
 	List<MonthChk> getMonthChkByDepartmentAndState(String department,MonthChkEnum... states);
 	
-	List<MonthChk> getAllFinishMonthChkByPerson(Person person);
+	List<MonthChk> getMonthChkByPersonAndState(Long year, Person person,MonthChkEnum... states);
 	
 	MonthChk next(Long id) throws StateChangeException;
 	
 	MonthChk back(Long id) throws StateChangeException;
+
+	
 }

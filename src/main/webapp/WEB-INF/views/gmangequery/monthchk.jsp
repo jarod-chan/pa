@@ -10,20 +10,20 @@
 <form action="" method="get">
 年份：
 <select name="year">
-	<c:forEach var="item" items="${years}">
-		<option value="${item}" <c:if test="${item==queryPage.year}">selected="true"</c:if> >${item}</option>
+	<c:forEach var="item" items="${dateTool.allYears}">
+		<option value="${item}" <c:if test="${item==queryBean.year}">selected="true"</c:if> >${item}</option>
 	</c:forEach>
 </select>
 月份：
 <select name="month">
-	<c:forEach var="item" items="${months}">
-		<option value="${item}" <c:if test="${item==queryPage.month}">selected="true"</c:if> >${item}</option>
+	<c:forEach var="item" items="${dateTool.allMonths}">
+		<option value="${item}" <c:if test="${item==queryBean.month}">selected="true"</c:if> >${item}</option>
 	</c:forEach>
 </select>
 部门:
 <select name="department">
 	<c:forEach var="item" items="${departments}">
-		<option value="${item.name}" <c:if test="${item.name==queryPage.department}">selected="true"</c:if>>${item.name}</option>
+		<option value="${item.name}" <c:if test="${item.name==queryBean.department}">selected="true"</c:if>>${item.name}</option>
 	</c:forEach>
 </select>
 &nbsp;&nbsp;&nbsp;&nbsp;

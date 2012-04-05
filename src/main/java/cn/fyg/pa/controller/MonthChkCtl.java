@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.bean.MonthChkYearQuery;
 import cn.fyg.pa.message.imp.SessionMPR;
 import cn.fyg.pa.model.MonthChk;
 import cn.fyg.pa.model.Person;
@@ -25,6 +26,7 @@ import cn.fyg.pa.model.enums.MonthChkEnum;
 import cn.fyg.pa.service.MonthChkService;
 import cn.fyg.pa.service.PersonService;
 import cn.fyg.pa.service.WorkTypeService;
+import cn.fyg.pa.tool.DateTool;
 
 @Controller
 @RequestMapping("/person/{personId}/monthchk")
@@ -95,12 +97,14 @@ public class MonthChkCtl {
 	}
 	
 	@RequestMapping(value="/histroy",method=RequestMethod.GET)
-	public String histroy(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	public String histroy(MonthChkYearQuery queryBean,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		logger.info("histroy");
-		List<MonthChk> monthChks=monthChkService.getAllFinishMonthChkByPerson(person);
+		List<MonthChk> monthChks=monthChkService.getMonthChkByPersonAndState(queryBean.getYear(), person, MonthChkEnum.FINISHED);
+		map.put("dateTool", new DateTool());
+		map.put("queryBean", queryBean);
 		map.put("monthChks", monthChks);
 		map.put("person", person);
-		map.put("msg",new SessionMPR(session).getMessage());
+		map.put("message",new SessionMPR(session).getMessage());
 		return "monthchk/histroy";
 	}
 	

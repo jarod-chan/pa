@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.fyg.pa.bean.UrlName;
+import cn.fyg.pa.bean.UrlNameBean;
 
 
 
@@ -22,9 +22,9 @@ public class AdminCtl {
 	public String list(Map<String,Object> map) {
 		logger.info("show admin all");
 		String title="管理员页面";
-		List<UrlName> list=new ArrayList<UrlName>();
-		list.add(new UrlName("用户管理","/pa/admin/person"));
-		list.add(new UrlName("考核报表","/pa/admin/rpt/point/asc"));
+		List<UrlNameBean> list=new ArrayList<UrlNameBean>();
+		list.add(new UrlNameBean("用户管理","/pa/admin/person"));
+		list.add(new UrlNameBean("考核报表","/pa/admin/rpt/point/asc"));
 		map.put("title", title);
 		map.put("urls", list);
 		

@@ -65,7 +65,7 @@ public class IdrMonthPlanBillDao {
 		return entityManager.merge(idrMonthPlanBill);
 	}
 
-	public IdrMonthPlanBill getMaxMonthIdrMonthPlanBill(Department department) {
+	public IdrMonthPlanBill findMaxMonthIdrMonthPlanBill(Department department) {
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<IdrMonthPlanBill> query=builder.createQuery(IdrMonthPlanBill.class);
 		Root<IdrMonthPlanBill> root=query.from(IdrMonthPlanBill.class);

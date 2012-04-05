@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.bean.IdrMonthPlanQueryPage;
-import cn.fyg.pa.bean.MonthchkQueryPage;
+import cn.fyg.pa.bean.IdrMonthPlanQueryBean;
+import cn.fyg.pa.bean.MonthchkQueryBean;
 import cn.fyg.pa.model.Department;
 import cn.fyg.pa.model.IdrMonthPlanBill;
 import cn.fyg.pa.model.MonthChk;
@@ -34,68 +34,26 @@ public class GmangeQueryCtl {
 	DepartmentService departmentService;
 
 	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
-	public String queryIdrMonthPlan(IdrMonthPlanQueryPage page,Map<String,Object> map){
-		page=intiIdrMonthPlanQuery(page);
-		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillService.getIdrMonthPlanBillByPeriodAndState(page.getYear(), page.getMonth(), IdrMonthPlanEnum.FINISHED);
+	public String queryIdrMonthPlan(IdrMonthPlanQueryBean queryBean,Map<String,Object> map){
+		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillService.getIdrMonthPlanBillByPeriodAndState(queryBean.getYear(), queryBean.getMonth(), IdrMonthPlanEnum.FINISHED);
 		DateTool dtl=new DateTool();
 		map.put("years", dtl.getAllYears());
 		map.put("months", dtl.getAllMonths());
-		map.put("queryPage", page);
+		map.put("queryPage", queryBean);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);
 		return "gmangequery/idrmonthplan";
 	}
 	
-	
-	private IdrMonthPlanQueryPage intiIdrMonthPlanQuery(IdrMonthPlanQueryPage page) {
-		DateTool dtl=new DateTool();
-		if(page==null){
-			page=new IdrMonthPlanQueryPage();
-			page.setYear(dtl.getCurrentYear());
-			page.setMonth(dtl.getCurrentMonth());
-			return page;
-		}
-		if(page.getYear()==null){
-			page.setYear(dtl.getCurrentYear());
-		}
-		if(page.getMonth()==null){
-			page.setMonth(dtl.getCurrentMonth());
-		}
-		return page;
-	}
 
 	@RequestMapping(value="/monthchk",method=RequestMethod.GET)
-	public String queryMonthchk(MonthchkQueryPage page,Map<String,Object> map){
-		page=initMonthchkQueryPage(page,"办公室");
+	public String queryMonthchk(MonthchkQueryBean queryBean,Map<String,Object> map){
 		List<Department> departments=departmentService.getAllDepartmentsOrderById();
-		List<MonthChk> monthChks=monthChkService.getMonthChkByPeriodAndState(page.getYear(), page.getMonth(),page.getDepartment(), MonthChkEnum.FINISHED);
-		DateTool dtl=new DateTool();
-		map.put("years", dtl.getAllYears());
-		map.put("months", dtl.getAllMonths());
+		List<MonthChk> monthChks=monthChkService.getMonthChkByPeriodAndDepartmentAndState(queryBean.getYear(), queryBean.getMonth(),queryBean.getDepartment(), MonthChkEnum.FINISHED);
+		map.put("dateTool", new DateTool());
 		map.put("departments",departments);
-		map.put("queryPage", page);
+		map.put("queryBean", queryBean);
 		map.put("monthChks", monthChks);
 		return "gmangequery/monthchk";
 	}
 
-
-	private MonthchkQueryPage initMonthchkQueryPage(MonthchkQueryPage page,String department) {
-		DateTool dtl=new DateTool();
-		if(page==null){
-			page=new MonthchkQueryPage();
-			page.setYear(dtl.getCurrentYear());
-			page.setMonth(dtl.getCurrentMonth());
-			page.setDepartment(department);
-			return page;
-		}
-		if(page.getYear()==null){
-			page.setYear(dtl.getCurrentYear());
-		}
-		if(page.getMonth()==null){
-			page.setMonth(dtl.getCurrentMonth());
-		}
-		if(page.getDepartment()==null){
-			page.setDepartment(department);
-		}
-		return page;
-	}
 }
