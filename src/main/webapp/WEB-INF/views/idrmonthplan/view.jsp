@@ -26,12 +26,7 @@ $(document).ready(function() {
 <body>
 <h2>部门月度工作计划【查看】</h2>
 <%@ include file="personinfo.jsp"%>
-<br>
-<c:if test="${message!=null}">
-	<font id="msg" style="color:red;" >${message}</font>
-</c:if>
-<br>
-
+<%@ include file="../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:650px;" class="tbldef">
 <thead>
 	<tr>

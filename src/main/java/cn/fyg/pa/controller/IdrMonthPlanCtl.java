@@ -63,6 +63,7 @@ public class IdrMonthPlanCtl {
 		String departmentName=person.getDepartment();
 		Department department=departmentService.findByName(departmentName);
 		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillService.getCurrentIdrMonthPlanBill(department);
+		//XXX 
 		Long contextSize=0L;
 		for (IdrTask idrTask : idrMonthPlanBill.getIdrTasks()) {
 			if(idrTask.getContext()!=null){

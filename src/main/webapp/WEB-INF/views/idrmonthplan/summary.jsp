@@ -138,11 +138,7 @@
 <body>
 <h2>部门月度工作计划【总结】</h2>
 <%@ include file="personinfo.jsp"%>
-<br>
-<c:if test="${message!=null}">
-	<font id="msg" style="color:red;" >${message}</font>
-</c:if>
-<br>
+<%@ include file="../common/message.jsp"%>
 <form  action="/${ctx}/mange/${person.id}/idrmonthplan/${idrMonthPlanBill.id}" method="post">
 
 <input name="id" type="hidden" value="${idrMonthPlanBill.id}" /> 

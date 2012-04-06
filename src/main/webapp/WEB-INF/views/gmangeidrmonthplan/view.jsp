@@ -37,12 +37,7 @@
 <h2>部门月度工作计划【查看】</h2>
 部门经理:${mange.name}&nbsp;&nbsp;部门:${idrMonthPlanBill.department.name}&nbsp;&nbsp;<br>
 计划周期:${idrMonthPlanBill.year}年${idrMonthPlanBill.month}月&nbsp;&nbsp;状态:${idrMonthPlanBill.state.name}
-<br/>
-<c:if test="${message!=null}">
-	<font id="msg" style="color:red;" >${message}</font>
-</c:if>
-<br/>
-
+<%@ include file="../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:650px;" class="tbldef">
 <thead>
 	<tr>
