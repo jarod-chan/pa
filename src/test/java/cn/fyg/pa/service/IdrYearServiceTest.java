@@ -3,6 +3,7 @@ package cn.fyg.pa.service;
 import javax.annotation.Resource;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,7 +20,7 @@ public class IdrYearServiceTest {
 	@Resource
 	IdrYearCompanyService idrYearService;
 	
-	@Before
+	@Ignore
 	public void save(){
 		IdrYearCompany idrYear=new IdrYearCompany();
 		idrYear.setYear(2030L);
@@ -30,14 +31,13 @@ public class IdrYearServiceTest {
 		idrYear=idrYearService.save(idrYear);
 	}
 	
-	@Test
-	@Transactional
+	@Test //XXX 需要更改 无效测试
 	public void testSave(){
 		
-		IdrYearCompany retIdrYear=idrYearService.findByYear(2030L);
-		for(IdrCompany idrcpy:retIdrYear.getIdrCompany()){
-			System.out.println(idrcpy.getId());
-		}
+//		IdrYearCompany retIdrYear=idrYearService.findByYear(2030L);
+//		for(IdrCompany idrcpy:retIdrYear.getIdrCompany()){
+//			System.out.println(idrcpy.getId());
+//		}
 		
 	}
 

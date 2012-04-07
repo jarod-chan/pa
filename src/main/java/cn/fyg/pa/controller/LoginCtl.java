@@ -28,11 +28,9 @@ public class LoginCtl {
 	private PersonService personService;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView getLogin() {
+	public String getLogin() {
 		logger.info("getLogin");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("login");
-		return mav;
+		return "login";
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)

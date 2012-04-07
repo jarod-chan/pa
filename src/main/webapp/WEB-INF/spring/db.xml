@@ -12,7 +12,7 @@
 	<!-- Scans within the base package of the application for @Components to configure as beans -->
 	<bean id="placeholderConfig"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:db_mysql_local.properties" />
+		<property name="location" value="classpath:db.properties" />
 	</bean>
 
 	<bean id="entityManagerFactory"
