@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cn.fyg.pa.model.MonthChk;
-import cn.fyg.pa.model.MonthChkItem;
-import cn.fyg.pa.model.Person;
+import cn.fyg.pa.domain.model.MonthChk;
+import cn.fyg.pa.domain.model.MonthChkItem;
+import cn.fyg.pa.domain.model.Person;
+import cn.fyg.pa.infrastructure.perisistence.MonthChkDao;
+import cn.fyg.pa.infrastructure.perisistence.MonthChkItemDao;
 
 @ContextConfiguration("/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)

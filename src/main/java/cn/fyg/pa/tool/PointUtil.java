@@ -8,8 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import cn.fyg.pa.help.rptComparator.PointDescComparator;
-import cn.fyg.pa.page.Point;
+import cn.fyg.pa.application.page.Point;
+import cn.fyg.pa.domain.help.rptComparator.PointDescComparator;
 
 public class PointUtil {
 	

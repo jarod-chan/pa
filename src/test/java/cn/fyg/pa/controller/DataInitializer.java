@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import cn.fyg.pa.model.Person;
+import cn.fyg.pa.domain.model.Person;
 
 
 @Component

@@ -10,8 +10,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.fyg.pa.model.IdrCompany;
-import cn.fyg.pa.model.IdrYearCompany;
+import cn.fyg.pa.domain.model.IdrCompany;
+import cn.fyg.pa.domain.model.IdrYearCompany;
+import cn.fyg.pa.domain.service.IdrYearCompanyService;
 
 @ContextConfiguration("/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)

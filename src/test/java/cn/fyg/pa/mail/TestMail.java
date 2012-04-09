@@ -2,6 +2,10 @@ package cn.fyg.pa.mail;
 
 import org.junit.Test;
 
+import cn.fyg.pa.infrastructure.mail.Mail;
+import cn.fyg.pa.infrastructure.mail.Sender;
+import cn.fyg.pa.infrastructure.mail.SenderFactory;
+
 public class TestMail {
 	
 	@Test

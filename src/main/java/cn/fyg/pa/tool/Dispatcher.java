@@ -3,7 +3,7 @@ package cn.fyg.pa.tool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.fyg.pa.page.LoginRet;
+import cn.fyg.pa.application.page.LoginRet;
 
 /**
  *根据登录员工的角色来分发url

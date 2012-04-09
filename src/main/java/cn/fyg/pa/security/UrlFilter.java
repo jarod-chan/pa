@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.fyg.pa.page.LoginRet;
+import cn.fyg.pa.application.page.LoginRet;
 import cn.fyg.pa.tool.SessionUtil;
 
 /**  TODO 这里有重复逻辑  

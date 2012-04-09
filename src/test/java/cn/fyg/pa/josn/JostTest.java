@@ -11,9 +11,9 @@ import net.sf.json.JSONSerializer;
 
 import org.junit.Test;
 
-import cn.fyg.pa.model.Fychkitem;
-import cn.fyg.pa.model.IdrCompany;
-import cn.fyg.pa.model.IdrTypeWeight;
+import cn.fyg.pa.domain.model.Fychkitem;
+import cn.fyg.pa.domain.model.IdrCompany;
+import cn.fyg.pa.domain.model.IdrTypeWeight;
 import cn.fyg.pa.tool.JsonUtil;
 
 public class JostTest {
