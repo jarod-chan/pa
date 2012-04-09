@@ -1,6 +1,6 @@
-package cn.fyg.pa.application.page;
+package cn.fyg.pa.application.bean;
 
-public class LoginPage {
+public class LoginBean {
 	
 	private String username;
 	private String password;

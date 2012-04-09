@@ -3,7 +3,7 @@ package cn.fyg.pa.tool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.fyg.pa.application.page.LoginRet;
+import cn.fyg.pa.application.bean.LoginRetBean;
 
 /**
  *根据登录员工的角色来分发url
@@ -12,7 +12,7 @@ public class Dispatcher {
 	
 	public static final Logger logger=LoggerFactory.getLogger(Dispatcher.class);
 	
-	public static String dispatcher(LoginRet loginRet) {
+	public static String dispatcher(LoginRetBean loginRet) {
 		logger.info("dispatcher");
 		
 		if(loginRet.getMange().equals("A")){

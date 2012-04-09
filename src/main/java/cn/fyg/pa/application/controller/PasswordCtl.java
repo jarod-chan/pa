@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.application.page.LoginRet;
+import cn.fyg.pa.application.bean.LoginRetBean;
 import cn.fyg.pa.application.page.PasswordPage;
 import cn.fyg.pa.domain.model.Person;
 import cn.fyg.pa.domain.service.PersonService;
@@ -32,7 +32,7 @@ public class PasswordCtl {
 	PersonService personService;
 	
 	@ModelAttribute("person")
-	public Person initPerson(@ModelAttribute("loginRet") LoginRet loginRet,@PathVariable("personId") Long personId){
+	public Person initPerson(@ModelAttribute("loginRet") LoginRetBean loginRet,@PathVariable("personId") Long personId){
 		logger.info("initPerson");
 		//return personDao.find(Long.valueOf(loginRet.getPersonid()));
 		return personService.find(personId);

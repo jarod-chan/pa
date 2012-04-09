@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +27,21 @@ public class PersonDao {
 		return entityManager.find(Person.class, id);
 	}
 	
+	public Person findByName(String personname){
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query = builder.createQuery(Person.class);
+		Root<Person> root = query.from(Person.class);
+		Predicate criteria=builder.equal(root.get("name"), personname);
+		criteria=builder.or(criteria,builder.equal(root.get("email"), personname));
+		criteria=builder.or(criteria,builder.equal(root.get("email"), personname+"@fyg.cn"));
+		query.where(criteria);
+		List<Person> retList=entityManager.createQuery(query).setMaxResults(1).getResultList();
+		return retList.isEmpty()?null:retList.get(0);
+	}
+	
+	
+	
+	
 	/**
 	 * 通过部门名称查找项目经理
 	 * @param department
@@ -38,14 +57,6 @@ public class PersonDao {
 		return ret.isEmpty()?null:ret.get(0);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public Person findByName(String personname) {
-		List<Person> ret=entityManager.createQuery("select p from fyperson p where p.name=:personname order by p.id asc")
-				.setParameter("personname",personname)
-				.setMaxResults(1)
-				.getResultList();
-		return ret.isEmpty()?null:(Person)ret.get(0);
-	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Person> getAllFyperson() {

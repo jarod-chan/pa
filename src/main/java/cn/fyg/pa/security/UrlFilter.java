@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.fyg.pa.application.page.LoginRet;
+import cn.fyg.pa.application.bean.LoginRetBean;
 import cn.fyg.pa.tool.SessionUtil;
 
 /**  TODO 这里有重复逻辑  
@@ -101,7 +101,7 @@ public class UrlFilter implements Filter {
         	return;
         }
         SessionUtil session=new SessionUtil(req);
-		LoginRet loginRet = session.getValue("loginRet", LoginRet.class);
+		LoginRetBean loginRet = session.getValue("loginRet", LoginRetBean.class);
 		
 		if(loginRet!=null){	
 			

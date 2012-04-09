@@ -1,8 +1,9 @@
-package cn.fyg.pa.application.page;
+package cn.fyg.pa.application.bean;
 
-public class LoginRet {
+public class LoginRetBean {
 	
 	private String personid;
+	private String name;
 	private String chkstr;
 	private String mange;
 	private boolean isPass;
@@ -30,6 +31,12 @@ public class LoginRet {
 	}
 	public void setMange(String mange) {
 		this.mange = mange;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
