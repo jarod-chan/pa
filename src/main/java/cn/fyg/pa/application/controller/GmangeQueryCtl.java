@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.application.bean.IdrMonthPlanQueryBean;
-import cn.fyg.pa.application.bean.MonthchkQueryBean;
+import cn.fyg.pa.application.bean.MonthChkQueryBean;
 import cn.fyg.pa.domain.model.Department;
 import cn.fyg.pa.domain.model.IdrMonthPlanBill;
 import cn.fyg.pa.domain.model.MonthChk;
@@ -36,9 +36,7 @@ public class GmangeQueryCtl {
 	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
 	public String queryIdrMonthPlan(IdrMonthPlanQueryBean queryBean,Map<String,Object> map){
 		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillService.getIdrMonthPlanBillByPeriodAndState(queryBean.getYear(), queryBean.getMonth(), IdrMonthPlanEnum.FINISHED);
-		DateTool dtl=new DateTool();
-		map.put("years", dtl.getAllYears());
-		map.put("months", dtl.getAllMonths());
+		map.put("dateTool", new DateTool());
 		map.put("queryPage", queryBean);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);
 		return "gmangequery/idrmonthplan";
@@ -46,7 +44,7 @@ public class GmangeQueryCtl {
 	
 
 	@RequestMapping(value="/monthchk",method=RequestMethod.GET)
-	public String queryMonthchk(MonthchkQueryBean queryBean,Map<String,Object> map){
+	public String queryMonthchk(MonthChkQueryBean queryBean,Map<String,Object> map){
 		List<Department> departments=departmentService.getAllDepartmentsOrderById();
 		List<MonthChk> monthChks=monthChkService.getMonthChkByPeriodAndDepartmentAndState(queryBean.getYear(), queryBean.getMonth(),queryBean.getDepartment(), MonthChkEnum.FINISHED);
 		map.put("dateTool", new DateTool());

@@ -21,13 +21,13 @@ public interface IdrMonthPlanBillService {
 	IdrMonthPlanBill next(Long id) throws StateChangeException;
 	
 	IdrMonthPlanBill back(Long id)throws StateChangeException;
-
-	List<IdrMonthPlanBill> getAllIdrMonthPlanBillState(IdrMonthPlanEnum... state);
 	
 	List<IdrMonthPlanBill> getIdrMonthPlanBillByDepartmentAndState(Department department,IdrMonthPlanEnum... state);
 	
 	List<IdrMonthPlanBill> getIdrMonthPlanBillByGmangeAndState(Person gmange,IdrMonthPlanEnum... state);
 
 	List<IdrMonthPlanBill> getIdrMonthPlanBillByPeriodAndState(Long year,Long month,IdrMonthPlanEnum... state);
+	
+	List<IdrMonthPlanBill> getIdrMonthPlanBillByPeriodAndDepartmentAndState(Long year,Long month,Department depatrment,IdrMonthPlanEnum... state);
 
 }

@@ -2,7 +2,7 @@ package cn.fyg.pa.application.bean;
 
 import cn.fyg.pa.tool.DateTool;
 
-public class MonthchkQueryBean {
+public class MonthChkQueryBean {
 	
 	public static final String DEFAULT_DEPARTMENT="办公室";
 	
@@ -10,7 +10,7 @@ public class MonthchkQueryBean {
 	private Long month;
 	private String department;
 	
-	public MonthchkQueryBean() {
+	public MonthChkQueryBean() {
 		DateTool dateTool=new DateTool();
 		this.year = dateTool.getCurrentYear();
 		this.month = dateTool.getCurrentMonth();

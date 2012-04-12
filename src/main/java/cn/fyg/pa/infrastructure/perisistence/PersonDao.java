@@ -35,8 +35,19 @@ public class PersonDao {
 		criteria=builder.or(criteria,builder.equal(root.get("email"), personname));
 		criteria=builder.or(criteria,builder.equal(root.get("email"), personname+"@fyg.cn"));
 		query.where(criteria);
+		query.orderBy(builder.asc(root.get("id")));
 		List<Person> retList=entityManager.createQuery(query).setMaxResults(1).getResultList();
 		return retList.isEmpty()?null:retList.get(0);
+	}
+	
+	public List<Person> findByManage(ManageEnum... mangeEnum){
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query = builder.createQuery(Person.class);
+		Root<Person> root = query.from(Person.class);
+		Predicate criteria=root.get("manage").in((Object[])mangeEnum);
+		query.where(criteria);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
 	}
 	
 	

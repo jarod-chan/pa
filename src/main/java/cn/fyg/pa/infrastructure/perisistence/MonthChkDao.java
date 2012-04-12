@@ -65,61 +65,6 @@ public class MonthChkDao {
 		entityManager.remove(entityManager.merge(monthChk));		
 	}
 	
-	public List<MonthChk> getAllMonthChkByPersonAndState(Long year,Long month,Person person,MonthChkEnum... states){
-		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
-		CriteriaQuery<MonthChk> query = builder.createQuery(MonthChk.class);
-		Root<MonthChk> root = query.from(MonthChk.class);
-		ArrayList<Predicate> criteria = new ArrayList<Predicate>();
-		if(year!=null){
-			criteria.add(builder.equal(root.get("year"), year));
-		}
-		if(month!=null){
-			criteria.add(builder.equal(root.get("month"), month));
-		}
-		if(person!=null){
-			criteria.add(builder.equal(root.get("person"), person));
-		}
-		if(states!=null&&states.length>0){
-			criteria.add(root.get("state").in((Object[])states));
-		}
-		if(criteria.size()==1){
-			query.where(criteria.get(0));
-		}else{
-			query.where(builder.and(criteria.toArray(new Predicate[0])));
-		}
-		query.orderBy(builder.desc(root.get("year"))
-				,builder.desc(root.get("month")));
-		return entityManager.createQuery(query).getResultList();
-	}
-
-	public List<MonthChk> findByPeriodAndState(Long year, Long month,String department,MonthChkEnum... states) {
-		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
-		CriteriaQuery<MonthChk> query=builder.createQuery(MonthChk.class);
-		Root<MonthChk> root=query.from(MonthChk.class);
-		query.select(root);
-		List<Predicate> criteria=new ArrayList<Predicate>();
-		if(year!=null){
-			criteria.add(builder.equal(root.get("year"), year));
-		}
-		if(month!=null){
-			criteria.add(builder.equal(root.get("month"), month));
-		}
-		if(states!=null&&states.length>0){
-			criteria.add(root.get("state").in((Object[])states));
-		}
-		if(department!=null){
-			criteria.add(builder.equal(root.get("person").get("department"), department));
-		}
-		
-		if(criteria.size()==1){
-			query.where(criteria.get(0));
-		}else{
-			query.where(builder.and(criteria.toArray(new Predicate[0])));
-		}
-		query.orderBy(builder.asc(root.get("person")));
-		return entityManager.createQuery(query).getResultList();
-	}
-	
 	public MonthChk findMaxMonthMonthChk(Person person){
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<MonthChk> query=builder.createQuery(MonthChk.class);
@@ -141,6 +86,41 @@ public class MonthChkDao {
 			return null;
 		}
 		return resultList.get(0);
+	}
+	
+	public List<MonthChk> findByPeriodAndDepartmentAndPersonAndState(Long year, Long month,String department,Person person,MonthChkEnum... states){
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<MonthChk> query=builder.createQuery(MonthChk.class);
+		Root<MonthChk> root=query.from(MonthChk.class);
+		query.select(root);
+		List<Predicate> criteria=new ArrayList<Predicate>();
+		if(year!=null){
+			criteria.add(builder.equal(root.get("year"), year));
+		}
+		if(month!=null){
+			criteria.add(builder.equal(root.get("month"), month));
+		}
+		if(department!=null){
+			criteria.add(builder.equal(root.get("person").get("department"), department));
+		}
+		if(person!=null){
+			criteria.add(builder.equal(root.get("person"), person));
+		}
+		if(states!=null&&states.length>0){
+			criteria.add(root.get("state").in((Object[])states));
+		}
+		
+		if(criteria.size()==1){
+			query.where(criteria.get(0));
+		}else{
+			query.where(builder.and(criteria.toArray(new Predicate[0])));
+		}
+		query.orderBy(
+				builder.desc(root.get("year")), 
+				builder.desc(root.get("month")),
+				builder.asc(root.get("person"))
+			);
+		return entityManager.createQuery(query).getResultList();
 	}
 
 }

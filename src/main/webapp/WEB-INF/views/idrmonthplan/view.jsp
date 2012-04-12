@@ -54,7 +54,7 @@ $(document).ready(function() {
 
 <input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/mange/${person.id}/all','_self')"/>
 <input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
-</form>
+
 
 </body>
 </html>

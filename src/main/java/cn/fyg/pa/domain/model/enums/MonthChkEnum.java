@@ -8,6 +8,18 @@ import cn.fyg.pa.domain.model.StateChangeException;
 
 
 public enum MonthChkEnum implements CommonEnum {
+	NEW("新建"){
+
+		@Override
+		void doNext() {
+		}
+
+		@Override
+		void doback() {
+			
+		}
+		
+	},
 	SAVED("暂存"){
 		
 		@Override

@@ -7,6 +7,18 @@ import cn.fyg.pa.domain.model.IdrTask;
 import cn.fyg.pa.domain.model.StateChangeException;
 
 public enum IdrMonthPlanEnum implements CommonEnum{
+	NEW("新建"){
+
+		@Override
+		void doNext() {
+		}
+
+		@Override
+		void doback() {
+			
+		}
+		
+	},
 	SAVED("暂存") {
 		
 		@Override

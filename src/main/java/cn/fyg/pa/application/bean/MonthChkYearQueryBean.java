@@ -2,11 +2,11 @@ package cn.fyg.pa.application.bean;
 
 import cn.fyg.pa.tool.DateTool;
 
-public class MonthChkYearQuery {
+public class MonthChkYearQueryBean {
 
 	private Long year;
 	
-	public MonthChkYearQuery(){
+	public MonthChkYearQueryBean(){
 		DateTool dateTool=new DateTool();
 		this.year=dateTool.getCurrentYear();
 	}

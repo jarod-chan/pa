@@ -16,12 +16,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.application.bean.MonthChkYearQuery;
+import cn.fyg.pa.application.bean.IdrMonthPlanQueryBean;
+import cn.fyg.pa.application.bean.MonthChkYearQueryBean;
+import cn.fyg.pa.domain.model.Department;
+import cn.fyg.pa.domain.model.IdrMonthPlanBill;
 import cn.fyg.pa.domain.model.MonthChk;
 import cn.fyg.pa.domain.model.Person;
 import cn.fyg.pa.domain.model.StateChangeException;
 import cn.fyg.pa.domain.model.WorkType;
+import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.model.enums.MonthChkEnum;
+import cn.fyg.pa.domain.service.DepartmentService;
+import cn.fyg.pa.domain.service.IdrMonthPlanBillService;
 import cn.fyg.pa.domain.service.MonthChkService;
 import cn.fyg.pa.domain.service.PersonService;
 import cn.fyg.pa.domain.service.WorkTypeService;
@@ -50,6 +56,12 @@ public class MonthChkCtl {
 	
 	@Resource
 	WorkTypeService workTypeService;
+	
+	@Resource
+	IdrMonthPlanBillService idrMonthPlanBillService;
+	
+	@Resource
+	DepartmentService departmentService;
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
@@ -97,7 +109,7 @@ public class MonthChkCtl {
 	}
 	
 	@RequestMapping(value="/histroy",method=RequestMethod.GET)
-	public String histroy(MonthChkYearQuery queryBean,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	public String histroy(MonthChkYearQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		logger.info("histroy");
 		List<MonthChk> monthChks=monthChkService.getMonthChkByPersonAndState(queryBean.getYear(), person, MonthChkEnum.FINISHED);
 		map.put("dateTool", new DateTool());
@@ -106,6 +118,21 @@ public class MonthChkCtl {
 		map.put("person", person);
 		map.put("message",new SessionMPR(session).getMessage());
 		return "monthchk/histroy";
+	}
+	
+	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
+	public String idrMonthPlan(IdrMonthPlanQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map){
+		logger.info("idrMonthPlan");
+		Department department = departmentService.findByName(person.getDepartment());
+		List<IdrMonthPlanBill> idrMonthPlanBills = idrMonthPlanBillService.getIdrMonthPlanBillByPeriodAndDepartmentAndState(
+						queryBean.getYear(), 
+						queryBean.getMonth(), 
+						department,
+						IdrMonthPlanEnum.EXECUTE, IdrMonthPlanEnum.FINISHED);
+		map.put("dateTool", new DateTool());
+		map.put("queryBean", queryBean);
+		map.put("idrMonthPlanBills", idrMonthPlanBills);
+		return "monthchk/idrmonthplan";
 	}
 	
 }

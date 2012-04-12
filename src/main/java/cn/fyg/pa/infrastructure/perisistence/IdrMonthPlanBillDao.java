@@ -72,50 +72,11 @@ public class IdrMonthPlanBillDao {
 		query.select(root);
 		query.where(builder.equal(root.get("department"), department));
 		query.orderBy(builder.desc(root.get("year")),builder.desc(root.get("month")));
-		List<IdrMonthPlanBill> ret=entityManager.createQuery(query).setMaxResults(1).getResultList();
-		if(ret.isEmpty()){
-			return null;
-		}
-		return ret.get(0);
+		List<IdrMonthPlanBill> retList=entityManager.createQuery(query).setMaxResults(1).getResultList();
+		return retList.isEmpty()?null:retList.get(0);
 	}
 
-
-	public List<IdrMonthPlanBill> findBillByState(IdrMonthPlanEnum... states) {
-		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
-		CriteriaQuery<IdrMonthPlanBill> query=builder.createQuery(IdrMonthPlanBill.class);
-		Root<IdrMonthPlanBill> root=query.from(IdrMonthPlanBill.class);
-		query.select(root);
-		if(states.length>0){
-			query.where(root.get("state").in((Object[])states));
-		}
-		query.orderBy(builder.desc(root.get("year")),builder.desc(root.get("month")));
-		return entityManager.createQuery(query).getResultList();
-	}
-
-
-	public List<IdrMonthPlanBill> findBillByDepartmentAndState(Department[] department, IdrMonthPlanEnum... states) {
-		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
-		CriteriaQuery<IdrMonthPlanBill> query=builder.createQuery(IdrMonthPlanBill.class);
-		Root<IdrMonthPlanBill> root=query.from(IdrMonthPlanBill.class);
-		query.select(root);
-		List<Predicate> criteria=new ArrayList<Predicate>();
-		if(department!=null&&department.length>0){
-			criteria.add(root.get("department").in((Object[])department));
-		}
-		if(states!=null&&states.length>0){
-			criteria.add(root.get("state").in((Object[])states));
-		}
-		if(criteria.size()==1){
-			query.where(criteria.get(0));
-		}else{
-			query.where(builder.and(criteria.toArray(new Predicate[0])));
-		}
-		query.orderBy(builder.desc(root.get("year")),builder.desc(root.get("month")));
-		return entityManager.createQuery(query).getResultList();
-	}
-
-
-	public List<IdrMonthPlanBill> findByPeriodAndState(Long year, Long month,IdrMonthPlanEnum... states) {
+	public List<IdrMonthPlanBill> findByPeriodAndDepartmentAndState(Long year,Long month,Department[] department,IdrMonthPlanEnum... states){
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<IdrMonthPlanBill> query=builder.createQuery(IdrMonthPlanBill.class);
 		Root<IdrMonthPlanBill> root=query.from(IdrMonthPlanBill.class);
@@ -127,6 +88,9 @@ public class IdrMonthPlanBillDao {
 		if(month!=null){
 			criteria.add(builder.equal(root.get("month"), month));
 		}
+		if(department!=null&&department.length>0){
+			criteria.add(root.get("department").in((Object[])department));
+		}
 		if(states!=null&&states.length>0){
 			criteria.add(root.get("state").in((Object[])states));
 		}
@@ -136,11 +100,11 @@ public class IdrMonthPlanBillDao {
 		}else{
 			query.where(builder.and(criteria.toArray(new Predicate[0])));
 		}
-		query.orderBy(builder.asc(root.get("department")));
+		query.orderBy(builder.desc(root.get("year")),
+				builder.desc(root.get("month")),
+				builder.asc(root.get("department")));
 		return entityManager.createQuery(query).getResultList();
+		
 	}
 
-
-
-	
 }

@@ -96,25 +96,27 @@ public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 	}
 
 	@Override
-	public List<IdrMonthPlanBill> getAllIdrMonthPlanBillState(IdrMonthPlanEnum... state) {
-		return idrMonthPlanBillDao.findBillByState(state);
-	}
-
-	@Override
 	public List<IdrMonthPlanBill> getIdrMonthPlanBillByDepartmentAndState(Department department, IdrMonthPlanEnum... state) {
-		return idrMonthPlanBillDao.findBillByDepartmentAndState(new Department[]{department},state);
+		return idrMonthPlanBillDao.findByPeriodAndDepartmentAndState(null,null,new Department[]{department},state);
 	}
 
 	@Override
 	public List<IdrMonthPlanBill> getIdrMonthPlanBillByGmangeAndState(Person gmange, IdrMonthPlanEnum... state) {
 		List<Department> departmentsList=departmentDao.findByPerson(gmange.getId());
 		Department[] departmentsArray=departmentsList.toArray(new Department[departmentsList.size()]);
-		return idrMonthPlanBillDao.findBillByDepartmentAndState(departmentsArray,state);
+		return idrMonthPlanBillDao.findByPeriodAndDepartmentAndState(null,null,departmentsArray,state);
 	}
 
 	@Override
 	public List<IdrMonthPlanBill> getIdrMonthPlanBillByPeriodAndState(Long year, Long month, IdrMonthPlanEnum... state) {
-		return idrMonthPlanBillDao.findByPeriodAndState(year, month,state);
+		return idrMonthPlanBillDao.findByPeriodAndDepartmentAndState(year, month,null,state);
+	}
+
+	@Override
+	public List<IdrMonthPlanBill> getIdrMonthPlanBillByPeriodAndDepartmentAndState(
+			Long year, Long month, Department depatrment,
+			IdrMonthPlanEnum... state) {
+		return idrMonthPlanBillDao.findByPeriodAndDepartmentAndState(year, month, new Department[]{depatrment}, state);
 	}
 
 }

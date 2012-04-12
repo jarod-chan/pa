@@ -49,16 +49,6 @@ public class MonthChkServiceImp implements MonthChkService{
 	}
 
 	@Override
-	public List<MonthChk> getMonthChkByPeriodAndDepartmentAndState(Long year, Long month,String department,MonthChkEnum... states) {
-		return monthChkDao.findByPeriodAndState(year,month,department,states);
-	}
-
-	@Override
-	public List<MonthChk> getMonthChkByDepartmentAndState(String department,MonthChkEnum... states) {
-		return monthChkDao.findByPeriodAndState(null,null,department,states);
-	}
-
-	@Override
 	public MonthChk getCurrentMonthChk(Person person) {
 		MonthChk monthChk=monthChkDao.findMaxMonthMonthChk(person);
 		if(monthChk==null){
@@ -98,8 +88,18 @@ public class MonthChkServiceImp implements MonthChkService{
 	}
 
 	@Override
+	public List<MonthChk> getMonthChkByPeriodAndDepartmentAndState(Long year, Long month,String department,MonthChkEnum... states) {
+		return monthChkDao.findByPeriodAndDepartmentAndPersonAndState(year,month,department,null,states);
+	}
+
+	@Override
+	public List<MonthChk> getMonthChkByDepartmentAndState(String department,MonthChkEnum... states) {
+		return monthChkDao.findByPeriodAndDepartmentAndPersonAndState(null,null,department,null,states);
+	}
+
+	@Override
 	public List<MonthChk> getMonthChkByPersonAndState(Long year, Person person,MonthChkEnum... states) {
-		return monthChkDao.getAllMonthChkByPersonAndState(year,null,person, states);
+		return monthChkDao.findByPeriodAndDepartmentAndPersonAndState(year,null,null,person, states);
 	}
 
 
