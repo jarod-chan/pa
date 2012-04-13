@@ -21,15 +21,15 @@ public class IdrYearServiceTest {
 	@Resource
 	IdrYearCompanyService idrYearService;
 	
-	@Ignore
+	@Test
 	public void save(){
-		IdrYearCompany idrYear=new IdrYearCompany();
-		idrYear.setYear(2030L);
-		
-		IdrCompany idrCompany=new IdrCompany();
-		idrYear.getIdrCompany().add(idrCompany);
-		
-		idrYear=idrYearService.save(idrYear);
+//		IdrYearCompany idrYear=new IdrYearCompany();
+//		idrYear.setYear(2030L);
+//		
+//		IdrCompany idrCompany=new IdrCompany();
+//		idrYear.getIdrCompany().add(idrCompany);
+//		
+//		idrYear=idrYearService.save(idrYear);
 	}
 	
 	@Test //XXX 需要更改 无效测试

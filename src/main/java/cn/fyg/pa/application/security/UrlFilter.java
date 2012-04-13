@@ -1,4 +1,4 @@
-package cn.fyg.pa.security;   
+package cn.fyg.pa.application.security;   
   
 import java.io.IOException;
 import java.util.Arrays;
