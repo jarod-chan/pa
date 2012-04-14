@@ -4,12 +4,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import cn.fyg.pa.application.bean.LoginBean;
-import cn.fyg.pa.application.bean.LoginRetBean;
 import cn.fyg.pa.domain.model.Person;
 import cn.fyg.pa.domain.service.PersonService;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;
-import cn.fyg.pa.tool.Constant;
+import cn.fyg.pa.interfaces.bean.LoginBean;
+import cn.fyg.pa.interfaces.bean.LoginRetBean;
+import cn.fyg.pa.interfaces.tool.Constant;
 
 @Service
 public class PersonServiceImp implements PersonService {

@@ -1,8 +1,8 @@
 package cn.fyg.pa.domain.service;
 
-import cn.fyg.pa.application.bean.LoginBean;
-import cn.fyg.pa.application.bean.LoginRetBean;
 import cn.fyg.pa.domain.model.Person;
+import cn.fyg.pa.interfaces.bean.LoginBean;
+import cn.fyg.pa.interfaces.bean.LoginRetBean;
 
 public interface PersonService {
 	

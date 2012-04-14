@@ -15,7 +15,7 @@ import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.service.IdrMonthPlanBillService;
 import cn.fyg.pa.infrastructure.perisistence.DepartmentDao;
 import cn.fyg.pa.infrastructure.perisistence.IdrMonthPlanBillDao;
-import cn.fyg.pa.tool.CMonthPlanBill;
+import cn.fyg.pa.interfaces.tool.CMonthPlanBill;
 
 @Service
 public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {

@@ -2,7 +2,7 @@ package cn.fyg.pa.domain.help.rptComparator;
 
 import java.util.Comparator;
 
-import cn.fyg.pa.application.page.Point;
+import cn.fyg.pa.interfaces.page.Point;
 
 public class PointDescComparator<T> implements Comparator<T> {
 

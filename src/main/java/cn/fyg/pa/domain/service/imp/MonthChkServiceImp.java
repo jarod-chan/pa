@@ -13,7 +13,7 @@ import cn.fyg.pa.domain.model.StateChangeException;
 import cn.fyg.pa.domain.model.enums.MonthChkEnum;
 import cn.fyg.pa.domain.service.MonthChkService;
 import cn.fyg.pa.infrastructure.perisistence.MonthChkDao;
-import cn.fyg.pa.tool.CMonthChk;
+import cn.fyg.pa.interfaces.tool.CMonthChk;
 
 @Service
 public class MonthChkServiceImp implements MonthChkService{
