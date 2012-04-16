@@ -1,6 +1,6 @@
 package cn.fyg.pa.interfaces.page;
 
-import cn.fyg.pa.domain.model.Person;
+import cn.fyg.pa.domain.person.Person;
 
 public class MangePage {
 	

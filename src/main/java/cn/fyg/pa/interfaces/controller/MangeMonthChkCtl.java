@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.domain.model.MonthChk;
-import cn.fyg.pa.domain.model.Person;
 import cn.fyg.pa.domain.model.StateChangeException;
 import cn.fyg.pa.domain.model.enums.MonthChkEnum;
+import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.domain.service.MonthChkService;
-import cn.fyg.pa.domain.service.PersonService;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.bean.ManageMonthChkQueryBean;
 import cn.fyg.pa.interfaces.tool.DateTool;
@@ -33,7 +33,7 @@ public class MangeMonthChkCtl {
 	private static final Logger logger=LoggerFactory.getLogger(MangeMonthChkCtl.class);
 
 	@Resource
-	PersonService personService;
+	PersonRepository personRepository;
 	
 	@Resource
 	MonthChkService monthChkService;
@@ -41,7 +41,7 @@ public class MangeMonthChkCtl {
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
 		logger.info("initPerson");
-		return personService.find(personId);
+		return personRepository.find(personId);
 	}
 	
 	
@@ -105,6 +105,7 @@ public class MangeMonthChkCtl {
 		new SessionMPR(session).setMessage(message);
 		return "redirect:../../monthchk";
 	}
+	
 
 
 	@RequestMapping(value="/histroy",method=RequestMethod.GET)

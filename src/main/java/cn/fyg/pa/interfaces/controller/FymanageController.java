@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.domain.model.Person;
+import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.infrastructure.perisistence.FychkmangeDao;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;
 import cn.fyg.pa.interfaces.page.MangePage;

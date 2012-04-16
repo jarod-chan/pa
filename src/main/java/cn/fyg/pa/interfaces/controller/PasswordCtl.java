@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.domain.model.Person;
-import cn.fyg.pa.domain.service.PersonService;
+import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.infrastructure.message.MessagePasser;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.bean.LoginRetBean;
@@ -29,13 +29,13 @@ public class PasswordCtl {
 	public static final Logger logger=LoggerFactory.getLogger(PasswordCtl.class);
 	
 	@Resource
-	PersonService personService;
+	PersonRepository personRepository;
 	
 	@ModelAttribute("person")
 	public Person initPerson(@ModelAttribute("loginRet") LoginRetBean loginRet,@PathVariable("personId") Long personId){
 		logger.info("initPerson");
 		//return personDao.find(Long.valueOf(loginRet.getPersonid()));
-		return personService.find(personId);
+		return personRepository.find(personId);
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
@@ -58,7 +58,7 @@ public class PasswordCtl {
 		ModelAndView mav=new ModelAndView();
 		if(page.isPass()){
 			person.setChkstr(page.getConfirmcsr());
-			personService.save(person);
+			personRepository.save(person);
 			SessionUtil util=new SessionUtil(session);
 			util.remove("loginRet");
 			mav.addObject(Constant.MESSAGE_NAME,"密码修改成功！");

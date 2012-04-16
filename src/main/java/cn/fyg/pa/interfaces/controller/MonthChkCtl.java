@@ -19,15 +19,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import cn.fyg.pa.domain.model.Department;
 import cn.fyg.pa.domain.model.IdrMonthPlanBill;
 import cn.fyg.pa.domain.model.MonthChk;
-import cn.fyg.pa.domain.model.Person;
 import cn.fyg.pa.domain.model.StateChangeException;
 import cn.fyg.pa.domain.model.WorkType;
 import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.model.enums.MonthChkEnum;
+import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.domain.service.DepartmentService;
 import cn.fyg.pa.domain.service.IdrMonthPlanBillService;
 import cn.fyg.pa.domain.service.MonthChkService;
-import cn.fyg.pa.domain.service.PersonService;
 import cn.fyg.pa.domain.service.WorkTypeService;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.bean.IdrMonthPlanQueryBean;
@@ -49,7 +49,7 @@ public class MonthChkCtl {
 	}
 	
 	@Resource
-	PersonService personService;
+	PersonRepository personRepository;
 	
 	@Resource
 	MonthChkService monthChkService;
@@ -66,7 +66,7 @@ public class MonthChkCtl {
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
 		logger.info("initPerson");
-		return personService.find(personId);
+		return personRepository.find(personId);
 	}
 	
 	
@@ -74,7 +74,7 @@ public class MonthChkCtl {
 	public String toEdit(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		logger.info("toEdit");
 		MonthChk monthChk=monthChkService.getCurrentMonthChk(person);
-		Person mange=personService.getDeptMange(person.getDepartment());
+		Person mange=personRepository.getDeptMange(person.getDepartment());
 		List<WorkType> workTypes=workTypeService.getAllWorkType();
 		
 		map.put("mange", mange);

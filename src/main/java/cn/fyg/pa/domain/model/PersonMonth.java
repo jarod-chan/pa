@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import cn.fyg.pa.domain.person.Person;
+
 @Entity
 public class PersonMonth implements Serializable {
 

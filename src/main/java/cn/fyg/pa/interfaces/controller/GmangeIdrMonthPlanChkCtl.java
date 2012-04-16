@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.domain.model.IdrMonthPlanBill;
-import cn.fyg.pa.domain.model.Person;
 import cn.fyg.pa.domain.model.StateChangeException;
 import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.service.IdrMonthPlanBillService;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;

@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.fyg.pa.domain.model.MonthChk;
 import cn.fyg.pa.domain.model.MonthChkItem;
-import cn.fyg.pa.domain.model.Person;
+import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.infrastructure.perisistence.MonthChkDao;
 import cn.fyg.pa.infrastructure.perisistence.MonthChkItemDao;
 

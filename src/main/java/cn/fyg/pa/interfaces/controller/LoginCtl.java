@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.domain.service.PersonService;
+import cn.fyg.pa.application.LoginService;
+import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.interfaces.bean.LoginBean;
 import cn.fyg.pa.interfaces.bean.LoginRetBean;
 import cn.fyg.pa.interfaces.tool.Dispatcher;
@@ -25,7 +26,7 @@ public class LoginCtl {
 	private static final Logger logger = LoggerFactory.getLogger(LoginCtl.class);
 	
 	@Resource
-	private PersonService personService;
+	private LoginService loginService;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getLogin() {
@@ -37,7 +38,7 @@ public class LoginCtl {
 	public ModelAndView postLogin(LoginBean loginBean,HttpServletRequest request, HttpServletResponse response) {
 		logger.info("postLogin");
 		
-		LoginRetBean loginRetBean=personService.checkLoginPerson(loginBean);
+		LoginRetBean loginRetBean=loginService.checkLoginPerson(loginBean);
 				
 		if(loginRetBean.isPass()){
 			loginRetBean=doChangeForSpecialPerson(loginBean,loginRetBean);

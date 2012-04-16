@@ -5,9 +5,9 @@ import java.util.List;
 
 import cn.fyg.pa.domain.model.Department;
 import cn.fyg.pa.domain.model.IdrMonthPlanBill;
-import cn.fyg.pa.domain.model.Person;
 import cn.fyg.pa.domain.model.StateChangeException;
 import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.person.Person;
 
 public interface IdrMonthPlanBillService {
 	

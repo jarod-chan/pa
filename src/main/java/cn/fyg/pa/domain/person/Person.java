@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model;
+package cn.fyg.pa.domain.person;
 
 import java.io.Serializable;
 
@@ -7,8 +7,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
-import cn.fyg.pa.domain.model.enums.ManageEnum;
-import cn.fyg.pa.domain.model.enums.TypeEnum;
 
 @Entity(name = "fyperson")
 public class Person implements Serializable {

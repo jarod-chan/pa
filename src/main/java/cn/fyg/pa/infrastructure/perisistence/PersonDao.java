@@ -12,9 +12,9 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.fyg.pa.domain.model.Person;
-import cn.fyg.pa.domain.model.enums.ManageEnum;
-import cn.fyg.pa.domain.model.enums.TypeEnum;
+import cn.fyg.pa.domain.person.ManageEnum;
+import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.person.TypeEnum;
 
 
 @Repository

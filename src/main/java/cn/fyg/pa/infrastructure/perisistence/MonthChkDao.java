@@ -16,8 +16,8 @@ import org.springframework.stereotype.Repository;
 
 import cn.fyg.pa.domain.model.MonthChk;
 import cn.fyg.pa.domain.model.MonthChkItem;
-import cn.fyg.pa.domain.model.Person;
 import cn.fyg.pa.domain.model.enums.MonthChkEnum;
+import cn.fyg.pa.domain.person.Person;
 
 @Repository
 public class MonthChkDao {

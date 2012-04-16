@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.domain.model.Person;
+import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.infrastructure.mail.Mail;
 import cn.fyg.pa.infrastructure.mail.Sender;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;

@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
 import cn.fyg.pa.domain.model.enums.MonthChkEnum;
+import cn.fyg.pa.domain.person.Person;
 
 @Entity
 public class MonthChk implements Serializable {
