@@ -1,14 +1,13 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>
 <html>
+<head>
 <%@ include file="../common/head.jsp"%>
 <style type="text/css">
 	.currRow{
 		background-color:#77BBFF;
 	}
 </style>
-
-
 <script type="text/javascript">	
 	var rowClick=function (){
 		$("#tbl tr").removeClass("currRow");
@@ -18,15 +17,23 @@
 	$(document).ready(function() {
 		$("#tbl tr").click(rowClick);
 	});
-	
-</script>  
+</script> 
+</head>
+<c:set var="pagefunc" value="月度工作任务" scope="request"/> 
+<c:set var="pagetitle" value="员工月度工作任务提报" scope="request"/> 
+<c:set var="pagesize" value="990" scope="request"/> 
 <body>
-<h2>员工月度工作任务提报</h2>
-员工:${monthChk.person.name}&nbsp;&nbsp;部门:${monthChk.person.department}&nbsp;&nbsp;上级主管:${mange.name}<br>
-考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}
-<input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/histroy','_self')"/>
-
+<div class="headdiv" >
+<div class="headleft" >考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}&nbsp;&nbsp;部门:${monthChk.person.department}&nbsp;&nbsp;上级主管:${mange.name}</div>
+<div class="headright">
+<input type="button" value="查看部门计划>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/idrmonthplan','_self')"/>
+<input type="button" value="查看历史考核>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/histroy','_self')"/>
+<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${monthChk.person.id}/password?backurl=/${ctx}/person/${monthChk.person.id}/monthchk','_self')"/>
+</div>
+<div  class="headnone"></div>
+</div>
 <%@ include file="../common/message.jsp"%>
+
 <table border=1 style="table-layout:fixed;width:950px;">
 <thead>
 	<tr>
@@ -67,7 +74,7 @@
 	</c:forEach>
 </tbody>
 </table>
- 
+<br/>
 <input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
 
 </body>

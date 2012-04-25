@@ -3,9 +3,10 @@ package cn.fyg.pa.domain.person;
 import cn.fyg.pa.domain.model.enums.CommonEnum;
 
 public enum ManageEnum implements CommonEnum {
-	G("总经理"),
+	A("管理员"),
+	G("分管副总"),
 	Y("经理"),
-	N("职员");
+	N("员工");
 	
 	private String name;
 	private ManageEnum(String name){

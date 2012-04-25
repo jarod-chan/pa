@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.application.LoginService;
+import cn.fyg.pa.domain.person.ManageEnum;
 import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.interfaces.bean.LoginBean;
 import cn.fyg.pa.interfaces.bean.LoginRetBean;
@@ -43,10 +44,21 @@ public class LoginCtl {
 		if(loginRetBean.isPass()){
 			loginRetBean=doChangeForSpecialPerson(loginBean,loginRetBean);
 			new SessionUtil(request).setValue("loginRet",loginRetBean);
+			String loginInfo = getLoginInfo(loginRetBean);
+			new SessionUtil(request).setValue("loginInfo", loginInfo);
 			return dispatcherMav(loginRetBean);
 		}
 				
 		return reLoginMav(loginBean);
+	}
+
+	//XXX  传递登录人员信息的session
+	private String getLoginInfo(LoginRetBean loginRetBean) {
+		String loginInfo="";
+		String mangeName=ManageEnum.valueOf(loginRetBean.getMange()).getName();
+		String userName=loginRetBean.getName();
+		loginInfo=mangeName+":"+userName;
+		return loginInfo;
 	}
 
 	//XXX 此处待修改
