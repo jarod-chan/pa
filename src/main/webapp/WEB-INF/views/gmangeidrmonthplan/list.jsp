@@ -4,13 +4,22 @@
 <head>
 <%@ include file="../common/head.jsp"%>
 </head>
-
+<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
+<c:set var="pagetitle" value="部门月度工作执行情况" scope="request"/> 
+<c:set var="pagesize" value="825" scope="request"/> 
 <body>
-<h2>部门月度工作执行情况</h2>
-分管经理:${person.name}&nbsp;&nbsp;
-<input type="button" value="历史记录>>" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan/history','_self')"/>
-<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${person.id}/password?backurl=/pa/gmange/${person.id}/idrmonthplan','_self')"/>
-<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
+
+<div class="headdiv" >
+<div class="headleft" >
+</div>
+<div class="headright"  >
+	<input type="button" value="历史记录>>" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan/history','_self')"/>
+	<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${person.id}/password?backurl=/pa/gmange/${person.id}/idrmonthplan','_self')"/>
+	<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
+</div>
+<div  class="headnone"></div>
+</div>
+
 <%@ include file="../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:800px;">
 <thead>

@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>
 <html>
+<head>
 <%@ include file="../common/head.jsp"%>
 <style type="text/css">
 	.currRow{
@@ -33,10 +34,22 @@
 	});
 	
 </script>  
+</head>
+<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
+<c:set var="pagetitle" value="部门月度工作计划查看" scope="request"/> 
+<c:set var="pagesize" value="670" scope="request"/>
 <body>
-<h2>部门月度工作计划【查看】</h2>
-部门经理:${mange.name}&nbsp;&nbsp;部门:${idrMonthPlanBill.department.name}&nbsp;&nbsp;<br>
-计划周期:${idrMonthPlanBill.year}年${idrMonthPlanBill.month}月&nbsp;&nbsp;状态:${idrMonthPlanBill.state.name}
+
+<div class="headdiv" >
+<div class="headleft" style="width: 80%;">
+部门经理:${mange.name}&nbsp;&nbsp;部门:${idrMonthPlanBill.department.name}&nbsp;&nbsp;计划周期:${idrMonthPlanBill.year}年${idrMonthPlanBill.month}月&nbsp;&nbsp;状态:${idrMonthPlanBill.state.name}
+</div>
+<div class="headright"  style="width: 10%;">
+<input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
+</div>
+<div  class="headnone"></div>
+</div>
+
 <%@ include file="../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:650px;" class="tbldef">
 <thead>
@@ -63,8 +76,6 @@
 	</c:forEach>
 </tbody>
 </table>
-
-<input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
 
 </body>
 </html>

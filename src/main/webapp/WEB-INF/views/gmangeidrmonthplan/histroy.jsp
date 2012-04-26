@@ -4,10 +4,20 @@
 <head>
 <%@ include file="../common/head.jsp"%>
 </head>
-
+<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
+<c:set var="pagetitle" value="部门月度工作计划历史" scope="request"/> 
+<c:set var="pagesize" value="720" scope="request"/>
 <body>
-<h2>部门月度工作计划【历史】</h2>
-分管经理:${person.name}&nbsp;&nbsp;<input type="button" value="<<当前计划" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
+
+<div class="headdiv" >
+<div class="headleft" >
+</div>
+<div class="headright" >
+<input type="button" value="<<当前计划" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
+</div>
+<div  class="headnone"></div>
+</div>
+
 <%@ include file="../common/message.jsp"%>
 <%@ include file="../fragment/idrmonthplantable.jsp"%>
 </body>

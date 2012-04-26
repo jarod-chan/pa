@@ -3,15 +3,25 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
- 
 </head>
+<c:set var="pagefunc" value="员工月度工作任务评价" scope="request"/> 
+<c:set var="pagetitle" value="员工月度工作任务" scope="request"/> 
+<c:set var="pagesize" value="825" scope="request"/> 
 <body>
-<h2>员工月度工作任务评价</h2>
-经理:${mange.name}&nbsp;&nbsp;部门:${mange.department}&nbsp;&nbsp;
-<input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/histroy','_self')"/>
-<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${mange.id}/password?backurl=/pa/mange/${mange.id}/monthchk','_self')"/>
-<input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/mange/${mange.id}/all','_self')"/>
-<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
+
+<div class="headdiv" >
+<div class="headleft"  >
+	部门:${mange.department}&nbsp;&nbsp;
+</div>
+<div class="headright" >
+	<input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/histroy','_self')"/>
+	<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${mange.id}/password?backurl=/pa/mange/${mange.id}/monthchk','_self')"/>
+	<input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/mange/${mange.id}/all','_self')"/>
+	<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>	
+</div>
+<div  class="headnone"></div>
+</div>
+
 <%@ include file="../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:800px;">
 <thead>

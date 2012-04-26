@@ -1,14 +1,13 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>
 <html>
+<head>
 <%@ include file="../common/head.jsp"%>
 <style type="text/css">
 	.currRow{
 		background-color:#77BBFF;
 	}
 </style>
-
-
 <script type="text/javascript">
 
 	var rowClick=function (){
@@ -44,13 +43,23 @@
 			$("#monthChk").attr("action",oldAction+"/back").submit();
 		}
 	}
-	
-</script>  
+</script> 
+</head>
+<c:set var="pagefunc" value="员工月度工作任务评价" scope="request"/> 
+<c:set var="pagetitle" value="员工月度工作任务评价" scope="request"/> 
+<c:set var="pagesize" value="990" scope="request"/>  
 <body>
-<h2>员工月度工作任务评价</h2>
 
-经理:${mange.name}&nbsp;&nbsp;部门:${mange.department}&nbsp;&nbsp;考核员工:${monthChk.person.name}&nbsp;&nbsp;<br>
-考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}
+<div class="headdiv" >
+<div class="headleft" >
+部门:${mange.department}&nbsp;&nbsp;考核员工:${monthChk.person.name}&nbsp;&nbsp;考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}
+</div>
+<div class="headright">
+</div>
+<div  class="headnone"></div>
+</div>
+
+
 <%@ include file="../common/message.jsp"%>
 
 <form id="monthChk" action="/${ctx}/mange/${mange.id}/monthchk/${monthChk.id}" method="post">
@@ -96,7 +105,7 @@
 	</c:forEach>
 </tbody>
 </table>
-
+<br/>
 <input type="button" value="保存"  onclick="save()"/>
 <input type="button" value="完成"  onclick="finish()"/>
 <input type="button" value="打回"  onclick="back()"/>

@@ -2,6 +2,7 @@
 <%@ include file="../common/common.jsp"%>
 <html>
 <head>
+<meta name="decorator" content="none"/>
 <%@ include file="../common/head.jsp"%>
 <style type="text/css">
 ul{list-style-type:none; margin:0;padding:0;width:100%; }

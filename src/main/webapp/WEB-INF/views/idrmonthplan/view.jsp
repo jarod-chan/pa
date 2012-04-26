@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>
 <html>
+<head>
 <%@ include file="../common/head.jsp"%>
 <style type="text/css">
 	.currRow{
@@ -14,17 +15,16 @@ var rowClick=function (){
 	$(".tbldef tbody tr").removeClass("currRow");
 	$(this).addClass("currRow");
 };
-
-
 $(document).ready(function() { 
 	$(".tbldef tbody tr").click(rowClick);
 });
-
 </script>  
-
-
+</head>
+<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
+<c:set var="pagetitle" value="部门月度工作计划查看" scope="request"/> 
+<c:set var="pagesize" value="670" scope="request"/> 
 <body>
-<h2>部门月度工作计划【查看】</h2>
+
 <%@ include file="personinfo.jsp"%>
 <%@ include file="../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:650px;" class="tbldef">
@@ -52,6 +52,7 @@ $(document).ready(function() {
 </tbody>
 </table>
 
+<br/>
 <input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/mange/${person.id}/all','_self')"/>
 <input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
 

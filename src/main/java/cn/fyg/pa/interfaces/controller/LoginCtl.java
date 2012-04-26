@@ -1,5 +1,8 @@
 package cn.fyg.pa.interfaces.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +19,7 @@ import cn.fyg.pa.domain.person.ManageEnum;
 import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.interfaces.bean.LoginBean;
 import cn.fyg.pa.interfaces.bean.LoginRetBean;
+import cn.fyg.pa.interfaces.bean.UrlNameBean;
 import cn.fyg.pa.interfaces.tool.Dispatcher;
 import cn.fyg.pa.interfaces.tool.SessionUtil;
 
@@ -46,11 +50,34 @@ public class LoginCtl {
 			new SessionUtil(request).setValue("loginRet",loginRetBean);
 			String loginInfo = getLoginInfo(loginRetBean);
 			new SessionUtil(request).setValue("loginInfo", loginInfo);
+			List<UrlNameBean> menuList=getMenuList(loginRetBean);
+			new SessionUtil(request).setValue("menuList", menuList);
 			return dispatcherMav(loginRetBean);
 		}
 				
 		return reLoginMav(loginBean);
 	}
+
+	//XXX 返回用户的菜单
+	private List<UrlNameBean> getMenuList(LoginRetBean loginRetBean) {
+		String personId=loginRetBean.getPersonid();
+		List<UrlNameBean> menuList=new ArrayList<UrlNameBean>();
+		if(loginRetBean.getMange().equals("A")){
+		}
+		if(loginRetBean.getMange().equals("G")){
+		}
+		if(loginRetBean.getMange().equals("Y")){
+			menuList.add(new UrlNameBean("员工月度工作任务评价",String.format("mange/%s/monthchk",personId)));
+			menuList.add(new UrlNameBean("部门月度工作计划执行",String.format("mange/%s/idrmonthplan",personId)));
+		}
+		if (loginRetBean.getMange().equals("N")) {
+			menuList.add(new UrlNameBean("月度工作任务",String.format("person/%s/monthchk",personId)));
+		}
+		
+		
+		return menuList;
+	}
+
 
 	//XXX  传递登录人员信息的session
 	private String getLoginInfo(LoginRetBean loginRetBean) {

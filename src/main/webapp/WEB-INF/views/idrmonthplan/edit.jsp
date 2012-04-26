@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>
 <html>
+<head>
 <%@ include file="../common/head.jsp"%>
 <style type="text/css">
 	.currRow{
@@ -120,9 +121,12 @@
 
 
 	
-</script>  
+</script> 
+</head>
+<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
+<c:set var="pagetitle" value="部门月度工作任务提报" scope="request"/> 
+<c:set var="pagesize" value="820" scope="request"/> 
 <body>
-<h2>部门月度工作计划【提报】</h2>
 <%@ include file="personinfo.jsp"%>
 <%@ include file="../common/message.jsp"%>
 <form  action="/${ctx}/mange/${person.id}/idrmonthplan" method="post">
@@ -164,7 +168,7 @@
 </tbody>
 </table>
 
-
+<br/>
 <input type="button" value="保存" onclick="save()"/>
 <input type="button" value="提交" onclick="commit()"/>
 <input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/mange/${person.id}/all','_self')"/>

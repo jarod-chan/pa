@@ -2,6 +2,7 @@
 <%@ include file="../common/common.jsp"%>
 <html>
 <head>
+<meta name="decorator" content="none"/>
 <%@ include file="../common/head.jsp"%>
 </head>
 

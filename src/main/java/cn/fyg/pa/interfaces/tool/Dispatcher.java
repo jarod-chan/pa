@@ -22,7 +22,7 @@ public class Dispatcher {
 			return "redirect:gmange/"+loginRet.getPersonid()+"/idrmonthplan";
 		}
 		if(loginRet.getMange().equals("Y")){
-			return "redirect:/mange/"+loginRet.getPersonid()+"/all";
+			return "redirect:/mange/"+loginRet.getPersonid()+"/monthchk";
 		}
 		if (loginRet.getMange().equals("N")) {
 			return "redirect:/person/"+loginRet.getPersonid()+"/monthchk";
