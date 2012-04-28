@@ -1,7 +1,7 @@
 package cn.fyg.pa.interfaces.page;
 
-import cn.fyg.pa.domain.model.Fycheck;
 import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.yearchk.Fycheck;
 
 public class Cell {
 	

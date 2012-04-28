@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model;
+package cn.fyg.pa.domain.yearchk;
 
 import java.io.Serializable;
 
@@ -15,6 +15,7 @@ public class Fycheck implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private Long year;
 	private Long colId;
 	private Long rowId;
 	private Long val;
@@ -50,8 +51,12 @@ public class Fycheck implements Serializable {
 	public void setChkId(Long chkId) {
 		this.chkId = chkId;
 	}
-
-	
+	public Long getYear() {
+		return year;
+	}
+	public void setYear(Long year) {
+		this.year = year;
+	}
 
 	
 	

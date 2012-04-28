@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.fyg.pa.domain.model.Fycheck;
+import cn.fyg.pa.domain.yearchk.Fycheck;
 
 
 @Repository

@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.domain.model.Fychkitem;
-import cn.fyg.pa.domain.model.Fychkmange;
 import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.yearchk.Fychkitem;
+import cn.fyg.pa.domain.yearchk.Fychkmange;
 import cn.fyg.pa.infrastructure.perisistence.FychkitemDao;
 import cn.fyg.pa.infrastructure.perisistence.FychkmangeDao;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;

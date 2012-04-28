@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.fyg.pa.domain.person.ManageEnum;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.TypeEnum;
+import cn.fyg.pa.interfaces.yearchk.PersonChkBean;
 
 
 @Repository
@@ -49,9 +50,6 @@ public class PersonDao {
 		query.orderBy(builder.asc(root.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
-	
-	
-	
 	
 	/**
 	 * 通过部门名称查找项目经理

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.domain.model.Fycheck;
 import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.yearchk.Fycheck;
 import cn.fyg.pa.infrastructure.perisistence.FycheckDao;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;
 import cn.fyg.pa.interfaces.page.Cell;
