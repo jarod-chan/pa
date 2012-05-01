@@ -13,7 +13,19 @@ public class PageBeanBuilder {
 	}
 	
 	//XXX 未完成，尝试计算pagebean
-	public PageBean builder(){
+	public PageBean builder(Long year,int needChkPerson){
+		
+		PageBean pageBean=new PageBean();
+		List<DepartmentChkBean> departmentChkBeanList = getDepartmentChkBeanList();
+		pageBean.setYear(year);
+		pageBean.setNeedChkPerson(needChkPerson);
+		pageBean.calculateSelf();
+		pageBean.setDepartmentChkBeans(departmentChkBeanList);
+		
+		return pageBean;
+	}
+
+	private List<DepartmentChkBean> getDepartmentChkBeanList() {
 		List<DepartmentChkBean> departmentChkBeanList=new ArrayList<DepartmentChkBean>();
 		
 		DepartmentChkBean departmentChkBean = createDepartmentChkBean(this.personChkBeans.get(0));
@@ -25,14 +37,7 @@ public class PageBeanBuilder {
 			}
 			departmentChkBean.getPersonChkBeans().add(personChkBean);
 		}
-		
-		
-		
-		
-		PageBean pageBean=new PageBean();
-		
-		
-		return pageBean;
+		return departmentChkBeanList;
 	}
 
 	private DepartmentChkBean createDepartmentChkBean(PersonChkBean personChkBean) {

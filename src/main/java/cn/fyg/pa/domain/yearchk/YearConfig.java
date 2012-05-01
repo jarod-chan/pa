@@ -26,5 +26,13 @@ public class YearConfig {
 	public void setEnable(Boolean enable) {
 		this.enable = enable;
 	}
+	
+	public void enable(){
+		this.enable=true;
+	}
+	
+	public void disable(){
+		this.enable=false;
+	}
 
 }

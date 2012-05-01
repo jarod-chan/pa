@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import cn.fyg.pa.domain.person.ManageEnum;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.PersonRepository;
+import cn.fyg.pa.domain.person.TypeEnum;
 import cn.fyg.pa.interfaces.bean.LoginBean;
 import cn.fyg.pa.interfaces.bean.LoginRetBean;
 import cn.fyg.pa.interfaces.tool.Constant;
@@ -44,6 +45,11 @@ public class PersonRepositoryJpa implements PersonRepository {
 	@Override
 	public List<Person> getPersonByManage(ManageEnum... mangeEnum) {
 		return personDao.findByManage(mangeEnum);
+	}
+
+	@Override
+	public int countStaffByType(TypeEnum type) {
+		return personDao.countStaffByType(type);
 	}
 
 

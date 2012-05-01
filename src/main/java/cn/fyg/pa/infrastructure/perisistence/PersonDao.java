@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.fyg.pa.domain.person.ManageEnum;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.TypeEnum;
-import cn.fyg.pa.interfaces.yearchk.PersonChkBean;
 
 
 @Repository
@@ -51,6 +50,16 @@ public class PersonDao {
 		return entityManager.createQuery(query).getResultList();
 	}
 	
+	public int countStaffByType(TypeEnum type) {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Long> query=builder.createQuery(Long.class);
+		Root<Person> root=query.from(Person.class);
+		Predicate criteria=builder.equal(root.get("type"), type);
+		query.select(builder.count(root.get("id")));
+		query.where(criteria);
+		return entityManager.createQuery(query).getSingleResult().intValue();
+	}
+
 	/**
 	 * 通过部门名称查找项目经理
 	 * @param department

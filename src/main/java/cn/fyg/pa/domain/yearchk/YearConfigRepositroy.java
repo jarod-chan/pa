@@ -1,7 +1,15 @@
 package cn.fyg.pa.domain.yearchk;
 
+import java.util.List;
+
 public interface YearConfigRepositroy {
 	
-	Long getEnableYear()throws EnableYearNotExist;
+	YearConfig getEnableYear()throws EnableYearNotExist;
+	
+	YearConfig find(Long year);
+
+	YearConfig save(YearConfig yearConfig);
+	
+	List<YearConfig> findAll();
 
 }

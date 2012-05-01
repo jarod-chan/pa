@@ -6,6 +6,8 @@ public class PageBean {
 	
 	private Long year;
 	
+	private int needChkPerson;
+	
 	private boolean isFinish;
 	
 	private List<DepartmentChkBean> departmentChkBeans;
@@ -32,6 +34,25 @@ public class PageBean {
 
 	public void setDepartmentChkBeans(List<DepartmentChkBean> departmentChkBeans) {
 		this.departmentChkBeans = departmentChkBeans;
+	}
+
+	public int getNeedChkPerson() {
+		return needChkPerson;
+	}
+
+	public void setNeedChkPerson(int needChkPerson) {
+		this.needChkPerson = needChkPerson;
+	}
+	
+	public void calculateSelf(){
+		for(DepartmentChkBean departmentChkBean:this.departmentChkBeans){
+			departmentChkBean.calculateSelf(this.needChkPerson);
+			if(!departmentChkBean.isFinish()){
+				this.isFinish=false;
+				return;
+			}
+			this.isFinish=true;
+		}
 	}
 
 }

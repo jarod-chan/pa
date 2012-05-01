@@ -15,4 +15,6 @@ public interface PersonRepository {
 	List<Person> getPersonByManage(ManageEnum... mangeEnum);
 
 	Person findByName(String personname);
+	
+	int countStaffByType(TypeEnum type);
 }

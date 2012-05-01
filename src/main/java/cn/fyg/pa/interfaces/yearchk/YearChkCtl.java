@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.application.YearChkService;
+import cn.fyg.pa.application.YearConfigService;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.domain.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.yearchk.Fycheck;
+import cn.fyg.pa.domain.yearchk.YearChkRepositroy;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.infrastructure.perisistence.FycheckDao;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;
@@ -40,7 +41,9 @@ public class YearChkCtl {
 	@Resource
 	PersonRepository personRepository;
 	@Resource
-	YearChkService yearChkService;
+	YearConfigService yearConfigService;
+	@Resource 
+	YearChkRepositroy yearChkRepositroy;
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
@@ -51,10 +54,14 @@ public class YearChkCtl {
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String list(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		try {
-			List<PersonChkBean> yearChkBeans = yearChkService.getPersonChkResult(person);
-			map.put("yearChkBeans", yearChkBeans);
+			Long year=yearConfigService.getEnableYear();
+			List<PersonChkBean> yearChkBeans = yearChkRepositroy.getPersonYearChkResult(year, person);
+			PageBeanBuilder builder=new PageBeanBuilder(yearChkBeans);
+			int needChkPersons=personRepository.countStaffByType(person.getType())-1;
+			PageBean pageBean = builder.builder(year, needChkPersons);
+			map.put("pageBean", pageBean);
 		} catch (EnableYearNotExist e) {
-			new SessionMPR(session).setMessage("当前无法进行年终员工考核");
+			new SessionMPR(session).setMessage("当前时间无法进行年终员工考核");
 		}
 		map.put("message",new SessionMPR(session).getMessage());
 		return "yearchk/list";

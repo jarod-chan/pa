@@ -6,6 +6,8 @@ public class DepartmentChkBean {
 	
 	private String department;
 	
+	private boolean isFinish;
+	
 	private List<PersonChkBean> personChkBeans;
 	
 	public String getDepartment() {
@@ -24,5 +26,22 @@ public class DepartmentChkBean {
 		this.personChkBeans = personChkBeans;
 	}
 
-	
+	public boolean isFinish() {
+		return isFinish;
+	}
+
+	public void setFinish(boolean isFinish) {
+		this.isFinish = isFinish;
+	}
+
+	public void calculateSelf(int needCheckPersons){
+		for(PersonChkBean personChkBean:this.personChkBeans){
+			int total=personChkBean.getWin()+personChkBean.getLose()+personChkBean.getDraw();
+			if(total!=needCheckPersons){
+				this.isFinish=false;
+				return;
+			}
+			this.isFinish=true;
+		}		
+	}
 }

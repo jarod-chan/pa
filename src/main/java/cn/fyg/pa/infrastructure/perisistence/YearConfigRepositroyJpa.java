@@ -1,18 +1,61 @@
 package cn.fyg.pa.infrastructure.perisistence;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
 
 import cn.fyg.pa.domain.yearchk.EnableYearNotExist;
+import cn.fyg.pa.domain.yearchk.YearConfig;
 import cn.fyg.pa.domain.yearchk.YearConfigRepositroy;
 
 @Repository
 public class YearConfigRepositroyJpa implements YearConfigRepositroy {
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	@Override
-	public Long getEnableYear() throws EnableYearNotExist {
-		// TODO Auto-generated method stub
-//		throw new EnableYearNotExist();
-		return 2012L;
+	public YearConfig getEnableYear() throws EnableYearNotExist {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<YearConfig> query=builder.createQuery(YearConfig.class);
+		Root<YearConfig> root=query.from(YearConfig.class);
+		Predicate criteria=builder.equal(root.get("enable"), Boolean.TRUE);
+		query.where(criteria);
+		List<YearConfig> enableYear=entityManager.createQuery(query).setMaxResults(1).getResultList();
+		if(enableYear.isEmpty()){
+			throw new EnableYearNotExist();
+		}
+		return enableYear.get(0);
+	}
+
+	@Override
+	public YearConfig find(Long year) {
+		return entityManager.find(YearConfig.class, year);
+	}
+	
+	@Override
+	public YearConfig save(YearConfig yearConfig){
+		YearConfig oldYearConfig=entityManager.find(YearConfig.class, yearConfig.getYear());
+		if(oldYearConfig==null){
+			entityManager.persist(yearConfig);
+			return yearConfig;
+		}
+		return entityManager.merge(yearConfig);
+	}
+
+	@Override
+	public List<YearConfig> findAll() {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<YearConfig> query=builder.createQuery(YearConfig.class);
+		Root<YearConfig> root=query.from(YearConfig.class);
+		return entityManager.createQuery(query).getResultList();
 	}
 
 }
