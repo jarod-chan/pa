@@ -51,6 +51,11 @@ public class PersonRepositoryJpa implements PersonRepository {
 	public int countStaffByType(TypeEnum type) {
 		return personDao.countStaffByType(type);
 	}
+	
+	@Override
+	public List<Person>  getStaffByType(TypeEnum type){
+		return personDao.getStaffByType(type);
+	}
 
 
 }

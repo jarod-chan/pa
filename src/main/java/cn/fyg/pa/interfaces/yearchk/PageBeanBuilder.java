@@ -19,8 +19,8 @@ public class PageBeanBuilder {
 		List<DepartmentChkBean> departmentChkBeanList = getDepartmentChkBeanList();
 		pageBean.setYear(year);
 		pageBean.setNeedChkPerson(needChkPerson);
-		pageBean.calculateSelf();
 		pageBean.setDepartmentChkBeans(departmentChkBeanList);
+		pageBean.calculateSelf();
 		
 		return pageBean;
 	}

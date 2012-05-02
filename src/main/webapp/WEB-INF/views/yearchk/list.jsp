@@ -11,8 +11,10 @@
 
 <div class="headdiv" >
 <div class="headleft"  >
+考核年份：${pageBean.year}&nbsp;&nbsp;状态：<c:choose><c:when test="${pageBean.finish==true}">已完成</c:when><c:otherwise>未完成</c:otherwise></c:choose>
 </div>
 <div class="headright" >
+<input type="button" value="快速完成全部考核" onclick="javascript:window.open('/${ctx}/','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -21,28 +23,29 @@
 <thead>
 	<tr>
 		<th style="width:50px;">序号</th>
-		<th style="width:500px;">工作完成情况表</th>
 		<th style="width:150px;">员工</th>
+		<th style="width:500px;">考核结果</th>
 		<th style="width:100px;">操作</th>
 	</tr>
 </thead>
 <tbody>
-<c:forEach var="item" items="${monthChks}"  varStatus="status">
+<% int num=0;%>
+<c:forEach var="item" items="${pageBean.departmentChkBeans}"  varStatus="status">
 	<tr>
-	<td>
-		${status.count}
-	</td>
-	<td>
-		${item.year}年${item.month}月份${item.person.name}工完成情况【${item.state.name}】
-	</td>
-	<td>
-		${item.person.name}
-	</td>
-	<td>
-		<input type="button" value="评价" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/${item.id}','_self')"/>
-	</td>
-				
-   </tr>
+		<td colspan="4">
+			部门:${item.department}
+		</td>
+	</tr>
+	<c:forEach var="personResult" items="${item.personChkBeans}">
+	<% num++;%>
+	<tr>
+		<td><% out.print(num); %></td>
+		<td>${personResult.name}</td>
+		<td>胜:${personResult.win}&nbsp;负:${personResult.lose}&nbsp;平:${personResult.draw}&nbsp;</td>
+		<td><input type="button" value="评价" onclick="javascript:window.open('/${ctx}/person/${person.id}/yearchk/personchk/${personResult.id}','_self')"/></td>
+	</tr>
+	</c:forEach>
+
 </c:forEach>
 </tbody>
 </table>

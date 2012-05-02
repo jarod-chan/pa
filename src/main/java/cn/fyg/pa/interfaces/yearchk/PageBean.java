@@ -1,5 +1,6 @@
 package cn.fyg.pa.interfaces.yearchk;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PageBean {
@@ -8,9 +9,9 @@ public class PageBean {
 	
 	private int needChkPerson;
 	
-	private boolean isFinish;
+	private boolean finish;
 	
-	private List<DepartmentChkBean> departmentChkBeans;
+	private List<DepartmentChkBean> departmentChkBeans=new ArrayList<DepartmentChkBean>();
 
 	public Long getYear() {
 		return year;
@@ -20,12 +21,13 @@ public class PageBean {
 		this.year = year;
 	}
 
+
 	public boolean isFinish() {
-		return isFinish;
+		return finish;
 	}
 
-	public void setFinish(boolean isFinish) {
-		this.isFinish = isFinish;
+	public void setFinish(boolean finish) {
+		this.finish = finish;
 	}
 
 	public List<DepartmentChkBean> getDepartmentChkBeans() {
@@ -48,10 +50,10 @@ public class PageBean {
 		for(DepartmentChkBean departmentChkBean:this.departmentChkBeans){
 			departmentChkBean.calculateSelf(this.needChkPerson);
 			if(!departmentChkBean.isFinish()){
-				this.isFinish=false;
+				this.finish=false;
 				return;
 			}
-			this.isFinish=true;
+			this.finish=true;
 		}
 	}
 

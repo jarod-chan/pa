@@ -1,5 +1,6 @@
 package cn.fyg.pa.interfaces.yearchk;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DepartmentChkBean {
@@ -8,7 +9,7 @@ public class DepartmentChkBean {
 	
 	private boolean isFinish;
 	
-	private List<PersonChkBean> personChkBeans;
+	private List<PersonChkBean> personChkBeans=new ArrayList<PersonChkBean>();
 	
 	public String getDepartment() {
 		return department;

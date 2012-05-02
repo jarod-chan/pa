@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import cn.fyg.pa.domain.person.ManageEnum;
 import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.yearchk.Fycheck;
 import cn.fyg.pa.domain.yearchk.YearChkRepositroy;
 import cn.fyg.pa.interfaces.yearchk.PersonChkBean;
 
@@ -35,13 +36,13 @@ public class YearChkRepositroyJpa implements YearChkRepositroy{
 				"     union all" +
 				"     select rowid as personid,if(-val=1,1,0)as win,if(val=0,1,0) as draw,if(-val=-1,1,0) as lose from fycheck where chkid=:personid and year=:year " +
 				") as temp group by personid ) as result on person.id=result.personid" +
-				" left join department on person.department=department.name " +
-				"where person.id!=:personid and person.manage=:manage and person.type=:type " +
+				" left join department on person.department=department.name" +
+				" where person.id!=:personid and person.manage=:manage and person.type=:type" +
 				" order by department.id,person.id asc";
 		Query query = entityManager.createNativeQuery(sql)
 				.setParameter("personid", person.getId())
-				.setParameter("manage", ManageEnum.N)
-				.setParameter("type", person.getType())
+				.setParameter("manage", ManageEnum.N.toString())
+				.setParameter("type", person.getType().toString())
 				.setParameter("year", year);
 		@SuppressWarnings("unchecked")
 		List<Object[]> tempList=query.getResultList();
@@ -57,5 +58,11 @@ public class YearChkRepositroyJpa implements YearChkRepositroy{
 			retList.add(yearChkBean);
 		}
 		return retList;
+	}
+
+	@Override
+	public List<Fycheck> getPersonYearChkAboutPerson(Long year,Person aboutPerson, Person chkPerson) {
+		// TODO Auto-generated method stub 实现person查询
+		return null;
 	}
 }

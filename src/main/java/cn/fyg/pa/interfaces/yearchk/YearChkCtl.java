@@ -22,6 +22,7 @@ import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.domain.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.yearchk.Fycheck;
+import cn.fyg.pa.domain.yearchk.FycheckFactory;
 import cn.fyg.pa.domain.yearchk.YearChkRepositroy;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.infrastructure.perisistence.FycheckDao;
@@ -59,6 +60,7 @@ public class YearChkCtl {
 			PageBeanBuilder builder=new PageBeanBuilder(yearChkBeans);
 			int needChkPersons=personRepository.countStaffByType(person.getType())-1;
 			PageBean pageBean = builder.builder(year, needChkPersons);
+			map.put("person", person);
 			map.put("pageBean", pageBean);
 		} catch (EnableYearNotExist e) {
 			new SessionMPR(session).setMessage("当前时间无法进行年终员工考核");
@@ -67,6 +69,75 @@ public class YearChkCtl {
 		return "yearchk/list";
 	}
 
+	@RequestMapping(value="/personchk/${colid}",method=RequestMethod.GET)
+	public String personchk(@PathVariable("colid") Long colPersonId,@ModelAttribute("person")Person chkPerson,Map<String,Object> map,HttpSession session){
+		Long year=0L;
+		try {
+			year=yearConfigService.getEnableYear();
+		}catch (EnableYearNotExist e) {
+			new SessionMPR(session).setMessage("当前时间无法进行年终员工考核");
+		}
+		
+		List<Person> sameTypePerson=personRepository.getStaffByType(chkPerson.getType());
+		Person colPerson=personRepository.find(colPersonId);
+		List<CellBean> cellBeans=createDefaultList(year,chkPerson,colPerson,sameTypePerson);
+		List<Fycheck> hasChecks=yearChkRepositroy.getPersonYearChkAboutPerson(year, colPerson, chkPerson);
+		List<Fycheck> hasChecksForColPerson=changeChecksForColPerson(colPersonId,hasChecks);
+		Map<String,Fycheck> hasChecksValues=changeChecksToMap(hasChecksForColPerson);
+		cellBeans=setValueTocellBeans(cellBeans,hasChecksValues);
+		map.put("cellBeans", cellBeans);
+		return "yearchk/personchk";
+	}
+
+	private List<CellBean> setValueTocellBeans(List<CellBean> cellBeans,
+			Map<String, Fycheck> hasChecksValues) {
+		for (CellBean cellBean : cellBeans) {
+			String key=cellBean.getColPerson().getId()+":"+cellBean.getRowPerson().getId();
+			Fycheck fycheck=hasChecksValues.get(key);
+			if(fycheck!=null){
+				cellBean.setFycheck(fycheck);
+			}
+		}
+		return cellBeans;
+	}
+
+	private Map<String, Fycheck> changeChecksToMap(
+			List<Fycheck> hasChecksForColPerson) {
+		Map<String, Fycheck> returnMap=new HashMap<String, Fycheck>();
+		for (Fycheck fycheck : hasChecksForColPerson) {
+			returnMap.put(fycheck.getColId()+":"+fycheck.getRowId(), fycheck);
+		}
+		return returnMap;
+	}
+
+	private List<Fycheck> changeChecksForColPerson(Long colPersonId,List<Fycheck> hasChecks) {
+		for (Fycheck fycheck : hasChecks) {
+			if(!fycheck.getColId().equals(colPersonId)){
+				swapColIdAndRowId(fycheck);
+			}
+		}
+		return hasChecks;
+	}
+
+	private void swapColIdAndRowId(Fycheck fycheck) {
+		Long tempRowId=fycheck.getRowId();
+		fycheck.setRowId(fycheck.getColId());
+		fycheck.setColId(tempRowId);
+	}
+
+	private List<CellBean> createDefaultList(Long year,Person chkPerson,Person colPerson,List<Person> rowPersons) {
+		List<CellBean> retList=new ArrayList<CellBean>();
+		for(Person rowPerson:rowPersons){
+			CellBean cellBean=new CellBean();
+			cellBean.setColPerson(colPerson);
+			cellBean.setRowPerson(rowPerson);
+			Fycheck fycheck=FycheckFactory.createFycheck(year, colPerson.getId(), rowPerson.getId(), chkPerson.getId());
+			cellBean.setFycheck(fycheck);
+			retList.add(cellBean);
+		}
+		
+		return retList;
+	}
 
 
 
