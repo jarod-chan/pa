@@ -3,6 +3,13 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
+<script type="text/javascript">
+	function saveAllChecks(){
+		var actionFrom=$("form");
+		var oldAction=actionFrom.attr("action");
+		actionFrom.attr("action",oldAction+"/saveAllChecks").submit();
+	}
+</script>
 </head>
 <c:set var="pagefunc" value="年终员工考核" scope="request"/> 
 <c:set var="pagetitle" value="年终员工考核列表" scope="request"/> 
@@ -11,13 +18,16 @@
 
 <div class="headdiv" >
 <div class="headleft"  >
-考核年份：${pageBean.year}&nbsp;&nbsp;状态：<c:choose><c:when test="${pageBean.finish==true}">已完成</c:when><c:otherwise>未完成</c:otherwise></c:choose>
+考核年份:${pageBean.year}&nbsp;&nbsp;状态:<c:choose><c:when test="${pageBean.finish==true}">已完成</c:when><c:otherwise>未完成</c:otherwise></c:choose>
 </div>
 <div class="headright" >
-<input type="button" value="快速完成全部考核" onclick="javascript:window.open('/${ctx}/','_self')"/>
+<input type="button" value="快速完成全部考核" onclick="saveAllChecks()"/>
 </div>
 <div  class="headnone"></div>
 </div>
+<form action="/${ctx}/person/${person.id}/yearchk" method="post">
+<input name="year" type="hidden" value="${pageBean.year}"/>
+</form>
 <%@ include file="../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:800px;">
 <thead>
@@ -41,7 +51,7 @@
 	<tr>
 		<td><% out.print(num); %></td>
 		<td>${personResult.name}</td>
-		<td>胜:${personResult.win}&nbsp;负:${personResult.lose}&nbsp;平:${personResult.draw}&nbsp;</td>
+		<td>胜${personResult.win}&nbsp;负${personResult.lose}&nbsp;平${personResult.draw}&nbsp;</td>
 		<td><input type="button" value="评价" onclick="javascript:window.open('/${ctx}/person/${person.id}/yearchk/personchk/${personResult.id}','_self')"/></td>
 	</tr>
 	</c:forEach>

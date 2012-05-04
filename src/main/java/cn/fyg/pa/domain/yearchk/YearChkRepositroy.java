@@ -11,5 +11,9 @@ public interface YearChkRepositroy {
 	List<PersonChkBean> getPersonYearChkResult(Long year, Person person);
 	
 	List<Fycheck> getPersonYearChkAboutPerson(Long year,Person aboutPerson,Person chkPerson);
+	
+	void saveFychecks(List<Fycheck> fychecks);
+
+	List<Fycheck> getPersonYearChkByChkperson(Person person);
 
 }

@@ -7,6 +7,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
@@ -62,7 +66,34 @@ public class YearChkRepositroyJpa implements YearChkRepositroy{
 
 	@Override
 	public List<Fycheck> getPersonYearChkAboutPerson(Long year,Person aboutPerson, Person chkPerson) {
-		// TODO Auto-generated method stub 实现person查询
-		return null;
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Fycheck> query = builder.createQuery(Fycheck.class);
+		Root<Fycheck> root = query.from(Fycheck.class);
+		Predicate chkPersonCriteria=builder.equal(root.get("chkId"), chkPerson.getId());
+		Predicate aboutPersonCriteria=builder.equal(root.get("colId"), aboutPerson.getId());
+		aboutPersonCriteria=builder.or(aboutPersonCriteria,builder.equal(root.get("rowId"), aboutPerson.getId()));
+		query.where(chkPersonCriteria,aboutPersonCriteria);
+		return entityManager.createQuery(query).getResultList();
+	}
+
+	@Override
+	public void saveFychecks(List<Fycheck> fychecks) {
+		for (Fycheck fycheck : fychecks) {
+			if (fycheck.getId() == null) {
+				entityManager.persist(fycheck);
+			} else {
+				entityManager.merge(fycheck);
+			}	
+		}
+	}
+
+	@Override
+	public List<Fycheck> getPersonYearChkByChkperson(Person person) {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Fycheck> query = builder.createQuery(Fycheck.class);
+		Root<Fycheck> root = query.from(Fycheck.class);
+		Predicate criteria=builder.equal(root.get("chkId"), person.getId());
+		query.where(criteria);
+		return entityManager.createQuery(query).getResultList();
 	}
 }

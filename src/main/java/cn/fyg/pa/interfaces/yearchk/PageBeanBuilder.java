@@ -12,7 +12,6 @@ public class PageBeanBuilder {
 		this.personChkBeans = personChkBeans;
 	}
 	
-	//XXX 未完成，尝试计算pagebean
 	public PageBean builder(Long year,int needChkPerson){
 		
 		PageBean pageBean=new PageBean();

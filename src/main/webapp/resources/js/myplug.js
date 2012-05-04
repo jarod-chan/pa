@@ -7,7 +7,12 @@
 		var re=new RegExp(_options.match,"g"); 
     	
         this.init = function () {
-        	$(this).find("tr").each(function(index){
+        	if($(this).is("tbody")){
+        		var list=$(this).find("tr");
+        	}else if($(this).is("ul")){
+        		var list=$(this).find("li");
+        	}
+        	list.each(function(index){
         		$(this).find('input[name*='+_options.match+'],select[name*='+_options.match+'],textarea[name*='+_options.match+']').each(function(){	
        				$(this).attr("name",$(this).attr("name").replace(re,"["+index+"]."));
         		});

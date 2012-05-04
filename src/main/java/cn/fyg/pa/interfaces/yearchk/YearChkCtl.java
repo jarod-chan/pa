@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import cn.fyg.pa.application.YearCheckService;
 import cn.fyg.pa.application.YearConfigService;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.PersonRepository;
@@ -25,9 +27,6 @@ import cn.fyg.pa.domain.yearchk.Fycheck;
 import cn.fyg.pa.domain.yearchk.FycheckFactory;
 import cn.fyg.pa.domain.yearchk.YearChkRepositroy;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
-import cn.fyg.pa.infrastructure.perisistence.FycheckDao;
-import cn.fyg.pa.infrastructure.perisistence.PersonDao;
-import cn.fyg.pa.interfaces.page.Cell;
 
 
 /**
@@ -45,6 +44,8 @@ public class YearChkCtl {
 	YearConfigService yearConfigService;
 	@Resource 
 	YearChkRepositroy yearChkRepositroy;
+	@Resource
+	YearCheckService yearCheckService;
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
@@ -58,19 +59,21 @@ public class YearChkCtl {
 			Long year=yearConfigService.getEnableYear();
 			List<PersonChkBean> yearChkBeans = yearChkRepositroy.getPersonYearChkResult(year, person);
 			PageBeanBuilder builder=new PageBeanBuilder(yearChkBeans);
-			int needChkPersons=personRepository.countStaffByType(person.getType())-1;
+			int needChkPersons=personRepository.countStaffByType(person.getType())-2;
 			PageBean pageBean = builder.builder(year, needChkPersons);
 			map.put("person", person);
 			map.put("pageBean", pageBean);
 		} catch (EnableYearNotExist e) {
 			new SessionMPR(session).setMessage("当前时间无法进行年终员工考核");
+			map.put("message",new SessionMPR(session).getMessage());
+			return "yearchk/nottime";
 		}
 		map.put("message",new SessionMPR(session).getMessage());
 		return "yearchk/list";
 	}
-
-	@RequestMapping(value="/personchk/${colid}",method=RequestMethod.GET)
-	public String personchk(@PathVariable("colid") Long colPersonId,@ModelAttribute("person")Person chkPerson,Map<String,Object> map,HttpSession session){
+							
+	@RequestMapping(value="/personchk/{colId}",method=RequestMethod.GET)
+	public String personchk(@PathVariable("colId") Long colPersonId,@ModelAttribute("person")Person chkPerson,Map<String,Object> map,HttpSession session){
 		Long year=0L;
 		try {
 			year=yearConfigService.getEnableYear();
@@ -78,19 +81,37 @@ public class YearChkCtl {
 			new SessionMPR(session).setMessage("当前时间无法进行年终员工考核");
 		}
 		
-		List<Person> sameTypePerson=personRepository.getStaffByType(chkPerson.getType());
 		Person colPerson=personRepository.find(colPersonId);
+		List<Person> sameTypePerson=personRepository.getStaffByType(chkPerson.getType());
+		sameTypePerson=removePerson(sameTypePerson,colPerson,chkPerson);
 		List<CellBean> cellBeans=createDefaultList(year,chkPerson,colPerson,sameTypePerson);
 		List<Fycheck> hasChecks=yearChkRepositroy.getPersonYearChkAboutPerson(year, colPerson, chkPerson);
 		List<Fycheck> hasChecksForColPerson=changeChecksForColPerson(colPersonId,hasChecks);
 		Map<String,Fycheck> hasChecksValues=changeChecksToMap(hasChecksForColPerson);
 		cellBeans=setValueTocellBeans(cellBeans,hasChecksValues);
-		map.put("cellBeans", cellBeans);
+		PersonPageBeanBuilder builder=new PersonPageBeanBuilder(cellBeans);
+		map.put("person", chkPerson);
+		map.put("pageBean", builder.build(year, colPerson));
+		map.put("message",new SessionMPR(session).getMessage());
 		return "yearchk/personchk";
 	}
 
-	private List<CellBean> setValueTocellBeans(List<CellBean> cellBeans,
-			Map<String, Fycheck> hasChecksValues) {
+	private List<Person> removePerson(List<Person> sameTypePerson,Person... persons) {
+		for (Person comparePerson : persons) {
+			Iterator<Person> iterator = sameTypePerson.iterator();
+			while (iterator.hasNext()) {
+				Person person = iterator.next();
+				if (person.getId().equals(comparePerson.getId())) {
+					sameTypePerson.remove(person);
+					break;
+				}
+			}
+		}
+		
+		return sameTypePerson;
+	}
+
+	private List<CellBean> setValueTocellBeans(List<CellBean> cellBeans,Map<String, Fycheck> hasChecksValues) {
 		for (CellBean cellBean : cellBeans) {
 			String key=cellBean.getColPerson().getId()+":"+cellBean.getRowPerson().getId();
 			Fycheck fycheck=hasChecksValues.get(key);
@@ -123,128 +144,78 @@ public class YearChkCtl {
 		Long tempRowId=fycheck.getRowId();
 		fycheck.setRowId(fycheck.getColId());
 		fycheck.setColId(tempRowId);
+		fycheck.setVal(0L-fycheck.getVal());
 	}
 
 	private List<CellBean> createDefaultList(Long year,Person chkPerson,Person colPerson,List<Person> rowPersons) {
 		List<CellBean> retList=new ArrayList<CellBean>();
 		for(Person rowPerson:rowPersons){
-			CellBean cellBean=new CellBean();
-			cellBean.setColPerson(colPerson);
-			cellBean.setRowPerson(rowPerson);
-			Fycheck fycheck=FycheckFactory.createFycheck(year, colPerson.getId(), rowPerson.getId(), chkPerson.getId());
-			cellBean.setFycheck(fycheck);
-			retList.add(cellBean);
+			if(!colPerson.getId().equals(rowPerson.getId())){				
+				CellBean cellBean=new CellBean();
+				cellBean.setColPerson(colPerson);
+				cellBean.setRowPerson(rowPerson);
+				Fycheck fycheck=FycheckFactory.createFycheck(year, colPerson.getId(), rowPerson.getId(), chkPerson.getId());
+				cellBean.setFycheck(fycheck);
+				retList.add(cellBean);
+			}
 		}
 		
 		return retList;
 	}
-
-
-
-
-
-
-	@Resource
-	private FycheckDao fycheckDao;
 	
-	@Resource
-	private PersonDao fypersonDao;
-	
-	private Map<String,Fycheck> hasCheckMap;
-	
-	@RequestMapping(value="/showall",method=RequestMethod.GET)
-	public String listAllFycheck(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
-		logger.info("listAllFycheck");
-		
-		Long personId=person.getId();
-		
-		List<Fycheck> check=fycheckDao.getFycheckByUserid(personId);
-		hasCheckMap=changeCheckToMap(check);
-		
-		List<Person> people = fypersonDao.getAllFypersonSameTypeAndNotSelfAndNotManage(personId,person.getType());
-		List<List<Cell>> tableData=makeTableList(people);
-		
-		List<Cell> tableHead=tableData.get(0);
-		
-		map.put("currPerson",person);
-		map.put("tableData", tableData);
-		map.put("tableHead",tableHead);
-		map.put("message",new SessionMPR(session).getMessage());
-		return "yearchk/list_check";
+	@RequestMapping(value="/personchk/{colId}/save",method=RequestMethod.POST)
+	public String save(@PathVariable("colId") Long colPersonId,@ModelAttribute("person")Person chkPerson,PersonPageReceiveBean page,Map<String,Object> map,HttpSession session){
+		List<Fycheck> fychecks=page.getFychecks();
+		fychecks=changeChecksForColSave(fychecks);
+		yearCheckService.saveFychecks(fychecks);
+		new SessionMPR(session).setMessage("保存成功！");
+		return "redirect:../"+colPersonId;
 	}
 	
-	private Map<String,Fycheck> changeCheckToMap(List<Fycheck> check) {
-		Map<String,Fycheck> map=new HashMap<String,Fycheck>();
-		for (Fycheck fycheck : check) {
-			map.put(fycheck.getColId()+";"+fycheck.getRowId(), fycheck);
+	private List<Fycheck> changeChecksForColSave(List<Fycheck> fychecks) {
+		for (Fycheck fycheck : fychecks) {
+			if(fycheck.getColId().intValue()<fycheck.getRowId().intValue()){
+				swapColIdAndRowId(fycheck);
+			}
 		}
-		return map;
+		return fychecks;
 	}
 
-	private List<List<Cell>> makeTableList(List<Person> people){
-		
-		List<List<Cell>> retList=new ArrayList<List<Cell>>();
-		
-		List<Person> rowPeople=new ArrayList<Person>();
-		List<Person> colPeople=new ArrayList<Person>();
-		rowPeople.add(null);
-		colPeople.add(null);
-		for (Person fyperson : people) {
-			rowPeople.add(fyperson);
-			colPeople.add(fyperson);
-		}
-		Iterator<Person> iterator=rowPeople.iterator();
-		for (int i=0;iterator.hasNext();i++) {
-			Person rowPerson = (Person) iterator.next();
-			List<Cell> cellList=makeRowList(i,rowPerson,colPeople);
-			retList.add(cellList);
-		}
-				
-		return retList;
+	@RequestMapping(value="/saveAllChecks",method=RequestMethod.POST)
+	public String saveAllChecks(@RequestParam("year") Long year,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+		List<Person> sameTypePerson=personRepository.getStaffByType(person.getType());
+		sameTypePerson=removePerson(sameTypePerson, person);
+		List<Fycheck> fychecks=createFychecksByDefault(year,sameTypePerson,person);
+		List<Fycheck> savedFychecks=yearChkRepositroy.getPersonYearChkByChkperson(person);
+		Map<String,Fycheck> hasCheckedValues=changeChecksToMap(savedFychecks);
+		fychecks=setValuesToFychecks(fychecks,hasCheckedValues);
+		yearCheckService.saveFychecks(fychecks);
+		new SessionMPR(session).setMessage("全部考核已完成！");
+		return "redirect:../yearchk";
 	}
 
-	private List<Cell> makeRowList(int row, Person rowPerson, List<Person> colPeople) {
-		List<Cell> retList=new ArrayList<Cell>();
-		Iterator<Person> iterator=colPeople.iterator();
-		for(int col=0;iterator.hasNext();col++){
-			Person colPerson = (Person) iterator.next();
-			Cell cell = makeCellList(row, rowPerson, col, colPerson);
-			retList.add(cell);
+	private List<Fycheck> createFychecksByDefault(Long year,List<Person> sameTypePerson,Person chkPerson) {
+		ArrayList<Fycheck> returnList = new ArrayList<Fycheck>();
+		for (Person rowPerson : sameTypePerson) {
+			for (Person colPerson : sameTypePerson) {
+				if(colPerson.getId().intValue()>rowPerson.getId().intValue()){
+					Fycheck fycheck=FycheckFactory.createFycheck(year,colPerson.getId(), rowPerson.getId(), chkPerson.getId());
+					returnList.add(fycheck);
+				}
+			}
 		}
-		return retList;
+		return returnList;
 	}
 
-	private Cell makeCellList(int row, Person rowPerson, int col,Person colPerson) {
-		Cell cell=new Cell();
-		if(row==0&&col==0){
-			cell.setType("empty");
-		}else if (row==0){
-			cell.setType("person");
-			cell.setFyperson(colPerson);
-		}else if(col==0){
-			cell.setType("person");
-			cell.setFyperson(rowPerson);
-		}else if(col>row){
-			cell.setType("data");
-			Fycheck fycheck = getFycheck(colPerson.getId(),rowPerson.getId());
-			cell.setDataCell(fycheck);
-			cell.setFyperson(colPerson);
-			cell.setScperson(rowPerson);
-		}else{
-			cell.setType("empty");
+	private List<Fycheck> setValuesToFychecks(List<Fycheck> fychecks,Map<String, Fycheck> hasCheckedValues) {
+		for (int i = 0,len=fychecks.size(); i < len; i++) {
+			Fycheck fycheck = fychecks.get(i);
+			String key=fycheck.getColId()+":"+fycheck.getRowId();
+			Fycheck hasCheckedValue=hasCheckedValues.get(key);
+			if(hasCheckedValue!=null){
+				fychecks.set(i, hasCheckedValue);
+			}
 		}
-		return cell;
+		return fychecks;
 	}
-
-	private Fycheck getFycheck(Long cowId, Long rowId) {
-		Fycheck dataCell=hasCheckMap.get(cowId+";"+rowId);
-		if(dataCell==null){
-			dataCell=new Fycheck();
-			dataCell.setColId(cowId);
-			dataCell.setRowId(rowId);
-			dataCell.setVal(new Long(0));
-		}
-		return dataCell;
-	}
-
 }
