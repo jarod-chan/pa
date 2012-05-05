@@ -1,8 +1,8 @@
-package cn.fyg.pa.interfaces.page;
+package cn.fyg.pa.interfaces.yearchk.managechk;
 
 import cn.fyg.pa.domain.person.Person;
 
-public class MangePage {
+public class PersonPointBean {
 	
 	private Person person;
 	private String getPoint;

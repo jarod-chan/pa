@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.controller;
+package cn.fyg.pa.interfaces.yearchk.managechk;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,86 +6,139 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.fyg.pa.application.YearConfigService;
 import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.person.PersonRepository;
+import cn.fyg.pa.domain.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.yearchk.Fychkitem;
 import cn.fyg.pa.domain.yearchk.Fychkmange;
+import cn.fyg.pa.domain.yearchk.YearMangeChkRepositroy;
 import cn.fyg.pa.infrastructure.perisistence.FychkitemDao;
 import cn.fyg.pa.infrastructure.perisistence.FychkmangeDao;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;
-import cn.fyg.pa.interfaces.page.CheckPage;
 import cn.fyg.pa.interfaces.page.ChkmangeTab;
 import cn.fyg.pa.interfaces.tool.CommonModelAndView;
 import cn.fyg.pa.interfaces.tool.Constant;
 import cn.fyg.pa.interfaces.tool.CookieUtil;
 import cn.fyg.pa.interfaces.tool.Tool;
 
-
 @Controller
-@RequestMapping("/mangechk/")
-public class FymanageChkController {
+@RequestMapping("/mange/{personId}/yearchk")
+public class ManageYearChkCtl {
 	
-	private static final Logger logger = LoggerFactory.getLogger(FymanageChkController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ManageYearChkCtl.class);
+	
+	@Resource
+	PersonRepository personRepository;
+	
+	@Resource
+	YearMangeChkRepositroy yearMangeChkRepositroy;
+	
+	@Resource
+	YearConfigService yearConfigService;
+	
+	@ModelAttribute("person")
+	public Person initPerson(@PathVariable("personId") Long personId){
+		logger.info("initPerson");
+		return personRepository.find(personId);
+	}
+	
+	@RequestMapping(value="",method=RequestMethod.GET)
+	public String list(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	
+		Long year = 0L;
+		try {
+			year = yearConfigService.getEnableYear();
+		} catch (EnableYearNotExist e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		List<Person> departmentPersons=personRepository.getStaffByDept(person.getDepartment());
+	
+		List<Object[]> pointArr=yearMangeChkRepositroy.getPseronPointByDepartment(year,person.getDepartment());
+		Map<Long,Long> personPoint=getPersonPointMap(pointArr);
+		List<PersonPointBean> tabData=makeTable(departmentPersons,personPoint); 
+		
+		map.put("year", year);
+		map.put("person",person);
+		map.put("tabData", tabData);
 
+
+		return "yearchk/manageuser_list";
+	}
+	
+	public String list_back(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+		
+		Long personId=person.getId();
+		List<Person> sameDepartmentPerson=personRepository.getStaffByDept(person.getDepartment());
+		
+		List<Object[]> pointArr=fychkmangeDao.getPseronPoint(personId);
+		Map<Long,Long> personPoint=getPersonPointMap(pointArr);
+		List<PersonPointBean> tabData=makeTable(sameDepartmentPerson,personPoint); 
+		
+
+		map.put("person",person);
+		map.put("tabData", tabData);
+
+
+		return "yearchk/manageuser_list";
+	}
+	
 	@Autowired
 	private PersonDao fypersonDao;
-	@Autowired
-	private FychkitemDao fychkitemDao;
+	
 	@Autowired
 	private FychkmangeDao fychkmangeDao;
+	
+	private List<PersonPointBean> makeTable(List<Person> sameDepartmentPerson,
+			Map<Long, Long> personPoint) {
+		List<PersonPointBean> ret=new ArrayList<PersonPointBean>();
+		for (Person fyperson : sameDepartmentPerson) {
+			PersonPointBean page=new PersonPointBean();
+			page.setPerson(fyperson);
+			Long point=personPoint.get(fyperson.getId());
+			if(point!=null){
+				String getPoint=Tool.format(new BigDecimal(point).divide(Constant.POINT_LEVEL,3,BigDecimal.ROUND_HALF_DOWN));
+				page.setGetPoint(getPoint);
+			}
+			ret.add(page);
+		}
+		return ret;
+	}
+
+	private Map<Long,Long> getPersonPointMap(List<Object[]> pointArr) {
+		Map<Long,Long> personPoint=new HashMap<Long,Long>();
+		for (Object[] objects : pointArr) {
+			personPoint.put((Long)objects[0], (Long)objects[1]);
+		}
+		return personPoint;
+	}
+	
+	
+	@Autowired
+	private FychkitemDao fychkitemDao;
 	
 	private Map<Long,Fychkmange> hasCheckMap;
 	
 	private Long sumall=new Long(0);
 	
-	@RequestMapping(method=RequestMethod.POST,value="save") 
-	public ModelAndView saveFycheck(@ModelAttribute CheckPage checkPage,@RequestParam(value="mangeId",required=true) Long mangeId,@RequestParam(value="personId",required=true) Long personId,@CookieValue(value="chkstr",required=false) String cookieChkstr) {
-		logger.info("Received request to mangechk save");
-		Person manage = fypersonDao.find(mangeId);
-//		if (!CookieUtil.checkLogin(cookieChkstr, manage))
-//			return CommonModelAndView.getHomeModelAndView();
-		Person person=fypersonDao.find(personId);
-		
-		List<Fychkmange> saveList=new ArrayList<Fychkmange>();
-		List<Fychkmange> removeList=new ArrayList<Fychkmange>();
-		int totalPoin=0;
-		for (int i=0,len=checkPage.getId().size();i<len;i++) {
-			if(!checkPage.getFlag().get(i)){
-				if(checkPage.getId().get(i)!=null){
-					Fychkmange fychkmange=new Fychkmange();
-					fychkmange.setId(checkPage.getId().get(i));
-					removeList.add(fychkmange);
-				}	
-				continue;
-			}
-			Fychkmange fychkmange=new Fychkmange();
-			fychkmange.setId(checkPage.getId().get(i));
-			fychkmange.setMangeid(mangeId);
-			fychkmange.setPersonid(personId);
-			fychkmange.setItemid(checkPage.getItemid().get(i));
-			fychkmange.setVal(checkPage.getVal().get(i));
-			saveList.add(fychkmange);
-			Fychkitem fychkitem=fychkitemDao.find(checkPage.getItemid().get(i));
-			totalPoin+=fychkitem.getPoint()*fychkmange.getVal();
-		}
-		fychkmangeDao.removeList(removeList);
-		fychkmangeDao.saveList(saveList);
-		
-		String getPoint=Tool.format(new BigDecimal(totalPoin).divide(Constant.POINT_LEVEL,3,BigDecimal.ROUND_HALF_DOWN));
-		
-		String msg="保存成功,员工"+person.getName()+"获得"+getPoint+"分,继续操作或者返回上页";
-		return listDepartmentPseron(mangeId,personId,msg,cookieChkstr);
-	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="list")
 	public ModelAndView listDepartmentPseron(@RequestParam(value="mangeId",required=false) Long mangeId,@RequestParam(value="personId",required=true) Long personId,String msg,@CookieValue(value="chkstr",required=false) String cookieChkstr){
@@ -109,7 +162,7 @@ public class FymanageChkController {
 		mav.addObject("tabData",tabData);
 		mav.addObject("sumall",sumall);
 		mav.addObject("msg", msg);
-		mav.setViewName("fy/chkmanage_list");
+		mav.setViewName("yearchk/chkmanage_list");
 		return mav;
 	}
 

@@ -17,11 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.infrastructure.perisistence.FychkmangeDao;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;
-import cn.fyg.pa.interfaces.page.MangePage;
 import cn.fyg.pa.interfaces.tool.CommonModelAndView;
 import cn.fyg.pa.interfaces.tool.Constant;
 import cn.fyg.pa.interfaces.tool.CookieUtil;
 import cn.fyg.pa.interfaces.tool.Tool;
+import cn.fyg.pa.interfaces.yearchk.managechk.PersonPointBean;
 
 
 
@@ -46,7 +46,7 @@ public class FymanageController {
 		
 		List<Object[]> pointArr=fychkmangeDao.getPseronPoint(personId);
 		Map<Long,Long> personPoint=getPersonPointMap(pointArr);
-		List<MangePage> tabData=makeTable(sameDepartmentPerson,personPoint); 
+		List<PersonPointBean> tabData=makeTable(sameDepartmentPerson,personPoint); 
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("currPerson",currPerson);
@@ -56,11 +56,11 @@ public class FymanageController {
 		return mav;
 	}
 
-	private List<MangePage> makeTable(List<Person> sameDepartmentPerson,
+	private List<PersonPointBean> makeTable(List<Person> sameDepartmentPerson,
 			Map<Long, Long> personPoint) {
-		List<MangePage> ret=new ArrayList<MangePage>();
+		List<PersonPointBean> ret=new ArrayList<PersonPointBean>();
 		for (Person fyperson : sameDepartmentPerson) {
-			MangePage page=new MangePage();
+			PersonPointBean page=new PersonPointBean();
 			page.setPerson(fyperson);
 			Long point=personPoint.get(fyperson.getId());
 			if(point!=null){

@@ -1,20 +1,18 @@
 package cn.fyg.pa.domain.yearchk;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Fychkmange implements Serializable{
+public class Fychkmange {
 
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private Long year;
 	private Long mangeid;
 	private Long personid;
 	private Long itemid;
@@ -25,6 +23,12 @@ public class Fychkmange implements Serializable{
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Long getYear() {
+		return year;
+	}
+	public void setYear(Long year) {
+		this.year = year;
 	}
 	public Long getMangeid() {
 		return mangeid;

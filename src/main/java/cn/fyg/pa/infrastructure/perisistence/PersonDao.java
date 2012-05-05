@@ -71,6 +71,24 @@ public class PersonDao {
 		query.orderBy(builder.asc(root.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
+	
+	public  List<Person> getStaffByDept(String department) {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query=builder.createQuery(Person.class);
+		Root<Person> root=query.from(Person.class);
+		Predicate criteria=builder.equal(root.get("department"), department);
+		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		query.where(criteria);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}	
+	
+	
+	
+	
+	
+
+
 
 	/**
 	 * 通过部门名称查找项目经理

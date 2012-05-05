@@ -19,4 +19,6 @@ public interface PersonRepository {
 	int countStaffByType(TypeEnum type);
 
 	List<Person> getStaffByType(TypeEnum type);
+
+	List<Person> getStaffByDept(String department);
 }

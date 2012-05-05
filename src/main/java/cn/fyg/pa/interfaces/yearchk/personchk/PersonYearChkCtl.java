@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.yearchk;
+package cn.fyg.pa.interfaces.yearchk.personchk;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,9 +34,9 @@ import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
  */
 @Controller
 @RequestMapping("/person/{personId}/yearchk")
-public class YearChkCtl {
+public class PersonYearChkCtl {
 	
-	private static final Logger logger = LoggerFactory.getLogger(YearChkCtl.class);
+	private static final Logger logger = LoggerFactory.getLogger(PersonYearChkCtl.class);
 	
 	@Resource
 	PersonRepository personRepository;

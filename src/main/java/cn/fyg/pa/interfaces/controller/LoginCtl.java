@@ -69,6 +69,7 @@ public class LoginCtl {
 		if(loginRetBean.getMange().equals("Y")){
 			menuList.add(new UrlNameBean("员工月度工作任务评价",String.format("mange/%s/monthchk",personId)));
 			menuList.add(new UrlNameBean("部门月度工作计划执行",String.format("mange/%s/idrmonthplan",personId)));
+			menuList.add(new UrlNameBean("部门员工年度工作评价",String.format("mange/%s/yearchk",personId)));
 		}
 		if (loginRetBean.getMange().equals("N")) {
 			menuList.add(new UrlNameBean("月度工作任务",String.format("person/%s/monthchk",personId)));

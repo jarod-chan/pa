@@ -20,11 +20,9 @@ public class PersonRepositoryJpa implements PersonRepository {
 	@Resource
 	private PersonDao personDao;
 	
-	
-	
 	@Override
-	public Person findByName(String personname){
-		return personDao.findByName(personname);
+	public Person find(Long id) {
+		return personDao.find(id);
 	}
 
 	@Override
@@ -33,8 +31,8 @@ public class PersonRepositoryJpa implements PersonRepository {
 	}
 
 	@Override
-	public Person find(Long id) {
-		return personDao.find(id);
+	public Person findByName(String personname){
+		return personDao.findByName(personname);
 	}
 
 	@Override
@@ -55,6 +53,11 @@ public class PersonRepositoryJpa implements PersonRepository {
 	@Override
 	public List<Person>  getStaffByType(TypeEnum type){
 		return personDao.getStaffByType(type);
+	}
+	
+	@Override
+	public List<Person> getStaffByDept(String department){
+		return personDao.getStaffByDept(department);
 	}
 
 

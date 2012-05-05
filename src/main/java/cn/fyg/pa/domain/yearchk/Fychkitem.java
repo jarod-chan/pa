@@ -1,20 +1,15 @@
 package cn.fyg.pa.domain.yearchk;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Fychkitem implements Serializable{
+public class Fychkitem {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private Long id;
+	private Long year;
 	private String content;
 	private Long point;
 	/**
@@ -56,7 +51,12 @@ public class Fychkitem implements Serializable{
 	public void setMust(Boolean must) {
 		this.must = must;
 	}
+	public Long getYear() {
+		return year;
+	}
+	public void setYear(Long year) {
+		this.year = year;
+	}
 	
 	
-
 }
