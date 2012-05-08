@@ -45,7 +45,7 @@
 	}
 </script> 
 </head>
-<c:set var="pagefunc" value="员工月度工作任务评价" scope="request"/> 
+<c:set var="pagefunc" value="员工工作评价" scope="request"/> 
 <c:set var="pagetitle" value="员工月度工作任务评价" scope="request"/> 
 <c:set var="pagesize" value="990" scope="request"/>  
 <body>

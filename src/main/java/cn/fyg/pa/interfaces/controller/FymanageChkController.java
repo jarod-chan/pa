@@ -48,6 +48,7 @@ public class FymanageChkController {
 	
 	private Long sumall=new Long(0);
 	
+//	XXX 已重构 待删
 	@RequestMapping(method=RequestMethod.POST,value="save") 
 	public ModelAndView saveFycheck(@ModelAttribute CheckPage checkPage,@RequestParam(value="mangeId",required=true) Long mangeId,@RequestParam(value="personId",required=true) Long personId,@CookieValue(value="chkstr",required=false) String cookieChkstr) {
 		logger.info("Received request to mangechk save");
@@ -87,6 +88,8 @@ public class FymanageChkController {
 		return listDepartmentPseron(mangeId,personId,msg,cookieChkstr);
 	}
 	
+	
+	//XXX  已重构 待删除
 	@RequestMapping(method=RequestMethod.GET,value="list")
 	public ModelAndView listDepartmentPseron(@RequestParam(value="mangeId",required=false) Long mangeId,@RequestParam(value="personId",required=true) Long personId,String msg,@CookieValue(value="chkstr",required=false) String cookieChkstr){
 		logger.info("Received request to mangechk list");

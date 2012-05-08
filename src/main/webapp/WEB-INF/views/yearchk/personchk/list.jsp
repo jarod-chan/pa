@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
+<%@ include file="../../common/common.jsp"%>
 <html>
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../../common/head.jsp"%>
 <script type="text/javascript">
 	function saveAllChecks(){
 		var actionFrom=$("form");
@@ -28,7 +28,7 @@
 <form action="/${ctx}/person/${person.id}/yearchk" method="post">
 <input name="year" type="hidden" value="${pageBean.year}"/>
 </form>
-<%@ include file="../common/message.jsp"%>
+<%@ include file="../../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:800px;">
 <thead>
 	<tr>

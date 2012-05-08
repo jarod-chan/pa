@@ -1,11 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
+<%@ include file="../../common/common.jsp"%>
 <html>
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../../common/head.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function() {
-		setTimeout(function(){$("#msg").slideToggle(1000);},3000);
 		$("input[name='flagchk']").bind('click',function(){
 			var nextSel=$(this).parent().next().find("select");
 			if($(this).attr("checked")){
@@ -17,9 +16,15 @@
 			}
 		});
 	 });
+	
+	function save(){
+		var actionFrom=$("form");
+		var oldAction=actionFrom.attr("action");
+		actionFrom.attr("action",oldAction+"/save").submit();
+	}
 </script> 
 </head>  
-<c:set var="pagefunc" value="部门员工年度工作评价" scope="request"/> 
+<c:set var="pagefunc" value="员工年度考核" scope="request"/> 
 <c:set var="pagetitle" value="部门员工年度工作评价" scope="request"/> 
 <c:set var="pagesize" value="768" scope="request"/>
 <body>
@@ -27,24 +32,24 @@
 
 <div class="headdiv" >
 <div class="headleft"  >
-员工:${person.name}
+考核年份:${year}&nbsp;&nbsp;员工:${checkPerson.name}
 </div>
 <div class="headright" >
-<input type="button" value="<<返回"  onclick="javascript:window.open('/pa/mange/${manage.id}/yearchk','_self')"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/pa/mange/${person.id}/yearchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
-<%@ include file="../common/message.jsp"%>
+<%@ include file="../../common/message.jsp"%>
 
 
-<form action="save?mangeId=${manage.id}&personId=${person.id}" method="post">
-
+<form action="/${ctx}/mange/${person.id}/yearchk/person/${checkPerson.id}" method="post">
+<input name="year" type="hidden" value="${year}"/>
 
 <table border=1>
 <tr>
 	<td>考核要素</td><td>合计：${sumall}</td><td>得分</td><td>考核内容</td><td>必选</td><td>评价</td>
 </tr>
-<c:forEach items="${tabData}" var="item">
+<c:forEach items="${chkmangeTabs}" var="item">
 	<tr style="height:30px;">
 	<c:if test="${item.special=='Y'}">
 		<td rowspan="${item.rownum}">${item.type}</td>
@@ -71,7 +76,7 @@
 </c:forEach>
 </table>
 <br>
-<input type="submit" value="保存"/>
+<input type="button" value="保存" onclick="save()"/>
 </form>
 </body>
 </html>

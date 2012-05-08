@@ -21,6 +21,7 @@ public class FychkmangeDao {
 		return entityManager.find(Fychkmange.class, id);
 	}
 	
+	//XXX 待删除
 	@SuppressWarnings("unchecked")
 	public List<Fychkmange> getCurrMangeToPersonChk(Long mangId,Long personId){
 		return entityManager.createQuery("select p from Fychkmange p where mangeid=:mangeid and personid=:personid order by id asc")
@@ -29,6 +30,7 @@ public class FychkmangeDao {
 				.getResultList();
 	}
 	
+	//XXX 待删除
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getPseronPoint(Long mangId){
 		List<Object[]> ret=entityManager.createQuery("select mange.personid,sum(mange.val*items.point) " +
@@ -41,6 +43,7 @@ public class FychkmangeDao {
 		return ret;
 	}
 	
+	//XXX 待删除
 	@Transactional
 	public void saveList(List<Fychkmange> list){
 		for (Fychkmange fychkmange : list) {
@@ -52,6 +55,7 @@ public class FychkmangeDao {
 		}
 	}
 	
+	//XXX 待删除
 	@Transactional
 	public void removeList(List<Fychkmange> list){
 		for (Fychkmange fychkmange : list) {

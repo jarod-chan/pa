@@ -138,7 +138,7 @@
 	
 </script>  
 </head>
-<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
+<c:set var="pagefunc" value="部门工作执行" scope="request"/> 
 <c:set var="pagetitle" value="部门月度工作计划总结" scope="request"/> 
 <c:set var="pagesize" value="820" scope="request"/>
 <body>
@@ -191,8 +191,7 @@
 <br/>
 <input type="button" value="保存" onclick="summary()"/>
 <input type="button" value="完成" onclick="finish()"/>
-<input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/mange/${person.id}/all','_self')"/>
-<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
+
 </form>
 
 </body>

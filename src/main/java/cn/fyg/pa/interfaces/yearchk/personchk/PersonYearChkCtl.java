@@ -64,12 +64,11 @@ public class PersonYearChkCtl {
 			map.put("person", person);
 			map.put("pageBean", pageBean);
 		} catch (EnableYearNotExist e) {
-			new SessionMPR(session).setMessage("当前时间无法进行年终员工考核");
-			map.put("message",new SessionMPR(session).getMessage());
-			return "yearchk/nottime";
+			map.put("message","当前时间无法进行年终员工考核");
+			return "yearchk/personchk/nottime";
 		}
 		map.put("message",new SessionMPR(session).getMessage());
-		return "yearchk/list";
+		return "yearchk/personchk/list";
 	}
 							
 	@RequestMapping(value="/personchk/{colId}",method=RequestMethod.GET)
@@ -78,7 +77,8 @@ public class PersonYearChkCtl {
 		try {
 			year=yearConfigService.getEnableYear();
 		}catch (EnableYearNotExist e) {
-			new SessionMPR(session).setMessage("当前时间无法进行年终员工考核");
+			map.put("message","当前时间无法进行年终员工考核");
+			return "yearchk/personchk/nottime";
 		}
 		
 		Person colPerson=personRepository.find(colPersonId);
@@ -93,7 +93,7 @@ public class PersonYearChkCtl {
 		map.put("person", chkPerson);
 		map.put("pageBean", builder.build(year, colPerson));
 		map.put("message",new SessionMPR(session).getMessage());
-		return "yearchk/personchk";
+		return "yearchk/personchk/personchk";
 	}
 
 	private List<Person> removePerson(List<Person> sameTypePerson,Person... persons) {

@@ -14,7 +14,7 @@ import cn.fyg.pa.domain.yearchk.YearConfigFactory;
 import cn.fyg.pa.domain.yearchk.YearConfigRepositroy;
 
 @Service
-public class YearConfigServiceImp implements YearConfigService {
+public class YearConfigServiceImpl implements YearConfigService {
 	
 	@Resource
 	YearConfigRepositroy yearConfigRepositroy;

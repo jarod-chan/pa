@@ -20,7 +20,7 @@ $(document).ready(function() {
 });
 </script>  
 </head>
-<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
+<c:set var="pagefunc" value="部门工作执行" scope="request"/> 
 <c:set var="pagetitle" value="部门月度工作计划查看" scope="request"/> 
 <c:set var="pagesize" value="670" scope="request"/> 
 <body>
@@ -53,8 +53,6 @@ $(document).ready(function() {
 </table>
 
 <br/>
-<input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/mange/${person.id}/all','_self')"/>
-<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
 
 
 </body>

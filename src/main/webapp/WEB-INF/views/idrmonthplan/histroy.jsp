@@ -4,7 +4,7 @@
 <head>
 <%@ include file="../common/head.jsp"%>
 </head>
-<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
+<c:set var="pagefunc" value="部门工作执行" scope="request"/> 
 <c:set var="pagetitle" value="部门月度工作计划历史" scope="request"/> 
 <c:set var="pagesize" value="715" scope="request"/> 
 <body>

@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
+<%@ include file="../../common/common.jsp"%>
 <html>
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../../common/head.jsp"%>
 <style type="text/css">
 .mainul{list-style-type:none; margin:0;padding:0;width:100%; }
 .mainul li{ width:84px; float:left;background-color:#FFFFFF;margin: 10px;border: 1px solid #000000; }
@@ -33,7 +33,7 @@
 </div>
 <div  class="headnone"></div>
 </div>
-<%@ include file="../common/message.jsp"%>
+<%@ include file="../../common/message.jsp"%>
 <form action="/${ctx}/person/${person.id}/yearchk/personchk/${pageBean.personChkBean.id}" method="post">
 <table border=1 style="table-layout:fixed;width:800px;" >
 <thead>
