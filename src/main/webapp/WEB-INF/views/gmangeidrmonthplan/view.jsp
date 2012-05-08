@@ -45,7 +45,7 @@
 部门经理:${mange.name}&nbsp;&nbsp;部门:${idrMonthPlanBill.department.name}&nbsp;&nbsp;计划周期:${idrMonthPlanBill.year}年${idrMonthPlanBill.month}月&nbsp;&nbsp;状态:${idrMonthPlanBill.state.name}
 </div>
 <div class="headright"  style="width: 10%;">
-<input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

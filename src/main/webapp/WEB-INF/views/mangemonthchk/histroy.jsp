@@ -30,7 +30,7 @@
 	<input type="submit" value="查询" />
 </div>
 <div class="headright">
-	<input type="button" value="<<当前考核" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk','_self')"/>
+	<input type="button" value="<<返回" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

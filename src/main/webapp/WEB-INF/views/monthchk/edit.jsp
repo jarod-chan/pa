@@ -213,8 +213,7 @@
 
 <br/>
 <input type="button" value="保存" onclick="save()"/>
-<input type="button" value="提交" onclick="commit()"/>
-<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
+<input type="button" value="提交部门经理" onclick="commit()"/>
 </form>
 
 </body>

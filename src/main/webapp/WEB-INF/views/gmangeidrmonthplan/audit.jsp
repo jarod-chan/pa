@@ -54,6 +54,7 @@
 	部门:${idrMonthPlanBill.department.name}&nbsp;&nbsp;计划周期:${idrMonthPlanBill.year}年${idrMonthPlanBill.month}月&nbsp;&nbsp;状态:${idrMonthPlanBill.state.name}
 </div>
 <div class="headright"  >
+	<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -83,9 +84,8 @@
 </table>
 
 <br/>
-<input type="button" value="打回" onclick="back()"/>
-<input type="button" value="通过" onclick="next()"/>
-<input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
+<input type="button" value="打回部门经理修改" onclick="back()"/>
+<input type="button" value="通过当月计划" onclick="next()"/>
 </form>
 
 </body>

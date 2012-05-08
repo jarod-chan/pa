@@ -16,7 +16,6 @@
 <div class="headright" >
 	<input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/histroy','_self')"/>
 	<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${mange.id}/password?backurl=/pa/mange/${mange.id}/monthchk','_self')"/>
-	<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>	
 </div>
 <div  class="headnone"></div>
 </div>

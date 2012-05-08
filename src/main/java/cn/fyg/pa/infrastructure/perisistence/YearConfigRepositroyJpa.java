@@ -54,6 +54,7 @@ public class YearConfigRepositroyJpa implements YearConfigRepositroy {
 	public List<YearConfig> findAll() {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<YearConfig> query=builder.createQuery(YearConfig.class);
+		@SuppressWarnings("unused")
 		Root<YearConfig> root=query.from(YearConfig.class);
 		return entityManager.createQuery(query).getResultList();
 	}

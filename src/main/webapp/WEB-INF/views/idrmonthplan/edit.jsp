@@ -170,7 +170,7 @@
 
 <br/>
 <input type="button" value="保存" onclick="save()"/>
-<input type="button" value="提交" onclick="commit()"/>
+<input type="button" value="提交分管副总" onclick="commit()"/>
 </form>
 
 </body>

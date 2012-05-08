@@ -14,7 +14,7 @@
 	部门:${person.department}&nbsp;&nbsp;
 </div>
 <div class="headright">
-	<input type="button" value="<<当前计划" onclick="javascript:window.open('/${ctx}/mange/${person.id}/idrmonthplan','_self')"/>
+	<input type="button" value="<<返回" onclick="javascript:window.open('/${ctx}/mange/${person.id}/idrmonthplan','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

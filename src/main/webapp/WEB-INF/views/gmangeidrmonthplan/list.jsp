@@ -15,7 +15,6 @@
 <div class="headright"  >
 	<input type="button" value="历史记录>>" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan/history','_self')"/>
 	<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${person.id}/password?backurl=/pa/gmange/${person.id}/idrmonthplan','_self')"/>
-	<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

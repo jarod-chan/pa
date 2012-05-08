@@ -190,7 +190,7 @@
 
 <br/>
 <input type="button" value="保存" onclick="summary()"/>
-<input type="button" value="完成" onclick="finish()"/>
+<input type="button" value="完成工作总结" onclick="finish()"/>
 
 </form>
 

@@ -55,6 +55,7 @@
 部门:${mange.department}&nbsp;&nbsp;考核员工:${monthChk.person.name}&nbsp;&nbsp;考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}
 </div>
 <div class="headright">
+<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -107,9 +108,9 @@
 </table>
 <br/>
 <input type="button" value="保存"  onclick="save()"/>
-<input type="button" value="完成"  onclick="finish()"/>
-<input type="button" value="打回"  onclick="back()"/>
-<input type="button" value="返回"  onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk','_self')"/>
+<input type="button" value="完成评价"  onclick="finish()"/>
+<input type="button" value="打回员工修改"  onclick="back()"/>
+
 </form>
 
 </body>

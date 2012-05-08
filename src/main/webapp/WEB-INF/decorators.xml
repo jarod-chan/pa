@@ -2,21 +2,16 @@
 
 <!-- 用来定义装饰器要过滤的页面 -->  
 <decorator name="main" page="main.jsp">
-	<pattern>/person/*</pattern> 
-	<pattern>/common/*</pattern>  
+	<pattern>/common/*</pattern>
+	<pattern>/person/*</pattern>   
 	<pattern>/mange/*</pattern>
 	<pattern>/gmange/*</pattern>
 </decorator>
 
-<!-- 此处用来定义不需要过滤的页面 -->  
-<excludes>
-</excludes>
-
 <!-- 此处用来定义不需要过滤的页面 --> 
 <decorator name="none" page=""/> 
 
-<excludes>
-	<pattern></pattern>
-</excludes>
+<!-- 此处用来定义不需要过滤的页面 -->  
+<excludes></excludes>
 
 </decorators>

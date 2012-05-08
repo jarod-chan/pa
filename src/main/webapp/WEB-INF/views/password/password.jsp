@@ -8,6 +8,14 @@
 <c:set var="pagetitle" value="密码修改" scope="request"/> 
 <c:set var="pagesize" value="400" scope="request"/> 
 <body>
+<div class="headdiv" >
+<div class="headleft" ></div>
+<div class="headright">
+	<input type="button" value="<<返回" onclick="javascript:window.open('${backurl}','_self')"/>
+</div>
+<div  class="headnone"></div>
+</div>
+
 <%@ include file="../common/message.jsp"%>
 <form action="/${ctx}/common/settings/person/${person.id}/password?backurl=${backurl}" method="post">
 用户名：${person.name}<br/>
@@ -19,7 +27,6 @@
 <input name="confirmcsr" type="password" /><br/>
 <br/>
 <input type="submit" value="重置密码"/>
-<input type="button" value="<<返回" onclick="javascript:window.open('${backurl}','_self')"/>
 </form>
 
 

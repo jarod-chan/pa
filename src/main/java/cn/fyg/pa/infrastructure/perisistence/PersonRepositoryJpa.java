@@ -10,9 +10,6 @@ import cn.fyg.pa.domain.person.ManageEnum;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.domain.person.TypeEnum;
-import cn.fyg.pa.interfaces.bean.LoginBean;
-import cn.fyg.pa.interfaces.bean.LoginRetBean;
-import cn.fyg.pa.interfaces.tool.Constant;
 
 @Service
 public class PersonRepositoryJpa implements PersonRepository {

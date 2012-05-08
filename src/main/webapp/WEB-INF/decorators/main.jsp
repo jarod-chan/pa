@@ -46,6 +46,15 @@
 .headdiv .headnone{
    clear: both;
 }
+
+/*定义退出按钮*/
+#mainbar .mainact{
+	text-decoration: none;color: #000000;
+}
+#mainbar .mainact:HOVER{
+	background-color: #000000; color: #FFFFFF;
+}
+
 </style>
 <script type="text/javascript">
 $(function(){
@@ -83,6 +92,7 @@ $(function(){
 </div>
 <div style="float:right">
 	${loginInfo}
+	<a class="mainact" title="退出系统"  href="/${ctx}/login">X</a>
 </div>
 <div style="clear:both"></div>
 </div>
