@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.model.Department;
+import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.model.IdrMonthPlanBill;
 import cn.fyg.pa.domain.model.MonthChk;
 import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;

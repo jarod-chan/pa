@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.application.LoginService;
 import cn.fyg.pa.domain.person.ManageEnum;
-import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.interfaces.bean.LoginBean;
 import cn.fyg.pa.interfaces.bean.LoginRetBean;
 import cn.fyg.pa.interfaces.bean.UrlNameBean;

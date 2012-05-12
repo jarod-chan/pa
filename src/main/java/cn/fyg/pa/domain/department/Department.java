@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model;
+package cn.fyg.pa.domain.department;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

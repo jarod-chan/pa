@@ -1,10 +1,11 @@
-package cn.fyg.pa.domain;
+package cn.fyg.pa.domain.department;
 
 import java.util.List;
 
-import cn.fyg.pa.domain.model.Department;
 
 public interface DepartmentRepository {
+	
+	Department find(Long id);
 
 	List<Department> getAllDepartmentsOrderById();
 }

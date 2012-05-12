@@ -6,10 +6,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import cn.fyg.pa.domain.DepartmentRepository;
 import cn.fyg.pa.domain.IdrMonthPlanBillRepository;
 import cn.fyg.pa.domain.MonthChkRepository;
-import cn.fyg.pa.domain.model.Department;
+import cn.fyg.pa.domain.department.Department;
+import cn.fyg.pa.domain.department.DepartmentRepository;
 import cn.fyg.pa.domain.model.IdrMonthPlanBill;
 import cn.fyg.pa.domain.model.MonthChk;
 import cn.fyg.pa.domain.person.ManageEnum;

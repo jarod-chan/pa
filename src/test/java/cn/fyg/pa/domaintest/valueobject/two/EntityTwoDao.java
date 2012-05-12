@@ -1,4 +1,4 @@
-package cn.fyg.pa.domaintest;
+package cn.fyg.pa.domaintest.valueobject.two;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,19 +8,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository
-public class EntityDao {
+public class EntityTwoDao {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Transactional
-	public void save(EntityObject en){
+	public void save(EntityTwo en){
 		entityManager.persist(en);
 	}
 	
-	public EntityObject find(Long id){
-		return entityManager.find(EntityObject.class, id);
+	public EntityTwo find(Long id){
+		return entityManager.find(EntityTwo.class, id);
 	}
-	
 
 }

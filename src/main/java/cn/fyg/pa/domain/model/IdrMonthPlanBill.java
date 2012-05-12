@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
 
 @Entity

@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 
-import cn.fyg.pa.domain.model.Department;
+import cn.fyg.pa.domain.department.Department;
 
 @Repository
 public class DepartmentDao {
@@ -41,6 +41,7 @@ public class DepartmentDao {
 		return entityManager.createQuery(query).getResultList();
 	}
 
+	//XXX 重构到repository 待删除
 	public List<Department> findAllDepartmentsOrderById() {
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<Department> query=builder.createQuery(Department.class);

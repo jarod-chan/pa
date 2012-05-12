@@ -25,9 +25,7 @@ import cn.fyg.pa.infrastructure.perisistence.FychkmangeDao;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;
 import cn.fyg.pa.interfaces.page.CheckPage;
 import cn.fyg.pa.interfaces.page.ChkmangeTab;
-import cn.fyg.pa.interfaces.tool.CommonModelAndView;
 import cn.fyg.pa.interfaces.tool.Constant;
-import cn.fyg.pa.interfaces.tool.CookieUtil;
 import cn.fyg.pa.interfaces.tool.Tool;
 
 

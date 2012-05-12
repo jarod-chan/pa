@@ -1,4 +1,4 @@
-package cn.fyg.pa.domaintest;
+package cn.fyg.pa.domaintest.valueobject.there;
 
 import java.util.ArrayList;
 import java.util.List;

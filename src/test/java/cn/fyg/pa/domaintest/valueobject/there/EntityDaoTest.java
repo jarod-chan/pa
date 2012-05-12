@@ -1,4 +1,4 @@
-package cn.fyg.pa.domaintest.test;
+package cn.fyg.pa.domaintest.valueobject.there;
 
 import javax.annotation.Resource;
 
@@ -7,9 +7,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cn.fyg.pa.domaintest.EntityDao;
-import cn.fyg.pa.domaintest.EntityObject;
-import cn.fyg.pa.domaintest.Value;
 
 
 

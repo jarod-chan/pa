@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.fyg.pa.domain.model.Department;
+import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.model.IdrMonthPlanBill;
 import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
 

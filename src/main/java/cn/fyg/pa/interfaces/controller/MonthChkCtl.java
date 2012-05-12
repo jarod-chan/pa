@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.model.Department;
+import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.model.IdrMonthPlanBill;
 import cn.fyg.pa.domain.model.MonthChk;
 import cn.fyg.pa.domain.model.StateChangeException;
