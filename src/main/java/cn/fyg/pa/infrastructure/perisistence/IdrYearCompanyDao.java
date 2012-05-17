@@ -9,9 +9,9 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.model.IdrCompany;
+import cn.fyg.pa.domain.companykpi.IdrCompany;
+import cn.fyg.pa.domain.companykpi.IdrYearCompany;
 import cn.fyg.pa.domain.model.IdrTypeWeight;
-import cn.fyg.pa.domain.model.IdrYearCompany;
 
 
 @Repository

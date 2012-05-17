@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model;
+package cn.fyg.pa.domain.companykpi;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
 import org.apache.commons.lang.StringUtils;
+
+import cn.fyg.pa.domain.model.IdrTypeWeight;
+import cn.fyg.pa.domain.model.Result;
 
 
 //年度指标

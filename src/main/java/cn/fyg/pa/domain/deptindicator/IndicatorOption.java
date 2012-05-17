@@ -4,7 +4,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import cn.fyg.pa.domain.model.IdrCompany;
+import cn.fyg.pa.domain.companykpi.IdrCompany;
 
 /**
  * 部门指标明细，表明该公司指标是否部门必须达成的指标

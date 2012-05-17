@@ -1,6 +1,6 @@
 package cn.fyg.pa.domain.service;
 
-import cn.fyg.pa.domain.model.IdrYearCompany;
+import cn.fyg.pa.domain.companykpi.IdrYearCompany;
 
 public interface IdrYearCompanyService {
 	

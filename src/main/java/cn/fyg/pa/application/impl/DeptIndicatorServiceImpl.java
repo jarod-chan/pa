@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.application.DeptIndicatorService;
+import cn.fyg.pa.domain.companykpi.IdrYearCompany;
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.deptindicator.DeptIndicator;
 import cn.fyg.pa.domain.deptindicator.DeptIndicatorFactory;
 import cn.fyg.pa.domain.deptindicator.DeptIndicatorRepository;
-import cn.fyg.pa.domain.model.IdrYearCompany;
 import cn.fyg.pa.domain.service.IdrYearCompanyService;
 
 @Service

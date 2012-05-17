@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.model.IdrCompany;
-import cn.fyg.pa.domain.model.IdrYearCompany;
+import cn.fyg.pa.domain.companykpi.IdrCompany;
+import cn.fyg.pa.domain.companykpi.IdrYearCompany;
 import cn.fyg.pa.domain.model.IdrYearTypeWeight;
 import cn.fyg.pa.domain.model.Result;
 import cn.fyg.pa.domain.service.IdrYearCompanyService;
