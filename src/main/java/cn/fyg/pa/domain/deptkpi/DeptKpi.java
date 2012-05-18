@@ -3,6 +3,7 @@ package cn.fyg.pa.domain.deptkpi;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
 
@@ -35,7 +37,7 @@ public class DeptKpi {
 	
 	@OneToMany(mappedBy = "deptKpi",
 			fetch = FetchType.EAGER, 
-			cascade = {},
+			cascade = {CascadeType.REFRESH},
 			targetEntity = DeptKpiItem.class)
 	@OrderBy("sn ASC")
 	private List<DeptKpiItem> deptKpiItems=new ArrayList<DeptKpiItem>();
@@ -72,6 +74,23 @@ public class DeptKpi {
 		this.deptKpiItems = deptKpiItems;
 	}
 	
-
+	/**
+	 * 返回某个公司指标的分解
+	 * @param idrCompany
+	 */
+	public DeptKpi getDeptKpiViewByIdrCompany(IdrCompany idrCompany){
+		DeptKpi deptKpi=new DeptKpi();
+		deptKpi.setId(this.id);
+		deptKpi.setDepartment(this.department);
+		deptKpi.setYear(this.year);
+		List<DeptKpiItem> copyDeptKpiItems=new ArrayList<DeptKpiItem>();
+		for(DeptKpiItem deptKpiItem:this.deptKpiItems){
+			if(deptKpiItem.getIdrCompany().getId().equals(idrCompany.getId())){
+				copyDeptKpiItems.add(deptKpiItem);
+			}
+		}
+		deptKpi.setDeptKpiItems(copyDeptKpiItems);
+		return deptKpi;
+ 	}
 
 }

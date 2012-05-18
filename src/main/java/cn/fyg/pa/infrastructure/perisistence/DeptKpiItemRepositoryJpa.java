@@ -11,6 +11,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
+import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
@@ -29,8 +30,8 @@ public class DeptKpiItemRepositoryJpa implements DeptKpiItemRepository{
 
 	@Override
 	public DeptKpiItem save(DeptKpiItem deptKpiItem) {
-		DeptKpi deptKpi=deptKpiItem.getDeptKpi();
-		deptKpi=getDeptKpiByYearAndDepartment(deptKpi.getYear(),deptKpi.getDepartment());
+//		DeptKpi deptKpi=deptKpiItem.getDeptKpi();
+//		deptKpi=getDeptKpiByYearAndDepartment(deptKpi.getYear(),deptKpi.getDepartment());
 		if(deptKpiItem.getId()==null){
 			entityManager.persist(deptKpiItem);
 			return deptKpiItem;
@@ -59,18 +60,24 @@ public class DeptKpiItemRepositoryJpa implements DeptKpiItemRepository{
 	}
 
 	@Override
-	public List<DeptKpiItem> findByYearAndDepartmentOrderBySn(Long year,
-			Department department) {
+	public List<DeptKpiItem> findByYearAndDepartmentAndIdrCompanyOrderBySn(Long year,Department department,IdrCompany idrCompany){
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<DeptKpiItem> query = builder.createQuery(DeptKpiItem.class);
 		Root<DeptKpiItem> from = query.from(DeptKpiItem.class);
 		Predicate criteria=builder.and(
 				builder.equal(from.get("deptKpi").get("year"), year),
-				builder.equal(from.get("deptKpi").get("department"), department)
+				builder.equal(from.get("deptKpi").get("department"), department),
+				builder.equal(from.get("idrCompany"), idrCompany)
 		);
 		query.where(criteria);
 		query.orderBy(builder.asc(from.get("sn")));
 		return entityManager.createQuery(query).getResultList();
+	}
+
+	@Override
+	public void remove(DeptKpiItem deptKpiItem) {
+		deptKpiItem=entityManager.merge(deptKpiItem);
+		entityManager.remove(deptKpiItem);
 	}
 
 }

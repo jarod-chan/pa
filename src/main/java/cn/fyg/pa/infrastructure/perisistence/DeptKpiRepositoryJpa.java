@@ -20,6 +20,11 @@ public class DeptKpiRepositoryJpa implements DeptKpiRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	@Override
+	public DeptKpi find(Long id) {
+		return entityManager.find(DeptKpi.class, id);
+	}
 
 	@Override
 	public DeptKpi findByYearAndDepartment(Long year, Department department) {
@@ -34,5 +39,16 @@ public class DeptKpiRepositoryJpa implements DeptKpiRepository {
 		List<DeptKpi> resultList = entityManager.createQuery(query).getResultList();
 		return resultList.isEmpty()?null:resultList.get(0);
 	}
+
+	@Override
+	public DeptKpi save(DeptKpi deptKpi) {
+		if(deptKpi.getId()==null){
+			entityManager.persist(deptKpi);
+			return deptKpi;
+		}
+		return entityManager.merge(deptKpi);
+	}
+
+	
 
 }

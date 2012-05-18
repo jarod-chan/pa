@@ -48,13 +48,20 @@ public class DeptKpiCtl {
 	public String toEdit(@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,@PathVariable("idrcompanyId")Long idrcompanyId,Map<String,Object> map,HttpSession session){
 		Department department=departmentRepository.find(departmentId);
 		IdrCompany idrCompany = idrCompanyRepository.find(idrcompanyId);
-		List<DeptKpiItem> deptKpiItems = deptKpiItemRepository.findByYearAndDepartmentOrderBySn(year, department);
+		List<DeptKpiItem> deptKpiItems = deptKpiItemRepository.findByYearAndDepartmentAndIdrCompanyOrderBySn(year, department,idrCompany);
 		map.put("year", year);
 		map.put("department", department);
 		map.put("idrCompany", idrCompany);
 		map.put("deptKpiItems", deptKpiItems);
 		map.put("message", new SessionMPR(session).getMessage());
 		return "deptkpi/edit";
+	}
+	
+	@RequestMapping(value="/idrcompany/{idrcompanyId}/save",method=RequestMethod.POST)
+	public String save(EditPage editPage,@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,@PathVariable("idrcompanyId")Long idrcompanyId,HttpSession session){
+		deptKpiFacade.saveDeptKpiItems(year,departmentId,idrcompanyId,editPage.getDeptKpiItems());
+		new SessionMPR(session).setMessage("保存成功！");
+		return "redirect:../../../"+departmentId;
 	}
 
 }

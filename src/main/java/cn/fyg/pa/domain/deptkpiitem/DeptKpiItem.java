@@ -1,14 +1,12 @@
 package cn.fyg.pa.domain.deptkpiitem;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import javax.persistence.CascadeType;
-
 
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.deptkpi.DeptKpi;
@@ -23,16 +21,17 @@ public class DeptKpiItem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;//部门kpi分解明细id
 	
-	@ManyToOne(cascade={CascadeType.PERSIST})
+	private Long sn;//序号
+	
+	@ManyToOne
 	@JoinColumn(name = "deptkpi_id")
 	private DeptKpi deptKpi;//部门kpi分解
-	
-	private Long sn;//序号
 	
 	@ManyToOne
 	@JoinColumn(name = "idrcompany_id")
 	private IdrCompany idrCompany;//公司指标
 	
+	@Column(length=128)
 	private String context;//部门指标内容
 
 	public Long getId() {
