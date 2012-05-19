@@ -6,6 +6,12 @@ public class UrlNameBean {
 	
 	private String url;
 	
+	
+	
+	public UrlNameBean() {
+		super();
+	}
+
 	public UrlNameBean(String name, String url) {
 		super();
 		this.name = name;

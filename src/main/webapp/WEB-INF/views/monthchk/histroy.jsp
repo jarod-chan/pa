@@ -4,8 +4,12 @@
 <head>
 <%@ include file="../common/head.jsp"%>
 </head>
-<c:set var="pagefunc" value="月度工作任务" scope="request"/> 
-<c:set var="pagetitle" value="员工月度工作任务完成历史" scope="request"/> 
+
+<c:set target="${pagefunc}" property="name" value="月度工作任务" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/monthchk" />  
+
+<c:set target="${pagetitle}" property="name" value="员工月度工作任务完成历史" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/person/${person.id}/monthchk/histroy" /> 
 <c:set var="pagesize" value="800" scope="request"/> 
 <body>
 <form action="" method="get">
