@@ -163,7 +163,6 @@
 <div class="headright">
 	<input type="button" value="查看部门计划>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/idrmonthplan','_self')"/>
 	<input type="button" value="查看历史考核>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/histroy','_self')"/>
-	<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${monthChk.person.id}/password?backurl=/${ctx}/person/${monthChk.person.id}/monthchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

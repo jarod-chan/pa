@@ -4,8 +4,13 @@
 <head>
 <%@ include file="../common/head.jsp"%>
 </head>
-<c:set var="pagefunc" value="员工工作评价" scope="request"/> 
-<c:set var="pagetitle" value="员工月度工作任务" scope="request"/> 
+
+<c:set target="${pagefunc}" property="name" value="员工工作评价" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${mange.id}/monthchk" />  
+
+<c:set target="${pagetitle}" property="name" value="员工月度工作任务" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${mange.id}/monthchk" /> 
+
 <c:set var="pagesize" value="825" scope="request"/> 
 <body>
 
@@ -15,7 +20,6 @@
 </div>
 <div class="headright" >
 	<input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/histroy','_self')"/>
-	<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${mange.id}/password?backurl=/pa/mange/${mange.id}/monthchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

@@ -4,8 +4,14 @@
 <head>
 <%@ include file="../common/head.jsp"%>
 </head>
-<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
-<c:set var="pagetitle" value="部门月度工作计划历史" scope="request"/> 
+
+<c:set target="${pagefunc}" property="name" value="部门月度工作任务执行" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan" />  
+
+<c:set target="${pagetitle}" property="name" value="部门月度工作计划历史" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan/history" />
+
+
 <c:set var="pagesize" value="720" scope="request"/>
 <body>
 

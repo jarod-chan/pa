@@ -4,8 +4,14 @@
 <head>
 <%@ include file="../../common/head.jsp"%>
 </head> 
-<c:set var="pagefunc" value="员工年度考核" scope="request"/> 
-<c:set var="pagetitle" value="部门员工年度工作评价列表" scope="request"/> 
+
+<c:set target="${pagefunc}" property="name" value="员工年度考核" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/yearchk" />  
+
+<c:set target="${pagetitle}" property="name" value="部门员工年度工作评价列表" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${person.id}/yearchk" /> 
+
+
 <c:set var="pagesize" value="600" scope="request"/>
 <body>
 

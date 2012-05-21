@@ -65,6 +65,7 @@ public class LoginCtl {
 		if(loginRetBean.getMange().equals("A")){
 		}
 		if(loginRetBean.getMange().equals("G")){
+			menuList.add(new UrlNameBean("部门工作执行",String.format("gmange/%s/idrmonthplan",personId)));
 		}
 		if(loginRetBean.getMange().equals("Y")){
 			menuList.add(new UrlNameBean("员工工作评价",String.format("mange/%s/monthchk",personId)));

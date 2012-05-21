@@ -11,8 +11,12 @@
 	}
 </script>
 </head>
-<c:set var="pagefunc" value="年终员工考核" scope="request"/> 
-<c:set var="pagetitle" value="年终员工考核列表" scope="request"/> 
+<c:set target="${pagefunc}" property="name" value="年终员工考核" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/yearchk" />  
+
+<c:set target="${pagetitle}" property="name" value="年终员工考核列表" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/person/${person.id}/yearchk" /> 
+
 <c:set var="pagesize" value="825" scope="request"/> 
 <body>
 

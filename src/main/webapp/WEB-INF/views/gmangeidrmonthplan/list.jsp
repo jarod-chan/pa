@@ -4,8 +4,13 @@
 <head>
 <%@ include file="../common/head.jsp"%>
 </head>
-<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
-<c:set var="pagetitle" value="部门月度工作执行情况" scope="request"/> 
+
+<c:set target="${pagefunc}" property="name" value="部门月度工作任务执行" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan" />  
+
+<c:set target="${pagetitle}" property="name" value="部门月度工作执行情况" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan" />
+
 <c:set var="pagesize" value="825" scope="request"/> 
 <body>
 
@@ -14,7 +19,6 @@
 </div>
 <div class="headright"  >
 	<input type="button" value="历史记录>>" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan/history','_self')"/>
-	<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${person.id}/password?backurl=/pa/gmange/${person.id}/idrmonthplan','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

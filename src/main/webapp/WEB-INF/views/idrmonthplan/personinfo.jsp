@@ -6,7 +6,6 @@
 </div>
 <div class="headright"  style="width: 38%">
 	<input type="button" value="历史计划>>" onclick="javascript:window.open('/${ctx}/mange/${person.id}/idrmonthplan/history','_self')"/>
-	<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${person.id}/password?backurl=/${ctx}/mange/${person.id}/idrmonthplan','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

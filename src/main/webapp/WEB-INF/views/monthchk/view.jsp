@@ -19,8 +19,12 @@
 	});
 </script> 
 </head>
-<c:set var="pagefunc" value="月度工作任务" scope="request"/> 
-<c:set var="pagetitle" value="员工月度工作任务提报" scope="request"/> 
+<c:set target="${pagefunc}" property="name" value="月度工作任务" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${monthChk.person.id}/monthchk" />  
+
+<c:set target="${pagetitle}" property="name" value="员工月度工作任务提报" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/person/${monthChk.person.id}/monthchk" /> 
+
 <c:set var="pagesize" value="990" scope="request"/> 
 <body>
 <div class="headdiv" >
@@ -28,7 +32,6 @@
 <div class="headright">
 <input type="button" value="查看部门计划>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/idrmonthplan','_self')"/>
 <input type="button" value="查看历史考核>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/histroy','_self')"/>
-<input type="button" value="修改密码>>" onclick="javascript:window.open('/${ctx}/common/settings/person/${monthChk.person.id}/password?backurl=/${ctx}/person/${monthChk.person.id}/monthchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
