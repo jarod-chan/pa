@@ -12,8 +12,11 @@ import cn.fyg.pa.domain.companykpi.IdrCompanyRepository;
 import cn.fyg.pa.domain.companykpi.IdrYearCompany;
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.department.DepartmentRepository;
+import cn.fyg.pa.domain.deptindicator.DeptIndicator;
+import cn.fyg.pa.domain.deptindicator.DeptIndicatorRepository;
 import cn.fyg.pa.domain.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
+import cn.fyg.pa.domain.model.Result;
 import cn.fyg.pa.domain.service.IdrYearCompanyService;
 
 @Component
@@ -27,6 +30,8 @@ public class DeptKpiFacade {
 	DepartmentRepository departmentRepository;
 	@Resource 
 	IdrCompanyRepository idrCompanyRepository;
+	@Resource
+	DeptIndicatorRepository deptIndicatorRepository;
 	
 	
 	public ListPage getDeptKpiByYearAndDepartment(Long year, Long departmentId) {
@@ -35,12 +40,19 @@ public class DeptKpiFacade {
 		Department department = departmentRepository.find(departmentId);
 		DeptKpi deptKpi = deptKpiService.getDeptKpiByYearAndDepartment(year, department);
 		List<DeptKpiItem> deptKpiItems = deptKpi.getDeptKpiItems();
-		ListPageBuilder builder=new ListPageBuilder(idrCompanys,deptKpiItems);
+		DeptIndicator deptIndicator = deptIndicatorRepository.findByYearAndDepartment(year, department);
+		ListBuilder builder=new ListBuilder(idrCompanys,deptKpiItems,deptIndicator);
 		return builder.build(year,department);
 	}
 	
-
-
+	public PreviewPage getDeptKpiForPreview(Long year,Long departmentId){
+		Department department = departmentRepository.find(departmentId);
+		DeptKpi deptKpi = deptKpiService.getDeptKpiByYearAndDepartment(year, department);
+		PreviewBuilder builder=new PreviewBuilder(deptKpi);
+		PreviewPage previewPage = builder.build();
+		return previewPage;
+	}
+	
 	public void saveDeptKpiItems(Long year, Long departmentId,Long idrcompanyId, List<DeptKpiItem> deptKpiItems) {
 		Department department = departmentRepository.find(departmentId);
 		DeptKpi deptKpi = deptKpiService.getDeptKpiByYearAndDepartment(year, department);
@@ -50,6 +62,12 @@ public class DeptKpiFacade {
 			deptKpiItem.setIdrCompany(idrCompany);
 		}
 		deptKpiService.saveDeptKpiItems(deptKpi,idrCompany,deptKpiItems);
+	}
+	
+	public Result commitDeptKpi(Long year,Long departmentId){
+		Department department = departmentRepository.find(departmentId);
+		DeptKpi deptKpi = deptKpiService.getDeptKpiByYearAndDepartment(year, department);
+		return deptKpiService.commitDeptKpi(deptKpi);
 	}
 
 }

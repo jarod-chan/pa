@@ -12,11 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.fyg.pa.application.DeptKpiService;
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.department.Department;
+import cn.fyg.pa.domain.deptindicator.DeptIndicator;
+import cn.fyg.pa.domain.deptindicator.DeptIndicatorRepository;
 import cn.fyg.pa.domain.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.deptkpi.DeptKpiFactory;
 import cn.fyg.pa.domain.deptkpi.DeptKpiRepository;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItemRepository;
+import cn.fyg.pa.domain.model.Result;
 
 @Service
 public class DeptKpiServiceImpl implements DeptKpiService {
@@ -26,6 +29,9 @@ public class DeptKpiServiceImpl implements DeptKpiService {
 	
 	@Resource
 	DeptKpiItemRepository deptKpiItemRepository;
+	
+	@Resource
+	DeptIndicatorRepository deptIndicatorRepository;
 
 	@Override
 	public DeptKpi getDeptKpiByYearAndDepartment(Long year, Department department) {
@@ -55,6 +61,12 @@ public class DeptKpiServiceImpl implements DeptKpiService {
 		for (DeptKpiItem deptKpiItem : deptKpiItems) {
 			deptKpiItemRepository.save(deptKpiItem);
 		}
+	}
+
+	@Override
+	public Result commitDeptKpi(DeptKpi deptKpi) {
+		DeptIndicator deptIndicator = deptIndicatorRepository.findByYearAndDepartment(deptKpi.getYear(), deptKpi.getDepartment());
+		return deptKpi.verifySelf(deptIndicator);
 	}
 
 }

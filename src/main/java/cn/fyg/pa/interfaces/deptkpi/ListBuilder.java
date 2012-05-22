@@ -7,19 +7,24 @@ import java.util.Map;
 
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.department.Department;
+import cn.fyg.pa.domain.deptindicator.DeptIndicator;
+import cn.fyg.pa.domain.deptindicator.IndicatorOption;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
 
-public class ListPageBuilder {
+public class ListBuilder {
 	
 	private List<IdrCompany> idrCompanys;
 	
 	private List<DeptKpiItem> deptKpiItems;
 	
-	public ListPageBuilder(List<IdrCompany> idrCompanys,
-			List<DeptKpiItem> deptKpiItems) {
+	private DeptIndicator deptIndicator;
+	
+	public ListBuilder(List<IdrCompany> idrCompanys,
+			List<DeptKpiItem> deptKpiItems, DeptIndicator deptIndicator) {
 		super();
 		this.idrCompanys = idrCompanys;
 		this.deptKpiItems = deptKpiItems;
+		this.deptIndicator=deptIndicator;
 	}
 
 
@@ -32,21 +37,33 @@ public class ListPageBuilder {
 	}
 
 
-	private List<PageItem> buildPageItems() {
+	private List<ListItem> buildPageItems() {
 		Map<Long,Integer> deptKpiItemsByIdrCompany=createDeptKpiItemsByIdrCompany();
-		List<PageItem> pageItems=createPageItems(deptKpiItemsByIdrCompany);
+		Map<Long,Boolean> indicatorOptionByIdrCompany=createIndicatorOptionByIdrCompany();
+		List<ListItem> pageItems=createPageItems(deptKpiItemsByIdrCompany,indicatorOptionByIdrCompany);
 		return pageItems;
 	}
 
 
-	private List<PageItem> createPageItems(Map<Long, Integer> deptKpiItemsByIdrCompany) {
-		List<PageItem> pageItems=new ArrayList<PageItem>();
+	private Map<Long, Boolean> createIndicatorOptionByIdrCompany() {
+		Map<Long,Boolean> returnMap=new HashMap<Long,Boolean>();
+		for(IndicatorOption indicatorOption:this.deptIndicator.getIndiactorOptions()){
+			returnMap.put(indicatorOption.getIdrCompany().getId(), indicatorOption.getMust());
+		}
+		return returnMap;
+	}
+
+
+	private List<ListItem> createPageItems(Map<Long, Integer> deptKpiItemsByIdrCompany, Map<Long, Boolean> indicatorOptionByIdrCompany) {
+		List<ListItem> pageItems=new ArrayList<ListItem>();
 		for (IdrCompany idrCompany : idrCompanys) {
-			PageItem pageItem=new PageItem();
+			ListItem pageItem=new ListItem();
 			pageItem.setIdrCompany(idrCompany);
 			Long idrCompanyId = idrCompany.getId();
 			Integer num=deptKpiItemsByIdrCompany.get(idrCompanyId);
 			pageItem.setDeptKpiItemNum(num==null?0:num.intValue());
+			Boolean mustSelect=indicatorOptionByIdrCompany.get(idrCompanyId);
+			pageItem.setMustSelect(mustSelect==null?Boolean.FALSE:mustSelect.booleanValue());
 			pageItems.add(pageItem);
 		}
 		return pageItems;

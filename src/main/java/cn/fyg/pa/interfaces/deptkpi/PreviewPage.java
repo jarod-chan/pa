@@ -1,16 +1,17 @@
 package cn.fyg.pa.interfaces.deptkpi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.fyg.pa.domain.department.Department;
 
-public class ListPage {
+public class PreviewPage {
 	
 	private Long year;
 	
 	private Department department;
 	
-	private List<ListItem> pageItems;
+	private List<PreviewItem> previewItems=new ArrayList<PreviewItem>();
 
 	public Long getYear() {
 		return year;
@@ -28,12 +29,14 @@ public class ListPage {
 		this.department = department;
 	}
 
-	public List<ListItem> getPageItems() {
-		return pageItems;
+	public List<PreviewItem> getPreviewItems() {
+		return previewItems;
 	}
 
-	public void setPageItems(List<ListItem> pageItems) {
-		this.pageItems = pageItems;
+	public void setPreviewItems(List<PreviewItem> previewItems) {
+		this.previewItems = previewItems;
 	}
 	
+	
+
 }

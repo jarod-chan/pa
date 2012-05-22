@@ -2,11 +2,13 @@ package cn.fyg.pa.interfaces.deptkpi;
 
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 
-public class PageItem {
+public class ListItem {
 	
-	private IdrCompany idrCompany;
+	private IdrCompany idrCompany;//指标
+
+	private int deptKpiItemNum; //已分解项数
 	
-	private int deptKpiItemNum;
+	private boolean mustSelect;//是否必选
 
 	public IdrCompany getIdrCompany() {
 		return idrCompany;
@@ -24,5 +26,11 @@ public class PageItem {
 		this.deptKpiItemNum = deptKpiItemNum;
 	}
 
-	
+	public boolean isMustSelect() {
+		return mustSelect;
+	}
+
+	public void setMustSelect(boolean mustSelect) {
+		this.mustSelect = mustSelect;
+	}
 }

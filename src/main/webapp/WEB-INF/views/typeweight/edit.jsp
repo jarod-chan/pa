@@ -131,7 +131,7 @@
 </head>
 <body>
 <h2>类别权重</h2>
-年度：${idrYear.year}
+年度：${idrYearTypeWeight.year}
 <%@ include file="../common/message.jsp"%>
 <form id="typeweight" action="/${ctx}/admin/idrtypeweight" method="post">
 <input type="hidden" name="year"  value="${idrYearTypeWeight.year}" />

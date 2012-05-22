@@ -18,6 +18,7 @@ import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.department.DepartmentRepository;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItemRepository;
+import cn.fyg.pa.domain.model.Result;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 
 @Controller
@@ -42,6 +43,25 @@ public class DeptKpiCtl {
 		map.put("listPage", listPage);
 		map.put("message", new SessionMPR(session).getMessage());
 		return "deptkpi/list";
+	}
+	
+	@RequestMapping(value="/preview",method=RequestMethod.GET)
+	public String preview(@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,Map<String,Object> map,HttpSession session){
+		PreviewPage previewPage = deptKpiFacade.getDeptKpiForPreview(year, departmentId);
+		map.put("previewPage", previewPage);
+		map.put("message", new SessionMPR(session).getMessage());
+		return "deptkpi/preview";
+	}
+	
+	@RequestMapping(value="/commit",method=RequestMethod.POST)
+	public String commit(@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,Map<String,Object> map,HttpSession session){
+		Result result = deptKpiFacade.commitDeptKpi(year, departmentId);
+		if(result.pass()){
+			new SessionMPR(session).setMessage("提交通过！");
+		}else{
+			new SessionMPR(session).setMessage(String.format("提交失败，%s!", result.cause()));
+		}
+		return "redirect:../"+departmentId;
 	}
 	
 	@RequestMapping(value="/idrcompany/{idrcompanyId}",method=RequestMethod.GET)
