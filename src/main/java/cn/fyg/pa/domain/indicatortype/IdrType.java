@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model;
+package cn.fyg.pa.domain.indicatortype;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

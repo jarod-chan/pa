@@ -1,6 +1,6 @@
 package cn.fyg.pa.domain.service;
 
-import cn.fyg.pa.domain.model.IdrYearTypeWeight;
+import cn.fyg.pa.domain.yeartypeweight.IdrYearTypeWeight;
 
 public interface IdrYearTypeWeightService {
 	

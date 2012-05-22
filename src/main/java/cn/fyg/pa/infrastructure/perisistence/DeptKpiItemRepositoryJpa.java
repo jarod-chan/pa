@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItemRepository;
 
@@ -30,33 +29,11 @@ public class DeptKpiItemRepositoryJpa implements DeptKpiItemRepository{
 
 	@Override
 	public DeptKpiItem save(DeptKpiItem deptKpiItem) {
-//		DeptKpi deptKpi=deptKpiItem.getDeptKpi();
-//		deptKpi=getDeptKpiByYearAndDepartment(deptKpi.getYear(),deptKpi.getDepartment());
 		if(deptKpiItem.getId()==null){
 			entityManager.persist(deptKpiItem);
 			return deptKpiItem;
 		}
 		return entityManager.merge(deptKpiItem);
-	}
-
-	private DeptKpi getDeptKpiByYearAndDepartment(Long year,
-			Department department) {
-		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<DeptKpi> query = builder.createQuery(DeptKpi.class);
-		Root<DeptKpi> from = query.from(DeptKpi.class);
-		Predicate criteria=builder.and(
-				builder.equal(from.get("year"), year),
-				builder.equal(from.get("department"), department)
-				);
-		query.where(criteria);
-		List<DeptKpi> resultList = entityManager.createQuery(query).getResultList();
-		if(resultList.isEmpty()){
-			DeptKpi deptKpi=new DeptKpi();
-			deptKpi.setYear(year);
-			deptKpi.setDepartment(department);
-			return deptKpi;
-		}
-		return resultList.get(0);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model;
+package cn.fyg.pa.domain.deptmonthplan;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -6,8 +6,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import cn.fyg.pa.domain.common.StateChangeException;
 import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
 
 @Entity
 public class IdrMonthPlanBill extends IdrTaskBill {

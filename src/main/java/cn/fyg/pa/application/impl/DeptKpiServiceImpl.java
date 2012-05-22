@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.application.DeptKpiService;
+import cn.fyg.pa.domain.common.Result;
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.deptindicator.DeptIndicator;
@@ -19,7 +20,6 @@ import cn.fyg.pa.domain.deptkpi.DeptKpiFactory;
 import cn.fyg.pa.domain.deptkpi.DeptKpiRepository;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItemRepository;
-import cn.fyg.pa.domain.model.Result;
 
 @Service
 public class DeptKpiServiceImpl implements DeptKpiService {

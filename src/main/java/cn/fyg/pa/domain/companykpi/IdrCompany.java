@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import cn.fyg.pa.domain.model.IdrTypeWeight;
+import cn.fyg.pa.domain.yeartypeweight.IdrTypeWeight;
 
 //公司指标
 @Entity

@@ -2,7 +2,7 @@ package cn.fyg.pa.domain.service;
 
 import java.util.List;
 
-import cn.fyg.pa.domain.model.IdrType;
+import cn.fyg.pa.domain.indicatortype.IdrType;
 
 public interface IdrTypeService {
 	

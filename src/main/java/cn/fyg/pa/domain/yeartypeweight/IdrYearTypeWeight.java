@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model;
+package cn.fyg.pa.domain.yeartypeweight;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+
+import cn.fyg.pa.domain.common.Result;
 
 //年度类别权重，非数据库实体
 @Entity

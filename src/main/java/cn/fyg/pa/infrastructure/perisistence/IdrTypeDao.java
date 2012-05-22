@@ -10,7 +10,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.model.IdrType;
+import cn.fyg.pa.domain.indicatortype.IdrType;
 
 @Repository
 public class IdrTypeDao implements BaseDao<IdrType> {

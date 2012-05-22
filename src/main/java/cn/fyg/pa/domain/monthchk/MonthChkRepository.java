@@ -1,8 +1,7 @@
-package cn.fyg.pa.domain;
+package cn.fyg.pa.domain.monthchk;
 
 import java.util.List;
 
-import cn.fyg.pa.domain.model.MonthChk;
 
 public interface MonthChkRepository {
 

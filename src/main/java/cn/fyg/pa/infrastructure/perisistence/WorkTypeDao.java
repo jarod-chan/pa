@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.model.WorkType;
+import cn.fyg.pa.domain.worktype.WorkType;
 
 
 @Repository

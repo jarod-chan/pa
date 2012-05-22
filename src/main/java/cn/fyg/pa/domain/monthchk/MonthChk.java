@@ -1,8 +1,7 @@
-package cn.fyg.pa.domain.model;
+package cn.fyg.pa.domain.monthchk;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,7 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-import cn.fyg.pa.domain.model.enums.MonthChkEnum;
+import cn.fyg.pa.domain.common.StateChangeException;
 import cn.fyg.pa.domain.person.Person;
 
 @Entity
@@ -47,27 +46,6 @@ public class MonthChk implements Serializable {
 	@OrderBy("sn ASC")
 	private List<MonthChkItem> monthChkItems=new ArrayList<MonthChkItem>();
 	
-	//TODO 重构
-	/**
-	 * 减去另外一个明细集合
-	 * @param anotherMonthChkItems
-	 * @return 剩余的集合
-	 */
-	public void subtractMonthChkItemsById(List<MonthChkItem> anotherMonthChkItems){
-		List<Long> anotherItemIds=new ArrayList<Long>();
-		for(MonthChkItem item:anotherMonthChkItems){
-			if (item.getId() != null) {
-				anotherItemIds.add(item.getId());
-			}
-		}
-		Iterator<MonthChkItem> iterator=monthChkItems.iterator();
-		while(iterator.hasNext()){
-			MonthChkItem item=iterator.next();
-			if(anotherItemIds.contains(item.getId())){
-				iterator.remove();
-			}
-		}
-	}
 
 	public Long getId() {
 		return id;

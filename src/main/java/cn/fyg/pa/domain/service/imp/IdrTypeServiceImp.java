@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.fyg.pa.domain.model.IdrType;
+import cn.fyg.pa.domain.indicatortype.IdrType;
 import cn.fyg.pa.domain.service.IdrTypeService;
 import cn.fyg.pa.infrastructure.perisistence.IdrTypeDao;
 

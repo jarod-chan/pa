@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.IdrMonthPlanBillRepository;
-import cn.fyg.pa.domain.model.IdrMonthPlanBill;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillRepository;
 import cn.fyg.pa.infrastructure.perisistence.IdrMonthPlanBillDao;
 
 @Repository

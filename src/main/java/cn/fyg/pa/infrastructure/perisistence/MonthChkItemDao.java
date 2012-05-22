@@ -5,7 +5,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.model.MonthChkItem;
+import cn.fyg.pa.domain.monthchk.MonthChkItem;
 
 @Repository
 public class MonthChkItemDao {

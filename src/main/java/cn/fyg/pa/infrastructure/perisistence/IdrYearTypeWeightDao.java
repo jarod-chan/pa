@@ -8,8 +8,8 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.model.IdrTypeWeight;
-import cn.fyg.pa.domain.model.IdrYearTypeWeight;
+import cn.fyg.pa.domain.yeartypeweight.IdrTypeWeight;
+import cn.fyg.pa.domain.yeartypeweight.IdrYearTypeWeight;
 
 @Repository
 public class IdrYearTypeWeightDao implements BaseDao<IdrYearTypeWeight>{

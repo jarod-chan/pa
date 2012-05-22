@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.MonthChkRepository;
-import cn.fyg.pa.domain.model.MonthChk;
+import cn.fyg.pa.domain.monthchk.MonthChk;
+import cn.fyg.pa.domain.monthchk.MonthChkRepository;
 
 @Repository
 public class MonthChkRepositoryImp implements MonthChkRepository {

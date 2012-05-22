@@ -7,10 +7,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.fyg.pa.domain.common.StateChangeException;
 import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.model.IdrMonthPlanBill;
-import cn.fyg.pa.domain.model.StateChangeException;
-import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.service.IdrMonthPlanBillService;
 import cn.fyg.pa.infrastructure.perisistence.DepartmentDao;

@@ -14,9 +14,9 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.model.MonthChk;
-import cn.fyg.pa.domain.model.MonthChkItem;
-import cn.fyg.pa.domain.model.enums.MonthChkEnum;
+import cn.fyg.pa.domain.monthchk.MonthChk;
+import cn.fyg.pa.domain.monthchk.MonthChkEnum;
+import cn.fyg.pa.domain.monthchk.MonthChkItem;
 import cn.fyg.pa.domain.person.Person;
 
 @Repository

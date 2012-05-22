@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.domain.common.StateChangeException;
 import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.model.IdrMonthPlanBill;
-import cn.fyg.pa.domain.model.IdrTask;
-import cn.fyg.pa.domain.model.StateChangeException;
-import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.deptmonthplan.IdrTask;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.service.DepartmentService;
 import cn.fyg.pa.domain.service.IdrMonthPlanBillService;

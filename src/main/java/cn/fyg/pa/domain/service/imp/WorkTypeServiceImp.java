@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import cn.fyg.pa.domain.model.WorkType;
 import cn.fyg.pa.domain.service.WorkTypeService;
+import cn.fyg.pa.domain.worktype.WorkType;
 import cn.fyg.pa.infrastructure.perisistence.WorkTypeDao;
 
 @Service

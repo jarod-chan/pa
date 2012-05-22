@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.companykpi.IdrYearCompany;
-import cn.fyg.pa.domain.model.IdrTypeWeight;
+import cn.fyg.pa.domain.yeartypeweight.IdrTypeWeight;
 
 
 @Repository

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.model.IdrMonthPlanBill;
-import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
 
 public class AnalysisIdrMonthPlanBuilder {
 	

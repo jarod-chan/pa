@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model;
+package cn.fyg.pa.domain.monthchk;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import cn.fyg.pa.domain.worktype.WorkType;
 
 @Entity
 public class MonthChkItem implements Serializable {

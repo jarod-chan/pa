@@ -1,6 +1,6 @@
 package cn.fyg.pa.interfaces.bean;
 
-import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
 
 public class DepartmentIdrMonthPlanBillStateBean {
 	

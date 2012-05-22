@@ -2,9 +2,9 @@ package cn.fyg.pa.domain.service;
 
 import java.util.List;
 
-import cn.fyg.pa.domain.model.MonthChk;
-import cn.fyg.pa.domain.model.StateChangeException;
-import cn.fyg.pa.domain.model.enums.MonthChkEnum;
+import cn.fyg.pa.domain.common.StateChangeException;
+import cn.fyg.pa.domain.monthchk.MonthChk;
+import cn.fyg.pa.domain.monthchk.MonthChkEnum;
 import cn.fyg.pa.domain.person.Person;
 
 public interface MonthChkService {

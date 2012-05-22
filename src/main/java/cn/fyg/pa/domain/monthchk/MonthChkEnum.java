@@ -1,10 +1,9 @@
-package cn.fyg.pa.domain.model.enums;
+package cn.fyg.pa.domain.monthchk;
 
 import org.apache.commons.lang.StringUtils;
 
-import cn.fyg.pa.domain.model.MonthChk;
-import cn.fyg.pa.domain.model.MonthChkItem;
-import cn.fyg.pa.domain.model.StateChangeException;
+import cn.fyg.pa.domain.common.CommonEnum;
+import cn.fyg.pa.domain.common.StateChangeException;
 
 
 public enum MonthChkEnum implements CommonEnum {

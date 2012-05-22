@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model.enums;
+package cn.fyg.pa.domain.common;
 
 public interface CommonEnum {
 	public String getName();

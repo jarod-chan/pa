@@ -84,7 +84,7 @@ public class UrlFilter implements Filter {
         // 获取当前请求的URI     
         String url = req.getRequestURI(); 
         String method=req.getMethod();
-        logger.info(method+":"+url);
+//        logger.info(method+":"+url);
          
         //开发临时去掉url过滤
         if(true){

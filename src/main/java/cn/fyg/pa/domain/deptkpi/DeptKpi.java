@@ -18,12 +18,12 @@ import javax.persistence.OrderBy;
 
 import org.apache.commons.lang.StringUtils;
 
+import cn.fyg.pa.domain.common.Result;
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.deptindicator.DeptIndicator;
 import cn.fyg.pa.domain.deptindicator.IndicatorOption;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
-import cn.fyg.pa.domain.model.Result;
 
 /**
  * 部门考核指标，通过year,department 来唯一确定一个

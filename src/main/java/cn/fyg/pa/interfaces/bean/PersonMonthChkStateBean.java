@@ -1,6 +1,6 @@
 package cn.fyg.pa.interfaces.bean;
 
-import cn.fyg.pa.domain.model.enums.MonthChkEnum;
+import cn.fyg.pa.domain.monthchk.MonthChkEnum;
 
 public class PersonMonthChkStateBean {
 	

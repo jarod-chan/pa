@@ -3,7 +3,7 @@ package cn.fyg.pa.interfaces.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fyg.pa.domain.model.enums.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
 
 public class AnalysisIdrMonthPlanBean {
 

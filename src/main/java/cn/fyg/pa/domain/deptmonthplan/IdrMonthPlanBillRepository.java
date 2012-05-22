@@ -1,8 +1,7 @@
-package cn.fyg.pa.domain;
+package cn.fyg.pa.domain.deptmonthplan;
 
 import java.util.List;
 
-import cn.fyg.pa.domain.model.IdrMonthPlanBill;
 
 public interface IdrMonthPlanBillRepository {
 	

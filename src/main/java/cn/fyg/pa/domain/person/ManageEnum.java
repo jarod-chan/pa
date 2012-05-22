@@ -1,6 +1,6 @@
 package cn.fyg.pa.domain.person;
 
-import cn.fyg.pa.domain.model.enums.CommonEnum;
+import cn.fyg.pa.domain.common.CommonEnum;
 
 public enum ManageEnum implements CommonEnum {
 	A("管理员"),
