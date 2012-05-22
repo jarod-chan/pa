@@ -17,7 +17,7 @@ import javax.persistence.OrderBy;
 
 import org.apache.commons.lang.StringUtils;
 
-import cn.fyg.pa.domain.common.Result;
+import cn.fyg.pa.domain.shared.Result;
 import cn.fyg.pa.domain.yeartypeweight.IdrTypeWeight;
 
 

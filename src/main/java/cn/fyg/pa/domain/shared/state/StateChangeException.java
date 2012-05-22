@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.common;
+package cn.fyg.pa.domain.shared.state;
 
 
 public class StateChangeException extends Exception {

@@ -2,8 +2,8 @@ package cn.fyg.pa.domain.deptmonthplan;
 
 import org.apache.commons.lang.StringUtils;
 
-import cn.fyg.pa.domain.common.CommonEnum;
-import cn.fyg.pa.domain.common.StateChangeException;
+import cn.fyg.pa.domain.shared.CommonEnum;
+import cn.fyg.pa.domain.shared.state.StateChangeException;
 
 public enum IdrMonthPlanEnum implements CommonEnum{
 	NEW("新建"){

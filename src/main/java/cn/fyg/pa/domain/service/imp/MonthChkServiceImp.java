@@ -7,11 +7,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.fyg.pa.domain.common.StateChangeException;
 import cn.fyg.pa.domain.monthchk.MonthChk;
 import cn.fyg.pa.domain.monthchk.MonthChkEnum;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.service.MonthChkService;
+import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.infrastructure.perisistence.MonthChkDao;
 import cn.fyg.pa.interfaces.tool.CMonthChk;
 
@@ -65,7 +65,7 @@ public class MonthChkServiceImp implements MonthChkService{
 		monthChk.setPerson(person);
 		monthChk.setYear(CMonthChk.INIT_YEAR);
 		monthChk.setMonth(CMonthChk.INIT_MONTH);
-		monthChk.setState(MonthChkEnum.SAVED);
+		monthChk.setState(MonthChkEnum.NEW);
 		return monthChk;
 	}
 
@@ -76,7 +76,7 @@ public class MonthChkServiceImp implements MonthChkService{
 	private MonthChk nextMonthMonthChk(MonthChk finishedMonthChk) {
 		MonthChk monthChk=new MonthChk();
 		monthChk.setPerson(finishedMonthChk.getPerson());
-		monthChk.setState(MonthChkEnum.SAVED);
+		monthChk.setState(MonthChkEnum.NEW);
 		if(finishedMonthChk.getMonth().intValue()==12){
 			monthChk.setYear(finishedMonthChk.getYear()+1);
 			monthChk.setMonth(1L);

@@ -17,8 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-import cn.fyg.pa.domain.common.StateChangeException;
 import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.shared.state.StateChangeException;
 
 @Entity
 public class MonthChk implements Serializable {
@@ -95,14 +95,12 @@ public class MonthChk implements Serializable {
 		this.monthChkItems = monthChkItems;
 	}
 	
-	public void next() throws StateChangeException{
-		this.state.setMonthChk(this);
-		this.state.next();
+	public void next() throws StateChangeException{;
+		this.state.next(this);
 	}
 	
 	public void back() throws StateChangeException{
-		this.state.setMonthChk(this);
-		this.state.back();
+		this.state.back(this);
 	}
 
 }

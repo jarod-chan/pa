@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import cn.fyg.pa.application.DeptKpiService;
-import cn.fyg.pa.domain.common.Result;
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.companykpi.IdrCompanyRepository;
 import cn.fyg.pa.domain.companykpi.IdrYearCompany;
@@ -18,6 +17,7 @@ import cn.fyg.pa.domain.deptindicator.DeptIndicatorRepository;
 import cn.fyg.pa.domain.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
 import cn.fyg.pa.domain.service.IdrYearCompanyService;
+import cn.fyg.pa.domain.shared.Result;
 
 @Component
 public class DeptKpiFacade {

@@ -4,4 +4,4 @@ performance appraisal system
 框架：
 	spring mvc+jpa 
 开发方式：
-	应用DDD实践，尝试分离各种元素
+	尝试应用DDD实践，尝试分离各种元素

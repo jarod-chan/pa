@@ -1,6 +1,6 @@
 package cn.fyg.pa.domain.person;
 
-import cn.fyg.pa.domain.common.CommonEnum;
+import cn.fyg.pa.domain.shared.CommonEnum;
 
 public enum TypeEnum implements CommonEnum {
 	N("职能部室"),

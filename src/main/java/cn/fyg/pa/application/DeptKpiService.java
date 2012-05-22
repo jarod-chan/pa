@@ -2,11 +2,11 @@ package cn.fyg.pa.application;
 
 import java.util.List;
 
-import cn.fyg.pa.domain.common.Result;
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
+import cn.fyg.pa.domain.shared.Result;
 
 public interface DeptKpiService {
 	

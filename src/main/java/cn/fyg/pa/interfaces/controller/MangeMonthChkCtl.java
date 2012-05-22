@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.common.StateChangeException;
 import cn.fyg.pa.domain.monthchk.MonthChk;
 import cn.fyg.pa.domain.monthchk.MonthChkEnum;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.domain.service.MonthChkService;
+import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.bean.ManageMonthChkQueryBean;
 import cn.fyg.pa.interfaces.tool.DateTool;

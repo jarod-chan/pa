@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.common.StateChangeException;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.service.IdrMonthPlanBillService;
+import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;
 

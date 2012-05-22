@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.common.StateChangeException;
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
@@ -28,6 +27,7 @@ import cn.fyg.pa.domain.service.DepartmentService;
 import cn.fyg.pa.domain.service.IdrMonthPlanBillService;
 import cn.fyg.pa.domain.service.MonthChkService;
 import cn.fyg.pa.domain.service.WorkTypeService;
+import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.domain.worktype.WorkType;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.bean.IdrMonthPlanQueryBean;
@@ -43,6 +43,7 @@ public class MonthChkCtl {
 	public static Map<MonthChkEnum,String> PAGEMAP=new HashMap<MonthChkEnum,String>();
 	
 	static{
+		PAGEMAP.put(MonthChkEnum.NEW, "monthchk/edit");
 		PAGEMAP.put(MonthChkEnum.SAVED, "monthchk/edit");
 		PAGEMAP.put(MonthChkEnum.SUBMITTED, "monthchk/view");
 		PAGEMAP.put(MonthChkEnum.FINISHED, "monthchk/view");

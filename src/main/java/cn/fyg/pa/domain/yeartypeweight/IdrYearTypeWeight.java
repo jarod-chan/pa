@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-import cn.fyg.pa.domain.common.Result;
+import cn.fyg.pa.domain.shared.Result;
 
 //年度类别权重，非数据库实体
 @Entity

@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.common.Result;
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.companykpi.IdrYearCompany;
 import cn.fyg.pa.domain.service.IdrYearCompanyService;
 import cn.fyg.pa.domain.service.IdrYearTypeWeightService;
+import cn.fyg.pa.domain.shared.Result;
 import cn.fyg.pa.domain.yeartypeweight.IdrYearTypeWeight;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.tool.JsonUtil;

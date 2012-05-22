@@ -6,8 +6,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import cn.fyg.pa.domain.common.StateChangeException;
 import cn.fyg.pa.domain.department.Department;
+import cn.fyg.pa.domain.shared.state.StateChangeException;
 
 @Entity
 public class IdrMonthPlanBill extends IdrTaskBill {

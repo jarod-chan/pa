@@ -3,7 +3,7 @@ package cn.fyg.pa.interfaces.tool;
 import java.util.HashMap;
 import java.util.Map;
 
-import cn.fyg.pa.domain.common.CommonEnum;
+import cn.fyg.pa.domain.shared.CommonEnum;
 
 public class EnumUtil {
 
