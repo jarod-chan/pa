@@ -20,6 +20,11 @@ public class DepartmentRepositoryImp implements DepartmentRepository {
 	private EntityManager entityManager;
 	
 	@Override
+	public Department find(Long id) {
+		return entityManager.find(Department.class, id);
+	}
+
+	@Override
 	public List<Department> getAllDepartmentsOrderById() {
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<Department> query=builder.createQuery(Department.class);
@@ -30,8 +35,17 @@ public class DepartmentRepositoryImp implements DepartmentRepository {
 	}
 
 	@Override
-	public Department find(Long id) {
-		return entityManager.find(Department.class, id);
+	public Department findByName(String name) {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Department> query=builder.createQuery(Department.class);
+		Root<Department> root=query.from(Department.class);
+		query.select(root);
+		query.where(builder.equal(root.get("name"), name));
+		List<Department> ret=entityManager.createQuery(query).setMaxResults(1).getResultList();
+		if(ret.isEmpty()){
+			return null;
+		}
+		return ret.get(0);
 	}
 
 }

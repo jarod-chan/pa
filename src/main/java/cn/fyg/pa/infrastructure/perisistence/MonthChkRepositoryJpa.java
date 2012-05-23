@@ -17,18 +17,21 @@ import org.springframework.stereotype.Repository;
 import cn.fyg.pa.domain.monthchk.MonthChk;
 import cn.fyg.pa.domain.monthchk.MonthChkEnum;
 import cn.fyg.pa.domain.monthchk.MonthChkItem;
+import cn.fyg.pa.domain.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.person.Person;
 
 @Repository
-public class MonthChkDao {
+public class MonthChkRepositoryJpa implements MonthChkRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	public MonthChk find(Long id){
+	@Override
+	public MonthChk find(Long id) {
 		return entityManager.find(MonthChk.class, id);
 	}
 	
+	@Override
 	public MonthChk save(MonthChk monthChk) {
 		for (MonthChkItem monthChkItem : monthChk.getMonthChkItems()) {
 			monthChkItem.setMonthChk(monthChk);
@@ -60,11 +63,9 @@ public class MonthChkDao {
 		}
 		return entityManager.merge(monthChk);
 	}
-
-	public void remove(MonthChk monthChk) {
-		entityManager.remove(entityManager.merge(monthChk));		
-	}
 	
+	
+	@Override
 	public MonthChk findMaxMonthMonthChk(Person person){
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<MonthChk> query=builder.createQuery(MonthChk.class);
@@ -88,7 +89,29 @@ public class MonthChkDao {
 		return resultList.get(0);
 	}
 	
-	public List<MonthChk> findByPeriodAndDepartmentAndPersonAndState(Long year, Long month,String department,Person person,MonthChkEnum... states){
+
+	@Override
+	public List<MonthChk> findMonthChkByPeriod(Long year,Long month){
+		return findByPeriodAndDepartmentAndPersonAndState(year, month, null, null);
+	}
+
+
+	@Override
+	public List<MonthChk> getMonthChkByPeriodAndDepartmentAndState(Long year, Long month,String department,MonthChkEnum... states) {
+		return findByPeriodAndDepartmentAndPersonAndState(year,month,department,null,states);
+	}
+
+	@Override
+	public List<MonthChk> getMonthChkByDepartmentAndState(String department,MonthChkEnum... states) {
+		return findByPeriodAndDepartmentAndPersonAndState(null,null,department,null,states);
+	}
+
+	@Override
+	public List<MonthChk> getMonthChkByPersonAndState(Long year, Person person,MonthChkEnum... states) {
+		return findByPeriodAndDepartmentAndPersonAndState(year,null,null,person, states);
+	}
+	
+	private List<MonthChk> findByPeriodAndDepartmentAndPersonAndState(Long year, Long month,String department,Person person,MonthChkEnum... states){
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<MonthChk> query=builder.createQuery(MonthChk.class);
 		Root<MonthChk> root=query.from(MonthChk.class);

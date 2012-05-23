@@ -16,19 +16,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.application.MonthChkService;
 import cn.fyg.pa.domain.department.Department;
+import cn.fyg.pa.domain.department.DepartmentRepository;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.monthchk.MonthChk;
 import cn.fyg.pa.domain.monthchk.MonthChkEnum;
+import cn.fyg.pa.domain.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.PersonRepository;
-import cn.fyg.pa.domain.service.DepartmentService;
 import cn.fyg.pa.domain.service.IdrMonthPlanBillService;
-import cn.fyg.pa.domain.service.MonthChkService;
-import cn.fyg.pa.domain.service.WorkTypeService;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.domain.worktype.WorkType;
+import cn.fyg.pa.domain.worktype.WorkTypeRepository;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.bean.IdrMonthPlanQueryBean;
 import cn.fyg.pa.interfaces.bean.MonthChkYearQueryBean;
@@ -51,19 +52,21 @@ public class MonthChkCtl {
 	
 	@Resource
 	PersonRepository personRepository;
-	
+	@Resource
+	WorkTypeRepository workTypeRepository;	
 	@Resource
 	MonthChkService monthChkService;
-	
 	@Resource
-	WorkTypeService workTypeService;
+	MonthChkRepository monthChkRepository;
+	@Resource
+	DepartmentRepository  departmentRepository;
+
 	
 	@Resource
 	IdrMonthPlanBillService idrMonthPlanBillService;
 	
-	@Resource
-	DepartmentService departmentService;
-	
+
+
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
 		logger.info("initPerson");
@@ -76,7 +79,7 @@ public class MonthChkCtl {
 		logger.info("toEdit");
 		MonthChk monthChk=monthChkService.getCurrentMonthChk(person);
 		Person mange=personRepository.getDeptMange(person.getDepartment());
-		List<WorkType> workTypes=workTypeService.getAllWorkType();
+		List<WorkType> workTypes=workTypeRepository.findAllWorkTypes();
 		
 		map.put("mange", mange);
 		map.put("monthChk", monthChk);
@@ -112,7 +115,7 @@ public class MonthChkCtl {
 	@RequestMapping(value="/histroy",method=RequestMethod.GET)
 	public String histroy(MonthChkYearQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		logger.info("histroy");
-		List<MonthChk> monthChks=monthChkService.getMonthChkByPersonAndState(queryBean.getYear(), person, MonthChkEnum.FINISHED);
+		List<MonthChk> monthChks=monthChkRepository.getMonthChkByPersonAndState(queryBean.getYear(), person, MonthChkEnum.FINISHED);
 		map.put("dateTool", new DateTool());
 		map.put("queryBean", queryBean);
 		map.put("monthChks", monthChks);
@@ -124,7 +127,7 @@ public class MonthChkCtl {
 	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
 	public String idrMonthPlan(IdrMonthPlanQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map){
 		logger.info("idrMonthPlan");
-		Department department = departmentService.findByName(person.getDepartment());
+		Department department = departmentRepository.findByName(person.getDepartment());
 		List<IdrMonthPlanBill> idrMonthPlanBills = idrMonthPlanBillService.getIdrMonthPlanBillByPeriodAndDepartmentAndState(
 						queryBean.getYear(), 
 						queryBean.getMonth(), 

@@ -25,11 +25,9 @@ public class GmangeAnalysisFacadeImp implements GmangeAnalysisFacade {
 	
 	@Resource
 	DepartmentRepository departmentRepository;
-	
 	@Resource
 	IdrMonthPlanBillRepository idrMonthPlanBillRepository;
 	
-
 	@Override
 	public AnalysisIdrMonthPlanBean analyseIdrMonthPlan(Long year, Long month){
 		List<Department> departments=departmentRepository.getAllDepartmentsOrderById();
@@ -41,14 +39,13 @@ public class GmangeAnalysisFacadeImp implements GmangeAnalysisFacade {
 	
 	@Resource
 	MonthChkRepository monthChkReposity;
-	
 	@Resource
 	PersonRepository personRepository;
 	
 	@Override
 	public AnalysisMonthChkBean analyseMonthChk(Long year,Long month){
 		List<Person> persons=personRepository.getPersonByManage(ManageEnum.N);
-		List<MonthChk> monthChks=monthChkReposity.getEveryoneMonthChkByPeriod(year, month);
+		List<MonthChk> monthChks=monthChkReposity.findMonthChkByPeriod(year, month);
 		AnalysisMonthChkBuiler builder=new AnalysisMonthChkBuiler(persons, monthChks);
 		return builder.build(year,month);
 	}
