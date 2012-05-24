@@ -56,13 +56,11 @@ public class IdrMonthPlanBill extends IdrTaskBill {
 	}
 
 	public void next() throws StateChangeException {
-		state.setIdrMonthPlanBill(this);
-		this.state.next();
+		this.state.next(this);
 	}
 	
 	public void back() throws StateChangeException{
-		state.setIdrMonthPlanBill(this);
-		this.state.back();
+		this.state.back(this);
 	}
 	
 }

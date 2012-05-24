@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.controller;
+package cn.fyg.pa.interfaces.monthplan;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,16 +18,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.application.IdrMonthPlanBillService;
 import cn.fyg.pa.domain.department.Department;
+import cn.fyg.pa.domain.department.DepartmentRepository;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillRepository;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.deptmonthplan.IdrTask;
 import cn.fyg.pa.domain.person.Person;
-import cn.fyg.pa.domain.service.DepartmentService;
-import cn.fyg.pa.domain.service.IdrMonthPlanBillService;
+import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
-import cn.fyg.pa.infrastructure.perisistence.PersonDao;
 
 @Controller
 @RequestMapping("/mange/{personId}/idrmonthplan")
@@ -38,6 +39,7 @@ public class IdrMonthPlanCtl {
 	public static Map<IdrMonthPlanEnum,String> PAGEMAP=new HashMap<IdrMonthPlanEnum,String>();
 	
 	static{
+		PAGEMAP.put(IdrMonthPlanEnum.NEW, "idrmonthplan/edit");
 		PAGEMAP.put(IdrMonthPlanEnum.SAVED, "idrmonthplan/edit");
 		PAGEMAP.put(IdrMonthPlanEnum.SUBMITTED, "idrmonthplan/view");
 		PAGEMAP.put(IdrMonthPlanEnum.EXECUTE, "idrmonthplan/summary");
@@ -45,23 +47,23 @@ public class IdrMonthPlanCtl {
 	}
 	
 	@Resource
-	PersonDao personDao;
-	
+	PersonRepository personRepository;
+	@Resource
+	IdrMonthPlanBillRepository idrMonthPlanBillRepository;
 	@Resource
 	IdrMonthPlanBillService idrMonthPlanBillService; 
-	
 	@Resource
-	DepartmentService departmentService; 
+	DepartmentRepository departmentRepository;
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
-		return personDao.find(personId);
+		return personRepository.find(personId);
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String toEdit(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		String departmentName=person.getDepartment();
-		Department department=departmentService.findByName(departmentName);
+		Department department=departmentRepository.findByName(departmentName);
 		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillService.getCurrentIdrMonthPlanBill(department);
 		//XXX 
 		Long contextSize=0L;
@@ -102,7 +104,7 @@ public class IdrMonthPlanCtl {
 	@RequestMapping(value="/{idrmonthplanId}/summary",method=RequestMethod.POST)
 	public String summary(@PathVariable("idrmonthplanId")Long idrmonthplanId,HttpServletRequest request,HttpSession session){
 		String message="保存成功！";
-		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillService.find(idrmonthplanId);
+		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillRepository.find(idrmonthplanId);
 		//TODO 此处有待进一步修改
 		Iterator<IdrTask> iterator=idrMonthPlanBill.getIdrTasks().iterator();
 		while(iterator.hasNext()){
@@ -121,7 +123,7 @@ public class IdrMonthPlanCtl {
 	@RequestMapping(value="/{idrmonthplanId}/finish",method=RequestMethod.POST)
 	public String finish(@PathVariable("idrmonthplanId")Long idrmonthplanId,HttpServletRequest request,HttpSession session){
 		String message="工作计划完成！";
-		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillService.find(idrmonthplanId);
+		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillRepository.find(idrmonthplanId);
 		//TODO 此处有待进一步修改
 		Iterator<IdrTask> iterator=idrMonthPlanBill.getIdrTasks().iterator();
 		while(iterator.hasNext()){
@@ -146,8 +148,8 @@ public class IdrMonthPlanCtl {
 	@RequestMapping(value="/history",method=RequestMethod.GET)
 	public String history(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		String departmentName=person.getDepartment();
-		Department department=departmentService.findByName(departmentName);
-		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillService.getIdrMonthPlanBillByDepartmentAndState(department,IdrMonthPlanEnum.FINISHED);
+		Department department=departmentRepository.findByName(departmentName);
+		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.getIdrMonthPlanBillByDepartmentAndState(department,IdrMonthPlanEnum.FINISHED);
 		map.put("person", person);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);
 		return "idrmonthplan/histroy";

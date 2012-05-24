@@ -26,11 +26,11 @@ import cn.fyg.pa.domain.monthchk.MonthChkEnum;
 import cn.fyg.pa.domain.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.PersonRepository;
-import cn.fyg.pa.domain.service.IdrMonthPlanBillService;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.domain.worktype.WorkType;
 import cn.fyg.pa.domain.worktype.WorkTypeRepository;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
+import cn.fyg.pa.infrastructure.perisistence.IdrMonthPlanBillRepositoryJpa;
 import cn.fyg.pa.interfaces.bean.IdrMonthPlanQueryBean;
 import cn.fyg.pa.interfaces.bean.MonthChkYearQueryBean;
 import cn.fyg.pa.interfaces.tool.DateTool;
@@ -60,10 +60,8 @@ public class MonthChkCtl {
 	MonthChkRepository monthChkRepository;
 	@Resource
 	DepartmentRepository  departmentRepository;
-
-	
 	@Resource
-	IdrMonthPlanBillService idrMonthPlanBillService;
+	IdrMonthPlanBillRepositoryJpa  idrMonthPlanBillRepositoryImp;
 	
 
 
@@ -128,7 +126,7 @@ public class MonthChkCtl {
 	public String idrMonthPlan(IdrMonthPlanQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map){
 		logger.info("idrMonthPlan");
 		Department department = departmentRepository.findByName(person.getDepartment());
-		List<IdrMonthPlanBill> idrMonthPlanBills = idrMonthPlanBillService.getIdrMonthPlanBillByPeriodAndDepartmentAndState(
+		List<IdrMonthPlanBill> idrMonthPlanBills = idrMonthPlanBillRepositoryImp.getIdrMonthPlanBillByPeriodAndDepartmentAndState(
 						queryBean.getYear(), 
 						queryBean.getMonth(), 
 						department,
