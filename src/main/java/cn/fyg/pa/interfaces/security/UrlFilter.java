@@ -19,9 +19,10 @@ import org.slf4j.LoggerFactory;
 import cn.fyg.pa.interfaces.bean.LoginRetBean;
 import cn.fyg.pa.interfaces.tool.SessionUtil;
 
-/**  TODO 这里有重复逻辑  
+/**
+ *  TODO 这里有重复逻辑  
  *  TODO url 还是可以越权操作    要重新考虑这里的实现
- * 用户访问权限的过滤器  
+ *  用户访问权限的过滤器  
  * @author viano  
  */  
 public class UrlFilter implements Filter {   
@@ -31,7 +32,7 @@ public class UrlFilter implements Filter {
 	/**
 	 * 非过滤url
 	 */
-	private static final List<String> noFilterUrl=Arrays.asList("/pa/","/pa/login","/pa/fetchcsr","/pa/fail","/pa/dispatcher");
+	private static final List<String> noFilterUrl=Arrays.asList("/pa/","/pa/first","/pa/fetchcsr","/pa/fail","/pa/login");
 	
 	/**
 	 * 资源url

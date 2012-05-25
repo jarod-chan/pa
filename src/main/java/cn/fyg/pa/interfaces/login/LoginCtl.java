@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.controller;
+package cn.fyg.pa.interfaces.login;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +12,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.application.LoginService;
 import cn.fyg.pa.domain.person.ManageEnum;
-import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.interfaces.bean.LoginBean;
 import cn.fyg.pa.interfaces.bean.LoginRetBean;
 import cn.fyg.pa.interfaces.bean.UrlNameBean;
+import cn.fyg.pa.interfaces.tool.Constant;
 import cn.fyg.pa.interfaces.tool.Dispatcher;
 import cn.fyg.pa.interfaces.tool.SessionUtil;
 
@@ -34,13 +35,16 @@ public class LoginCtl {
 	private LoginService loginService;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String getLogin() {
+	public String getLogin(@RequestParam("forwardUrl") String forwardUrl) {
 		logger.info("getLogin");
-		return "login";
+		if(forwardUrl==null){
+			return "redirect:first";
+		}
+		return "forward:"+forwardUrl;
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ModelAndView postLogin(LoginBean loginBean,HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView postLogin(LoginBean loginBean, @RequestParam("forwardUrl") String forwardUrl,HttpServletRequest request, HttpServletResponse response) {
 		logger.info("postLogin");
 		
 		LoginRetBean loginRetBean=loginService.checkLoginPerson(loginBean);
@@ -55,7 +59,7 @@ public class LoginCtl {
 			return dispatcherMav(loginRetBean);
 		}
 				
-		return reLoginMav(loginBean);
+		return reLoginMav(loginBean,forwardUrl);
 	}
 
 	//XXX 返回用户的菜单
@@ -108,11 +112,11 @@ public class LoginCtl {
 		return mav;
 	}
 	
-	private ModelAndView reLoginMav(LoginBean loginBean) {
+	private ModelAndView reLoginMav(LoginBean loginBean, String backurl) {
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("login");
+		mav.setViewName("forward:"+backurl);
 		mav.addObject("loginPage",loginBean);
-		mav.addObject("msg","用户名或者密码错误!");
+		mav.addObject(Constant.MESSAGE_NAME,"用户名或者密码错误!");
 		return mav;
 	}
 
