@@ -126,8 +126,6 @@
 <c:set target="${pagefunc}" property="name" value="部门工作执行" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/idrmonthplan" />  
 
-<c:set target="${pagetitle}" property="name" value="部门月度工作任务提报" />
-<c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${person.id}/idrmonthplan" />  
 
 <c:set var="pagesize" value="820" scope="request"/> 
 <body>

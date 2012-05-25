@@ -150,9 +150,6 @@
 <c:set target="${pagefunc}" property="name" value="月度工作任务" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/person/${monthChk.person.id}/monthchk" />  
 
-<c:set target="${pagetitle}" property="name" value="员工月度工作任务提报" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/person/${monthChk.person.id}/monthchk" /> 
-
 <c:set var="pagesize" value="1010" scope="request"/> 
 <body>
 

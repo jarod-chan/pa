@@ -49,7 +49,7 @@ body {
 
 #fixdiv {
 	display: block;
-	top: 40px;
+	top: 20px;
 	left: ${pagewidth-291}px;
 	width: 300px;
 	position: fixed;
@@ -79,12 +79,11 @@ body {
 <script type="text/javascript">
 	
 	$(document).ready(function() {
-		$(":input[name='username']").bind("blur",blurUsername).triggerHandler("blur");
+		$("#loginform :input[name='username']").bind("blur",blurUsername).triggerHandler("blur");
 	});
 
-
 	//特殊人员事件
-	function blurUsername(){
+	var blurUsername=function(){
 		var username=$(this).val().trim();
 		$(this).val(username);
 		if(username=='牟一琦'||username=='陆兆贤'){
@@ -98,7 +97,7 @@ body {
 
 </script>
 
-<form action="login?forwardUrl=/first" method="post">
+<form id="loginform" action="login" method="post">
 	<div id="fixdiv" >
 		<div></div>
 		<div>

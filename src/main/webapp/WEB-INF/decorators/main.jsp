@@ -10,6 +10,27 @@
 <title><decorator:title/></title>
 <decorator:head />
 <link type="text/css" rel="stylesheet" href="/${ctx}/resources/css/mainbar.css" /> 
+<style type="text/css">
+/* 定义页面内部的头部信息 */
+
+.headdiv{
+	width:${pagesize}px;/* pagesize 从页面传入可否修改 */
+}
+
+.headdiv .headleft{
+	width:50%;
+	float: left;
+}
+.headdiv .headright{
+	width:48%;
+	float: right;
+	text-align: right;
+}
+.headdiv .headnone{
+   clear: both;
+}
+/*-----------------------------------------------------------------------------------------*/
+</style>
 <script type="text/javascript">
 $(function(){
 	$('.nav').children("li:has(ul)").hover(
@@ -21,6 +42,10 @@ $(function(){
 		}
 	);
 });
+
+function logout(){
+	window.open('/${ctx}','_self');
+}
 </script>
 
 </head>
@@ -40,7 +65,7 @@ $(function(){
 			<div class="main_head">方远房产卓越绩效管理平台</div>
 		</div>
 		<div class="top_right">
-			<div class="main_blank"></div>
+			<div class="main_blank"><input type="button" value="退出" onclick="logout()"/>&nbsp;&nbsp;</div>
 			<div class="main_info">${loginInfo}&nbsp;&nbsp;</div>
 		</div>
 		<div class="clear_div"></div>
@@ -48,7 +73,7 @@ $(function(){
 	
 	<div class="second">
 		<div class="second_left" >
-			<a href="${pagefunc.url}">${pagefunc.name}</a>&gt;<a href="${pagetitle.url}">${pagetitle.name}</a>
+			<a href="/${ctx}/common/userhome/${loginRet.personid}">首页</a><c:if test="${pagefunc.name!=null}">&gt;<a href="${pagefunc.url}">${pagefunc.name}</a></c:if><c:if test="${pagetitle.name!=null}">&gt;<a href="${pagetitle.url}">${pagetitle.name}</a></c:if>
 		</div>
 		<div class="second_right" >
 			<!-- 功能菜单  -->

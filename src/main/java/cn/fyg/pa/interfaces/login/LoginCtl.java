@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.application.LoginService;
@@ -35,16 +34,13 @@ public class LoginCtl {
 	private LoginService loginService;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String getLogin(@RequestParam("forwardUrl") String forwardUrl) {
+	public String getLogin() {
 		logger.info("getLogin");
-		if(forwardUrl==null){
-			return "redirect:first";
-		}
-		return "forward:"+forwardUrl;
+		return "redirect:first";
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ModelAndView postLogin(LoginBean loginBean, @RequestParam("forwardUrl") String forwardUrl,HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView postLogin(LoginBean loginBean,HttpServletRequest request, HttpServletResponse response) {
 		logger.info("postLogin");
 		
 		LoginRetBean loginRetBean=loginService.checkLoginPerson(loginBean);
@@ -59,7 +55,7 @@ public class LoginCtl {
 			return dispatcherMav(loginRetBean);
 		}
 				
-		return reLoginMav(loginBean,forwardUrl);
+		return reLoginMav(loginBean);
 	}
 
 	//XXX 返回用户的菜单
@@ -69,7 +65,7 @@ public class LoginCtl {
 		if(loginRetBean.getMange().equals("A")){
 		}
 		if(loginRetBean.getMange().equals("G")){
-			menuList.add(new UrlNameBean("部门工作执行",String.format("gmange/%s/idrmonthplan",personId)));
+			menuList.add(new UrlNameBean("部门工作执行情况",String.format("gmange/%s/idrmonthplan",personId)));
 		}
 		if(loginRetBean.getMange().equals("Y")){
 			menuList.add(new UrlNameBean("员工工作评价",String.format("mange/%s/monthchk",personId)));
@@ -112,9 +108,9 @@ public class LoginCtl {
 		return mav;
 	}
 	
-	private ModelAndView reLoginMav(LoginBean loginBean, String backurl) {
+	private ModelAndView reLoginMav(LoginBean loginBean) {
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("forward:"+backurl);
+		mav.setViewName("first");
 		mav.addObject("loginPage",loginBean);
 		mav.addObject(Constant.MESSAGE_NAME,"用户名或者密码错误!");
 		return mav;

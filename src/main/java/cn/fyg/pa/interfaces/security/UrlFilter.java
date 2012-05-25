@@ -42,7 +42,7 @@ public class UrlFilter implements Filter {
 	/**
 	 * 公共url
 	 */
-	private static final List<String> commonUrl=Arrays.asList("/pa/common/settings/person");
+	private static final List<String> commonUrl=Arrays.asList("/pa/common/settings/person","/pa/common/userhome");
 	
 	/**
 	 * 职员url

@@ -44,7 +44,7 @@
 	
 </script>  
 </head>
-<c:set target="${pagefunc}" property="name" value="部门月度工作任务执行" />
+<c:set target="${pagefunc}" property="name" value="部门工作执行情况" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan" />  
 
 <c:set target="${pagetitle}" property="name" value="部门月度工作计划审核" /> 

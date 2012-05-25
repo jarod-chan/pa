@@ -4,11 +4,9 @@
 <head>
 <%@ include file="../common/head.jsp"%>
 </head>
-<c:set target="${pagefunc}" property="name" value="用户账户设置" />
+<c:set target="${pagefunc}" property="name" value="密码修改" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/common/settings/person/${person.id}/password" />  
 
-<c:set target="${pagetitle}" property="name" value="密码修改" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/common/settings/person/${person.id}/password" /> 
 
 <c:set var="pagesize" value="400" scope="request"/> 
 <body>
