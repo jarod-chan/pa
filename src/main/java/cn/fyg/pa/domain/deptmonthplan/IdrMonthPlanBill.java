@@ -63,4 +63,14 @@ public class IdrMonthPlanBill extends IdrTaskBill {
 		this.state.back(this);
 	}
 	
+	public int getContextSize(){
+		Long contextSize=0L;
+		for (IdrTask idrTask : this.getIdrTasks()) {
+			if(idrTask.getContext()!=null){
+				contextSize=idrTask.getSn();
+			}
+		}
+		return contextSize.intValue();
+	}
+	
 }

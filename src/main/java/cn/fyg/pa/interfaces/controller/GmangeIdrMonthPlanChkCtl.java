@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.application.IdrMonthPlanBillService;
+import cn.fyg.pa.domain.department.Department;
+import cn.fyg.pa.domain.department.DepartmentRepository;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillRepository;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;
@@ -39,12 +42,17 @@ public class GmangeIdrMonthPlanChkCtl {
 	
 	@Resource
 	PersonDao personDao;
-	
 	@Resource
-	IdrMonthPlanBillRepository idrMonthPlanBillRepository;
+	PersonRepository personRepository;
+	@Resource
+	DepartmentRepository departmentRepository;
+	
+
 	
 	@Resource
 	IdrMonthPlanBillService idrMonthPlanBillService;
+	@Resource
+	IdrMonthPlanBillRepository idrMonthPlanBillRepository;
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
@@ -53,9 +61,10 @@ public class GmangeIdrMonthPlanChkCtl {
 	}
 	
 	@RequestMapping(value="")
-	public String index(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
-		logger.info("index");
-		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.getIdrMonthPlanBillByGmangeAndState(person,IdrMonthPlanEnum.SUBMITTED,IdrMonthPlanEnum.EXECUTE);
+	public String toList(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+		logger.info("toList");
+		List<Department> departments = departmentRepository.findDepartmentsByGmanage(person);
+		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByDepartmentAndState(departments,IdrMonthPlanEnum.SUBMITTED,IdrMonthPlanEnum.EXECUTE);
 		map.put("person", person);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);
 		map.put("message",new SessionMPR(session).getMessage());
@@ -99,7 +108,8 @@ public class GmangeIdrMonthPlanChkCtl {
 	
 	@RequestMapping(value="/history",method=RequestMethod.GET)
 	public String history(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
-		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.getIdrMonthPlanBillByGmangeAndState(person,IdrMonthPlanEnum.FINISHED);
+		List<Department> departments = departmentRepository.findDepartmentsByGmanage(person);
+		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByDepartmentAndState(departments,IdrMonthPlanEnum.FINISHED);
 		map.put("person", person);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);
 		return "gmangeidrmonthplan/histroy";

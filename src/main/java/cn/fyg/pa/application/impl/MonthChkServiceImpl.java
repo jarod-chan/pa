@@ -21,7 +21,7 @@ public class MonthChkServiceImpl implements MonthChkService{
 	
 	@Override
 	public MonthChk getCurrentMonthChk(Person person) {
-		MonthChk monthChk=monthChkRepository.findMaxMonthMonthChk(person);
+		MonthChk monthChk=monthChkRepository.findLastMonthMonthChk(person);
 		if(monthChk==null){
 			return MonthChkFactory.createInitMonthChk(person);
 		}

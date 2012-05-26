@@ -26,7 +26,7 @@ public class DeptindiactorFacade {
 	DeptIndicatorService deptIndicatorService;
 	
 	public List<ListBean> getListBeans(Long year){
-		List<Department> departments=departmentRepository.getAllDepartmentsOrderById();
+		List<Department> departments=departmentRepository.findAllDepartmentsOrderById();
 		List<DeptIndicator> deptIndicators=deptIndicatorRepository.findByYear(year);
 		Map<Long,DeptIndicator> deptIndicatorsMap=createDeptIndicatorsMap(deptIndicators);
 		List<ListBean> listBeans=createLsitBeans(departments,deptIndicatorsMap);

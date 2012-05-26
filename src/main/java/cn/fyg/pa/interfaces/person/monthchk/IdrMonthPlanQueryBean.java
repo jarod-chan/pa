@@ -1,7 +1,8 @@
-package cn.fyg.pa.interfaces.bean;
+package cn.fyg.pa.interfaces.person.monthchk;
 
 import cn.fyg.pa.interfaces.tool.DateTool;
 
+//XXX 被多出引用 应该重构
 public class IdrMonthPlanQueryBean {
 	
 	private Long year;

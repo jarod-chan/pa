@@ -12,31 +12,22 @@ import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillFactory;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillRepository;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
-import cn.fyg.pa.infrastructure.perisistence.DepartmentDao;
-import cn.fyg.pa.infrastructure.perisistence.IdrMonthPlanBillDao;
 
 @Service
 public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 	
-	//XXX   重构到此处，去掉dao重构到repository正在进行中。。。。。。。
-	@Resource
-	IdrMonthPlanBillDao idrMonthPlanBillDao;
 	@Resource
 	IdrMonthPlanBillRepository idrMonthPlanBillRepository;
-	@Resource
-	DepartmentDao departmentDao;
 	
 	@Override
 	@Transactional
 	public IdrMonthPlanBill save(IdrMonthPlanBill idrMonthPlanBill) {
-		return idrMonthPlanBillDao.save(idrMonthPlanBill);
+		return idrMonthPlanBillRepository.save(idrMonthPlanBill);
 	}
 
-
-
 	@Override
-	public IdrMonthPlanBill getCurrentIdrMonthPlanBill(Department department) {
-		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillRepository.findMaxMonthIdrMonthPlanBill(department);
+	public IdrMonthPlanBill getLastIdrMonthPlanBill(Department department) {
+		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillRepository.findLastIdrMonthPlanBill(department);
 		if(idrMonthPlanBill==null){
 			return IdrMonthPlanBillFactory.createInitIdrMonthPlanBill(department);
 		}

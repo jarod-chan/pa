@@ -17,11 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.infrastructure.perisistence.FychkmangeDao;
 import cn.fyg.pa.infrastructure.perisistence.PersonDao;
+import cn.fyg.pa.interfaces.manage.yearchk.PersonPointBean;
 import cn.fyg.pa.interfaces.tool.CommonModelAndView;
 import cn.fyg.pa.interfaces.tool.Constant;
 import cn.fyg.pa.interfaces.tool.CookieUtil;
 import cn.fyg.pa.interfaces.tool.Tool;
-import cn.fyg.pa.interfaces.yearchk.managechk.PersonPointBean;
 
 
 

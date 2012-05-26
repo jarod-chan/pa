@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.department.DepartmentRepository;
+import cn.fyg.pa.domain.person.Person;
 
 @Repository
 public class DepartmentRepositoryImp implements DepartmentRepository {
@@ -25,7 +26,7 @@ public class DepartmentRepositoryImp implements DepartmentRepository {
 	}
 
 	@Override
-	public List<Department> getAllDepartmentsOrderById() {
+	public List<Department> findAllDepartmentsOrderById() {
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<Department> query=builder.createQuery(Department.class);
 		Root<Department> root=query.from(Department.class);
@@ -33,9 +34,19 @@ public class DepartmentRepositoryImp implements DepartmentRepository {
 		query.orderBy(builder.asc(root.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
+	
+	@Override
+	public List<Department> findDepartmentsByGmanage(Person gmanage){
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Department> query=builder.createQuery(Department.class);
+		Root<Department> root=query.from(Department.class);
+		query.select(root);
+		query.where(builder.equal(root.get("gmange_id"), gmanage.getId()));
+		return entityManager.createQuery(query).getResultList();
+	}
 
 	@Override
-	public Department findByName(String name) {
+	public Department findDepartmentByName(String name) {
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<Department> query=builder.createQuery(Department.class);
 		Root<Department> root=query.from(Department.class);

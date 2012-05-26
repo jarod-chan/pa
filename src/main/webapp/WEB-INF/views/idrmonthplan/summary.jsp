@@ -17,7 +17,7 @@
 	var leftAndMargin={"float":"left","margin-left":"10px","width":"22px"};
 	
 	//原始计划条数
-	var contextSize=${contextSize};
+	var contextSize=${idrMonthPlanBill.contextSize};
 	
 	var summaryCss={"width":"530","vertical-align":"top"};
 	var summaryLength={"maxlength":"500"};

@@ -11,7 +11,7 @@ public interface MonthChkRepository {
 	
 	MonthChk save(MonthChk monthChk);
 	
-	MonthChk findMaxMonthMonthChk(Person person);
+	MonthChk findLastMonthMonthChk(Person person);
 
 	List<MonthChk> findMonthChkByPeriod(Long year,Long month);
 	

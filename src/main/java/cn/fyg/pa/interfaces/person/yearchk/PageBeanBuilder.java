@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.yearchk.personchk;
+package cn.fyg.pa.interfaces.person.yearchk;
 
 import java.util.ArrayList;
 import java.util.List;

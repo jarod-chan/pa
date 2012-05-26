@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.yearchk.managechk;
+package cn.fyg.pa.interfaces.manage.yearchk;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

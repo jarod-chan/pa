@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.yearchk.managechk;
+package cn.fyg.pa.interfaces.manage.yearchk;
 
 import cn.fyg.pa.domain.person.Person;
 

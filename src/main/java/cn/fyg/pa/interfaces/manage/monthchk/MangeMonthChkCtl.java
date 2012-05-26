@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.controller;
+package cn.fyg.pa.interfaces.manage.monthchk;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,6 @@ import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
-import cn.fyg.pa.interfaces.bean.ManageMonthChkQueryBean;
 import cn.fyg.pa.interfaces.tool.DateTool;
 
 @Controller

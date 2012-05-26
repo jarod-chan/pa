@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.bean;
+package cn.fyg.pa.interfaces.person.monthchk;
 
 import cn.fyg.pa.interfaces.tool.DateTool;
 

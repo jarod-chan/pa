@@ -30,8 +30,8 @@ public class GmangeAnalysisFacadeImp implements GmangeAnalysisFacade {
 	
 	@Override
 	public AnalysisIdrMonthPlanBean analyseIdrMonthPlan(Long year, Long month){
-		List<Department> departments=departmentRepository.getAllDepartmentsOrderById();
-		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findByPeriod(year,month);
+		List<Department> departments=departmentRepository.findAllDepartmentsOrderById();
+		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriod(year,month);
 		AnalysisIdrMonthPlanBuilder builder = new AnalysisIdrMonthPlanBuilder(departments,idrMonthPlanBills);
 		return builder.build(year, month);
 	}

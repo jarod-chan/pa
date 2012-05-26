@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.monthplan;
+package cn.fyg.pa.interfaces.manage.monthplan;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,6 +29,7 @@ import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.person.PersonRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
+import cn.fyg.pa.interfaces.tool.DateTool;
 
 @Controller
 @RequestMapping("/mange/{personId}/idrmonthplan")
@@ -63,16 +64,8 @@ public class IdrMonthPlanCtl {
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String toEdit(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		String departmentName=person.getDepartment();
-		Department department=departmentRepository.findByName(departmentName);
-		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillService.getCurrentIdrMonthPlanBill(department);
-		//XXX 
-		Long contextSize=0L;
-		for (IdrTask idrTask : idrMonthPlanBill.getIdrTasks()) {
-			if(idrTask.getContext()!=null){
-				contextSize=idrTask.getSn();
-			}
-		}
-		map.put("contextSize", contextSize);
+		Department department=departmentRepository.findDepartmentByName(departmentName);
+		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillService.getLastIdrMonthPlanBill(department);
 		map.put("person", person);
 		map.put("idrMonthPlanBill", idrMonthPlanBill);
 		map.put("message", new SessionMPR(session).getMessage());
@@ -146,10 +139,12 @@ public class IdrMonthPlanCtl {
 	}
 	
 	@RequestMapping(value="/history",method=RequestMethod.GET)
-	public String history(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	public String history(YearQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		String departmentName=person.getDepartment();
-		Department department=departmentRepository.findByName(departmentName);
-		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.getIdrMonthPlanBillByDepartmentAndState(department,IdrMonthPlanEnum.FINISHED);
+		Department department=departmentRepository.findDepartmentByName(departmentName);
+		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriodAndDepartmentAndState(queryBean.getYear(),null,department,IdrMonthPlanEnum.FINISHED);
+		map.put("dateTool", new DateTool());
+		map.put("queryBean", queryBean);
 		map.put("person", person);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);
 		return "idrmonthplan/histroy";

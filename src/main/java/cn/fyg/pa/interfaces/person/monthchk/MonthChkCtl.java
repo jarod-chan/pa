@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.monthchk;
+package cn.fyg.pa.interfaces.person.monthchk;
 
 
 import java.util.HashMap;
@@ -20,6 +20,7 @@ import cn.fyg.pa.application.MonthChkService;
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.department.DepartmentRepository;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillRepository;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.monthchk.MonthChk;
 import cn.fyg.pa.domain.monthchk.MonthChkEnum;
@@ -30,9 +31,6 @@ import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.domain.worktype.WorkType;
 import cn.fyg.pa.domain.worktype.WorkTypeRepository;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
-import cn.fyg.pa.infrastructure.perisistence.IdrMonthPlanBillRepositoryJpa;
-import cn.fyg.pa.interfaces.bean.IdrMonthPlanQueryBean;
-import cn.fyg.pa.interfaces.bean.MonthChkYearQueryBean;
 import cn.fyg.pa.interfaces.tool.DateTool;
 
 @Controller
@@ -61,7 +59,7 @@ public class MonthChkCtl {
 	@Resource
 	DepartmentRepository  departmentRepository;
 	@Resource
-	IdrMonthPlanBillRepositoryJpa  idrMonthPlanBillRepositoryImp;
+	IdrMonthPlanBillRepository  idrMonthPlanBillRepository;
 	
 
 
@@ -125,8 +123,8 @@ public class MonthChkCtl {
 	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
 	public String idrMonthPlan(IdrMonthPlanQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map){
 		logger.info("idrMonthPlan");
-		Department department = departmentRepository.findByName(person.getDepartment());
-		List<IdrMonthPlanBill> idrMonthPlanBills = idrMonthPlanBillRepositoryImp.getIdrMonthPlanBillByPeriodAndDepartmentAndState(
+		Department department = departmentRepository.findDepartmentByName(person.getDepartment());
+		List<IdrMonthPlanBill> idrMonthPlanBills = idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriodAndDepartmentAndState(
 						queryBean.getYear(), 
 						queryBean.getMonth(), 
 						department,

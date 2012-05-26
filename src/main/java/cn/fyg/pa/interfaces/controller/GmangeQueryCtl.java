@@ -17,8 +17,8 @@ import cn.fyg.pa.domain.monthchk.MonthChk;
 import cn.fyg.pa.domain.monthchk.MonthChkEnum;
 import cn.fyg.pa.domain.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.service.DepartmentService;
-import cn.fyg.pa.interfaces.bean.IdrMonthPlanQueryBean;
 import cn.fyg.pa.interfaces.bean.MonthChkQueryBean;
+import cn.fyg.pa.interfaces.person.monthchk.IdrMonthPlanQueryBean;
 import cn.fyg.pa.interfaces.tool.DateTool;
 
 @Controller
@@ -31,7 +31,7 @@ public class GmangeQueryCtl {
 	
 	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
 	public String queryIdrMonthPlan(IdrMonthPlanQueryBean queryBean,Map<String,Object> map){
-		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.getIdrMonthPlanBillByPeriodAndState(queryBean.getYear(), queryBean.getMonth(), IdrMonthPlanEnum.FINISHED);
+		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriodAndState(queryBean.getYear(), queryBean.getMonth(), IdrMonthPlanEnum.FINISHED);
 		map.put("dateTool", new DateTool());
 		map.put("queryPage", queryBean);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);

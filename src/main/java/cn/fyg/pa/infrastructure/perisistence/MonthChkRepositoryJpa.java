@@ -66,7 +66,7 @@ public class MonthChkRepositoryJpa implements MonthChkRepository {
 	
 	
 	@Override
-	public MonthChk findMaxMonthMonthChk(Person person){
+	public MonthChk findLastMonthMonthChk(Person person){
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<MonthChk> query=builder.createQuery(MonthChk.class);
 		Root<MonthChk> root=query.from(MonthChk.class);
