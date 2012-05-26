@@ -49,7 +49,7 @@ body {
 
 #fixdiv {
 	display: block;
-	top: 20px;
+	top: 40px;
 	left: ${pagewidth-291}px;
 	width: 300px;
 	position: fixed;
