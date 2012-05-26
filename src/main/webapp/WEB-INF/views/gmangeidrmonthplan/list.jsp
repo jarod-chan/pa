@@ -59,7 +59,5 @@
 </tbody>
 </table>
 
-
-<%@ include file="../fragment/gmangequerymenu.jsp"%>
 </body>
 </html>

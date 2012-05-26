@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.controller;
+package cn.fyg.pa.interfaces.totalreport;
 
 import java.util.List;
 import java.util.Map;

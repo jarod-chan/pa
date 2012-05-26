@@ -2,11 +2,11 @@
 <%@ include file="../common/common.jsp"%>
 <html>
 <head>
-<meta name="decorator" content="none"/>
+
 <%@ include file="../common/head.jsp"%>
 <style type="text/css">
-ul{list-style-type:none; margin:0;padding:0;width:100%; }
-ul li{ width:100px; float:left;background-color:#FFFFFF;margin: 4px;border: 1px solid #97CBFF; }
+tbody ul{list-style-type:none; margin:0;padding:0;width:100%; }
+tbody ul li{ width:100px; float:left;background-color:#FFFFFF;margin: 4px;border: 1px solid #97CBFF; }
 </style>
 <script type="text/javascript">
 	var swithShow=function(){
@@ -29,8 +29,13 @@ ul li{ width:100px; float:left;background-color:#FFFFFF;margin: 4px;border: 1px 
 	 });
 </script>
 </head>
+<c:set target="${pagefunc}" property="name" value="公司考核情况查询" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${loginRet.personid}/totalreport" />  
+
+<c:set target="${pagetitle}" property="name" value="公司员工月度工作概况" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${loginRet.personid}/analysis/monthchk" /> 
+
 <body>
-<h2>公司员工月度工作概况</h2>
 <form action="" method="get">
 年份：
 <select name="year">

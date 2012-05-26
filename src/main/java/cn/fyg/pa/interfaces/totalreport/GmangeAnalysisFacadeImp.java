@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.facade;
+package cn.fyg.pa.interfaces.totalreport;
 
 import java.util.List;
 
