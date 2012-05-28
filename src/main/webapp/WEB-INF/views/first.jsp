@@ -13,7 +13,7 @@
 			<div class="main_head">方远房产卓越绩效管理平台</div>
 		</div>
 		<div class="top_right">
-			<div class="main_blank"><input type="button" value="登录" onclick="back()"/>&nbsp;&nbsp;</div>
+			<div class="main_blank"><input id="btn_login" type="button" value="登录\/" />&nbsp;&nbsp;</div>
 			<div class="main_info"></div>
 		</div>
 		<div class="clear_div"></div>
@@ -28,6 +28,9 @@
 			<ul class="nav" style="float:left">
 				<li>
 					<div>&nabla;绩效系统功能&nbsp;&nbsp;</div>
+				</li>
+				<li>
+					<div>&nabla;历史记录查询&nbsp;&nbsp;</div>
 				</li>
 				<li>
 					<div>&nabla;系统功能&nbsp;&nbsp;</div>
@@ -49,8 +52,8 @@ body {
 
 #fixdiv {
 	display: block;
-	top: 40px;
-	left: ${pagewidth-291}px;
+	top: 44px;
+	left: ${pagewidth-292}px; 
 	width: 300px;
 	position: fixed;
 } /* IE并不认识fixed，而FF认识 */
@@ -63,6 +66,7 @@ body {
 	border-width:1px;
 	border-color: #000000 ;                 /* #5FBA63 */
 	text-align: center;
+	display: none;
 }
 #fixdiv  div{
 	height: 25px;
@@ -80,7 +84,28 @@ body {
 	
 	$(document).ready(function() {
 		$("#loginform :input[name='username']").bind("blur",blurUsername).triggerHandler("blur");
+		$("#btn_login").bind("click",toggleLoginDiv);
+		<c:if test="${message!=null}">
+		$("#fixdiv").show();
+		$("#btn_login").val("登录/\\");
+		</c:if>
 	});
+	
+	var toggleLoginDiv=function(){
+		var fixdiv=$("#fixdiv");
+		var btn=$(this);
+		if(fixdiv.is(":visible")){
+			fixdiv.slideUp(500).queue(function(next){
+				btn.val("登录\\/");
+				next();
+			});
+		}else{
+			fixdiv.slideDown(500).queue(function(next){
+				btn.val("登录/\\");
+				next();
+			});
+		}
+	}
 
 	//特殊人员事件
 	var blurUsername=function(){

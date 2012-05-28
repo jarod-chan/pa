@@ -4,12 +4,8 @@
 <head>
 <%@ include file="../common/head.jsp"%>
 </head>
-
-<c:set target="${pagefunc}" property="name" value="月度工作任务" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/monthchk" />  
-
-<c:set target="${pagetitle}" property="name" value="部门月度工作计划查看" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/person/${person.id}/monthchk/idrmonthplan" /> 
+<c:set target="${pagefunc}" property="name" value="部门计划查看" /> 
+<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/monthchk/idrmonthplan" /> 
 
 <c:set var="pagesize" value="720" scope="request"/> 
 <body>
@@ -32,7 +28,6 @@
 <input type="submit" value="查询" />
 </div>
 <div class="headright">
-<input type="button" value="<<返回" onclick="javascript:window.open('/${ctx}/person/${person.id}/monthchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

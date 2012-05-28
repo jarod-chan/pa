@@ -16,7 +16,6 @@
 	部门:${mange.department}&nbsp;&nbsp;
 </div>
 <div class="headright" >
-	<input type="button" value="历史考核>>" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/histroy','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

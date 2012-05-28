@@ -28,8 +28,6 @@
 <div class="headdiv" >
 <div class="headleft" >考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}&nbsp;&nbsp;部门:${monthChk.person.department}&nbsp;&nbsp;上级主管:${mange.name}</div>
 <div class="headright">
-<input type="button" value="查看部门计划>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/idrmonthplan','_self')"/>
-<input type="button" value="查看历史考核>>" onclick="javascript:window.open('/${ctx}/person/${monthChk.person.id}/monthchk/histroy','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

@@ -39,7 +39,6 @@
 考核年份:${year}&nbsp;&nbsp;员工:${checkPerson.name}
 </div>
 <div class="headright" >
-<input type="button" value="<<返回"  onclick="javascript:window.open('/pa/mange/${person.id}/yearchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -81,6 +80,7 @@
 </table>
 <br>
 <input type="button" value="保存" onclick="save()"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/pa/mange/${person.id}/yearchk','_self')"/>
 </form>
 </body>
 </html>

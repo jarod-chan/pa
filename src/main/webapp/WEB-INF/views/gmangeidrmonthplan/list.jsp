@@ -16,7 +16,6 @@
 <div class="headleft" >
 </div>
 <div class="headright"  >
-	<input type="button" value="历史记录>>" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan/history','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>

@@ -50,16 +50,45 @@ public class LoginCtl {
 			new SessionUtil(request).setValue("loginRet",loginRetBean);
 			String loginInfo = getLoginInfo(loginRetBean);
 			new SessionUtil(request).setValue("loginInfo", loginInfo);
-			List<UrlNameBean> menuList=getMenuList(loginRetBean);
-			new SessionUtil(request).setValue("menuList", menuList);
+			
+			List<UrlNameBean> funcList=getFuncList(loginRetBean);
+			new SessionUtil(request).setValue("funcList", funcList);
+			List<UrlNameBean> queryList=getQueryList(loginRetBean);
+			new SessionUtil(request).setValue("queryList", queryList);
+			
 			return dispatcherMav(loginRetBean);
 		}
 				
 		return reLoginMav(loginBean);
 	}
 
+	private List<UrlNameBean> getQueryList(LoginRetBean loginRetBean) {
+		String personId=loginRetBean.getPersonid();
+		List<UrlNameBean> menuList=new ArrayList<UrlNameBean>();
+		if(loginRetBean.getMange().equals("A")){
+		}
+		if(loginRetBean.getMange().equals("G")){
+			menuList.add(new UrlNameBean("部门工作执行历史",String.format("gmange/%s/idrmonthplan/history",personId)));
+		}
+		if(loginRetBean.getMange().equals("Y")){
+			if(isSpecialPerson(personId)){
+				menuList.add(new UrlNameBean("部门工作执行历史",String.format("mange/%s/idrmonthplan/history",personId)));
+			}else{				
+				menuList.add(new UrlNameBean("部门工作执行历史",String.format("mange/%s/idrmonthplan/history",personId)));
+				menuList.add(new UrlNameBean("员工月度工作评价历史",String.format("mange/%s/monthchk/histroy",personId)));
+			}
+		}
+		if (loginRetBean.getMange().equals("N")) {
+			menuList.add(new UrlNameBean("月度工作历史",String.format("person/%s/monthchk/histroy",personId)));
+			menuList.add(new UrlNameBean("部门计划查看",String.format("person/%s/monthchk/idrmonthplan",personId)));
+		}
+		
+		
+		return menuList;
+	}
+
 	//XXX 返回用户的菜单
-	private List<UrlNameBean> getMenuList(LoginRetBean loginRetBean) {
+	private List<UrlNameBean> getFuncList(LoginRetBean loginRetBean) {
 		String personId=loginRetBean.getPersonid();
 		List<UrlNameBean> menuList=new ArrayList<UrlNameBean>();
 		if(loginRetBean.getMange().equals("A")){
@@ -69,9 +98,13 @@ public class LoginCtl {
 			menuList.add(new UrlNameBean("公司考核情况查询",String.format("gmange/%s/totalreport",personId)));
 		}
 		if(loginRetBean.getMange().equals("Y")){
-			menuList.add(new UrlNameBean("员工工作评价",String.format("mange/%s/monthchk",personId)));
-			menuList.add(new UrlNameBean("部门工作执行",String.format("mange/%s/idrmonthplan",personId)));
-			menuList.add(new UrlNameBean("员工年度考核",String.format("mange/%s/yearchk",personId)));
+			if(isSpecialPerson(personId)){
+				menuList.add(new UrlNameBean("部门工作执行",String.format("mange/%s/idrmonthplan",personId)));
+			}else{				
+				menuList.add(new UrlNameBean("部门工作执行",String.format("mange/%s/idrmonthplan",personId)));
+				menuList.add(new UrlNameBean("员工工作评价",String.format("mange/%s/monthchk",personId)));
+				menuList.add(new UrlNameBean("员工年度考核",String.format("mange/%s/yearchk",personId)));
+			}
 		}
 		if (loginRetBean.getMange().equals("N")) {
 			menuList.add(new UrlNameBean("月度工作任务",String.format("person/%s/monthchk",personId)));
@@ -81,6 +114,15 @@ public class LoginCtl {
 		
 		return menuList;
 	}
+	
+	//如果是【办公室】【 产品部】 的两个特殊人员，则做特殊处理
+	private boolean isSpecialPerson(String personId){
+		if(personId==null) return false;
+		if(personId.equals("101")||personId.equals("102")){
+			return true;
+		}
+		return false;
+	} 
 
 
 	//XXX  传递登录人员信息的session

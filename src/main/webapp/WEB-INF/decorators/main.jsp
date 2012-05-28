@@ -53,8 +53,6 @@ function logout(){
 <%
 	String loginInfo=(String)session.getAttribute("loginInfo");
 	request.setAttribute("loginInfo", loginInfo);
-	List menuList=(List)session.getAttribute("menuList");
-	request.setAttribute("menuList", menuList);
 %>
 
 <body>
@@ -79,10 +77,18 @@ function logout(){
 			<!-- 功能菜单  -->
 			<ul class="nav" style="float:left">
 				<li>
-					<div>&nabla;绩效系统功能&nbsp;&nbsp;</div>
+					<div>&nabla;绩效考核功能&nbsp;&nbsp;</div>
 					<ul>
-					<c:forEach var="menu" items="${menuList}">
-						<li><a href="/${ctx}/${menu.url}"><strong>&nbsp;&nbsp;${menu.name}&nbsp;&nbsp;</strong></a></li>
+					<c:forEach var="menu" items="${funcList}">
+						<li><a href="/${ctx}/${menu.url}">&nbsp;&nbsp;${menu.name}&nbsp;&nbsp;</a></li>
+					</c:forEach>
+					</ul>
+				</li>
+				<li>
+					<div>&nabla;历史记录查询&nbsp;&nbsp;</div>
+					<ul>
+					<c:forEach var="menu" items="${queryList}">
+						<li><a href="/${ctx}/${menu.url}">&nbsp;&nbsp;${menu.name}&nbsp;&nbsp;</a></li>
 					</c:forEach>
 					</ul>
 				</li>

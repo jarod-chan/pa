@@ -33,7 +33,6 @@
 状态:胜${pageBean.personChkBean.win}&nbsp;负${pageBean.personChkBean.lose}&nbsp;平${pageBean.personChkBean.draw}&nbsp;</td>
 </div>
 <div class="headright" >
-<input type="button" value="<<返回" onclick="javascript:window.open('/${ctx}/person/${person.id}/yearchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -77,6 +76,7 @@
 </table>
 <br/>
 <input type="button" value="保存" onclick="save()"/>
+<input type="button" value="<<返回" onclick="javascript:window.open('/${ctx}/person/${person.id}/yearchk','_self')"/>
 </form>
 </body>
 </html>

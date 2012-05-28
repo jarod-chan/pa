@@ -5,12 +5,9 @@
 <%@ include file="../common/head.jsp"%>
  
 </head>
-<c:set target="${pagefunc}" property="name" value="员工工作评价" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${mange.id}/monthchk" />  
-
-<c:set target="${pagetitle}" property="name" value="员工月度工作任务评价历史" /> 
+  
+<c:set target="${pagetitle}" property="name" value="员工月度工作评价历史" /> 
 <c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${mange.id}/monthchk/histroy" /> 
-
 
 <c:set var="pagesize" value="800" scope="request"/>  
 <body>
@@ -35,7 +32,6 @@
 	<input type="submit" value="查询" />
 </div>
 <div class="headright">
-	<input type="button" value="<<返回" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
