@@ -18,13 +18,13 @@ public class IndexCtl {
 		return "redirect:first";
 	}
 	
-	@RequestMapping(value = "/first")
+	@RequestMapping(value = "first")
 	public String first() {
 		logger.info("first");
 		return "first";
 	}
 		
-	@RequestMapping(value = "/fail", method = RequestMethod.GET)
+	@RequestMapping(value = "fail", method = RequestMethod.GET)
 	public String fail() {
 		logger.info("fail");
 		return "fail";

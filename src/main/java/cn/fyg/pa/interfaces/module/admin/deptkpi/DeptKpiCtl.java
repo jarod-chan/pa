@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
-import cn.fyg.pa.domain.model.companykpi.IdrCompanyRepository;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompanyRepository;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.department.DepartmentRepository;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;

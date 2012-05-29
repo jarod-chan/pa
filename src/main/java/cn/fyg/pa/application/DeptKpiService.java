@@ -2,7 +2,7 @@ package cn.fyg.pa.application;
 
 import java.util.List;
 
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;

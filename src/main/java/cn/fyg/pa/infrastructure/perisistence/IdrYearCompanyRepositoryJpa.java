@@ -9,22 +9,38 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
 import cn.fyg.pa.domain.model.companykpi.IdrYearCompany;
+import cn.fyg.pa.domain.model.companykpi.IdrYearCompanyRepository;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.yeartypeweight.IdrTypeWeight;
 
 
 @Repository
-public class IdrYearCompanyDao implements BaseDao<IdrYearCompany> {
+public class IdrYearCompanyRepositoryJpa implements IdrYearCompanyRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	@Override
 	public IdrYearCompany find(Long id) {
-		IdrYearCompany idrYearCompany=entityManager.find(IdrYearCompany.class, id);
-		return idrYearCompany;
+		return entityManager.find(IdrYearCompany.class, id);
 	}
 	
+	@Override
+	public IdrYearCompany save(IdrYearCompany idrYearCompany){
+		for(IdrCompany idrCompany:idrYearCompany.getIdrCompany()){
+			idrCompany.setIdrYearCompany(idrYearCompany);
+			IdrTypeWeight dbIdrTypeWeight=entityManager.find(IdrTypeWeight.class, idrCompany.getIdrTypeWeight().getId());
+			idrCompany.setIdrTypeWeight(dbIdrTypeWeight);
+			calculateRealWeight(idrCompany);
+		}
+		IdrYearCompany oldIdrYear=entityManager.find(IdrYearCompany.class, idrYearCompany.getYear());
+		if(oldIdrYear==null){
+			return create(idrYearCompany);
+		}
+		return update(idrYearCompany,oldIdrYear);
+	}
+
 	private IdrYearCompany create(IdrYearCompany idrYearCompany) {
 		entityManager.persist(idrYearCompany);
 		return idrYearCompany;
@@ -45,21 +61,6 @@ public class IdrYearCompanyDao implements BaseDao<IdrYearCompany> {
 	}
 
 	
-	@Override
-	public IdrYearCompany save(IdrYearCompany idrYearCompany){
-		for(IdrCompany idrCompany:idrYearCompany.getIdrCompany()){
-			idrCompany.setIdrYearCompany(idrYearCompany);
-			IdrTypeWeight dbIdrTypeWeight=entityManager.find(IdrTypeWeight.class, idrCompany.getIdrTypeWeight().getId());
-			idrCompany.setIdrTypeWeight(dbIdrTypeWeight);
-			calculateRealWeight(idrCompany);
-		}
-		IdrYearCompany oldIdrYear=entityManager.find(IdrYearCompany.class, idrYearCompany.getYear());
-		if(oldIdrYear==null){
-			return create(idrYearCompany);
-		}
-		return update(idrYearCompany,oldIdrYear);
-	}
-
 	private void calculateRealWeight(IdrCompany idrCompany) {
 		if(idrCompany.getWeight()==null) {
 			idrCompany.setRealWeight(null);
@@ -72,9 +73,5 @@ public class IdrYearCompanyDao implements BaseDao<IdrYearCompany> {
 		idrCompany.setRealWeight(idrCompany.getWeight().multiply(idrCompany.getIdrTypeWeight().getWeight()).setScale(2, BigDecimal.ROUND_HALF_UP));
 	}
 
-	@Override
-	public void remove(IdrYearCompany idrYear){
-		entityManager.remove(idrYear);
-	}
 
 }

@@ -7,16 +7,18 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.application.IdrYearCompanyService;
+import cn.fyg.pa.application.IdrYearTypeWeightService;
 import cn.fyg.pa.domain.model.companykpi.IdrYearCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.yeartypeweight.IdrYearTypeWeight;
-import cn.fyg.pa.domain.service.IdrYearCompanyService;
-import cn.fyg.pa.domain.service.IdrYearTypeWeightService;
 import cn.fyg.pa.domain.shared.Result;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.tool.JsonUtil;
@@ -24,6 +26,8 @@ import cn.fyg.pa.interfaces.module.shared.tool.JsonUtil;
 @Controller
 @RequestMapping("/admin/idrcompany")
 public class IdrCompanyCtl {
+	
+	private static final Logger logger=LoggerFactory.getLogger(IdrCompanyCtl.class);
 
 	@Resource
 	IdrYearCompanyService idrYearCompanyService;
@@ -33,8 +37,9 @@ public class IdrCompanyCtl {
 	
 	@RequestMapping(value="edit/{year}",method=RequestMethod.GET)
 	public String toEdit(@PathVariable("year")Long year,Map<String,Object> map,HttpSession session){
+		logger.info("toEdit");
 		IdrYearCompany idrYearCompany=idrYearCompanyService.findByYear(year);
-		IdrYearTypeWeight idrYearTypeWeight=idrYearTypeWeightService.findByYear(year);
+		IdrYearTypeWeight idrYearTypeWeight=idrYearTypeWeightService.getByYear(year);
 		map.put("idrYearCompany", idrYearCompany);
 		map.put("idrYearTypeWeight", idrYearTypeWeight);
 		map.put("idrTypeWeightsJson", JsonUtil.toArrayStr(idrYearTypeWeight.getIdrTypeWeight(),new String[]{"idrYearTypeWeight"}));
@@ -43,7 +48,8 @@ public class IdrCompanyCtl {
 	}
 	
 	@RequestMapping(value="save",method=RequestMethod.POST)
-	public String edit(IdrYearCompany idrYearCompanyForm,HttpSession session){
+	public String save(IdrYearCompany idrYearCompanyForm,HttpSession session){
+		logger.info("save");
 		idrYearCompanyForm=idrYearCompanyService.save(idrYearCompanyForm);
 		 new SessionMPR(session).setMessage("保存成功！");
 		return "redirect:edit/"+idrYearCompanyForm.getYear();
@@ -51,6 +57,7 @@ public class IdrCompanyCtl {
 	
 	@RequestMapping(value="sort",method=RequestMethod.POST)
 	public String sort(IdrYearCompany idrYearCompanyForm,HttpSession session){
+		logger.info("sort");
 		idrYearCompanyForm=idrYearCompanyService.sortIdrCompanyByIdrTypeWeight(idrYearCompanyForm);
 		new SessionMPR(session).setMessage("排序完成！");
 		return "redirect:edit/"+idrYearCompanyForm.getYear();
@@ -58,6 +65,7 @@ public class IdrCompanyCtl {
 	
 	@RequestMapping(value="commit",method=RequestMethod.POST)
 	public String commit(IdrYearCompany idrYearCompanyForm,HttpSession session){
+		logger.info("commit");
 		idrYearCompanyForm=idrYearCompanyService.sortIdrCompanyByIdrTypeWeight(idrYearCompanyForm);
 		Result result=idrYearCompanyForm.verifySelf();
 		if(result.pass()){

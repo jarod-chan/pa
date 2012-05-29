@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.deptkpi.DeptKpi;
 
 /**

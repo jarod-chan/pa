@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.service;
+package cn.fyg.pa.application;
 
 import cn.fyg.pa.domain.model.companykpi.IdrYearCompany;
 

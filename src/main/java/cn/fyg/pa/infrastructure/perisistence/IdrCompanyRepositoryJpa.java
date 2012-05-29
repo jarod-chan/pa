@@ -5,8 +5,8 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
-import cn.fyg.pa.domain.model.companykpi.IdrCompanyRepository;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompanyRepository;
 
 @Repository
 public class IdrCompanyRepositoryJpa implements IdrCompanyRepository{

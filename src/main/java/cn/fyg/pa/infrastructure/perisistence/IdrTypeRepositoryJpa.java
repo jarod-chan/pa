@@ -11,9 +11,10 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import cn.fyg.pa.domain.model.indicatortype.IdrType;
+import cn.fyg.pa.domain.model.indicatortype.IdrTypeRepository;
 
 @Repository
-public class IdrTypeDao implements BaseDao<IdrType> {
+public class IdrTypeRepositoryJpa implements IdrTypeRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -22,7 +23,7 @@ public class IdrTypeDao implements BaseDao<IdrType> {
 	public IdrType find(Long id) {
 		return entityManager.find(IdrType.class, id);
 	}
-	
+
 	@Override
 	public IdrType save(IdrType idrType) {
 		if(idrType.getId()==null){
@@ -31,12 +32,13 @@ public class IdrTypeDao implements BaseDao<IdrType> {
 		}else
 			return entityManager.merge(idrType);
 	}
-
+	
 	@Override
 	public void remove(IdrType idrType) {
 		entityManager.remove(idrType);
 	}
-	
+
+	@Override
 	public List<IdrType> findAll() {
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<IdrType> query=builder.createQuery(IdrType.class);
@@ -45,4 +47,5 @@ public class IdrTypeDao implements BaseDao<IdrType> {
 		query.orderBy(builder.asc(root.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
+
 }

@@ -1,10 +1,10 @@
-package cn.fyg.pa.domain.service;
+package cn.fyg.pa.application;
 
 import cn.fyg.pa.domain.model.yeartypeweight.IdrYearTypeWeight;
 
 public interface IdrYearTypeWeightService {
 	
-	IdrYearTypeWeight findByYear(Long year);
+	IdrYearTypeWeight getByYear(Long year);
 	
 	IdrYearTypeWeight save(IdrYearTypeWeight idrYearTypeWeight);
 

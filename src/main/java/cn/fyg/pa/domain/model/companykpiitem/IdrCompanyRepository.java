@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model.companykpi;
+package cn.fyg.pa.domain.model.companykpiitem;
 
 public interface IdrCompanyRepository {
 	

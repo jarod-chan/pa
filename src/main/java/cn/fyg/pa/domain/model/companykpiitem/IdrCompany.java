@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model.companykpi;
+package cn.fyg.pa.domain.model.companykpiitem;
 
 import java.math.BigDecimal;
 
@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import cn.fyg.pa.domain.model.companykpi.IdrYearCompany;
 import cn.fyg.pa.domain.model.yeartypeweight.IdrTypeWeight;
 
 //公司指标

@@ -9,10 +9,11 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import cn.fyg.pa.domain.model.yeartypeweight.IdrTypeWeight;
+import cn.fyg.pa.domain.model.yeartypeweight.IdrYearTypeWeightRepository;
 import cn.fyg.pa.domain.model.yeartypeweight.IdrYearTypeWeight;
 
 @Repository
-public class IdrYearTypeWeightDao implements BaseDao<IdrYearTypeWeight>{
+public class IdrYearTypeWeightRepositoryJpa implements IdrYearTypeWeightRepository{
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -53,10 +54,5 @@ public class IdrYearTypeWeightDao implements BaseDao<IdrYearTypeWeight>{
 		return idrYearTypeWeight;
 	}
 
-	@Override
-	public void remove(IdrYearTypeWeight t) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

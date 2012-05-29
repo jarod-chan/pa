@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItemRepository;

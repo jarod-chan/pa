@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
 import cn.fyg.pa.domain.model.deptindicator.IndicatorOption;

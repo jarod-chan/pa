@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.application.DeptKpiService;
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
 import cn.fyg.pa.domain.model.deptindicator.DeptIndicatorRepository;

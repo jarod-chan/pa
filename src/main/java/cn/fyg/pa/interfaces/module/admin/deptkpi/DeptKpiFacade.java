@@ -7,16 +7,16 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import cn.fyg.pa.application.DeptKpiService;
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
-import cn.fyg.pa.domain.model.companykpi.IdrCompanyRepository;
+import cn.fyg.pa.application.IdrYearCompanyService;
 import cn.fyg.pa.domain.model.companykpi.IdrYearCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompanyRepository;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.department.DepartmentRepository;
 import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
 import cn.fyg.pa.domain.model.deptindicator.DeptIndicatorRepository;
 import cn.fyg.pa.domain.model.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
-import cn.fyg.pa.domain.service.IdrYearCompanyService;
 import cn.fyg.pa.domain.shared.Result;
 
 @Component

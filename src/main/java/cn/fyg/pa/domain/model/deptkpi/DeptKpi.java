@@ -18,7 +18,7 @@ import javax.persistence.OrderBy;
 
 import org.apache.commons.lang.StringUtils;
 
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
 import cn.fyg.pa.domain.model.deptindicator.IndicatorOption;

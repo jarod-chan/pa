@@ -3,8 +3,8 @@ package cn.fyg.pa.domain.model.deptindicator;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fyg.pa.domain.model.companykpi.IdrCompany;
 import cn.fyg.pa.domain.model.companykpi.IdrYearCompany;
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.department.Department;
 
 public class DeptIndicatorFactory {

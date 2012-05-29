@@ -1,47 +1,42 @@
-package cn.fyg.pa.domain.service.imp;
+package cn.fyg.pa.application.impl;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import cn.fyg.pa.application.IdrYearCompanyService;
 import cn.fyg.pa.domain.model.companykpi.IdrYearCompany;
-import cn.fyg.pa.domain.service.IdrYearCompanyService;
-import cn.fyg.pa.infrastructure.perisistence.IdrYearCompanyDao;
+import cn.fyg.pa.domain.model.companykpi.IdrYearCompanyFactory;
+import cn.fyg.pa.domain.model.companykpi.IdrYearCompanyRepository;
 
 @Service
-public class IdrYearCompanyServiceImp implements IdrYearCompanyService {
+public class IdrYearCompanyServiceImpl implements IdrYearCompanyService {
 	
 	@Resource
-	IdrYearCompanyDao idrYearCompanyDao;
+	IdrYearCompanyRepository idrYearCompanyRepository;
 	
 	@Override
 	@Transactional
 	public IdrYearCompany findByYear(Long year) {
-		IdrYearCompany idrYear=idrYearCompanyDao.find(year);
+		IdrYearCompany idrYear=idrYearCompanyRepository.find(year);
 		if(idrYear==null){
-			idrYear=initIdrYear(year);
+			return IdrYearCompanyFactory.createIdrYearCompany(year);
 		}
 		return idrYear;
 	}
 
-	private IdrYearCompany initIdrYear(Long year) {
-		IdrYearCompany idrYear=new IdrYearCompany();
-		idrYear.setYear(year);
-		return idrYear;
-	}
 
 	@Override
 	@Transactional
 	public IdrYearCompany save(IdrYearCompany idrYearCompany) {
-		return idrYearCompanyDao.save(idrYearCompany);
+		return idrYearCompanyRepository.save(idrYearCompany);
 	}
 	
 	@Override
 	@Transactional
 	public IdrYearCompany sortIdrCompanyByIdrTypeWeight(IdrYearCompany idrYearCompany){
-		idrYearCompany=idrYearCompanyDao.save(idrYearCompany);
+		idrYearCompany=idrYearCompanyRepository.save(idrYearCompany);
 		idrYearCompany.sortIdrCompanyByIdrTypeWeight();
 		return idrYearCompany;
 	}

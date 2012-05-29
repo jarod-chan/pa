@@ -17,6 +17,7 @@ import javax.persistence.OrderBy;
 
 import org.apache.commons.lang.StringUtils;
 
+import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.yeartypeweight.IdrTypeWeight;
 import cn.fyg.pa.domain.shared.Result;
 
