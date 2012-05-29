@@ -33,12 +33,12 @@ public class PersonRepositoryJpa implements PersonRepository {
 	}
 
 	@Override
-	public Person getDeptMange(String department) {
+	public Person findDepartmentMange(String department) {
 		return personDao.findDeptMange(department);
 	}
 	
 	@Override
-	public List<Person> getPersonByManage(ManageEnum... mangeEnum) {
+	public List<Person> findPersonByManage(ManageEnum... mangeEnum) {
 		return personDao.findByManage(mangeEnum);
 	}
 

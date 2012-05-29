@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.fyg.pa.interfaces.bean.LoginRetBean;
-import cn.fyg.pa.interfaces.tool.SessionUtil;
+import cn.fyg.pa.interfaces.module.shared.tool.SessionUtil;
+import cn.fyg.pa.interfaces.module.system.login.LoginRetBean;
 
 /**
  *  TODO 这里有重复逻辑  
@@ -88,10 +88,10 @@ public class UrlFilter implements Filter {
 //        logger.info(method+":"+url);
          
         //开发临时去掉url过滤
-//        if(true){
-//        	chain.doFilter(request, response);
-//        	return;
-//        }
+        if(true){
+        	chain.doFilter(request, response);
+        	return;
+        }
         
         if(isNofilterUrl(url)){
         	chain.doFilter(request, response);

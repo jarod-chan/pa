@@ -14,7 +14,7 @@ import org.junit.Test;
 import cn.fyg.pa.domain.companykpi.IdrCompany;
 import cn.fyg.pa.domain.yearchk.Fychkitem;
 import cn.fyg.pa.domain.yeartypeweight.IdrTypeWeight;
-import cn.fyg.pa.interfaces.tool.JsonUtil;
+import cn.fyg.pa.interfaces.module.shared.tool.JsonUtil;
 
 public class JostTest {
 

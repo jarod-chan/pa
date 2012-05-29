@@ -18,7 +18,7 @@ import cn.fyg.pa.domain.person.ManageEnum;
 import cn.fyg.pa.domain.person.Person;
 import cn.fyg.pa.domain.yearchk.Fycheck;
 import cn.fyg.pa.domain.yearchk.YearChkRepositroy;
-import cn.fyg.pa.interfaces.person.yearchk.PersonChkBean;
+import cn.fyg.pa.interfaces.module.person.yearchk.PersonChkBean;
 
 @Repository
 public class YearChkRepositroyJpa implements YearChkRepositroy{
