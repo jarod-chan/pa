@@ -1,4 +1,4 @@
-package cn.fyg.pa.infrastructure.perisistence;
+package cn.fyg.pa.infrastructure.perisistence.jpa;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RptDao {
+public class RptJpa {
 
 	@PersistenceContext
 	private EntityManager entityManager;

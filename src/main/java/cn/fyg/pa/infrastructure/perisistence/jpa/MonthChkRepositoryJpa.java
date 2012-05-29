@@ -1,4 +1,4 @@
-package cn.fyg.pa.infrastructure.perisistence;
+package cn.fyg.pa.infrastructure.perisistence.jpa;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.infrastructure.perisistence.RptDao;
+import cn.fyg.pa.infrastructure.perisistence.jpa.RptJpa;
 
 @Controller
 @RequestMapping("/admin/rpt")
@@ -19,7 +19,7 @@ public class RptCtl {
 	private static final Logger logger = LoggerFactory.getLogger(RptCtl.class);
 	
 	@Autowired
-	private RptDao rptDao;
+	private RptJpa rptDao;
 	
 	@RequestMapping(value="/point/{order}")
 	public ModelAndView point(@PathVariable("order")String order){

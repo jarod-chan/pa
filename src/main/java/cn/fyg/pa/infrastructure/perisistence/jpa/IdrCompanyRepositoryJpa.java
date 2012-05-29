@@ -1,4 +1,4 @@
-package cn.fyg.pa.infrastructure.perisistence;
+package cn.fyg.pa.infrastructure.perisistence.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

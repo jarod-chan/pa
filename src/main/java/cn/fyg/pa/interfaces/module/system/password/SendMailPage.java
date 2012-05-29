@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.system.fetchpassword;
+package cn.fyg.pa.interfaces.module.system.password;
 
 import org.apache.commons.lang.StringUtils;
 

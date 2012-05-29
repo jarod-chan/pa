@@ -3,9 +3,10 @@ package cn.fyg.pa.interfaces.module.admin.person;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.fyg.pa.application.PersonService;
 import cn.fyg.pa.domain.model.person.ManageEnum;
 import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.model.person.TypeEnum;
-import cn.fyg.pa.infrastructure.perisistence.PersonDao;
 import cn.fyg.pa.interfaces.module.shared.tool.EnumUtil;
 import cn.fyg.pa.interfaces.module.shared.tool.Tool;
 
@@ -28,15 +30,17 @@ public class PersonCtl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PersonCtl.class);
 
-	@Autowired
-	private PersonDao personDao;
+	@Resource
+	PersonRepository personRepository;
+	@Resource
+	PersonService personService;
 	
 	@RequestMapping(value="")
 	public ModelAndView index() {
 		logger.info("index");
 		
 		ModelAndView mav = new ModelAndView();
-		List<Person> persons = personDao.getAllFyperson();
+		List<Person> persons = personRepository.getAllFyperson();
 		mav.addObject("persons",persons);
 		mav.setViewName("person/list");
 		return mav;
@@ -65,7 +69,7 @@ public class PersonCtl {
 			mav.setViewName("person/new");
 			return mav;
 		}
-    	personDao.save(person);  
+    	personService.save(person);  
         return new ModelAndView("redirect:person");  
     }  
       
@@ -73,7 +77,7 @@ public class PersonCtl {
 	@RequestMapping(value="/{personId}")
 	public ModelAndView edit(@PathVariable("personId")Long personId){
 		logger.info("get user with id");
-		Person person=personDao.find(personId);
+		Person person=personRepository.find(personId);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("typeEnum",EnumUtil.enumToMap(TypeEnum.values()));
 		mav.addObject("manageEnum",EnumUtil.enumToMap(ManageEnum.values()));
@@ -96,7 +100,7 @@ public class PersonCtl {
 		}
 		logger.info("post user");
 		person.setId(personId);
-		personDao.save(person);
+		personService.save(person);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("redirect:../person");
 		return mav;
@@ -105,7 +109,7 @@ public class PersonCtl {
 	@RequestMapping(value="/{personId}",method=RequestMethod.DELETE)
 	public ModelAndView delete(@PathVariable("personId")Long personId){
 		logger.info("post user");
-		personDao.remove(personId);
+		personService.remove(personId);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("redirect:person");
 		return mav;
@@ -115,7 +119,7 @@ public class PersonCtl {
 	public ModelAndView initPassword(@RequestParam(value="passlen",required=false) Long passlen,@RequestParam(value="type",required=false) String type) {
 		logger.info("post initPassword");
 		
-		List<Person> people = personDao.getAllFyperson();
+		List<Person> people = personRepository.getAllFyperson();
 		List<Person> peopleHasPassword=new ArrayList<Person>();
 		for (Person fyperson : people) {
 			if(type.equals("reset")){
@@ -129,7 +133,7 @@ public class PersonCtl {
 			}
 
 		}
-		personDao.saveAll(peopleHasPassword);
+		personService.saveAll(peopleHasPassword);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("persons",people);

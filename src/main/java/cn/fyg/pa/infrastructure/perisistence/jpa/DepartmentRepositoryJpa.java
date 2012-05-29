@@ -1,4 +1,4 @@
-package cn.fyg.pa.infrastructure.perisistence;
+package cn.fyg.pa.infrastructure.perisistence.jpa;
 
 import java.util.List;
 
@@ -10,16 +10,43 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-
 import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.department.DepartmentRepository;
+import cn.fyg.pa.domain.model.person.Person;
 
 @Repository
-public class DepartmentDao {
-	
+public class DepartmentRepositoryJpa implements DepartmentRepository {
+
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	@Override
+	public Department find(Long id) {
+		return entityManager.find(Department.class, id);
+	}
 
-	public Department findByName(String name) {
+	@Override
+	public List<Department> findAllDepartmentsOrderById() {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Department> query=builder.createQuery(Department.class);
+		Root<Department> root=query.from(Department.class);
+		query.select(root);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+	@Override
+	public List<Department> findDepartmentsByGmanage(Person gmanage){
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Department> query=builder.createQuery(Department.class);
+		Root<Department> root=query.from(Department.class);
+		query.select(root);
+		query.where(builder.equal(root.get("gmange_id"), gmanage.getId()));
+		return entityManager.createQuery(query).getResultList();
+	}
+
+	@Override
+	public Department findDepartmentByName(String name) {
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<Department> query=builder.createQuery(Department.class);
 		Root<Department> root=query.from(Department.class);
@@ -30,25 +57,6 @@ public class DepartmentDao {
 			return null;
 		}
 		return ret.get(0);
-	}
-	
-	public List<Department> findByPerson(Long personId){
-		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
-		CriteriaQuery<Department> query=builder.createQuery(Department.class);
-		Root<Department> root=query.from(Department.class);
-		query.select(root);
-		query.where(builder.equal(root.get("gmange_id"), personId));
-		return entityManager.createQuery(query).getResultList();
-	}
-
-	//XXX 重构到repository 待删除
-	public List<Department> findAllDepartmentsOrderById() {
-		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
-		CriteriaQuery<Department> query=builder.createQuery(Department.class);
-		Root<Department> root=query.from(Department.class);
-		query.select(root);
-		query.orderBy(builder.asc(root.get("id")));
-		return entityManager.createQuery(query).getResultList();
 	}
 
 }

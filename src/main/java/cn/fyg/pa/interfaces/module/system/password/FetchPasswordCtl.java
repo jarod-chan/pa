@@ -1,29 +1,30 @@
-package cn.fyg.pa.interfaces.module.system.fetchpassword;
+package cn.fyg.pa.interfaces.module.system.password;
+
+import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.infrastructure.mail.Mail;
 import cn.fyg.pa.infrastructure.mail.Sender;
-import cn.fyg.pa.infrastructure.perisistence.PersonDao;
 
 @Controller
 @RequestMapping("/fetchcsr")
-public class FetchCsrCtl {
+public class FetchPasswordCtl {
 	
-	private static final Logger logger=LoggerFactory.getLogger(FetchCsrCtl.class);
+	private static final Logger logger=LoggerFactory.getLogger(FetchPasswordCtl.class);
 	
-	@Autowired
-	private PersonDao personDao;
-	
-	@Autowired
+
+	@Resource
+	PersonRepository personRepository;
+	@Resource
 	private Sender sender;
 	
 	@RequestMapping(value="")
@@ -41,7 +42,7 @@ public class FetchCsrCtl {
 			return getFailMav("该用户不存在,请重新输入！");
 		}
 		
-		Person person=personDao.getMailAdressByUsername(sendMailPage.getUsername());
+		Person person=personRepository.findByName(sendMailPage.getUsername());
 		if(person==null){
 			return getFailMav("该用户不存在,请重新输入！");
 		}

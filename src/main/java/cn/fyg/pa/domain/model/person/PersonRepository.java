@@ -10,6 +10,10 @@ public interface PersonRepository {
 
 	Person save(Person person);
 	
+	void remove(Person person);
+
+	void saveAll(List<Person> persons);
+	
 	Person findDepartmentMange(String department);
 
 	Person findByName(String personname);
@@ -21,4 +25,7 @@ public interface PersonRepository {
 	List<Person> getStaffByType(TypeEnum type);
 
 	List<Person> getStaffByDept(String department);
+	
+	List<Person> getAllFyperson();
+
 }
