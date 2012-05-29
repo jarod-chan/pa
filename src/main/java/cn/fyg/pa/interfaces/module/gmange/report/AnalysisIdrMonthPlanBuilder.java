@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
 
 public class AnalysisIdrMonthPlanBuilder {
 	

@@ -3,8 +3,8 @@ package cn.fyg.pa.interfaces.module.admin.deptkpi;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fyg.pa.domain.companykpi.IdrCompany;
-import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
+import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
 
 public class PreviewItem {
 	

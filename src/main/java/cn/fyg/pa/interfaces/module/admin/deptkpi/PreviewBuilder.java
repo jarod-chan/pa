@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import cn.fyg.pa.domain.deptkpi.DeptKpi;
-import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
+import cn.fyg.pa.domain.model.deptkpi.DeptKpi;
+import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
 
 public class PreviewBuilder {
 	

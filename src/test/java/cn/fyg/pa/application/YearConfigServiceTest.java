@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static  org.junit.Assert.*;
 
-import cn.fyg.pa.domain.yearchk.EnableYearNotExist;
+import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
 
 @ContextConfiguration("/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)

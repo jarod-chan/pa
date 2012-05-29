@@ -14,11 +14,11 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillRepository;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
-import cn.fyg.pa.domain.deptmonthplan.IdrTask;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBillRepository;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrTask;
 
 @Repository
 public class IdrMonthPlanBillRepositoryJpa implements IdrMonthPlanBillRepository {

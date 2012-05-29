@@ -1,6 +1,6 @@
 package cn.fyg.pa.interfaces.module.gmange.report;
 
-import cn.fyg.pa.domain.monthchk.MonthChkEnum;
+import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
 
 public class PersonMonthChkStateBean {
 	

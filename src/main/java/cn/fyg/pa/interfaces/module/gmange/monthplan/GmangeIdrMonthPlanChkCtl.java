@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.application.IdrMonthPlanBillService;
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.department.DepartmentRepository;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillRepository;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
-import cn.fyg.pa.domain.person.Person;
-import cn.fyg.pa.domain.person.PersonRepository;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.department.DepartmentRepository;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBillRepository;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 

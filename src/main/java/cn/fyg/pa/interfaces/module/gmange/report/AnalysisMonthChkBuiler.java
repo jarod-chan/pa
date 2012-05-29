@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.fyg.pa.domain.monthchk.MonthChk;
-import cn.fyg.pa.domain.monthchk.MonthChkEnum;
-import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.model.monthchk.MonthChk;
+import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
+import cn.fyg.pa.domain.model.person.Person;
 
 public class AnalysisMonthChkBuiler {
 	

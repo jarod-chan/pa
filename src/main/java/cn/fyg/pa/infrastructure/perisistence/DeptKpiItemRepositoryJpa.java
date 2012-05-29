@@ -11,10 +11,10 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.companykpi.IdrCompany;
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
-import cn.fyg.pa.domain.deptkpiitem.DeptKpiItemRepository;
+import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
+import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItemRepository;
 
 @Repository
 public class DeptKpiItemRepositoryJpa implements DeptKpiItemRepository{

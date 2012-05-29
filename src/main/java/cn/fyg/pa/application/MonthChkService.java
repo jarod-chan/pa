@@ -1,7 +1,7 @@
 package cn.fyg.pa.application;
 
-import cn.fyg.pa.domain.monthchk.MonthChk;
-import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.model.monthchk.MonthChk;
+import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 
 public interface MonthChkService {

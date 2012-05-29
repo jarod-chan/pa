@@ -1,6 +1,6 @@
 package cn.fyg.pa.application;
 
-import cn.fyg.pa.domain.yearchk.EnableYearNotExist;
+import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
 
 public interface YearConfigService {
 	

@@ -3,7 +3,7 @@ package cn.fyg.pa.interfaces.module.gmange.report;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
 
 public class AnalysisIdrMonthPlanBean {
 

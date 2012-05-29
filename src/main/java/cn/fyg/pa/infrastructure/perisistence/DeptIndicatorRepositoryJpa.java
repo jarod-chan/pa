@@ -11,9 +11,9 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.deptindicator.DeptIndicator;
-import cn.fyg.pa.domain.deptindicator.DeptIndicatorRepository;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
+import cn.fyg.pa.domain.model.deptindicator.DeptIndicatorRepository;
 
 @Repository
 public class DeptIndicatorRepositoryJpa implements DeptIndicatorRepository {

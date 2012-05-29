@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.application.IdrMonthPlanBillService;
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillFactory;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillRepository;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanEnum;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBillFactory;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBillRepository;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 
 @Service

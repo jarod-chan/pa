@@ -6,10 +6,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import cn.fyg.pa.domain.person.ManageEnum;
-import cn.fyg.pa.domain.person.Person;
-import cn.fyg.pa.domain.person.PersonRepository;
-import cn.fyg.pa.domain.person.TypeEnum;
+import cn.fyg.pa.domain.model.person.ManageEnum;
+import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.domain.model.person.PersonRepository;
+import cn.fyg.pa.domain.model.person.TypeEnum;
 
 @Service
 public class PersonRepositoryJpa implements PersonRepository {

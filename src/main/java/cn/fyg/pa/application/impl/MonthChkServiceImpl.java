@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.application.MonthChkService;
-import cn.fyg.pa.domain.monthchk.MonthChk;
-import cn.fyg.pa.domain.monthchk.MonthChkEnum;
-import cn.fyg.pa.domain.monthchk.MonthChkFactory;
-import cn.fyg.pa.domain.monthchk.MonthChkRepository;
-import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.model.monthchk.MonthChk;
+import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
+import cn.fyg.pa.domain.model.monthchk.MonthChkFactory;
+import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
+import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 
 @Service

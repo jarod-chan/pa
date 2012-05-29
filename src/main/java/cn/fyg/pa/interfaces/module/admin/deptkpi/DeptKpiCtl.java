@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.companykpi.IdrCompany;
-import cn.fyg.pa.domain.companykpi.IdrCompanyRepository;
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.department.DepartmentRepository;
-import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
-import cn.fyg.pa.domain.deptkpiitem.DeptKpiItemRepository;
+import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.companykpi.IdrCompanyRepository;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.department.DepartmentRepository;
+import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
+import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItemRepository;
 import cn.fyg.pa.domain.shared.Result;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 

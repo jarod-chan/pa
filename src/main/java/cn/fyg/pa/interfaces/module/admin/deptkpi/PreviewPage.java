@@ -3,7 +3,7 @@ package cn.fyg.pa.interfaces.module.admin.deptkpi;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fyg.pa.domain.department.Department;
+import cn.fyg.pa.domain.model.department.Department;
 
 public class PreviewPage {
 	

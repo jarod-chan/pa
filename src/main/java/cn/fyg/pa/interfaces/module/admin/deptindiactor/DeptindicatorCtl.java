@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.deptindicator.DeptIndicator;
+import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 
 @Controller

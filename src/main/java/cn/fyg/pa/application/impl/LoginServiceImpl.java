@@ -5,8 +5,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import cn.fyg.pa.application.LoginService;
-import cn.fyg.pa.domain.person.Person;
-import cn.fyg.pa.domain.person.PersonRepository;
+import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 import cn.fyg.pa.interfaces.module.system.login.LoginBean;
 import cn.fyg.pa.interfaces.module.system.login.LoginRetBean;

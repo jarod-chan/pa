@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.application.YearConfigService;
-import cn.fyg.pa.domain.yearchk.EnableYearNotExist;
-import cn.fyg.pa.domain.yearchk.YearConfig;
-import cn.fyg.pa.domain.yearchk.YearConfigFactory;
-import cn.fyg.pa.domain.yearchk.YearConfigRepositroy;
+import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
+import cn.fyg.pa.domain.model.yearchk.YearConfig;
+import cn.fyg.pa.domain.model.yearchk.YearConfigFactory;
+import cn.fyg.pa.domain.model.yearchk.YearConfigRepositroy;
 
 @Service
 public class YearConfigServiceImpl implements YearConfigService {

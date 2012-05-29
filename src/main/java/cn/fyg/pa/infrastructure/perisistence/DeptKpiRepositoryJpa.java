@@ -11,9 +11,9 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.deptkpi.DeptKpi;
-import cn.fyg.pa.domain.deptkpi.DeptKpiRepository;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.deptkpi.DeptKpi;
+import cn.fyg.pa.domain.model.deptkpi.DeptKpiRepository;
 
 @Repository
 public class DeptKpiRepositoryJpa implements DeptKpiRepository {

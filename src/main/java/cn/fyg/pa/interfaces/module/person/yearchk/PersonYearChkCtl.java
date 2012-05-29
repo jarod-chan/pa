@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.fyg.pa.application.YearCheckService;
 import cn.fyg.pa.application.YearConfigService;
-import cn.fyg.pa.domain.person.Person;
-import cn.fyg.pa.domain.person.PersonRepository;
-import cn.fyg.pa.domain.yearchk.EnableYearNotExist;
-import cn.fyg.pa.domain.yearchk.Fycheck;
-import cn.fyg.pa.domain.yearchk.FycheckFactory;
-import cn.fyg.pa.domain.yearchk.YearChkRepositroy;
+import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.domain.model.person.PersonRepository;
+import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
+import cn.fyg.pa.domain.model.yearchk.Fycheck;
+import cn.fyg.pa.domain.model.yearchk.FycheckFactory;
+import cn.fyg.pa.domain.model.yearchk.YearChkRepositroy;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 
 

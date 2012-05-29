@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 
-import cn.fyg.pa.domain.department.Department;
+import cn.fyg.pa.domain.model.department.Department;
 
 @Repository
 public class DepartmentDao {

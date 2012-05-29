@@ -1,7 +1,7 @@
 package cn.fyg.pa.interfaces.module.person.yearchk;
 
-import cn.fyg.pa.domain.person.Person;
-import cn.fyg.pa.domain.yearchk.Fycheck;
+import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.domain.model.yearchk.Fycheck;
 
 public class CellBean {
 	

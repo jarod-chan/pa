@@ -1,6 +1,6 @@
 package cn.fyg.pa.interfaces.module.manage.yearchk;
 
-import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.model.person.Person;
 
 public class PersonPointBean {
 	

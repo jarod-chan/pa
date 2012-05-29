@@ -10,9 +10,9 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.department.DepartmentRepository;
-import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.department.DepartmentRepository;
+import cn.fyg.pa.domain.model.person.Person;
 
 @Repository
 public class DepartmentRepositoryImp implements DepartmentRepository {

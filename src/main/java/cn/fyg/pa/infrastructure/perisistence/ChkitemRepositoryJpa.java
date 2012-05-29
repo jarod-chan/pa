@@ -10,8 +10,8 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.yearchk.ChkitemRepository;
-import cn.fyg.pa.domain.yearchk.Fychkitem;
+import cn.fyg.pa.domain.model.yearchk.ChkitemRepository;
+import cn.fyg.pa.domain.model.yearchk.Fychkitem;
 
 @Repository
 public class ChkitemRepositoryJpa implements ChkitemRepository {

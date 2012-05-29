@@ -1,7 +1,7 @@
 package cn.fyg.pa.interfaces.module.manage.yearchk;
 
-import cn.fyg.pa.domain.yearchk.Fychkitem;
-import cn.fyg.pa.domain.yearchk.Fychkmange;
+import cn.fyg.pa.domain.model.yearchk.Fychkitem;
+import cn.fyg.pa.domain.model.yearchk.Fychkmange;
 
 public class ChkmangeTab {
 	

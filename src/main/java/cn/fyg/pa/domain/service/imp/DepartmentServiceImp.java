@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import cn.fyg.pa.domain.department.Department;
+import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.service.DepartmentService;
 import cn.fyg.pa.infrastructure.perisistence.DepartmentDao;
 

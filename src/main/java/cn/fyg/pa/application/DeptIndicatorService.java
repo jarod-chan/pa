@@ -1,7 +1,7 @@
 package cn.fyg.pa.application;
 
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.deptindicator.DeptIndicator;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
 
 public interface DeptIndicatorService {
 	

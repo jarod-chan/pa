@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.application.LoginService;
-import cn.fyg.pa.domain.person.ManageEnum;
+import cn.fyg.pa.domain.model.person.ManageEnum;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 import cn.fyg.pa.interfaces.module.shared.tool.SessionUtil;
 

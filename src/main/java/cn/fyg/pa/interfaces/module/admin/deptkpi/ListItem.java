@@ -1,6 +1,6 @@
 package cn.fyg.pa.interfaces.module.admin.deptkpi;
 
-import cn.fyg.pa.domain.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.companykpi.IdrCompany;
 
 public class ListItem {
 	

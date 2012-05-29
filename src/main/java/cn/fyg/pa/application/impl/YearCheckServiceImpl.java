@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.application.YearCheckService;
-import cn.fyg.pa.domain.yearchk.Fycheck;
-import cn.fyg.pa.domain.yearchk.YearChkRepositroy;
+import cn.fyg.pa.domain.model.yearchk.Fycheck;
+import cn.fyg.pa.domain.model.yearchk.YearChkRepositroy;
 
 @Service
 public class YearCheckServiceImpl implements YearCheckService {

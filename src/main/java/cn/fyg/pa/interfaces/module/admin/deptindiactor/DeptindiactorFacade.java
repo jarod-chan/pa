@@ -10,10 +10,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import cn.fyg.pa.application.DeptIndicatorService;
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.department.DepartmentRepository;
-import cn.fyg.pa.domain.deptindicator.DeptIndicator;
-import cn.fyg.pa.domain.deptindicator.DeptIndicatorRepository;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.department.DepartmentRepository;
+import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
+import cn.fyg.pa.domain.model.deptindicator.DeptIndicatorRepository;
 
 @Component
 public class DeptindiactorFacade {

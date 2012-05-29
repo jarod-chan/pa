@@ -3,7 +3,7 @@ package cn.fyg.pa.interfaces.module.gmange.report;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fyg.pa.domain.monthchk.MonthChkEnum;
+import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
 
 public class AnalysisDepartmentBean {
 	

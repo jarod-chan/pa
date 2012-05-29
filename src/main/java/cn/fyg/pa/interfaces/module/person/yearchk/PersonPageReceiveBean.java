@@ -3,7 +3,7 @@ package cn.fyg.pa.interfaces.module.person.yearchk;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fyg.pa.domain.yearchk.Fycheck;
+import cn.fyg.pa.domain.model.yearchk.Fycheck;
 
 public class PersonPageReceiveBean {
 

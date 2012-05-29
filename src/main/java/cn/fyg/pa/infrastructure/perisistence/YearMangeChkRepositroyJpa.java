@@ -7,10 +7,10 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.person.ManageEnum;
-import cn.fyg.pa.domain.person.Person;
-import cn.fyg.pa.domain.yearchk.Fychkmange;
-import cn.fyg.pa.domain.yearchk.YearMangeChkRepositroy;
+import cn.fyg.pa.domain.model.person.ManageEnum;
+import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.domain.model.yearchk.Fychkmange;
+import cn.fyg.pa.domain.model.yearchk.YearMangeChkRepositroy;
 
 @Repository
 public class YearMangeChkRepositroyJpa implements YearMangeChkRepositroy {

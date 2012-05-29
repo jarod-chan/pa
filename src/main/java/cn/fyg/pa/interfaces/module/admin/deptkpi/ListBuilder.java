@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.fyg.pa.domain.companykpi.IdrCompany;
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.deptindicator.DeptIndicator;
-import cn.fyg.pa.domain.deptindicator.IndicatorOption;
-import cn.fyg.pa.domain.deptkpiitem.DeptKpiItem;
+import cn.fyg.pa.domain.model.companykpi.IdrCompany;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
+import cn.fyg.pa.domain.model.deptindicator.IndicatorOption;
+import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
 
 public class ListBuilder {
 	

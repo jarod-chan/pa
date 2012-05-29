@@ -10,8 +10,8 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.worktype.WorkType;
-import cn.fyg.pa.domain.worktype.WorkTypeRepository;
+import cn.fyg.pa.domain.model.worktype.WorkType;
+import cn.fyg.pa.domain.model.worktype.WorkTypeRepository;
 
 
 @Repository

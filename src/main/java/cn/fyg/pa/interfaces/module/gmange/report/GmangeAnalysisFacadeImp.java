@@ -6,15 +6,15 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import cn.fyg.pa.domain.department.Department;
-import cn.fyg.pa.domain.department.DepartmentRepository;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
-import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillRepository;
-import cn.fyg.pa.domain.monthchk.MonthChk;
-import cn.fyg.pa.domain.monthchk.MonthChkRepository;
-import cn.fyg.pa.domain.person.ManageEnum;
-import cn.fyg.pa.domain.person.Person;
-import cn.fyg.pa.domain.person.PersonRepository;
+import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.department.DepartmentRepository;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBillRepository;
+import cn.fyg.pa.domain.model.monthchk.MonthChk;
+import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
+import cn.fyg.pa.domain.model.person.ManageEnum;
+import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.domain.model.person.PersonRepository;
 
 @Component
 public class GmangeAnalysisFacadeImp implements GmangeAnalysisFacade {

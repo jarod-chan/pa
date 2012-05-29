@@ -2,7 +2,7 @@ package cn.fyg.pa.interfaces.module.person.yearchk;
 
 import java.util.List;
 
-import cn.fyg.pa.domain.person.Person;
+import cn.fyg.pa.domain.model.person.Person;
 
 public class PersonPageBeanBuilder {
 	

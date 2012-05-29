@@ -11,9 +11,9 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import cn.fyg.pa.domain.yearchk.EnableYearNotExist;
-import cn.fyg.pa.domain.yearchk.YearConfig;
-import cn.fyg.pa.domain.yearchk.YearConfigRepositroy;
+import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
+import cn.fyg.pa.domain.model.yearchk.YearConfig;
+import cn.fyg.pa.domain.model.yearchk.YearConfigRepositroy;
 
 @Repository
 public class YearConfigRepositroyJpa implements YearConfigRepositroy {
