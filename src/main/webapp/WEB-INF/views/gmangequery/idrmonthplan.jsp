@@ -2,12 +2,17 @@
 <%@ include file="../common/common.jsp"%>
 <html>
 <head>
-<meta name="decorator" content="none"/>
 <%@ include file="../common/head.jsp"%>
 </head>
 
+<c:set target="${pagefunc}" property="name" value="公司考核情况查询" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${loginRet.personid}/totalreport" />  
+
+<c:set target="${pagetitle}" property="name" value="公司部门月度工作查询" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${loginRet.personid}/query/idrmonthplan" /> 
+
 <body>
-<h2>公司部门月度工作查询</h2>
+
 
 <form action="" method="get">
 年份：

@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.controller;
+package cn.fyg.pa.interfaces.totalreport;
 
 import java.util.Map;
 
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import cn.fyg.pa.interfaces.bean.AnalysisIdrMonthPlanBean;
 import cn.fyg.pa.interfaces.bean.AnalysisMonthChkBean;
 import cn.fyg.pa.interfaces.bean.YearAndMonthQueryBean;
-import cn.fyg.pa.interfaces.facade.GmangeAnalysisFacade;
 import cn.fyg.pa.interfaces.tool.DateTool;
 
 @Controller

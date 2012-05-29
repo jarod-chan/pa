@@ -1,0 +1,92 @@
+
+/* 定义下拉菜单样式 */
+
+.nav,.nav li ul{margin:0;padding:0;}
+.nav {list-style-type:none;}
+.nav li {position:relative;float:left;}
+.nav li ul {display:none;position:absolute;top:15px;padding-top:3px;list-style-type:none;}
+.nav li ul li {padding-top:5px;padding-left:0px;background-color: #FFFFFF;clear: both;}
+.nav li ul li a{text-decoration: none;color:#000000;white-space:nowrap;}
+.nav li ul li a:HOVER{background-color: #5BADFF;}
+.nav li ul li a:VISITED{color: #000000;}
+
+/*-----------------------------------------------------------------------------------------*/
+
+
+/* 定义页面头部显示信息 */
+
+#mainbar {
+	border:1px solid;
+	border-style: none none solid none;
+	border-color: #000000; /*5BADFF*/
+	width: 1010px;
+	margin-top: 20px;
+	padding-bottom:2px;
+	margin-bottom: 20px;
+	font-weight:bold;
+}
+
+/*取消浮动样式 ，通用  */
+#mainbar .clear_div{
+	clear: both;
+}
+
+/*上左  */
+#mainbar .top_left{
+	float: left;
+	height:65px;
+}
+
+#mainbar .top_left .main_head{
+	font-style:normal;
+	font-weight:bold;
+	font-size:36px;
+	float:none;
+	font-family:"黑体";
+}
+
+/*上右  */
+#mainbar .top{
+	margin-bottom: 5px;
+}
+
+#mainbar .top_right{
+	float: right;
+	height:65px;
+}
+
+#mainbar .top_right .main_blank{
+	height:50px;
+	float:none;
+	text-align:right;
+}
+
+#mainbar .top_right .main_info{
+	height:15px;
+	text-align:right;
+}
+
+
+/* 下左 */
+#mainbar .second_left{
+	float: left;
+}
+
+/* 下左链接 */
+#mainbar .second_left a{
+	text-decoration: none;
+	color:#000000;
+	white-space:nowrap;
+}
+#mainbar .second_left a:HOVER{background-color: #5BADFF;}
+#mainbar .second_left a:VISITED{color: #000000;}
+
+
+/* 下右 */
+#mainbar .second_right{
+	float: right;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+
+

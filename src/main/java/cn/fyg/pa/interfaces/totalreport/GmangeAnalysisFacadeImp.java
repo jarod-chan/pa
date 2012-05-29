@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.facade;
+package cn.fyg.pa.interfaces.totalreport;
 
 import java.util.List;
 
@@ -25,9 +25,11 @@ public class GmangeAnalysisFacadeImp implements GmangeAnalysisFacade {
 	
 	@Resource
 	DepartmentRepository departmentRepository;
+	
 	@Resource
 	IdrMonthPlanBillRepository idrMonthPlanBillRepository;
 	
+
 	@Override
 	public AnalysisIdrMonthPlanBean analyseIdrMonthPlan(Long year, Long month){
 		List<Department> departments=departmentRepository.findAllDepartmentsOrderById();
@@ -39,6 +41,7 @@ public class GmangeAnalysisFacadeImp implements GmangeAnalysisFacade {
 	
 	@Resource
 	MonthChkRepository monthChkReposity;
+	
 	@Resource
 	PersonRepository personRepository;
 	

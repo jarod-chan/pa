@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.controller;
+package cn.fyg.pa.interfaces.totalreport;
 
 import java.util.List;
 import java.util.Map;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.application.IdrMonthPlanBillService;
+import cn.fyg.pa.application.MonthChkService;
 import cn.fyg.pa.domain.department.Department;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBill;
 import cn.fyg.pa.domain.deptmonthplan.IdrMonthPlanBillRepository;
@@ -24,11 +26,18 @@ import cn.fyg.pa.interfaces.tool.DateTool;
 @Controller
 @RequestMapping("/gmange/{personId}/query")
 public class GmangeQueryCtl {
+	@Resource
+	MonthChkRepository monthChkRepository;
 	
+	@Resource
+	IdrMonthPlanBillService idrMonthPlanBillService;
 	
 	@Resource
 	IdrMonthPlanBillRepository idrMonthPlanBillRepository;
 	
+	@Resource
+	DepartmentService departmentService;
+
 	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
 	public String queryIdrMonthPlan(IdrMonthPlanQueryBean queryBean,Map<String,Object> map){
 		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriodAndState(queryBean.getYear(), queryBean.getMonth(), IdrMonthPlanEnum.FINISHED);
@@ -38,11 +47,6 @@ public class GmangeQueryCtl {
 		return "gmangequery/idrmonthplan";
 	}
 	
-	
-	@Resource
-	MonthChkRepository monthChkRepository;
-	@Resource
-	DepartmentService departmentService;
 
 	@RequestMapping(value="/monthchk",method=RequestMethod.GET)
 	public String queryMonthchk(MonthChkQueryBean queryBean,Map<String,Object> map){

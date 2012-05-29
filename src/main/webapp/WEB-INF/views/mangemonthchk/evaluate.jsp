@@ -45,9 +45,15 @@
 	}
 </script> 
 </head>
-<c:set var="pagefunc" value="员工工作评价" scope="request"/> 
-<c:set var="pagetitle" value="员工月度工作任务评价" scope="request"/> 
+
+<c:set target="${pagefunc}" property="name" value="员工工作评价" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${mange.id}/monthchk" />  
+
+<c:set target="${pagetitle}" property="name" value="员工月度工作任务评价" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${mange.id}/monthchk/${monthChk.id}" /> 
+
 <c:set var="pagesize" value="990" scope="request"/>  
+
 <body>
 
 <div class="headdiv" >
@@ -55,7 +61,6 @@
 部门:${mange.department}&nbsp;&nbsp;考核员工:${monthChk.person.name}&nbsp;&nbsp;考核周期:${monthChk.year}年${monthChk.month}月&nbsp;&nbsp;考核状态:${monthChk.state.name}
 </div>
 <div class="headright">
-<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -110,7 +115,7 @@
 <input type="button" value="保存"  onclick="save()"/>
 <input type="button" value="完成评价"  onclick="finish()"/>
 <input type="button" value="打回员工修改"  onclick="back()"/>
-
+<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk','_self')"/>
 </form>
 
 </body>

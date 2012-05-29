@@ -9,29 +9,12 @@
 <head>
 <title><decorator:title/></title>
 <decorator:head />
+<link type="text/css" rel="stylesheet" href="/${ctx}/resources/css/mainbar.css" /> 
 <style type="text/css">
-/*for mainbar*/
-.nav,.nav li ul{margin:0;padding:0;}
-.nav {list-style-type:none;}
-.nav li {position:relative;float:left;}
-.nav li ul {display:none;position:absolute;top:15px;padding-top:3px;list-style-type:none;}
-.nav li ul li {padding-top:5px;padding-left:0px;background-color: #FFFFFF;clear: both;}
-.nav li ul li a{text-decoration: none;color:#000000;white-space:nowrap;}
-.nav li ul li a:HOVER{background-color: #5BADFF;}
-.nav li ul li a:VISITED{color: #000000;}
-
-#mainbar {
-	border:1px solid;
-	border-style: none none solid none;
-	border-color: #000000; /*5BADFF*/
-	width:${pagesize}px;
-	margin-top: 20px;
-	padding-bottom:5px;
-	margin-bottom: 5px;
-}
+/* 定义页面内部的头部信息 */
 
 .headdiv{
-	width:${pagesize}px;
+	width:${pagesize}px;/* pagesize 从页面传入可否修改 */
 }
 
 .headdiv .headleft{
@@ -46,56 +29,90 @@
 .headdiv .headnone{
    clear: both;
 }
-
-/*定义退出按钮*/
-#mainbar .mainact{
-	text-decoration: none;color: #000000;
-}
-#mainbar .mainact:HOVER{
-	background-color: #000000; color: #FFFFFF;
-}
-
+/*-----------------------------------------------------------------------------------------*/
 </style>
 <script type="text/javascript">
 $(function(){
 	$('.nav').children("li:has(ul)").hover(
 		function(){
-		$(this).children("ul").slideDown();
+			$(this).children("ul").slideDown();
 		},
 		function(){
-		$(this).children("ul").hide();
+			$(this).children("ul").hide();
 		}
 	);
 });
+
+function logout(){
+	window.open('/${ctx}','_self');
+}
 </script>
+
 </head>
 <%@ page import="java.util.*" %>
 <%
 	String loginInfo=(String)session.getAttribute("loginInfo");
 	request.setAttribute("loginInfo", loginInfo);
-	List menuList=(List)session.getAttribute("menuList");
-	request.setAttribute("menuList", menuList);
 %>
+
 <body>
+
 <div id="mainbar">
-<div style="float:left">
-	<ul class="nav" style="float:left">
-	<li>
-		<div>&nabla;<strong>${pagefunc}&nbsp;&gt;&nbsp;${pagetitle}</strong></div>
-		<ul>
-		<c:forEach var="menu" items="${menuList}">
-			<li><a href="/${ctx}/${menu.url}"><strong>&nbsp;&nbsp;${menu.name}&nbsp;&nbsp;</strong></a></li>
-		</c:forEach>
-		</ul>
-	</li>
-	</ul>
+	<div class="top">
+		<div class="top_left">
+			<div class="main_head">方远房产卓越绩效管理平台</div>
+		</div>
+		<div class="top_right">
+			<div class="main_blank"><input type="button" value="退出" onclick="logout()"/>&nbsp;&nbsp;</div>
+			<div class="main_info">${loginInfo}&nbsp;&nbsp;</div>
+		</div>
+		<div class="clear_div"></div>
+	</div>
+	
+	<div class="second">
+		<div class="second_left" >
+			<a href="/${ctx}/common/userhome/${loginRet.personid}">首页</a><c:if test="${pagefunc.name!=null}">&gt;<a href="${pagefunc.url}">${pagefunc.name}</a></c:if><c:if test="${pagetitle.name!=null}">&gt;<a href="${pagetitle.url}">${pagetitle.name}</a></c:if>
+		</div>
+		<div class="second_right" >
+			<!-- 功能菜单  -->
+			<ul class="nav" style="float:left">
+				<li>
+					<div>&nabla;绩效考核功能&nbsp;&nbsp;</div>
+					<ul>
+					<c:forEach var="menu" items="${funcList}">
+						<li><a href="/${ctx}/${menu.url}">&nbsp;&nbsp;${menu.name}&nbsp;&nbsp;</a></li>
+					</c:forEach>
+					</ul>
+				</li>
+				<li>
+					<div>&nabla;历史记录查询&nbsp;&nbsp;</div>
+					<ul>
+					<c:forEach var="menu" items="${queryList}">
+						<li><a href="/${ctx}/${menu.url}">&nbsp;&nbsp;${menu.name}&nbsp;&nbsp;</a></li>
+					</c:forEach>
+					</ul>
+				</li>
+				<li>
+					<div>&nabla;系统功能&nbsp;&nbsp;</div>
+					<ul>
+					
+						<li><a href="/${ctx}/common/settings/person/${loginRet.personid}/password">&nbsp;&nbsp;修改密码&nbsp;&nbsp;</a></li>
+					
+						<li><a href="/${ctx}/login">&nbsp;&nbsp;退出系统&nbsp;&nbsp;</a></li>
+					
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="clear_div"></div>
+	</div>
+
 </div>
-<div style="float:right">
-	${loginInfo}
-	<a class="mainact" title="退出系统"  href="/${ctx}/login">X</a>
-</div>
-<div style="clear:both"></div>
-</div>
+
+
+
+
+
 <decorator:body />  
 </body>
 </html>

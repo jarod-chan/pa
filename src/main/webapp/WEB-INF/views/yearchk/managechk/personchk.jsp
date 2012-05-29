@@ -24,8 +24,12 @@
 	}
 </script> 
 </head>  
-<c:set var="pagefunc" value="员工年度考核" scope="request"/> 
-<c:set var="pagetitle" value="部门员工年度工作评价" scope="request"/> 
+<c:set target="${pagefunc}" property="name" value="员工年度考核" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/yearchk" />  
+
+<c:set target="${pagetitle}" property="name" value="部门员工年度工作评价" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${person.id}/yearchk/person/${checkPerson.id}" />
+
 <c:set var="pagesize" value="768" scope="request"/>
 <body>
 
@@ -35,7 +39,6 @@
 考核年份:${year}&nbsp;&nbsp;员工:${checkPerson.name}
 </div>
 <div class="headright" >
-<input type="button" value="<<返回"  onclick="javascript:window.open('/pa/mange/${person.id}/yearchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -77,6 +80,7 @@
 </table>
 <br>
 <input type="button" value="保存" onclick="save()"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/pa/mange/${person.id}/yearchk','_self')"/>
 </form>
 </body>
 </html>

@@ -18,8 +18,12 @@
 	}
 </script>
 </head>
-<c:set var="pagefunc" value="年终员工考核" scope="request"/> 
-<c:set var="pagetitle" value="年终员工个人考核" scope="request"/> 
+<c:set target="${pagefunc}" property="name" value="年终员工考核" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/yearchk" />  
+
+<c:set target="${pagetitle}" property="name" value="年终员工考核列表" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/person/${person.id}/yearchk/personchk/${pageBean.personChkBean.id}" /> 
+
 <c:set var="pagesize" value="820" scope="request"/> 
 <body>
 
@@ -29,7 +33,6 @@
 状态:胜${pageBean.personChkBean.win}&nbsp;负${pageBean.personChkBean.lose}&nbsp;平${pageBean.personChkBean.draw}&nbsp;</td>
 </div>
 <div class="headright" >
-<input type="button" value="<<返回" onclick="javascript:window.open('/${ctx}/person/${person.id}/yearchk','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -73,6 +76,7 @@
 </table>
 <br/>
 <input type="button" value="保存" onclick="save()"/>
+<input type="button" value="<<返回" onclick="javascript:window.open('/${ctx}/person/${person.id}/yearchk','_self')"/>
 </form>
 </body>
 </html>

@@ -20,8 +20,9 @@ $(document).ready(function() {
 });
 </script>  
 </head>
-<c:set var="pagefunc" value="部门工作执行" scope="request"/> 
-<c:set var="pagetitle" value="部门月度工作计划查看" scope="request"/> 
+<c:set target="${pagefunc}" property="name" value="部门工作执行" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/idrmonthplan" />  
+
 <c:set var="pagesize" value="670" scope="request"/> 
 <body>
 

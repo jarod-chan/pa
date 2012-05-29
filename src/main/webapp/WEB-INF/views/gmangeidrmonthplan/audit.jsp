@@ -44,8 +44,13 @@
 	
 </script>  
 </head>
-<c:set var="pagefunc" value="部门月度工作任务执行" scope="request"/> 
-<c:set var="pagetitle" value="部门月度工作计划审核" scope="request"/> 
+<c:set target="${pagefunc}" property="name" value="部门工作执行情况" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan" />  
+
+<c:set target="${pagetitle}" property="name" value="部门月度工作计划审核" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan/${idrMonthPlanBill.id}" />
+
+
 <c:set var="pagesize" value="670" scope="request"/>
 <body>
 
@@ -54,7 +59,6 @@
 	部门:${idrMonthPlanBill.department.name}&nbsp;&nbsp;计划周期:${idrMonthPlanBill.year}年${idrMonthPlanBill.month}月&nbsp;&nbsp;状态:${idrMonthPlanBill.state.name}
 </div>
 <div class="headright"  >
-	<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -86,6 +90,7 @@
 <br/>
 <input type="button" value="打回部门经理修改" onclick="back()"/>
 <input type="button" value="通过当月计划" onclick="next()"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
 </form>
 
 </body>

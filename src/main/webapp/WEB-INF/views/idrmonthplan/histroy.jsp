@@ -4,8 +4,10 @@
 <head>
 <%@ include file="../common/head.jsp"%>
 </head>
-<c:set var="pagefunc" value="部门工作执行" scope="request"/> 
-<c:set var="pagetitle" value="部门月度工作计划历史" scope="request"/> 
+
+<c:set target="${pagefunc}" property="name" value="部门工作执行历史" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/idrmonthplan/history" /> 
+
 <c:set var="pagesize" value="715" scope="request"/> 
 <body>
 
@@ -23,7 +25,6 @@
 	<input type="submit" value="查询" />
 </div>
 <div class="headright">
-	<input type="button" value="<<返回" onclick="javascript:window.open('/${ctx}/mange/${person.id}/idrmonthplan','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
