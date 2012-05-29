@@ -111,8 +111,11 @@ public class PersonRepositoryJpa implements PersonRepository {
 
 	@Override
 	public List<Person> getAllFyperson() {
-		Object obj= entityManager.createQuery("select p from fyperson p order by p.id asc").getResultList();
-		return (List<Person>) obj;
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query=builder.createQuery(Person.class);
+		Root<Person> root=query.from(Person.class);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
 	}
 
 	@Override
