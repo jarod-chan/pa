@@ -1,5 +1,7 @@
 package cn.fyg.pa.interfaces.module.system.password;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
@@ -8,12 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
-import cn.fyg.pa.infrastructure.mail.Mail;
-import cn.fyg.pa.infrastructure.mail.Sender;
+import cn.fyg.pa.infrastructure.mail.EmailException;
+import cn.fyg.pa.infrastructure.mail.EmailService;
+import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
 @Controller
 @RequestMapping("/fetchcsr")
@@ -24,61 +26,43 @@ public class FetchPasswordCtl {
 
 	@Resource
 	PersonRepository personRepository;
+
 	@Resource
-	private Sender sender;
+	EmailService emailService;
 	
-	@RequestMapping(value="")
-	public ModelAndView show(){
+	@Resource
+	FetchPasswordFacade fetchPasswordFacade;
+	
+	@RequestMapping(value="",method=RequestMethod.GET)
+	public String show(){
 		logger.info("show");
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("fetchcsr/mail");
-		return mav;
+		return "fetchcsr/fetchpassword";
 	}
 	
-	 @RequestMapping(value="",method=RequestMethod.POST)  
-	public ModelAndView sendMail(SendMailPage sendMailPage){
-		logger.info("sendMail");
-		if(!sendMailPage.checkPage()){
-			return getFailMav("该用户不存在,请重新输入！");
-		}
-		
-		Person person=personRepository.findByName(sendMailPage.getUsername());
+	@RequestMapping(value="",method=RequestMethod.POST)  
+	public String fetchPassword(UsernameBean usernameBean,Map<String,Object> map){
+		logger.info("fetchPassword");
+		Person person=personRepository.findByName(usernameBean.getUsername().trim());
+		map.put("usernameBean", usernameBean);
 		if(person==null){
-			return getFailMav("该用户不存在,请重新输入！");
+			map.put(Constant.MESSAGE_NAME, "该用户不存在,请重新输入！");
+			return "fetchcsr/fetchpassword";
 		}
 		if(person!=null&&StringUtils.isBlank(person.getEmail())){
-			return getFailMav("该用户没设置个人邮箱！");
+			map.put(Constant.MESSAGE_NAME, "该用户没设置个人邮箱！");
+			return "fetchcsr/fetchpassword";
 		}
 		
-		Mail mail = createEmailByPerson(person);
-		
-		sender.sendMail(mail);
-		
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("fetchcsr/sucess");
-		mav.addObject("username",sendMailPage.getUsername());
-		mav.addObject("email", person.getEmail());
-		return mav;
-		
+		try {
+			fetchPasswordFacade.sendPasswordToPerson(person);
+		} catch (EmailException e) {
+			logger.error("",e);
+			map.put(Constant.MESSAGE_NAME, "邮件服务器发送错误，请联系统管理人员！");
+			return "fetchcsr/fetchpassword";
+		}
+		map.put("username",person.getName());
+		map.put("email", person.getEmail());
+		return "fetchcsr/mailsucess";
 	}
-
-	private Mail createEmailByPerson(Person person) {
-		String subject = "密码取回邮件";
-		String context = person.getName()+ "，你好！<br>"
-				+ "你的考核系统登录信息如下<br>"
-				+ "用户名："+ person.getName() + "<br>"
-				+ "密码："+ person.getChkstr() + "<br>"
-				+ "点击以下链接登录考核系统<a href='http://kh.fyg.cn:8080/pa'>方远考核系统</a><br>";
-		String to = person.getEmail();
-		Mail mail = new Mail(subject, context, to);
-		return mail;
-	}
-
-	private ModelAndView getFailMav(String message) {
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("fetchcsr/mail");
-		mav.addObject("msg",message);
-		return mav;
-	}
-
+	
 }

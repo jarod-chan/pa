@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.fyg.pa.infrastructure.perisistence.jpa.RptJpa;
+import cn.fyg.pa.infrastructure.persistence.jpa.RptJpa;
 
 @Controller
 @RequestMapping("/admin/rpt")

@@ -144,7 +144,7 @@ body {
 		</div>
 		<div>
 			 <input type="submit" value="登录系统"/>
-	 		 <input type="button" value="忘记密码"  onclick="javascript:window.open('/pa/fetchcsr','_self')"/>
+	 		 <input type="button" value="取回密码"  onclick="javascript:window.open('/pa/fetchcsr','_self')"/>
 		</div>
 	</div>
 </form>	

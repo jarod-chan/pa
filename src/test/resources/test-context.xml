@@ -11,6 +11,8 @@
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
 	<import resource="test-db.xml" />
+	<import resource="infrastructure-email.xml"/>
+
 
 	<tx:annotation-driven />
 	<context:component-scan base-package="cn.fyg.pa" />	

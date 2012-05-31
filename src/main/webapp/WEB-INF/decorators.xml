@@ -1,5 +1,4 @@
 <decorators defaultdir="/WEB-INF/decorators">
-
 <!-- 用来定义装饰器要过滤的页面 -->  
 <decorator name="main" page="main.jsp">
 	<pattern>/common/*</pattern>
