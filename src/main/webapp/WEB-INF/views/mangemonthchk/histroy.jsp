@@ -6,7 +6,7 @@
  
 </head>
   
-<c:set target="${pagetitle}" property="name" value="员工月度工作评价历史" /> 
+<c:set target="${pagetitle}" property="name" value="员工工作评价历史" /> 
 <c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${mange.id}/monthchk/histroy" /> 
 
 <c:set var="pagesize" value="800" scope="request"/>  

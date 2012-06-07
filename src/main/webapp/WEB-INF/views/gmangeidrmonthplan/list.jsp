@@ -5,7 +5,7 @@
 <%@ include file="../common/head.jsp"%>
 </head>
 
-<c:set target="${pagefunc}" property="name" value="部门工作执行情况" />
+<c:set target="${pagefunc}" property="name" value="部门月度计划" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan" />  
 
 

@@ -138,7 +138,7 @@
 	
 </script>  
 </head>
-<c:set target="${pagefunc}" property="name" value="部门工作执行" />
+<c:set target="${pagefunc}" property="name" value="部门月度计划" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/idrmonthplan" />  
 
 <c:set var="pagesize" value="820" scope="request"/>

@@ -64,14 +64,15 @@ public class LoginCtl {
 		if(loginRetBean.getMange().equals("A")){
 		}
 		if(loginRetBean.getMange().equals("G")){
-			menuList.add(new UrlNameBean("部门工作执行历史",String.format("gmange/%s/idrmonthplan/history",personId)));
+			menuList.add(new UrlNameBean("部门月度计划历史",String.format("gmange/%s/idrmonthplan/history",personId)));
+			menuList.add(new UrlNameBean("公司考核情况查询",String.format("gmange/%s/totalreport",personId)));
 		}
 		if(loginRetBean.getMange().equals("Y")){
 			if(isSpecialPerson(personId)){
-				menuList.add(new UrlNameBean("部门工作执行历史",String.format("mange/%s/idrmonthplan/history",personId)));
+				menuList.add(new UrlNameBean("部门月度计划历史",String.format("mange/%s/idrmonthplan/history",personId)));
 			}else{				
-				menuList.add(new UrlNameBean("部门工作执行历史",String.format("mange/%s/idrmonthplan/history",personId)));
-				menuList.add(new UrlNameBean("员工月度工作评价历史",String.format("mange/%s/monthchk/histroy",personId)));
+				menuList.add(new UrlNameBean("部门月度计划历史",String.format("mange/%s/idrmonthplan/history",personId)));
+				menuList.add(new UrlNameBean("员工工作评价历史",String.format("mange/%s/monthchk/histroy",personId)));
 			}
 		}
 		if (loginRetBean.getMange().equals("N")) {
@@ -90,14 +91,13 @@ public class LoginCtl {
 		if(loginRetBean.getMange().equals("A")){
 		}
 		if(loginRetBean.getMange().equals("G")){
-			menuList.add(new UrlNameBean("部门工作执行情况",String.format("gmange/%s/idrmonthplan",personId)));
-			menuList.add(new UrlNameBean("公司考核情况查询",String.format("gmange/%s/totalreport",personId)));
+			menuList.add(new UrlNameBean("部门月度计划",String.format("gmange/%s/idrmonthplan",personId)));
 		}
 		if(loginRetBean.getMange().equals("Y")){
 			if(isSpecialPerson(personId)){
-				menuList.add(new UrlNameBean("部门工作执行",String.format("mange/%s/idrmonthplan",personId)));
+				menuList.add(new UrlNameBean("部门月度计划",String.format("mange/%s/idrmonthplan",personId)));
 			}else{				
-				menuList.add(new UrlNameBean("部门工作执行",String.format("mange/%s/idrmonthplan",personId)));
+				menuList.add(new UrlNameBean("部门月度计划",String.format("mange/%s/idrmonthplan",personId)));
 				menuList.add(new UrlNameBean("员工工作评价",String.format("mange/%s/monthchk",personId)));
 				menuList.add(new UrlNameBean("员工年度考核",String.format("mange/%s/yearchk",personId)));
 			}

@@ -36,10 +36,10 @@
 </script>  
 </head>
 
-<c:set target="${pagefunc}" property="name" value="部门工作执行情况" />
+<c:set target="${pagefunc}" property="name" value="部门月度计划" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan" />  
 
-<c:set target="${pagetitle}" property="name" value="部门月度工作计划查看" /> 
+<c:set target="${pagetitle}" property="name" value="部门月度计划查看" /> 
 <c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan/${idrMonthPlanBill.id}" />
 
 <c:set var="pagesize" value="670" scope="request"/>

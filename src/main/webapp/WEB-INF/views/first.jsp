@@ -30,7 +30,7 @@
 					<div>&nabla;绩效系统功能&nbsp;&nbsp;</div>
 				</li>
 				<li>
-					<div>&nabla;历史记录查询&nbsp;&nbsp;</div>
+					<div>&nabla;考核结果查询&nbsp;&nbsp;</div>
 				</li>
 				<li>
 					<div>&nabla;系统功能&nbsp;&nbsp;</div>

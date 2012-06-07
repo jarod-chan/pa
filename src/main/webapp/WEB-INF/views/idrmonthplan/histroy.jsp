@@ -5,7 +5,7 @@
 <%@ include file="../common/head.jsp"%>
 </head>
 
-<c:set target="${pagefunc}" property="name" value="部门工作执行历史" />
+<c:set target="${pagefunc}" property="name" value="部门月度计划历史" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/idrmonthplan/history" /> 
 
 <c:set var="pagesize" value="715" scope="request"/> 

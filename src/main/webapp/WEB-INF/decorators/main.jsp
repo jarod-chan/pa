@@ -85,7 +85,7 @@ function logout(){
 					</ul>
 				</li>
 				<li>
-					<div>&nabla;历史记录查询&nbsp;&nbsp;</div>
+					<div>&nabla;考核结果查询&nbsp;&nbsp;</div>
 					<ul>
 					<c:forEach var="menu" items="${queryList}">
 						<li><a href="/${ctx}/${menu.url}">&nbsp;&nbsp;${menu.name}&nbsp;&nbsp;</a></li>
