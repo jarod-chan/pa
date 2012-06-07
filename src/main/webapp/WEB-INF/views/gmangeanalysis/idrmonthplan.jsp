@@ -8,23 +8,27 @@ tbody ul{list-style-type:none; margin:0;padding:0;width:100%; }
 tbody ul li{ width:150px; float:left;background-color:#FFFFFF;margin: 4px;border: 1px solid #97CBFF; }
 </style>
 <script type="text/javascript">
-	var swithShow=function(){
-		if($(this).is(".swithon")){
-			$("li.finished").hide();
-			$(this).val("显示全部部门");
-			$("td").has("ul").not(":has(li:visible)").each(function(){
-					$(this).hide();		
-			});
+
+	var selchange=function(){
+		var selval=$(this).val();
+		if(selval=="all"){
+			$(".tbldef li:hidden").show();
+			$(".tbldef td:hidden").show();
 		}else{
-			$("li.finished").show();
-			$(this).val("过滤已完成部门");
-			$("td:hidden").show();
+			$(".tbldef li:not(."+selval+")").hide();
+			$(".tbldef li."+selval).show();
+			$(".tbldef td").has("ul").each(function(){
+				if($(this).is(":has(li."+selval+")")){
+					$(this).show();
+				}else{
+					$(this).hide();
+				}	
+			});
 		}
-		$(this).toggleClass("swithon");
 	}
 
 	 $(document).ready(function() {
-		$("#swithbtn").bind("click",swithShow);
+		$("#swithbtn").bind("change",selchange);
 	 });
 </script>
 </head>
@@ -54,7 +58,7 @@ tbody ul li{ width:150px; float:left;background-color:#FFFFFF;margin: 4px;border
 <input type="submit" value="查询" />
 </form>
 <%@ include file="../common/message.jsp"%>
-<table border=1 style="table-layout:fixed;width:810px;">
+<table border=1  style="table-layout:fixed;width:810px;" class="tbldef">
 <thead>
 	<tr>
 		<th>公司部门${queryBean.year}年${queryBean.month}月工作概况</th>
@@ -67,7 +71,12 @@ tbody ul li{ width:150px; float:left;background-color:#FFFFFF;margin: 4px;border
 				合计参与考核部门${analysisIdrMonthPlanBean.totalNum}个,<c:choose><c:when test="${analysisIdrMonthPlanBean.totalNum==analysisIdrMonthPlanBean.finishNum}">全部完成考核。</c:when><c:otherwise>${analysisIdrMonthPlanBean.finishNum}个已完成。</c:otherwise></c:choose>
 				</div>
 				<div style="width:50%;float:left;text-align: right;">
-				<input id="swithbtn" type="button" value="过滤已完成部门" class="swithon" /> 
+					<select id="swithbtn">
+						<option value="all">所有部门</option>
+						<c:forEach var="item" items="${stateEnum}">
+							<option value="${fn:toLowerCase(item)}">${item.name}</opiton>
+						</c:forEach>
+					</select>
 				</div>
 				</td>
 			</tr>

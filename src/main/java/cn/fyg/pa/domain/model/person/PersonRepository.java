@@ -20,7 +20,7 @@ public interface PersonRepository {
 
 	int countStaffByType(TypeEnum type);
 
-	List<Person> findPersonByManage(ManageEnum... mangeEnum);
+	List<Person> findPersonByManageOrderByDepartment(ManageEnum... mangeEnum);
 
 	List<Person> getStaffByType(TypeEnum type);
 

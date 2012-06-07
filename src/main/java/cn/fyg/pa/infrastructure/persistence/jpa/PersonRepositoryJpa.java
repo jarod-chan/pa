@@ -11,6 +11,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Service;
 
+import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.person.ManageEnum;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
@@ -63,13 +64,17 @@ public class PersonRepositoryJpa implements PersonRepository {
 	}
 	
 	@Override
-	public List<Person> findPersonByManage(ManageEnum... mangeEnum) {
+	public List<Person> findPersonByManageOrderByDepartment(ManageEnum... mangeEnum) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Person> query = builder.createQuery(Person.class);
-		Root<Person> root = query.from(Person.class);
-		Predicate criteria=root.get("manage").in((Object[])mangeEnum);
+		Root<Person> person = query.from(Person.class);
+		Root<Department> department=query.from(Department.class);
+
+		Predicate criteria=person.get("manage").in((Object[])mangeEnum);
+		criteria=builder.and(builder.equal(person.get("department"), department.get("name")),criteria);
+		query.select(person);
 		query.where(criteria);
-		query.orderBy(builder.asc(root.get("id")));
+		query.orderBy(builder.asc(department.get("number")));
 		return entityManager.createQuery(query).getResultList();
 	}
 

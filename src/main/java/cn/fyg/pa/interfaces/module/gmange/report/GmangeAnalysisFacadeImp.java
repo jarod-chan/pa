@@ -43,7 +43,7 @@ public class GmangeAnalysisFacadeImp implements GmangeAnalysisFacade {
 	
 	@Override
 	public AnalysisMonthChkBean analyseMonthChk(Long year,Long month){
-		List<Person> persons=personRepository.findPersonByManage(ManageEnum.N);
+		List<Person> persons=personRepository.findPersonByManageOrderByDepartment(ManageEnum.N);
 		List<MonthChk> monthChks=monthChkReposity.findMonthChkByPeriod(year, month);
 		AnalysisMonthChkBuiler builder=new AnalysisMonthChkBuiler(persons, monthChks);
 		return builder.build(year,month);
