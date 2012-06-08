@@ -27,13 +27,13 @@
 			<!-- 功能菜单  -->
 			<ul class="nav" style="float:left">
 				<li>
-					<div>&nabla;绩效系统功能&nbsp;&nbsp;</div>
+					<div><img class="img_down" src="/${ctx}/resources/img/down.gif">绩效系统功能&nbsp;&nbsp;</div>
 				</li>
 				<li>
-					<div>&nabla;考核结果查询&nbsp;&nbsp;</div>
+					<div><img class="img_down"  src="/${ctx}/resources/img/down.gif">考核结果查询&nbsp;&nbsp;</div>
 				</li>
 				<li>
-					<div>&nabla;系统功能&nbsp;&nbsp;</div>
+					<div><img class="img_down"  src="/${ctx}/resources/img/down.gif">系统功能&nbsp;&nbsp;</div>
 				</li>
 			</ul>
 		</div>

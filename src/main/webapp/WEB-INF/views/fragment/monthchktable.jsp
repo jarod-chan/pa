@@ -13,7 +13,7 @@
 				<tr>
 					<td rowspan="2">${status.count}</td>
 					<td>
-						${item.year}年${item.month}月份${item.person.name}工完成情况【${item.state.name}】
+						${item.year}年${item.month}月份${item.person.name}工作完成情况【${item.state.name}】
 					</td>
 				</tr>
 				<tr>

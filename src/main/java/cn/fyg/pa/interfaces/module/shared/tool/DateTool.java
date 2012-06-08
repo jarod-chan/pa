@@ -7,14 +7,40 @@ import java.util.List;
 
 public class DateTool {
 	public static Long BEG_YEAR=2012L;
-	private Calendar today=Calendar.getInstance();
+	private final Calendar thisMonthFirstDay;
+	private final Calendar prevMonthFirstDay;
+	
+	public DateTool(){
+		Calendar day=Calendar.getInstance();
+		day.set(Calendar.DATE, 1);
+		
+		thisMonthFirstDay=createNewCalendar(day);
+		day.add(Calendar.MONTH, -1);
+		prevMonthFirstDay=createNewCalendar(day);
+		
+	
+	}
+	private static Calendar createNewCalendar(Calendar calendar){
+		Calendar newCalendar=Calendar.getInstance();
+		newCalendar.setTime(calendar.getTime());
+		return newCalendar;
+	}
+	
 	
 	public Long getCurrentYear(){
-		return 0L+today.get(Calendar.YEAR);
+		return 0L+thisMonthFirstDay.get(Calendar.YEAR);
 	}
 	
 	public Long getCurrentMonth(){
-		return 1L+today.get(Calendar.MONTH);
+		return 1L+thisMonthFirstDay.get(Calendar.MONTH);
+	}
+	
+	public Long getPrevMonthYear(){
+		return 0L+prevMonthFirstDay.get(Calendar.YEAR);
+	}
+	
+	public Long getPrevMonth(){
+		return 1L+prevMonthFirstDay.get(Calendar.MONTH);
 	}
 	
 	public List<Long> getAllYears(){

@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
+<%@ include file="../../common/common.jsp"%>
 <html>
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../../common/head.jsp"%>
  
 </head>
   
@@ -38,7 +38,7 @@
 
 </form>
 
-<%@ include file="../common/message.jsp"%>
-<%@ include file="../fragment/monthchktable.jsp"%>
+<%@ include file="../../common/message.jsp"%>
+<%@ include file="../../fragment/monthchktable.jsp"%>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
+<%@ include file="../../common/common.jsp"%>
 <html>
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../../common/head.jsp"%>
 <style type="text/css">
 	.currRow{
 		background-color:#77BBFF;
@@ -66,7 +66,7 @@
 </div>
 
 
-<%@ include file="../common/message.jsp"%>
+<%@ include file="../../common/message.jsp"%>
 
 <form id="monthChk" action="/${ctx}/mange/${mange.id}/monthchk/${monthChk.id}" method="post">
 

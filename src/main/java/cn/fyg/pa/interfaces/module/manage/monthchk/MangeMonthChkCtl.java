@@ -24,13 +24,33 @@ import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.bean.YearAndMonthBean;
+import cn.fyg.pa.interfaces.module.shared.bean.YearAndPrevMonth;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
+/**
+ * @author jhon.chen@gmail.com
+ *
+ */
 @Controller
 @RequestMapping("/mange/{personId}/monthchk")
 public class MangeMonthChkCtl {
 	
 	private static final Logger logger=LoggerFactory.getLogger(MangeMonthChkCtl.class);
+	
+	private interface Page {
+		String PATH = "mange/monthchk/";
+		String LIST     = PATH + "list";
+		String EVALUATE = PATH + "evaluate";
+		String HISTROY  = PATH + "histroy";
+	}
+	
+	
+	/**为了再页面url不变的情况下保持查询条件
+	 * 所以把查询年月存储在session中
+	 */
+	private static final String MONTHCHK_QUERY_BEAN = "monthChkQueryBean";
+
 
 	@Resource
 	PersonRepository personRepository;
@@ -38,6 +58,8 @@ public class MangeMonthChkCtl {
 	MonthChkService monthChkService;
 	@Resource
 	MonthChkRepository monthChkRepository;
+	@Resource
+	MangeMonthChkFacade mangeMonthChkFacade;
 	
 	
 	@ModelAttribute("person")
@@ -49,11 +71,29 @@ public class MangeMonthChkCtl {
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String toList(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		logger.info("toList");
-		List<MonthChk> monthChks=monthChkRepository.getMonthChkByDepartmentAndState(person.getDepartment(), MonthChkEnum.SUBMITTED);
+		YearAndPrevMonth queryBean=getYearAndPrevMonthFromSession(session);
+		List<MonthChk> monthChks=mangeMonthChkFacade.getAllPersonMonthChkByPeriod(queryBean.getYear(),queryBean.getMonth(),person.getDepartment());
+		map.put("dateTool", new DateTool());
+		map.put("queryBean", queryBean);
 		map.put("mange", person);
 		map.put("monthChks", monthChks);
 		map.put("message",new SessionMPR(session).getMessage());
-		return "mangemonthchk/list";
+		return Page.LIST;
+	}
+
+	private YearAndPrevMonth getYearAndPrevMonthFromSession(HttpSession session) {
+		YearAndPrevMonth monthChkQueryBean = (YearAndPrevMonth) session.getAttribute(MONTHCHK_QUERY_BEAN);
+		if(monthChkQueryBean==null){
+			monthChkQueryBean=new YearAndPrevMonth();
+			session.setAttribute(MONTHCHK_QUERY_BEAN, monthChkQueryBean);
+		}
+		return monthChkQueryBean;
+	}
+	
+	@RequestMapping(value="",method=RequestMethod.POST)
+	public String setQueryBean(YearAndPrevMonth queryBean,HttpSession session){
+		session.setAttribute(MONTHCHK_QUERY_BEAN, queryBean);
+		return "redirect:monthchk";
 	}
 	
 	@RequestMapping(value="/{monthchkId}",method=RequestMethod.GET)
@@ -63,7 +103,7 @@ public class MangeMonthChkCtl {
 		map.put("mange", person);
 		map.put("monthChk", monthChk);
 		map.put("message",new SessionMPR(session).getMessage());
-		return "mangemonthchk/evaluate";
+		return Page.EVALUATE;
 	}
 	
 	@RequestMapping(value="/{monthchkId}/save",method=RequestMethod.POST)
@@ -110,14 +150,14 @@ public class MangeMonthChkCtl {
 
 
 	@RequestMapping(value="/histroy",method=RequestMethod.GET)
-	public String histroy(ManageMonthChkQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map){
+	public String histroy(YearAndMonthBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map){
 		logger.info("histroy");
 		List<MonthChk> monthChks=monthChkRepository.getMonthChkByPeriodAndDepartmentAndState(queryBean.getYear(), queryBean.getMonth(),person.getDepartment(), MonthChkEnum.FINISHED);
 		map.put("dateTool", new DateTool());
 		map.put("mange", person);
 		map.put("monthChks", monthChks);
 		map.put("queryBean", queryBean);
-		return "mangemonthchk/histroy";
+		return Page.HISTROY;
 	}
 	
 }

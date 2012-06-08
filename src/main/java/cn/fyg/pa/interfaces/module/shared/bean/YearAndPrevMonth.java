@@ -1,17 +1,16 @@
-package cn.fyg.pa.interfaces.module.manage.monthchk;
+package cn.fyg.pa.interfaces.module.shared.bean;
 
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
-public class ManageMonthChkQueryBean {
+public class YearAndPrevMonth {
+	
 	private Long year;
 	private Long month;
 	
-	
-
-	public ManageMonthChkQueryBean() {
+	public YearAndPrevMonth() {
 		DateTool dtl=new DateTool();
-		this.year=dtl.getCurrentYear();
-		this.month=dtl.getCurrentMonth();
+		this.year=dtl.getPrevMonthYear();
+		this.month=dtl.getPrevMonth();
 	}
 
 	public Long getYear() {
@@ -29,5 +28,7 @@ public class ManageMonthChkQueryBean {
 	public void setMonth(Long month) {
 		this.month = month;
 	}
+	
+	
 
 }

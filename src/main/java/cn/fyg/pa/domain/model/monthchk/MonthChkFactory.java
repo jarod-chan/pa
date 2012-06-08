@@ -29,7 +29,7 @@ public class MonthChkFactory {
 		return createMonthChk(person,year,month);
 	}
 	
-	private static MonthChk createMonthChk(Person person,Long year,Long month){
+	public static MonthChk createMonthChk(Person person,Long year,Long month){
 		MonthChk monthChk=new MonthChk();
 		monthChk.setPerson(person);
 		monthChk.setYear(year);
