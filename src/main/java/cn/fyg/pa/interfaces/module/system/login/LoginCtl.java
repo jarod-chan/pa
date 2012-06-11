@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.fyg.pa.application.LoginService;
 import cn.fyg.pa.domain.model.person.ManageEnum;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
-import cn.fyg.pa.interfaces.module.shared.tool.SessionUtil;
+import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 
 
 @Controller
@@ -28,6 +28,8 @@ public class LoginCtl {
 	
 	@Resource
 	private LoginService loginService;
+	@Resource
+	SessionUtil sessionUtil;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getLogin() {
@@ -42,15 +44,16 @@ public class LoginCtl {
 		LoginRetBean loginRetBean=loginService.checkLoginPerson(loginBean);
 				
 		if(loginRetBean.isPass()){
-			loginRetBean=doChangeForSpecialPerson(loginBean,loginRetBean);
-			new SessionUtil(request).setValue("loginRet",loginRetBean);
-			String loginInfo = getLoginInfo(loginRetBean);
-			new SessionUtil(request).setValue("loginInfo", loginInfo);
+			sessionUtil.invalidate();
 			
+			loginRetBean=doChangeForSpecialPerson(loginBean,loginRetBean);
+			sessionUtil.setValue("loginRet",loginRetBean);
+			String loginInfo = getLoginInfo(loginRetBean);
+			sessionUtil.setValue("loginInfo", loginInfo);
 			List<UrlNameBean> funcList=getFuncList(loginRetBean);
-			new SessionUtil(request).setValue("funcList", funcList);
+			sessionUtil.setValue("funcList", funcList);
 			List<UrlNameBean> queryList=getQueryList(loginRetBean);
-			new SessionUtil(request).setValue("queryList", queryList);
+			sessionUtil.setValue("queryList", queryList);
 			
 			return dispatcherMav(loginRetBean);
 		}
@@ -105,6 +108,9 @@ public class LoginCtl {
 		if (loginRetBean.getMange().equals("N")) {
 			menuList.add(new UrlNameBean("月度工作任务",String.format("person/%s/monthchk",personId)));
 			menuList.add(new UrlNameBean("年终员工考核",String.format("person/%s/yearchk",personId)));
+		}
+		if (loginRetBean.getMange().equals("F")) {
+			menuList.add(new UrlNameBean("员工考核结果",String.format("finance/%s/summarysnapshot",personId)));
 		}
 		
 		

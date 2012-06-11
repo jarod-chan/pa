@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.fyg.pa.interfaces.module.shared.tool.SessionUtil;
 import cn.fyg.pa.interfaces.module.system.login.LoginRetBean;
 
 /**
@@ -63,9 +62,15 @@ public class UrlFilter implements Filter {
 	 * 管理员url
 	 */
 	private static final List<String> adminUrl=Arrays.asList("/pa/admin");
+	
+	/**
+	 * 财务人员url
+	 */
+	private static final List<String> financeUrl=Arrays.asList("/pa/finance");
 
   
     public void destroy() {   
+    	logger.info("destroy");
     }   
   
     public void init(FilterConfig filterConfig) throws ServletException {   
@@ -84,7 +89,7 @@ public class UrlFilter implements Filter {
         
         // 获取当前请求的URI     
         String url = req.getRequestURI(); 
-        String method=req.getMethod();
+//        String method=req.getMethod();
 //        logger.info(method+":"+url);
          
         //开发临时去掉url过滤
@@ -101,11 +106,11 @@ public class UrlFilter implements Filter {
         	chain.doFilter(request, response);
         	return;
         }
-        SessionUtil session=new SessionUtil(req);
-		LoginRetBean loginRet = session.getValue("loginRet", LoginRetBean.class);
+
+        Object loginRetObj=req.getSession().getAttribute("loginRet");        
 		
-		if(loginRet!=null){	
-			
+		if(loginRetObj!=null){	
+			LoginRetBean loginRet=(LoginRetBean)loginRetObj;
 			String suffixId="/"+loginRet.getPersonid();
 			
 			if(isIndexOf(url,commonUrl,suffixId)){
@@ -125,6 +130,10 @@ public class UrlFilter implements Filter {
 				return;
 			}
 			if (isIndexOf(url, adminUrl) && loginRet.getMange().equals("A")) {
+				chain.doFilter(request, response);
+				return;
+			}
+			if (isIndexOf(url, financeUrl) && loginRet.getMange().equals("F")) {
 				chain.doFilter(request, response);
 				return;
 			}

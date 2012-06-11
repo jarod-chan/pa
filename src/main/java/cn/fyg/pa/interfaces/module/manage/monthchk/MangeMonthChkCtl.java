@@ -27,6 +27,7 @@ import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.bean.YearAndMonthBean;
 import cn.fyg.pa.interfaces.module.shared.bean.YearAndPrevMonth;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
+import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 
 /**
  * @author jhon.chen@gmail.com
@@ -45,13 +46,13 @@ public class MangeMonthChkCtl {
 		String HISTROY  = PATH + "histroy";
 	}
 	
-	
 	/**为了再页面url不变的情况下保持查询条件
-	 * 所以把查询年月存储在session中
+	 * 所以把查询年月存储在session中 
 	 */
-	private static final String MONTHCHK_QUERY_BEAN = "monthChkQueryBean";
+	private static final String QUERY_BEAN = "manage.monthchk.mangemonthchkctl";
 
-
+	@Resource
+	SessionUtil sessionUtil;
 	@Resource
 	PersonRepository personRepository;
 	@Resource
@@ -82,17 +83,17 @@ public class MangeMonthChkCtl {
 	}
 
 	private YearAndPrevMonth getYearAndPrevMonthFromSession(HttpSession session) {
-		YearAndPrevMonth monthChkQueryBean = (YearAndPrevMonth) session.getAttribute(MONTHCHK_QUERY_BEAN);
+		YearAndPrevMonth monthChkQueryBean =  sessionUtil.getValue(QUERY_BEAN);
 		if(monthChkQueryBean==null){
 			monthChkQueryBean=new YearAndPrevMonth();
-			session.setAttribute(MONTHCHK_QUERY_BEAN, monthChkQueryBean);
+			sessionUtil.setValue(QUERY_BEAN, monthChkQueryBean);
 		}
 		return monthChkQueryBean;
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.POST)
 	public String setQueryBean(YearAndPrevMonth queryBean,HttpSession session){
-		session.setAttribute(MONTHCHK_QUERY_BEAN, queryBean);
+		sessionUtil.setValue(QUERY_BEAN, queryBean);
 		return "redirect:monthchk";
 	}
 	

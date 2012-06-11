@@ -26,6 +26,9 @@ public class Dispatcher {
 		if (loginRet.getMange().equals("N")) {
 			return "redirect:person/"+loginRet.getPersonid()+"/monthchk";
 		}
+		if (loginRet.getMange().equals("F")) {
+			return "redirect:finance/"+loginRet.getPersonid()+"/summarysnapshot";
+		}
 		
 		return "redirect:/login";
 	}

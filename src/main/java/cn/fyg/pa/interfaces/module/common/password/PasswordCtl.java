@@ -17,7 +17,7 @@ import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
-import cn.fyg.pa.interfaces.module.shared.tool.SessionUtil;
+import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 
 @Controller
 @RequestMapping("/common/settings/person/{personId}/password")
@@ -27,6 +27,8 @@ public class PasswordCtl {
 	
 	@Resource
 	PersonRepository personRepository;
+	@Resource
+	SessionUtil sessionUtil;
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
@@ -57,9 +59,7 @@ public class PasswordCtl {
 		
 		person.setChkstr(page.getConfirmcsr());
 		personRepository.save(person);
-		SessionUtil util=new SessionUtil(session);
-		util.remove("loginRet");
-		util.remove("menuList");
+		sessionUtil.invalidate();
 		map.put(Constant.MESSAGE_NAME,"密码修改成功！");
 		return "password/sucess";	
 	}
