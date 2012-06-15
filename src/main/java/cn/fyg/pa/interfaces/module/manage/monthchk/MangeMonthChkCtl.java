@@ -23,9 +23,9 @@ import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
-import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.bean.YearAndMonthBean;
 import cn.fyg.pa.interfaces.module.shared.bean.YearAndPrevMonth;
+import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 
@@ -72,7 +72,7 @@ public class MangeMonthChkCtl {
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String toList(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 		logger.info("toList");
-		YearAndPrevMonth queryBean=getYearAndPrevMonthFromSession(session);
+		YearAndPrevMonth queryBean=getYearAndPrevMonthFromSession();
 		List<MonthChk> monthChks=mangeMonthChkFacade.getAllPersonMonthChkByPeriod(queryBean.getYear(),queryBean.getMonth(),person.getDepartment());
 		map.put("dateTool", new DateTool());
 		map.put("queryBean", queryBean);
@@ -82,7 +82,7 @@ public class MangeMonthChkCtl {
 		return Page.LIST;
 	}
 
-	private YearAndPrevMonth getYearAndPrevMonthFromSession(HttpSession session) {
+	private YearAndPrevMonth getYearAndPrevMonthFromSession() {
 		YearAndPrevMonth monthChkQueryBean =  sessionUtil.getValue(QUERY_BEAN);
 		if(monthChkQueryBean==null){
 			monthChkQueryBean=new YearAndPrevMonth();

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import cn.fyg.pa.application.IdrTypeService;
 import cn.fyg.pa.domain.model.indicatortype.IdrType;
 import cn.fyg.pa.domain.model.indicatortype.IdrTypeRepository;
-import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
 @Controller

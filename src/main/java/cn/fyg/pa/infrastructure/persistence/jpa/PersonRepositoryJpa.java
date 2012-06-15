@@ -139,5 +139,18 @@ public class PersonRepositoryJpa implements PersonRepository {
 		}
 	}
 
+	@Override
+	public List<Person> findPersonByManageOrderById(ManageEnum... mangeEnum) {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query = builder.createQuery(Person.class);
+		Root<Person> person = query.from(Person.class);
+
+		Predicate criteria=person.get("manage").in((Object[])mangeEnum);
+		query.select(person);
+		query.where(criteria);
+		query.orderBy(builder.asc(person.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}
+
 
 }

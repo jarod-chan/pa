@@ -26,7 +26,7 @@ import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.model.yearchk.Fycheck;
 import cn.fyg.pa.domain.model.yearchk.FycheckFactory;
 import cn.fyg.pa.domain.model.yearchk.YearChkRepositroy;
-import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 
 
 /**

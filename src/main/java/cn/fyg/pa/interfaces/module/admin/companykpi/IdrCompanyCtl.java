@@ -20,7 +20,7 @@ import cn.fyg.pa.domain.model.companykpi.IdrYearCompany;
 import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.yeartypeweight.IdrYearTypeWeight;
 import cn.fyg.pa.domain.shared.Result;
-import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.tool.JsonUtil;
 
 @Controller

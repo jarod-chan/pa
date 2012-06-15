@@ -1,4 +1,4 @@
-package cn.fyg.pa.infrastructure.message;
+package cn.fyg.pa.interfaces.module.shared.message;
 
 public interface MessagePasser {
 	

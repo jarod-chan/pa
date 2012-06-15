@@ -16,7 +16,7 @@ import cn.fyg.pa.application.IdrYearTypeWeightService;
 import cn.fyg.pa.domain.model.indicatortype.IdrTypeRepository;
 import cn.fyg.pa.domain.model.yeartypeweight.IdrYearTypeWeight;
 import cn.fyg.pa.domain.shared.Result;
-import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 
 @Controller
 @RequestMapping("/admin/idrtypeweight")

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
-import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 
 @Controller
 @RequestMapping("/admin/deptindicator")

@@ -6,15 +6,20 @@
 
 <script type="text/javascript">
 	var selChange=function(){
-		$('<form/>',{action:'/${ctx}/mange/${mange.id}/monthchk',method:'post'})
+		$('<form/>',{action:'/${ctx}/finance/${person.id}/summarysnapshot',method:'post'})
 		.append($('<input/>',{type:'hidden',name:'year',value:$("select[name=year]").val()}))
-		.append($('<input/>',{type:'hidden',name:'month',value:$("select[name=month]").val()}))
+	 	.appendTo($("body"))
+	 	.submit();
+	}
+	
+	function remove(summarysnapshotId){
+		$('<form/>',{action:'/${ctx}/finance/${person.id}/summarysnapshot/'+summarysnapshotId+'/remove',method:'post'})
 	 	.appendTo($("body"))
 	 	.submit();
 	}
 	
 	$(document).ready(function(){
-		$("select[name=year],select[name=month]").bind("change",selChange);
+		$("select[name=year]").bind("change",selChange);
 	})
 	
 </script>
@@ -28,20 +33,15 @@
 
 <div class="headdiv" >
 <div class="headleft"  >
-	部门:${mange.department}&nbsp;&nbsp;
-	考核周期:
+	年度:
 	<select name="year">
 		<c:forEach var="item" items="${dateTool.allYears}">
 			<option value="${item}" <c:if test="${item==queryBean.year}">selected="true"</c:if> >${item}</option>
 		</c:forEach>
 	</select>年
-	<select name="month">
-		<c:forEach var="item" items="${dateTool.allMonths}">
-			<option value="${item}" <c:if test="${item==queryBean.month}">selected="true"</c:if> >${item}</option>
-		</c:forEach>
-	</select>月
 </div>
 <div class="headright" >
+	<input type="button" value="接收考核结果" onclick="javascript:window.open('/${ctx}/finance/${person.id}/summarysnapshot/receive','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -51,37 +51,33 @@
 <thead>
 	<tr>
 		<th style="width:50px;">序号</th>
-		<th style="width:450px;">工作完成情况表</th>
-		<th style="width:100px;">员工</th>
-		<th style="width:100px;">状态</th>
-		<th style="width:100px;">操作</th>
+		<th style="width:350px;">工作完成情况表</th>
+		<th style="width:200px;">接收日期</th>
+		<th style="width:80px;">状态</th>
+		<th style="width:120px;">操作</th>
 	</tr>
 </thead>
 <tbody>
-<c:forEach var="item" items="${monthChks}"  varStatus="status">
+<c:forEach var="item" items="${summarySnapshots}"  varStatus="status">
 	<tr>
 	<td>
 		${status.count}
 	</td>
 	<td>
-		${item.year}年${item.month}月份${item.person.name}工作完成情况
+		${item.year}年${item.month}月份员工考核结果
 	</td>
 	<td>
-		${item.person.name}
+		<fmt:formatDate value="${item.logDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 	</td>
 	<td>
-		【${item.state.name}】
+		${item.state.name}
 	</td>
-	<td>
-		<c:choose>
-			<c:when test="${item.state=='NEW'||item.state=='SAVED'}"></c:when>
-			<c:when test="${item.state=='SUBMITTED'}">
-				<input type="button"  value="评价" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/${item.id}','_self')"/>
-			</c:when>
-			<c:when test="${item.state=='FINISHED'}">
-			</c:when>
-		</c:choose>
-		
+	<td>	
+		<input type="button" value="查看" onclick="javascript:window.open('/${ctx}/finance/${person.id}/summarysnapshot/${item.id}','_self')"/>
+		&nbsp;&nbsp;
+		<c:if test="${item.state=='RECEIVED'}">
+			<input type="button" value="删除" onclick="remove('${item.id}')"/>
+		</c:if>
 	</td>
 				
    </tr>

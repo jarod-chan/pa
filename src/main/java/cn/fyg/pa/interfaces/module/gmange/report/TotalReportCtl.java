@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
-import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
 @Controller

@@ -27,5 +27,7 @@ public interface PersonRepository {
 	List<Person> getStaffByDept(String department);
 	
 	List<Person> getAllFyperson();
+	
+	List<Person> findPersonByManageOrderById(ManageEnum... mangeEnum);
 
 }

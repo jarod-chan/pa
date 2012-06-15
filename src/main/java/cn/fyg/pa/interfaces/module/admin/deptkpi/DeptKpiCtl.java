@@ -19,7 +19,7 @@ import cn.fyg.pa.domain.model.department.DepartmentRepository;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItemRepository;
 import cn.fyg.pa.domain.shared.Result;
-import cn.fyg.pa.infrastructure.message.imp.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 
 @Controller
 @RequestMapping("/admin/deptkpi/{year}/department/{departmentId}")
