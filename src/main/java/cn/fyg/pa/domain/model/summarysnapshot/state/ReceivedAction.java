@@ -8,14 +8,14 @@ import cn.fyg.pa.domain.shared.state.StateChangeException;
 public class ReceivedAction extends SnapshotStateAction {
 	
 	@Override
-	protected boolean checkBack(SummarySnapshot summarySnapshot)
+	protected boolean checkNext(SummarySnapshot summarySnapshot)
 			throws StateChangeException {
 		return true;
 	}
 
 	@Override
 	protected void doNext(SummarySnapshot summarySnapshot) {
-		summarySnapshot.setState(SnapshotEnum.RECEIVED);
+		summarySnapshot.setState(SnapshotEnum.CONFIRMED);
 	}
 
 	@Override

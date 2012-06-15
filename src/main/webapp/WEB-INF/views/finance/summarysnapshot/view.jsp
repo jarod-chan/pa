@@ -6,18 +6,7 @@
 
 
 <script type="text/javascript">
-	var selChange=function(){
-		$('<form/>',{action:'/${ctx}/finance/${person.id}/summarysnapshot/receive',method:'post'})
-		.append($('<input/>',{type:'hidden',name:'year',value:$("select[name=year]").val()}))
-		.append($('<input/>',{type:'hidden',name:'month',value:$("select[name=month]").val()}))
-	 	.appendTo($("body"))
-	 	.submit();
-	}
-	
-	$(document).ready(function(){
-		$("select[name=year],select[name=month]").bind("change",selChange);
-	})
-	
+
 	function remove(){
 		$('<form/>',{action:'/${ctx}/finance/${person.id}/summarysnapshot/${summarySnapshot.id}/remove',method:'post'})
 	 	.appendTo($("body"))
@@ -35,7 +24,7 @@
 <c:set var="pagesize" value="990" scope="request"/>  
 
 <body>
-<form action="/${ctx}/finance/${person.id}/summarysnapshot/receive/save" method="post">
+
 
 <div class="headdiv" >
 <div class="headleft" >
@@ -55,7 +44,6 @@
 <%@ include file="../../fragment/snapshotitemview.jsp"%>
 
 
-</form>
 
 </body>
 </html>

@@ -95,7 +95,7 @@ public class MonthChk implements Serializable {
 		this.monthChkItems = monthChkItems;
 	}
 	
-	public void next() throws StateChangeException{;
+	public void next() throws StateChangeException{
 		this.state.next(this);
 	}
 	

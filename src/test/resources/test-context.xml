@@ -14,7 +14,10 @@
 	<import resource="infrastructure-email.xml"/>
 
 
+	<!-- 用正则过滤掉界面层自动注入的包 -->
 	<tx:annotation-driven />
-	<context:component-scan base-package="cn.fyg.pa" />	
+	<context:component-scan base-package="cn.fyg.pa" >
+		<context:exclude-filter type="regex" expression="cn\.fyg\.pa\.interfaces\..*"/>
+	</context:component-scan>	
 
 </beans>

@@ -3,6 +3,7 @@ package cn.fyg.pa.application;
 import java.util.List;
 
 import cn.fyg.pa.domain.model.summarysnapshot.SummarySnapshot;
+import cn.fyg.pa.domain.shared.state.StateChangeException;
 
 public interface SummarySnapshotService {
 
@@ -14,4 +15,7 @@ public interface SummarySnapshotService {
 	
 	void remove(Long summarySnapshotId);
 	
+	SummarySnapshot next(Long summarySnapshotId) throws StateChangeException;
+	
+	SummarySnapshot back(Long summarySnapshotId) throws StateChangeException;
 }

@@ -103,6 +103,10 @@ public class LoginCtl {
 				menuList.add(new UrlNameBean("部门月度计划",String.format("mange/%s/idrmonthplan",personId)));
 				menuList.add(new UrlNameBean("员工工作评价",String.format("mange/%s/monthchk",personId)));
 				menuList.add(new UrlNameBean("员工年度考核",String.format("mange/%s/yearchk",personId)));
+				//XXX 财务部  胡吉运 增加考核结果确认菜单
+				if(personId.equals("31")){
+					menuList.add(new UrlNameBean("员工考核结果确认",String.format("mange/%s/summarysnapshot",personId)));
+				}
 			}
 		}
 		if (loginRetBean.getMange().equals("N")) {

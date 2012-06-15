@@ -17,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import cn.fyg.pa.domain.shared.state.StateChangeException;
+
 @Entity
 public class SummarySnapshot {
 	
@@ -86,5 +88,12 @@ public class SummarySnapshot {
 		this.snapshotItems = snapshotItems;
 	}
 	
-	
+	public void next() throws StateChangeException {
+		this.state.next(this);
+	}
+
+	public void back() throws StateChangeException {
+		this.state.back(this);
+	}
+
 }
