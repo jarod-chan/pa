@@ -1,7 +1,5 @@
 package cn.fyg.pa.application.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -22,17 +20,6 @@ public class SummarySnapshotServiceImpl implements SummarySnapshotService {
 	@Transactional
 	public SummarySnapshot save(SummarySnapshot summarySnapshot) {
 		return summarySnapshotRepository.save(summarySnapshot);
-	}
-
-	@Override
-	public boolean isExistSummarySnapshotByPeriod(Long year, Long month) {
-		List<SummarySnapshot> summarySnapshots = summarySnapshotRepository.findByPeriod(year, month);
-		return summarySnapshots.isEmpty()?false:true;
-	}
-	
-	@Override
-	public List<SummarySnapshot> getSummarySnapshotByYear(Long year) {
-		return  summarySnapshotRepository.findByPeriod(year, null);
 	}
 
 	@Override

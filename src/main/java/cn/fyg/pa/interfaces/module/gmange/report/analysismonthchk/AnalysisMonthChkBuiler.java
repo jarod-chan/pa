@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.gmange.report;
+package cn.fyg.pa.interfaces.module.gmange.report.analysismonthchk;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +8,9 @@ import java.util.Map;
 import cn.fyg.pa.domain.model.monthchk.MonthChk;
 import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
 import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.interfaces.module.gmange.report.analysismonthchk.dto.AnalysisDepartmentBean;
+import cn.fyg.pa.interfaces.module.gmange.report.analysismonthchk.dto.AnalysisMonthChkBean;
+import cn.fyg.pa.interfaces.module.gmange.report.analysismonthchk.dto.PersonMonthChkStateBean;
 
 public class AnalysisMonthChkBuiler {
 	

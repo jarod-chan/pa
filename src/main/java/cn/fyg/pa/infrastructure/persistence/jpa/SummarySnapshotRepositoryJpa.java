@@ -42,9 +42,19 @@ public class SummarySnapshotRepositoryJpa implements SummarySnapshotRepository {
 	private SummarySnapshot update(SummarySnapshot summarySnapshot) {
 		return entityManager.merge(summarySnapshot);
 	}
-
+	
 	@Override
-	public List<SummarySnapshot> findByPeriod(Long year, Long month) {
+	public List<SummarySnapshot> findByYear(Long year) {
+		return findByYearAndMonth(year,null);
+	}
+	
+	@Override
+	public SummarySnapshot findByPeriod(Long year, Long month) {
+		List<SummarySnapshot> summarySnapshots = findByYearAndMonth(year,month);
+		return summarySnapshots.isEmpty()?null:summarySnapshots.get(0);
+	}
+
+	private List<SummarySnapshot> findByYearAndMonth(Long year, Long month) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<SummarySnapshot> query = builder.createQuery(SummarySnapshot.class);
 		Root<SummarySnapshot> from = query.from(SummarySnapshot.class);
@@ -63,8 +73,11 @@ public class SummarySnapshotRepositoryJpa implements SummarySnapshotRepository {
 				query.where(builder.and(predicates.toArray(new Predicate[0])));
 			}
 		}
-		query.orderBy(builder.desc(from.get("year")));
-		query.orderBy(builder.desc(from.get("month")));
+		query.orderBy(
+				builder.desc(from.get("year")),
+				builder.desc(from.get("month")),
+				builder.desc(from.get("logDate"))
+				);
 		return entityManager.createQuery(query).getResultList();
 
 	}

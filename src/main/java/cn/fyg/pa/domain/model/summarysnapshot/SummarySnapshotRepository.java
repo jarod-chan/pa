@@ -8,7 +8,9 @@ public interface SummarySnapshotRepository {
 
 	SummarySnapshot save(SummarySnapshot summarySnapshot);
 	
-	List<SummarySnapshot> findByPeriod(Long year,Long month);
+	List<SummarySnapshot> findByYear(Long year);
+	
+	SummarySnapshot findByPeriod(Long year,Long month);
 	
 	void remove(SummarySnapshot summarySnapshot);
 }

@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.gmange.report;
+package cn.fyg.pa.interfaces.module.gmange.report.analyseidrmonthplan;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +8,8 @@ import java.util.Map;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBill;
 import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
+import cn.fyg.pa.interfaces.module.gmange.report.analyseidrmonthplan.dto.AnalysisIdrMonthPlanBean;
+import cn.fyg.pa.interfaces.module.gmange.report.analyseidrmonthplan.dto.DepartmentIdrMonthPlanBillStateBean;
 
 public class AnalysisIdrMonthPlanBuilder {
 	

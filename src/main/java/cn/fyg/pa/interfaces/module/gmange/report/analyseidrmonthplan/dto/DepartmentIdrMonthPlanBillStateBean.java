@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.gmange.report;
+package cn.fyg.pa.interfaces.module.gmange.report.analyseidrmonthplan.dto;
 
 import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
 

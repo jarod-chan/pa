@@ -66,9 +66,52 @@ public class SummarySnapshotCtl {
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
+	public String toReceive(Map<String,Object> map,HttpSession session){
+		logger.info("toReceive");
+		YearAndPrevMonth queryBean=getYearAndPrevMonthFromSession();
+		SummarySnapshot summarySnapshot = summarySnapshotRepository.findByPeriod(queryBean.getYear(), queryBean.getMonth());
+		List<SnapshotItem> snapshotItemList =
+				summarySnapshot!=null?
+				summarySnapshot.getSnapshotItems():
+				summarySnapshotFacade.buildSnapshotItemList(queryBean.getYear(), queryBean.getMonth());
+
+		PageItemBean pageItemBean=summarySnapshotFacade.buildPageItemBean(snapshotItemList);
+		map.put("dateTool", new DateTool());
+		map.put("summarySnapshot", summarySnapshot);
+		map.put("pageItemBean", pageItemBean);
+		map.put("queryBean", queryBean);
+		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
+		return Page.RECEIVE;
+	}
+
+	private YearAndPrevMonth getYearAndPrevMonthFromSession() {
+		YearAndPrevMonth monthChkQueryBean =  sessionUtil.getValue(QUERY_BEAN_RECEIVE);
+		if(monthChkQueryBean==null){
+			monthChkQueryBean=new YearAndPrevMonth();
+			sessionUtil.setValue(QUERY_BEAN_RECEIVE, monthChkQueryBean);
+		}
+		return monthChkQueryBean;
+	}
+	
+	@RequestMapping(value="",method=RequestMethod.POST)
+	public String setReceiveQueryBean(YearAndPrevMonth queryBean){
+		sessionUtil.setValue(QUERY_BEAN_RECEIVE, queryBean);
+		return "redirect:summarysnapshot";
+	}
+	
+	@RequestMapping(value="/save",method=RequestMethod.POST)
+	public String save(SummarySnapshot summarySnapshot){
+		summarySnapshot.setState(SnapshotEnum.RECEIVED);
+		summarySnapshot.setLogDate(new Date());
+		summarySnapshotService.save(summarySnapshot);
+		messagePasser.setMessage("考核结果接收成功");
+		return "redirect:../summarysnapshot";
+	}
+	
+	@RequestMapping(value="/history",method=RequestMethod.GET)
 	public String  toList(Map<String,Object> map){
 		YearBean queryBean=getYearBeanFromSession();
-		List<SummarySnapshot> summarySnapshots = summarySnapshotService.getSummarySnapshotByYear(queryBean.getYear());
+		List<SummarySnapshot> summarySnapshots = summarySnapshotRepository.findByYear(queryBean.getYear());
 		map.put("summarySnapshots", summarySnapshots);
 		map.put("dateTool", new DateTool());
 		map.put("queryBean", queryBean);
@@ -85,13 +128,13 @@ public class SummarySnapshotCtl {
 		return yearBean;
 	}
 	
-	@RequestMapping(value="",method=RequestMethod.POST)
+	@RequestMapping(value="/history",method=RequestMethod.POST)
 	public String setYearBean(YearBean yearBean){
 		sessionUtil.setValue(QUERY_BEAN_LIST, yearBean);
-		return "redirect:summarysnapshot";
+		return "redirect:history";
 	}
 	
-	@RequestMapping(value="/{summarySnapshotId}",method=RequestMethod.GET)
+	@RequestMapping(value="/history/{summarySnapshotId}",method=RequestMethod.GET)
 	public String toView(@PathVariable("summarySnapshotId") Long summarySnapshotId,Map<String,Object> map){
 		SummarySnapshot summarySnapshot = summarySnapshotRepository.find(summarySnapshotId);
 		map.put("summarySnapshot", summarySnapshot);
@@ -107,49 +150,12 @@ public class SummarySnapshotCtl {
 	public String remove(@PathVariable("summarySnapshotId") Long summarySnapshotId){
 		summarySnapshotService.remove(summarySnapshotId);
 		messagePasser.setMessage("考核结果已删除");
-		return "redirect:../../summarysnapshot";
+		return "redirect:../history";
 	}
 	
-	@RequestMapping(value="/receive",method=RequestMethod.GET)
-	public String toReceive(Map<String,Object> map,HttpSession session){
-		logger.info("toReceive");
-		YearAndPrevMonth queryBean=getYearAndPrevMonthFromSession();
-		List<SnapshotItem> snapshotItemList = summarySnapshotFacade.buildSnapshotItemList(queryBean.getYear(), queryBean.getMonth());
-		PageItemBean pageItemBean=summarySnapshotFacade.buildPageItemBean(snapshotItemList);
-		boolean existSummarySnapshot = summarySnapshotService.isExistSummarySnapshotByPeriod(queryBean.getYear(), queryBean.getMonth());
-		map.put("dateTool", new DateTool());
-		map.put("existSummarySnapshot", existSummarySnapshot);
-		map.put("pageItemBean", pageItemBean);
-		map.put("queryBean", queryBean);
-		if(existSummarySnapshot){
-			map.put(Constant.MESSAGE_NAME, "当前考核结果已接收!");
-		}
-		return Page.RECEIVE;
-	}
 
-	private YearAndPrevMonth getYearAndPrevMonthFromSession() {
-		YearAndPrevMonth monthChkQueryBean =  sessionUtil.getValue(QUERY_BEAN_RECEIVE);
-		if(monthChkQueryBean==null){
-			monthChkQueryBean=new YearAndPrevMonth();
-			sessionUtil.setValue(QUERY_BEAN_RECEIVE, monthChkQueryBean);
-		}
-		return monthChkQueryBean;
-	}
 	
-	@RequestMapping(value="/receive",method=RequestMethod.POST)
-	public String setReceiveQueryBean(YearAndPrevMonth queryBean){
-		sessionUtil.setValue(QUERY_BEAN_RECEIVE, queryBean);
-		return "redirect:receive";
-	}
-	
-	@RequestMapping(value="/receive/save",method=RequestMethod.POST)
-	public String save(SummarySnapshot summarySnapshot){
-		summarySnapshot.setState(SnapshotEnum.RECEIVED);
-		summarySnapshot.setLogDate(new Date());
-		summarySnapshotService.save(summarySnapshot);
-		messagePasser.setMessage("考核结果接收成功");
-		return "redirect:../../summarysnapshot";
-	}
+
 	
 
 }

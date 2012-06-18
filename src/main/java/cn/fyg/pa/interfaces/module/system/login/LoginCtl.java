@@ -82,6 +82,9 @@ public class LoginCtl {
 			menuList.add(new UrlNameBean("月度工作历史",String.format("person/%s/monthchk/histroy",personId)));
 			menuList.add(new UrlNameBean("部门计划查看",String.format("person/%s/monthchk/idrmonthplan",personId)));
 		}
+		if (loginRetBean.getMange().equals("F")) {
+			menuList.add(new UrlNameBean("考核结果历史",String.format("finance/%s/summarysnapshot/history",personId)));
+		}
 		
 		
 		return menuList;
@@ -105,7 +108,7 @@ public class LoginCtl {
 				menuList.add(new UrlNameBean("员工年度考核",String.format("mange/%s/yearchk",personId)));
 				//XXX 财务部  胡吉运 增加考核结果确认菜单
 				if(personId.equals("31")){
-					menuList.add(new UrlNameBean("员工考核结果确认",String.format("mange/%s/summarysnapshot",personId)));
+					menuList.add(new UrlNameBean("考核结果确认",String.format("mange/%s/summarysnapshot",personId)));
 				}
 			}
 		}
@@ -114,7 +117,7 @@ public class LoginCtl {
 			menuList.add(new UrlNameBean("年终员工考核",String.format("person/%s/yearchk",personId)));
 		}
 		if (loginRetBean.getMange().equals("F")) {
-			menuList.add(new UrlNameBean("员工考核结果",String.format("finance/%s/summarysnapshot",personId)));
+			menuList.add(new UrlNameBean("考核结果接收",String.format("finance/%s/summarysnapshot",personId)));
 		}
 		
 		

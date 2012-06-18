@@ -9,3 +9,5 @@
 <jsp:useBean id="pagefunc" class="java.util.HashMap" scope="request"></jsp:useBean>
 <jsp:useBean id="pagetitle" class="java.util.HashMap" scope="request"></jsp:useBean>
 <!doctype html>
+
+

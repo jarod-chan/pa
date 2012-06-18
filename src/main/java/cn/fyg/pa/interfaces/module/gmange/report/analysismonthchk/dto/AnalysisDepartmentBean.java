@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.gmange.report;
+package cn.fyg.pa.interfaces.module.gmange.report.analysismonthchk.dto;
 
 import java.util.ArrayList;
 import java.util.List;

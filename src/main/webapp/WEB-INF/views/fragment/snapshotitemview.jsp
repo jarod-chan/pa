@@ -32,6 +32,11 @@
 		float: left;
 	}
 	
+	div.context .department .manager{
+		background-color:#FFFFFF;
+		border: 1px solid #97CBFF;
+	}
+	
 	div.context .person {
 		width:660px;
 		padding-left: 5px;
@@ -39,7 +44,6 @@
 		padding-bottom: 5px;
 	}
 
-	
 	div.context .person  ul{list-style-type:none; margin:0;padding:0;width:100%; }
 	div.context .person  ul li{ width:100px; float:left;background-color:#FFFFFF;margin: 4px;border: 1px solid #97CBFF; }
 	div.context .none { clear:both; font-size:0px; height:0px; line-height:0px;}
@@ -55,6 +59,9 @@
 				personDiv.css({"border-left": "1px solid #000000"});
 			}
 		})
+		var flagColor="#DDDDDD";
+		$("div.all:eq(1) .department .manager").css("background-color",flagColor);
+		$("div.all:eq(3) .person li").css("background-color",flagColor);
 	}) 
 </script>
 
@@ -68,7 +75,10 @@
 		
 		<c:forEach var="sd" items="${ft.departDescs}">
 		<div class="context">
-			<div class="department">${sd.departemnt.name}<br/>经理:${sd.manager.name}</div>
+			<div class="department">
+				<div>${sd.departemnt.name}</div>
+				<div class="manager">经理:${sd.manager.name}</div>
+			</div>
 			<div class="person">
 				<ul>
 					<c:forEach var="td" items="${pageItemBean.map[sd.findPersonListKey]}">

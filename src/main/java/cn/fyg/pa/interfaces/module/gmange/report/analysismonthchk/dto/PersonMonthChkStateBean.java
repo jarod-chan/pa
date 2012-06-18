@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.gmange.report;
+package cn.fyg.pa.interfaces.module.gmange.report.analysismonthchk.dto;
 
 import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
 
