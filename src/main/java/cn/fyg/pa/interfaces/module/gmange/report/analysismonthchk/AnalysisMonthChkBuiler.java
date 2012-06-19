@@ -18,7 +18,7 @@ public class AnalysisMonthChkBuiler {
 	
 	List<MonthChk> monthChks;
 	
-	Map<Long,MonthChkEnum> monthChkMap;
+	Map<Long,MonthChk> monthChkMap;
 
 	public AnalysisMonthChkBuiler(List<Person> persons, List<MonthChk> monthChks) {
 		super();
@@ -52,11 +52,11 @@ public class AnalysisMonthChkBuiler {
 			PersonMonthChkStateBean personMonthChkStateBean = new PersonMonthChkStateBean();
 			personMonthChkStateBean.setPersonName(person.getName());
 			personMonthChkStateBean.setState(getMonthChkState(person.getId()));
+			personMonthChkStateBean.setMonthchkId(getMonthChkId(person.getId()));
 			tempDepartmentBean.getPersonMonthChkStateBeans().add(personMonthChkStateBean);
 		}
 		return returnList;
 	}
-
 
 	private AnalysisDepartmentBean newAnalysisDepartmentBeanAndAddList(List<AnalysisDepartmentBean> returnList, String tempDepartment) {
 		AnalysisDepartmentBean tempDepartmentBean=new AnalysisDepartmentBean();
@@ -67,19 +67,38 @@ public class AnalysisMonthChkBuiler {
 
 
 	private void generateMonthChkMap() {
-		Map<Long,MonthChkEnum> map=new HashMap<Long,MonthChkEnum>();
+		Map<Long,MonthChk> map=new HashMap<Long,MonthChk>();
 		for(MonthChk monthChk:this.monthChks){
-			map.put(monthChk.getPerson().getId(), monthChk.getState());
+			map.put(monthChk.getPerson().getId(), monthChk);
 		}
 		this.monthChkMap=map;
 	}
 
+	private Long getMonthChkId(Long id) {
+		MonthChk monthChk=this.monthChkMap.get(id);
+		if (canReturnMonthChkId(monthChk)) {
+			return monthChk.getId();
+		}
+		return null;
+	}
 
+
+	private boolean canReturnMonthChkId(MonthChk monthChk) {
+		if(monthChk==null) return false;
+		if(MonthChkEnum.FINISHED==monthChk.getState()){
+			return true;
+		}
+		if(MonthChkEnum.SUBMITTED==monthChk.getState()){
+			return true;
+		}
+		return false;
+	}
+	
 	private MonthChkEnum getMonthChkState(Long id) {
-		MonthChkEnum state=this.monthChkMap.get(id);
-		if(state==null){
+		MonthChk monthChk=this.monthChkMap.get(id);
+		if(monthChk==null){
 			return MonthChkEnum.NEW;
 		}
-		return state;
+		return monthChk.getState();
 	}
 }

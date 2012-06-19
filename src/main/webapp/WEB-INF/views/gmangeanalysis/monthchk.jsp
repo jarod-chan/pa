@@ -7,6 +7,10 @@
 <style type="text/css">
 tbody ul{list-style-type:none; margin:0;padding:0;width:100%; }
 tbody ul li{ width:100px; float:left;background-color:#FFFFFF;margin: 4px;border: 1px solid #97CBFF; }
+
+tbody ul li a{text-decoration: none;color:#000000;white-space:nowrap;}
+tbody ul li a:HOVER{background-color: #5BADFF;}
+tbody ul li a:VISITED{color: #000000;}
 </style>
 <script type="text/javascript">
 	var selchange=function(){
@@ -27,16 +31,21 @@ tbody ul li{ width:100px; float:left;background-color:#FFFFFF;margin: 4px;border
 		}
 	}
 	
+	function monthchk(monthchkId){
+		if(monthchkId=='') return;
+		OpenEnvDefineWin("/${ctx}/gmange/${person.id}/analysis/monthchk/"+monthchkId,840,600);
+	}
+	
 	$(document).ready(function() {
 		$("#swithbtn").bind("change",selchange);
 	});
 </script>
 </head>
 <c:set target="${pagefunc}" property="name" value="公司考核情况查询" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${loginRet.personid}/totalreport" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/totalreport" />  
 
 <c:set target="${pagetitle}" property="name" value="公司员工月度工作概况" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${loginRet.personid}/analysis/monthchk" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${person.id}/analysis/monthchk" /> 
 
 <body>
 <form action="" method="get">
@@ -86,7 +95,16 @@ tbody ul li{ width:100px; float:left;background-color:#FFFFFF;margin: 4px;border
 					<td>
 					<ul>
 						<c:forEach var="list" items="${item.personMonthChkStateBeans}">
-							<li class="${fn:toLowerCase(list.state)} ">${list.personName}:${list.state.name}</li>
+							<li class="${fn:toLowerCase(list.state)} ">
+								<c:choose>
+									<c:when test="${not empty list.monthchkId}">
+										<a href="javascript:void(0);" onclick="monthchk('${list.monthchkId}')"> ${list.personName}:${list.state.name}</a>
+									</c:when>
+									<c:when test="${empty list.monthchkId}">
+										 ${list.personName}:${list.state.name}
+									</c:when>
+								</c:choose>
+							</li>
 						</c:forEach>
 					</ul>
 					</td>

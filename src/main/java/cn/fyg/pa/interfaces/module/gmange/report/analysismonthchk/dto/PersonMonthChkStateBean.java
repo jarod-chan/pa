@@ -7,6 +7,8 @@ public class PersonMonthChkStateBean {
 	private String personName;
 	
 	private MonthChkEnum state;
+	
+	private Long monthchkId;
 
 	public String getPersonName() {
 		return personName;
@@ -22,6 +24,14 @@ public class PersonMonthChkStateBean {
 
 	public void setState(MonthChkEnum state) {
 		this.state = state;
+	}
+
+	public Long getMonthchkId() {
+		return monthchkId;
+	}
+
+	public void setMonthchkId(Long monthchkId) {
+		this.monthchkId = monthchkId;
 	}
 
 }

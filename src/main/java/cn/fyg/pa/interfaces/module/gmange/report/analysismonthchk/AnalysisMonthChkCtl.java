@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.domain.model.monthchk.MonthChk;
 import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
+import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.interfaces.module.gmange.report.analysismonthchk.dto.AnalysisMonthChkBean;
@@ -24,6 +26,8 @@ public class AnalysisMonthChkCtl {
 	AnalysisMonthChkFacade analysisMonthChkFacade;
 	@Resource
 	PersonRepository personRepository;
+	@Resource
+	MonthChkRepository monthChkRepository;
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
 		return personRepository.find(personId);
@@ -39,6 +43,11 @@ public class AnalysisMonthChkCtl {
 		return "gmangeanalysis/monthchk";
 	}
 	
-
+	@RequestMapping(value="/{montchkId}",method=RequestMethod.GET)
+	public String viewMonthChk(@PathVariable("montchkId")Long montchkId,Map<String,Object> map){
+		MonthChk monthChk = monthChkRepository.find(montchkId);
+		map.put("monthChk", monthChk);
+		return "gmangeanalysis/monthchkinfo";
+	}
 
 }

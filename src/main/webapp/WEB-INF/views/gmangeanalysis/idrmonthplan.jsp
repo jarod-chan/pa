@@ -34,10 +34,10 @@ tbody ul li{ width:150px; float:left;background-color:#FFFFFF;margin: 4px;border
 </head>
 
 <c:set target="${pagefunc}" property="name" value="公司考核情况查询" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${loginRet.personid}/totalreport" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/totalreport" />  
 
 <c:set target="${pagetitle}" property="name" value="公司部门月度工作概况" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${loginRet.personid}/analysis/idrmonthplan" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${person.id}/analysis/idrmonthplan" /> 
 
 <body>
 
