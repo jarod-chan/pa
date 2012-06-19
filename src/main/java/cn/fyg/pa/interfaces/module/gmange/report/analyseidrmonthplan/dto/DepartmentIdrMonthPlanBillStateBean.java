@@ -7,6 +7,8 @@ public class DepartmentIdrMonthPlanBillStateBean {
 	private String departmentName;
 	
 	private IdrMonthPlanEnum state;
+	
+	private Long monthPlanBillId;
 
 	public String getDepartmentName() {
 		return departmentName;
@@ -22,6 +24,14 @@ public class DepartmentIdrMonthPlanBillStateBean {
 
 	public void setState(IdrMonthPlanEnum state) {
 		this.state = state;
+	}
+
+	public Long getMonthPlanBillId() {
+		return monthPlanBillId;
+	}
+
+	public void setMonthPlanBillId(Long monthPlanBillId) {
+		this.monthPlanBillId = monthPlanBillId;
 	}
 
 }

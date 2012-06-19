@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBill;
+import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBillRepository;
 import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
@@ -25,6 +27,9 @@ public class AnalysisIdrMonthPlanCtl{
 	AnalysisIdrMonthPlanFacade gmangeAnalysisFacade;
 	@Resource
 	PersonRepository personRepository;
+	@Resource
+	IdrMonthPlanBillRepository idrMonthPlanBillRepository;
+	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
 		return personRepository.find(personId);
@@ -40,5 +45,10 @@ public class AnalysisIdrMonthPlanCtl{
 		return "gmangeanalysis/idrmonthplan";
 	}
 	
-
+	@RequestMapping(value="/{monthplanId}",method=RequestMethod.GET)
+	public String viewMonthPlan(@PathVariable("monthplanId") Long monthplanId,Map<String,Object> map){
+		IdrMonthPlanBill idrMonthPlanBill = idrMonthPlanBillRepository.find(monthplanId);
+		map.put("bill", idrMonthPlanBill);
+		return "gmangeanalysis/idrmonthplaninfo";
+	}
 }

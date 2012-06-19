@@ -17,7 +17,7 @@ public class AnalysisIdrMonthPlanBuilder {
 	
 	List<IdrMonthPlanBill> idrMonthPlanBills;
 
-	private Map<Long, IdrMonthPlanEnum> idrMonthPlanBillStates;
+	private Map<Long, IdrMonthPlanBill> idrMonthPlanBillStates;
 
 	public AnalysisIdrMonthPlanBuilder(List<Department> departments,
 			List<IdrMonthPlanBill> idrMonthPlanBills) {
@@ -38,9 +38,9 @@ public class AnalysisIdrMonthPlanBuilder {
 	}
 
 	private void generateIdrMonthPlanBillMap() {
-		Map<Long,IdrMonthPlanEnum> map=new HashMap<Long,IdrMonthPlanEnum>();
+		Map<Long,IdrMonthPlanBill> map=new HashMap<Long,IdrMonthPlanBill>();
 		for(IdrMonthPlanBill idrMonthPlanBill:this.idrMonthPlanBills){
-			map.put(idrMonthPlanBill.getDepartment().getId(), idrMonthPlanBill.getState());
+			map.put(idrMonthPlanBill.getDepartment().getId(), idrMonthPlanBill);
 		}
 		this.idrMonthPlanBillStates=map;
 	}
@@ -51,17 +51,41 @@ public class AnalysisIdrMonthPlanBuilder {
 			DepartmentIdrMonthPlanBillStateBean departmentIdrMonthPlanBillStateBean = new DepartmentIdrMonthPlanBillStateBean();
 			departmentIdrMonthPlanBillStateBean.setDepartmentName(department.getName());
 			departmentIdrMonthPlanBillStateBean.setState(getDepartmentIdrMonthPlanBillState(department.getId()));
+			departmentIdrMonthPlanBillStateBean.setMonthPlanBillId(getDepartmentIdrMonthPlanId(department.getId()));
 			returnList.add(departmentIdrMonthPlanBillStateBean);
 		}
 		return returnList;
 	}
 
+	private Long getDepartmentIdrMonthPlanId(Long id) {
+		IdrMonthPlanBill idrMonthPlanBill=this.idrMonthPlanBillStates.get(id);
+		if(isCanReturnIdrmonthPlanBillId(idrMonthPlanBill)){
+			return idrMonthPlanBill.getId();
+		}
+		return null;
+	}
+
+	private boolean isCanReturnIdrmonthPlanBillId(
+			IdrMonthPlanBill idrMonthPlanBill) {
+		if(idrMonthPlanBill==null) return false;
+		if(IdrMonthPlanEnum.SUBMITTED==idrMonthPlanBill.getState()){
+			return true;
+		}
+		if(IdrMonthPlanEnum.EXECUTE==idrMonthPlanBill.getState()){
+			return true;
+		}
+		if(IdrMonthPlanEnum.FINISHED==idrMonthPlanBill.getState()){
+			return true;
+		}
+		return false;
+	}
+
 	private IdrMonthPlanEnum getDepartmentIdrMonthPlanBillState(Long id) {
-		IdrMonthPlanEnum state=this.idrMonthPlanBillStates.get(id);
-		if(state==null){
+		IdrMonthPlanBill idrMonthPlanBill=this.idrMonthPlanBillStates.get(id);
+		if(idrMonthPlanBill==null){
 			return IdrMonthPlanEnum.NEW;
 		}
-		return state;
+		return idrMonthPlanBill.getState();
 	}
 
 }

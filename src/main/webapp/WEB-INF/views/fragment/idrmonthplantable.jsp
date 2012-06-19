@@ -22,7 +22,7 @@
 	<c:forEach var="bill" items="${idrMonthPlanBills}" varStatus="status">
 		<tr>
 			<td rowspan="2">${status.count}</td>
-			<td>${bill.year}年${bill.month}【${bill.department.name}】月度工作计划&nbsp;&nbsp;&nbsp;&nbsp;【${bill.state.name}】</td>
+			<td>${bill.year}年${bill.month}月【${bill.department.name}】月度工作计划&nbsp;&nbsp;&nbsp;&nbsp;【${bill.state.name}】</td>
 		</tr>
 		<tr>
 			<td>

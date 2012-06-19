@@ -26,7 +26,7 @@
     {
         var left = eval(screen.width - width) / 2;
         var top = eval(screen.height - height) / 2;
-        var open_feature = "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top + ", scrollbar=no";
+        var open_feature = "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top + ", scrollbars=yes";
         var hwnd = window.open(url, "_blank", open_feature);
         if ((window != null) && (!hwnd.opener))
             hwnd.opener = window;

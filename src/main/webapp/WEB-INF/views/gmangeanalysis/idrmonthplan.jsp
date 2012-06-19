@@ -6,6 +6,10 @@
 <style type="text/css">
 tbody ul{list-style-type:none; margin:0;padding:0;width:100%; }
 tbody ul li{ width:150px; float:left;background-color:#FFFFFF;margin: 4px;border: 1px solid #97CBFF; }
+
+tbody ul li a{text-decoration: none;color:#000000;white-space:nowrap;}
+tbody ul li a:HOVER{background-color: #5BADFF;}
+tbody ul li a:VISITED{color: #000000;}
 </style>
 <script type="text/javascript">
 
@@ -25,6 +29,11 @@ tbody ul li{ width:150px; float:left;background-color:#FFFFFF;margin: 4px;border
 				}	
 			});
 		}
+	}
+	
+	function monthplan(monthplanId){
+		if(monthplanId=='') return;
+		OpenEnvDefineWin("/${ctx}/gmange/${person.id}/analysis/idrmonthplan/"+monthplanId,860,600);
 	}
 
 	 $(document).ready(function() {
@@ -84,7 +93,16 @@ tbody ul li{ width:150px; float:left;background-color:#FFFFFF;margin: 4px;border
 				<td>
 				<ul>
 					<c:forEach var="list" items="${analysisIdrMonthPlanBean.departmentIdrMonthPlanBillStateBeans}">
-						<li class="${fn:toLowerCase(list.state)} ">${list.departmentName}:${list.state.name}</li>
+						<li class="${fn:toLowerCase(list.state)} ">
+							<c:choose>
+								<c:when test="${not empty list.monthPlanBillId}">
+									<a href="javascript:void(0);" onclick="monthplan('${list.monthPlanBillId}')">${list.departmentName}:${list.state.name}</a>
+								</c:when>
+								<c:when test="${empty list.monthPlanBillId}">
+									${list.departmentName}:${list.state.name}
+								</c:when>
+							</c:choose>
+						</li>
 					</c:forEach>
 				</ul>
 				</td>
