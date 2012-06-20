@@ -47,6 +47,8 @@ public class ListBuilder {
 
 	private Map<Long, Boolean> createIndicatorOptionByIdrCompany() {
 		Map<Long,Boolean> returnMap=new HashMap<Long,Boolean>();
+		//XXX 正常情况下，这里不可能出现null
+		if(this.deptIndicator==null) return returnMap;
 		for(IndicatorOption indicatorOption:this.deptIndicator.getIndiactorOptions()){
 			returnMap.put(indicatorOption.getIdrCompany().getId(), indicatorOption.getMust());
 		}
