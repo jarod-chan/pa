@@ -61,13 +61,11 @@ public class SummarySnapshotCtl {
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
-		logger.info("initPerson");
 		return personRepository.find(personId);
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String toReceive(Map<String,Object> map,HttpSession session){
-		logger.info("toReceive");
 		YearAndPrevMonth queryBean=getYearAndPrevMonthFromSession();
 		SummarySnapshot summarySnapshot = summarySnapshotRepository.findByPeriod(queryBean.getYear(), queryBean.getMonth());
 		List<SnapshotItem> snapshotItemList =
