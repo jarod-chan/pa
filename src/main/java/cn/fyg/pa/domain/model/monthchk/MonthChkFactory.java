@@ -1,23 +1,19 @@
 package cn.fyg.pa.domain.model.monthchk;
 
 import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
 public class MonthChkFactory {
+
 	
 	/**
-     * XXX 此处待重构
-     * 五月份有新员工加入，此处处理
-     */
-	private static Long INIT_YEAR=2012L;
-    private static Long INIT_MONTH=5L;
-	
-	/**
-	 * 创建员工初始工作总结月份
+	 * 创建员工初始工作总结月份,默认为当前月份前一月份
 	 * @param person
 	 * @return
 	 */
 	public static MonthChk createInitMonthChk(Person person){
-		return createMonthChk(person,INIT_YEAR,INIT_MONTH);
+		DateTool dateTool=new DateTool();
+		return createMonthChk(person,dateTool.getPrevMonthYear(),dateTool.getPrevMonth());
 	}
 	
 	public static MonthChk createNextMonthChk(Person person,Long year,Long month){

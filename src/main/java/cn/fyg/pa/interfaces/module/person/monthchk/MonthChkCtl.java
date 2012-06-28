@@ -8,8 +8,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,8 +35,6 @@ import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 @RequestMapping("/person/{personId}/monthchk")
 public class MonthChkCtl {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MonthChkCtl.class);
-	
 	public static Map<MonthChkEnum,String> PAGEMAP=new HashMap<MonthChkEnum,String>();
 	
 	static{
@@ -65,14 +61,12 @@ public class MonthChkCtl {
 
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
-		logger.info("initPerson");
 		return personRepository.find(personId);
 	}
 	
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String toEdit(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
-		logger.info("toEdit");
 		MonthChk monthChk=monthChkService.getCurrentMonthChk(person);
 		Person mange=personRepository.findDepartmentMange(person.getDepartment());
 		List<WorkType> workTypes=workTypeRepository.findAllWorkTypes();
@@ -86,7 +80,6 @@ public class MonthChkCtl {
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public String save(MonthChk monthChk,HttpSession session){
-		logger.info("save");
 		monthChk.setState(MonthChkEnum.SAVED);
 		monthChkService.save(monthChk);
 		new SessionMPR(session).setMessage("保存成功！");
@@ -95,7 +88,6 @@ public class MonthChkCtl {
 	
 	@RequestMapping(value="/commit",method=RequestMethod.POST)
 	public String commit(MonthChk monthChk,HttpSession session){
-		logger.info("commit");
 		monthChk.setState(MonthChkEnum.SAVED);
 		monthChk=monthChkService.save(monthChk);
 		String message="提交成功！";
@@ -110,7 +102,6 @@ public class MonthChkCtl {
 	
 	@RequestMapping(value="/histroy",method=RequestMethod.GET)
 	public String histroy(MonthChkYearQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
-		logger.info("histroy");
 		List<MonthChk> monthChks=monthChkRepository.getMonthChkByPersonAndState(queryBean.getYear(), person, MonthChkEnum.FINISHED);
 		map.put("dateTool", new DateTool());
 		map.put("queryBean", queryBean);
@@ -122,7 +113,6 @@ public class MonthChkCtl {
 	
 	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
 	public String idrMonthPlan(IdrMonthPlanQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map){
-		logger.info("idrMonthPlan");
 		Department department = departmentRepository.findDepartmentByName(person.getDepartment());
 		List<IdrMonthPlanBill> idrMonthPlanBills = idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriodAndDepartmentAndState(
 						queryBean.getYear(), 
