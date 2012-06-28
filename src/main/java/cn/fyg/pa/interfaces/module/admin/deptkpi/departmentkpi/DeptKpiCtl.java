@@ -103,11 +103,15 @@ public class DeptKpiCtl {
 	}
 
 	private List<DeptKpiItem> createDeptKpiItems(String[] deptKpiItemsKey,List<DeptKpiItem> deptKpiItems) {
+		List<DeptKpiItem> retList=new ArrayList<DeptKpiItem>();
+		if(deptKpiItemsKey==null) return retList;
+		if(deptKpiItems==null) return retList;
+		
 		Map<String,DeptKpiItem> deptKpiItemsMap=new HashMap<String,DeptKpiItem>();
 		for (DeptKpiItem deptKpiItem : deptKpiItems) {
 			deptKpiItemsMap.put(String.valueOf(deptKpiItem.getId()), deptKpiItem);
 		}
-		List<DeptKpiItem> retList=new ArrayList<DeptKpiItem>();
+		
 		for (String key : deptKpiItemsKey) {
 			DeptKpiItem deptKpiItem=deptKpiItemsMap.get(key);
 			if(deptKpiItem==null){
