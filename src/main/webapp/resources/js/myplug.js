@@ -11,6 +11,8 @@
         		var list=$(this).find("tr");
         	}else if($(this).is("ul")){
         		var list=$(this).find("li");
+        	}else{
+        		var list=$(this);//传入数组本身，其它两个方法可以修改
         	}
         	list.each(function(index){
         		$(this).find('input[name*='+_options.match+'],select[name*='+_options.match+'],textarea[name*='+_options.match+']').each(function(){	

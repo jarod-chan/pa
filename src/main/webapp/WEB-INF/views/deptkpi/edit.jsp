@@ -28,6 +28,9 @@
 	tr.append("<td>")
 		.find("td:last")
 		.append($("<input type='text' name='deptKpiItems_context' />").css(contextSize).attr(contextlength));
+	tr.append("<td>")
+		.find("td:last")
+		.append($("<input type='text' name='deptKpiItems_point'   value='${item.point}' size='10' />"));
 		
 	tr.append("<td>")
 		.find("td:last")
@@ -47,6 +50,7 @@
 		$(".tbldef tbody tr").bind("click",rowClick);
 		$(":input[name='deptKpiItems_context']").css(contextSize).attr(contextlength);
 		$(".addLast").bind("click",addLastRow);
+		$(":input[name='deptKpiItems_point']").bind("blur",numberBlur);
 	});
 	
 	var rowClick=function (){
@@ -65,6 +69,7 @@
 	function cloneTR(){
 		var newtr=tr.clone();
 		newtr.click(rowClick);
+		newtr.find(":input[name='deptKpiItems_point']").bind("blur",numberBlur);
 		return newtr;
 	}
 	
@@ -107,12 +112,26 @@
 		actionFrom.attr("action",oldAction+"/save").submit();
 	}
 	
+	var numberBlur=function(){
+		if(IsFloat($(this).val(),"+"))	{
+			var point=hold($(this).val(),0);
+			$(this).val(point);
+		}else{
+			$(this).val("");
+		}
+	};
 	
 </script>
 </head>
 
 <body>
-<h2>部门KPI分解</h2>
+<h2>部门公司KPI项目</h2>
+<br/>
+<a href="/${ctx}/admin/deptkpi/${year}">部门KPI列表</a>
+&gt;<a href="/${ctx}/admin/deptkpi/${year}/department/${department.id}">${department.name}KPI分解列表</a>
+&gt;<a href="/${ctx}/admin/deptkpi/${year}/department/${department.id}/idrcompany/${idrCompany.id}">${department.name}KPI分解</a>
+<br/>
+<br/>
 年度：${year}&nbsp;&nbsp;部门:${department.name}<br/>
 公司KPI指标:${idrCompany.context}
 <%@ include file="../common/message.jsp"%>
@@ -125,6 +144,7 @@
 				<th style="display:none">none</th>
 				<th style="width:100px;">序号</th>
 				<th style="width:550px;" >部门指标内容</th>
+				<th style="width:100px;" >分值<font style="color:red">[整数]</font></th>
 				<th style="width:150px;white-space:nowrap;overflow:hidden;">操作<input type="button" class="addLast" value="+"  /></th>
 			</tr>
 		</thead>
@@ -134,12 +154,16 @@
 				<td style="display:none">
 					<input type="text" name="deptKpiItems_id"   value="${item.id}" />
 					<input type="text" name="deptKpiItems_sn"   value="${item.sn}" />
+					<input type="text" name="deptKpiItemsKey"   value="${item.id}" />
 				</td>
 				<td>
 					${item.sn}
 				</td>
 				<td>
 					<input type="text" name="deptKpiItems_context"   value="${item.context}" />
+				</td>
+				<td>
+					<input type="text" name="deptKpiItems_point"   value="${item.point}" size="10"/>
 				</td>
 				<td>
 					<input type="button" class="add" onclick='add(this)' value="+"  />
@@ -155,7 +179,6 @@
 
 <br/>
 <input type="button" value="保存" onclick="save()"/>
-<input type="button" value="返回" onclick="window.open('/${ctx}/admin/deptkpi/${year}/department/${department.id}','_self');"/>
 </form>
 </body>
 </html>

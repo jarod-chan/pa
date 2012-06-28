@@ -24,8 +24,13 @@ function preview(){
 
 </head>
 <body>
-<h2>部门KPI分解</h2>
+<h2>${listPage.department.name}KPI分解列表</h2>
+<br/>
+<a href="/${ctx}/admin/deptkpi/${listPage.year}">部门KPI列表</a>&gt;<a href="/${ctx}/admin/deptkpi/${listPage.year}/department/${listPage.department.id}">${listPage.department.name}KPI分解列表</a>
+<br/>
+<br/>
 年度：${listPage.year}&nbsp;&nbsp;部门:${listPage.department.name}
+
 <%@ include file="../common/message.jsp"%>
 
 <form action="/${ctx}/admin/deptkpi/${listPage.year}/department/${listPage.department.id}" method="post">
@@ -63,6 +68,5 @@ function preview(){
 <br/>
 <input type="button" value="提交" onclick="commit()"/>
 <input type="button" value="预览" onclick="preview()"/>
-
 </body>
 </html>

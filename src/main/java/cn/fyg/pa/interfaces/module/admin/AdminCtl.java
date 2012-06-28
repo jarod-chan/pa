@@ -30,7 +30,7 @@ public class AdminCtl {
 		list.add(new UrlNameBean("2.KPI类别权重","/pa/admin/idrtypeweight/edit/2012"));
 		list.add(new UrlNameBean("3.公司KPI分解","/pa/admin/idrcompany/edit/2012"));
 		list.add(new UrlNameBean("4.公司KPI指标分配部门","/pa/admin/deptindicator/2012"));
-		list.add(new UrlNameBean("5.公司KPI指标部门分解(办公室)","/pa/admin/deptkpi/2012/department/1"));
+		list.add(new UrlNameBean("5.公司KPI指标部门分解","/pa/admin/deptkpi/2012"));
 		map.put("title", title);
 		map.put("urls", list);
 		

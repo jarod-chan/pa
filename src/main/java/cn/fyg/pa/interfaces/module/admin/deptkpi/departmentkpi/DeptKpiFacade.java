@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.admin.deptkpi;
+package cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi;
 
 import java.util.List;
 
@@ -18,6 +18,8 @@ import cn.fyg.pa.domain.model.deptindicator.DeptIndicatorRepository;
 import cn.fyg.pa.domain.model.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
 import cn.fyg.pa.domain.shared.Result;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.list.ListPage;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.preview.PreviewPage;
 
 @Component
 public class DeptKpiFacade {

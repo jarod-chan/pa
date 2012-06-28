@@ -7,7 +7,7 @@
 
 </head>
 <body>
-<h2>部门KPI分解</h2>
+<h2>部门KPI预览</h2>
 年度：${previewPage.year}&nbsp;&nbsp;部门:${previewPage.department.name}<br/>
 <%@ include file="../common/message.jsp"%>
 
@@ -28,7 +28,8 @@
 					<div>公司KPI指标:${item.idrCompany.context }</div>
 					<div>
 						<c:forEach var="item2" items="${item.deptKpiItems}">
-						<div>${item2.sn}.${item2.context}</div>
+						<div style="margin-top: 5px;">${item2.sn}.${item2.context}</div>
+						<div style="margin-op: 5px;">&nbsp;&nbsp;分值:${item2.point}</div>
 						</c:forEach>
 					</div>
 				</td>

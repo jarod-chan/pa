@@ -1,12 +1,12 @@
-package cn.fyg.pa.interfaces.module.admin.deptkpi;
+package cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import cn.fyg.pa.domain.model.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.preview.PreviewItem;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.preview.PreviewPage;
 
 public class PreviewBuilder {
 	
@@ -29,7 +29,7 @@ public class PreviewBuilder {
 		if(this.deptKpi.getDeptKpiItems().isEmpty()){
 			return null;
 		}
-		sortDeptKpiItems(this.deptKpi);
+		this.deptKpi.sortByIdrCompanySnAndDeptKpiItemSn();
 		
 		List<PreviewItem> returnList=new ArrayList<PreviewItem>();
 		PreviewItem previewItem=null;
@@ -60,23 +60,6 @@ public class PreviewBuilder {
 		PreviewItem previewItem=new PreviewItem();
 		previewItem.setIdrCompany(deptKpiItem.getIdrCompany());
 		return previewItem;
-	}
-
-	private void sortDeptKpiItems(DeptKpi deptKpi) {
-		List<DeptKpiItem> deptKpiItems = this.deptKpi.getDeptKpiItems();
-		Collections.sort(deptKpiItems, new DeptKpiItemComparator());
-		
-	}
-	
-	public class DeptKpiItemComparator implements Comparator<DeptKpiItem> {
-		@Override
-		public int compare(DeptKpiItem one, DeptKpiItem two) {
-			if(one.getIdrCompany().getSn().compareTo(two.getIdrCompany().getSn())==0){
-				return one.getSn().compareTo(two.getSn());
-			}
-			return one.getIdrCompany().getSn().compareTo(two.getIdrCompany().getSn());
-		}
-
 	}
 
 }

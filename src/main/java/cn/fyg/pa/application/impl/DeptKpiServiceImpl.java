@@ -69,4 +69,13 @@ public class DeptKpiServiceImpl implements DeptKpiService {
 		return deptKpi.verifySelf(deptIndicator);
 	}
 
+	@Override
+	@Transactional
+	public void saveDeptKpiItems(List<DeptKpiItem> deptKpiItems) {
+		for (DeptKpiItem deptKpiItem : deptKpiItems) {
+			deptKpiItemRepository.save(deptKpiItem);
+		}
+		
+	}
+
 }

@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.admin.deptkpi;
+package cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +10,8 @@ import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
 import cn.fyg.pa.domain.model.deptindicator.IndicatorOption;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.list.ListItem;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.list.ListPage;
 
 public class ListBuilder {
 	

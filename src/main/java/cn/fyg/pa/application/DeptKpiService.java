@@ -15,5 +15,7 @@ public interface DeptKpiService {
 	void saveDeptKpiItems(DeptKpi deptKpi, IdrCompany idrCompany,List<DeptKpiItem> deptKpiItems);
 	
 	Result commitDeptKpi(DeptKpi deptKpi);
+	
+	void saveDeptKpiItems(List<DeptKpiItem> deptKpiItems);
 
 }

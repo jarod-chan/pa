@@ -1,6 +1,8 @@
 package cn.fyg.pa.domain.model.deptkpi;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,6 +34,18 @@ import cn.fyg.pa.domain.shared.Result;
 @Entity
 public class DeptKpi {
 	
+	
+	/**
+	 * 必选项分解总分值
+	 */
+	private static final Long MUST_SELECT_TOTAL_POINT=100L;
+	
+	
+	/**
+	 * 非必选项分解总分值
+	 */
+	private static final Long OTHER_TOTAL_POINT=50L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id; //部门kpi分解id
@@ -46,7 +60,6 @@ public class DeptKpi {
 			fetch = FetchType.EAGER, 
 			cascade = {CascadeType.REFRESH},
 			targetEntity = DeptKpiItem.class)
-
 	@OrderBy("sn ASC")
 	private List<DeptKpiItem> deptKpiItems=new ArrayList<DeptKpiItem>();
 
@@ -101,10 +114,17 @@ public class DeptKpi {
 		return deptKpi;
  	}
 	
+	//XXX  重构此处，采用其它方式处理
 	public Result verifySelf(DeptIndicator deptIndicator){
+		if(deptIndicator==null){
+			return new Result().pass(false).cause("部门指标未分配");
+		}
 		for(DeptKpiItem deptKpiItem:this.deptKpiItems){
-			if(StringUtils.isNotBlank(deptKpiItem.getContext())){
+			if(StringUtils.isBlank(deptKpiItem.getContext())){
 				return new Result().pass(false).cause("部门指标内容不能为空");
+			}
+			if(deptKpiItem.getPoint()==null){
+				return new Result().pass(false).cause("部门指标分值不能为空");
 			}
 		}
 		Set<Long> hasBreakSet = getBreakSet();
@@ -113,7 +133,47 @@ public class DeptKpi {
 				return new Result().pass(false).cause("必选公司指标未被分解");
 			}
 		}
+		Set<Long> mustSelectCompanyKpiIds=getMustSelectCompanyKpiIds(deptIndicator.getIndiactorOptions());
+		Long mustSelectBreakPoint=getMustSelectBreakPoint(mustSelectCompanyKpiIds);
+		if(!mustSelectBreakPoint.equals(MUST_SELECT_TOTAL_POINT)){
+			return new Result().pass(false).cause(String.format("必选公司指标总分值为:%s,不等于%s。", mustSelectBreakPoint,MUST_SELECT_TOTAL_POINT));
+		}
+		Long otherBreakPoint=getOtherBreakPoint(mustSelectCompanyKpiIds);
+		if(!otherBreakPoint.equals(OTHER_TOTAL_POINT)){
+			return new Result().pass(false).cause(String.format("非公司必选指标总分值为:%s,不等于%s。",otherBreakPoint,OTHER_TOTAL_POINT));
+		}
+		
 		return new Result().pass(true);
+	}
+	
+	private Long getOtherBreakPoint(Set<Long> mustSelectCompanyKpiIds) {
+		long totalPoint=0L;
+		for(DeptKpiItem deptKpiItem:this.deptKpiItems){
+			if(!mustSelectCompanyKpiIds.contains(deptKpiItem.getIdrCompany().getId())){
+				totalPoint+=deptKpiItem.getPoint().longValue();
+			}
+		}
+		return totalPoint;
+	}
+
+	private Long getMustSelectBreakPoint(Set<Long> mustSelectCompanyKpiIds) {
+		long totalPoint=0L;
+		for(DeptKpiItem deptKpiItem:this.deptKpiItems){
+			if(mustSelectCompanyKpiIds.contains(deptKpiItem.getIdrCompany().getId())){
+				totalPoint+=deptKpiItem.getPoint().longValue();
+			}
+		}
+		return totalPoint;
+	}
+
+	private Set<Long> getMustSelectCompanyKpiIds(List<IndicatorOption> indiactorOptions) {
+		Set<Long> retSet=new HashSet<Long>();
+		for (IndicatorOption indicatorOption : indiactorOptions) {
+			if(indicatorOption.getMust().booleanValue()){
+				retSet.add(indicatorOption.getIdrCompany().getId());
+			}
+		}
+		return retSet;
 	}
 
 	private boolean isMustSelectNotInHasBreakSet(IndicatorOption indicatorOption,
@@ -133,5 +193,20 @@ public class DeptKpi {
 		}
 		return hasBreakSet;
 	}
+	
+	public void sortByIdrCompanySnAndDeptKpiItemSn(){
+		Collections.sort(deptKpiItems, new  Comparator<DeptKpiItem>(){
+			@Override
+			public int compare(DeptKpiItem one, DeptKpiItem two) {
+				if(one.getIdrCompany().getSn().compareTo(two.getIdrCompany().getSn())==0){
+					return one.getSn().compareTo(two.getSn());
+				}
+				return one.getIdrCompany().getSn().compareTo(two.getIdrCompany().getSn());
+			}
+			
+		});
+	}
+	
+
 
 }

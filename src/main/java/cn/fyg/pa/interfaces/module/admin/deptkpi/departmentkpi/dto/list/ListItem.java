@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.admin.deptkpi;
+package cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.list;
 
 import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 
