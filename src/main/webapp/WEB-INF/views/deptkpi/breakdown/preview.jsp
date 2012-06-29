@@ -1,15 +1,15 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
+<%@ include file="../../common/common.jsp"%>
 <html>
 
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../../common/head.jsp"%>
 
 </head>
 <body>
 <h2>部门KPI预览</h2>
 年度：${previewPage.year}&nbsp;&nbsp;部门:${previewPage.department.name}<br/>
-<%@ include file="../common/message.jsp"%>
+<%@ include file="../../common/message.jsp"%>
 
 <table border="1" class="tbldef" >
 		<thead>

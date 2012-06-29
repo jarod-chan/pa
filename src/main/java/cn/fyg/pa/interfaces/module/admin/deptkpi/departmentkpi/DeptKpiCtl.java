@@ -33,6 +33,14 @@ import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 @RequestMapping("/admin/deptkpi/{year}/department/{departmentId}")
 public class DeptKpiCtl {
 	
+	private interface Page {
+		String PATH = "deptkpi/breakdown/";
+		String LIST = PATH + "list";
+		String EDIT=PATH+"edit";
+		String PREVIEW=PATH+"preview";
+	}
+	
+	
 	@Resource 
 	IdrCompanyRepository idrCompanyRepository;	
 	@Resource 
@@ -49,7 +57,7 @@ public class DeptKpiCtl {
 		ListPage listPage=deptKpiFacade.getDeptKpiByYearAndDepartment(year,departmentId);
 		map.put("listPage", listPage);
 		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
-		return "deptkpi/list";
+		return Page.LIST;
 	}
 	
 	@RequestMapping(value="/preview",method=RequestMethod.GET)
@@ -57,7 +65,7 @@ public class DeptKpiCtl {
 		PreviewPage previewPage = deptKpiFacade.getDeptKpiForPreview(year, departmentId);
 		map.put("previewPage", previewPage);
 		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
-		return "deptkpi/preview";
+		return Page.PREVIEW;
 	}
 	
 	@RequestMapping(value="/commit",method=RequestMethod.POST)
@@ -81,7 +89,7 @@ public class DeptKpiCtl {
 		map.put("idrCompany", idrCompany);
 		map.put("deptKpiItems", deptKpiItems);
 		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
-		return "deptkpi/edit";
+		return Page.EDIT;
 	}
 	
 	

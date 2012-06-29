@@ -1,9 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
+<%@ include file="../../common/common.jsp"%>
 <html>
 
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../../common/head.jsp"%>
 <style type="text/css">
 	.currRow{
 		background-color:#77BBFF;
@@ -134,7 +134,7 @@
 <br/>
 年度：${year}&nbsp;&nbsp;部门:${department.name}<br/>
 公司KPI指标:${idrCompany.context}
-<%@ include file="../common/message.jsp"%>
+<%@ include file="../../common/message.jsp"%>
 
 <form action="/${ctx}/admin/deptkpi/${year}/department/${department.id}/idrcompany/${idrCompany.id}" method="post">
 

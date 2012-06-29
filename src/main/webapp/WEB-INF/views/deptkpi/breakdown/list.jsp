@@ -1,9 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
+<%@ include file="../../common/common.jsp"%>
 <html>
 
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../../common/head.jsp"%>
 
 <script type="text/javascript">
 
@@ -31,7 +31,7 @@ function preview(){
 <br/>
 年度：${listPage.year}&nbsp;&nbsp;部门:${listPage.department.name}
 
-<%@ include file="../common/message.jsp"%>
+<%@ include file="../../common/message.jsp"%>
 
 <form action="/${ctx}/admin/deptkpi/${listPage.year}/department/${listPage.department.id}" method="post">
 </form>

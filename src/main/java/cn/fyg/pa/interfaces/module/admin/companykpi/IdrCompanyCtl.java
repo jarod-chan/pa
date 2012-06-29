@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,69 +17,65 @@ import cn.fyg.pa.domain.model.companykpi.IdrYearCompany;
 import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.yeartypeweight.IdrYearTypeWeight;
 import cn.fyg.pa.domain.shared.Result;
-import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.message.MessagePasser;
+import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 import cn.fyg.pa.interfaces.module.shared.tool.JsonUtil;
 
 @Controller
 @RequestMapping("/admin/idrcompany")
 public class IdrCompanyCtl {
-	
-	private static final Logger logger=LoggerFactory.getLogger(IdrCompanyCtl.class);
 
 	@Resource
 	IdrYearCompanyService idrYearCompanyService;
-	
 	@Resource
 	IdrYearTypeWeightService idrYearTypeWeightService;
+	@Resource
+	MessagePasser messagePasser;
 	
 	@RequestMapping(value="edit/{year}",method=RequestMethod.GET)
-	public String toEdit(@PathVariable("year")Long year,Map<String,Object> map,HttpSession session){
-		logger.info("toEdit");
+	public String toEdit(@PathVariable("year")Long year,Map<String,Object> map){
 		IdrYearCompany idrYearCompany=idrYearCompanyService.findByYear(year);
 		IdrYearTypeWeight idrYearTypeWeight=idrYearTypeWeightService.getByYear(year);
 		map.put("idrYearCompany", idrYearCompany);
 		map.put("idrYearTypeWeight", idrYearTypeWeight);
 		map.put("idrTypeWeightsJson", JsonUtil.toArrayStr(idrYearTypeWeight.getIdrTypeWeight(),new String[]{"idrYearTypeWeight"}));
-		map.put("message", new SessionMPR(session).getMessage());
+		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
 		return "idrcompany/edit";
 	}
 	
 	@RequestMapping(value="save",method=RequestMethod.POST)
-	public String save(IdrYearCompany idrYearCompanyForm,HttpSession session){
-		logger.info("save");
+	public String save(IdrYearCompany idrYearCompanyForm){
 		idrYearCompanyForm=idrYearCompanyService.save(idrYearCompanyForm);
-		 new SessionMPR(session).setMessage("保存成功！");
+		 messagePasser.setMessage("保存成功！");
 		return "redirect:edit/"+idrYearCompanyForm.getYear();
 	}
 	
 	@RequestMapping(value="sort",method=RequestMethod.POST)
-	public String sort(IdrYearCompany idrYearCompanyForm,HttpSession session){
-		logger.info("sort");
+	public String sort(IdrYearCompany idrYearCompanyForm){
 		idrYearCompanyForm=idrYearCompanyService.sortIdrCompanyByIdrTypeWeight(idrYearCompanyForm);
-		new SessionMPR(session).setMessage("排序完成！");
+		messagePasser.setMessage("排序完成！");
 		return "redirect:edit/"+idrYearCompanyForm.getYear();
 	}
 	
 	@RequestMapping(value="commit",method=RequestMethod.POST)
-	public String commit(IdrYearCompany idrYearCompanyForm,HttpSession session){
-		logger.info("commit");
+	public String commit(IdrYearCompany idrYearCompanyForm){
 		idrYearCompanyForm=idrYearCompanyService.sortIdrCompanyByIdrTypeWeight(idrYearCompanyForm);
 		Result result=idrYearCompanyForm.verifySelf();
 		if(result.pass()){
-			new SessionMPR(session).setMessage("提交通过！");
+			messagePasser.setMessage("提交通过！");
 		}else{
-			new SessionMPR(session).setMessage(String.format("提交失败，%s!", result.cause()));
+			messagePasser.setMessage(String.format("提交失败，%s!", result.cause()));
 		}
 		return "redirect:edit/"+idrYearCompanyForm.getYear();
 	}
 	
 	@RequestMapping(value="preview/{year}",method=RequestMethod.GET)
-	public String preview(@PathVariable("year")Long year,Map<String,Object> map,HttpSession session){
+	public String preview(@PathVariable("year")Long year,Map<String,Object> map){
 		IdrYearCompany idrYearCompany=idrYearCompanyService.findByYear(year);
 		Map<Long,Integer> rowSpan=getRowSpan(idrYearCompany.getIdrCompany());
 		map.put("idrYearCompany", idrYearCompany);
 		map.put("rowSpan", rowSpan);
-		map.put("message", new SessionMPR(session).getMessage());
+		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
 		return "idrcompany/view";
 	}
 
