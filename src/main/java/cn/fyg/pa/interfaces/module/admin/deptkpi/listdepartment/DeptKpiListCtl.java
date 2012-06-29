@@ -33,7 +33,6 @@ public class DeptKpiListCtl {
 	public String toList(@PathVariable("year")Long year,Map<String,Object> map){
 		List<Department> departments = departmentRepository.findAllDepartmentsOrderById();
 		map.put("departments", departments);
-		map.put("year", year);
 		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
 		return Page.LIST;
 	}
