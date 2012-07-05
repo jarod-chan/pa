@@ -3,6 +3,7 @@ package cn.fyg.pa.domain.model.deptkpiitem;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -30,11 +31,11 @@ public class DeptKpiItem {
 	
 	private Long sn;//序号
 	
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.REFRESH},fetch=FetchType.EAGER,optional=true)
 	@JoinColumn(name = "deptkpi_id")
 	private DeptKpi deptKpi;//部门kpi分解
 	
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.REFRESH},fetch=FetchType.EAGER,optional=true)
 	@JoinColumn(name = "idrcompany_id")
 	private IdrCompany idrCompany;//公司指标
 	

@@ -9,7 +9,7 @@
 
 <link type="text/css" rel="stylesheet" href="/${ctx}/resources/css/layout.css" /> 
 
-<script type="text/javascript" src="/${ctx}/resources/js/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="/${ctx}/resources/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/${ctx}/resources/js/myplug.js"></script>
 <script type="text/javascript" src="/${ctx}/resources/js/mycommon.js"></script>
 <script type="text/javascript" src="/${ctx}/resources/js/myfloat.js"></script>

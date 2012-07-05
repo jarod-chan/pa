@@ -78,4 +78,10 @@ public class DeptKpiServiceImpl implements DeptKpiService {
 		
 	}
 
+	@Override
+	@Transactional
+	public DeptKpi save(DeptKpi deptKpi) {
+		return deptKpiRepository.save(deptKpi);
+	}
+
 }

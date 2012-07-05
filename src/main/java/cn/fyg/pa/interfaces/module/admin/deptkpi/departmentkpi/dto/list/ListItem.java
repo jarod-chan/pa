@@ -1,6 +1,10 @@
 package cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.list;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
+import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
 
 public class ListItem {
 	
@@ -9,6 +13,16 @@ public class ListItem {
 	private int deptKpiItemNum; //已分解项数
 	
 	private boolean mustSelect;//是否必选
+	
+	private List<DeptKpiItem> deptKpiItems=new ArrayList<DeptKpiItem>();
+
+	public List<DeptKpiItem> getDeptKpiItems() {
+		return deptKpiItems;
+	}
+
+	public void setDeptKpiItems(List<DeptKpiItem> deptKpiItems) {
+		this.deptKpiItems = deptKpiItems;
+	}
 
 	public IdrCompany getIdrCompany() {
 		return idrCompany;

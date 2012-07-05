@@ -34,6 +34,8 @@
 					<input type="button" value="评价" onclick="window.open('/${ctx}/admin/deptkpi/${year}/department/${item.id}/evaluate','_self');"/>
 					&nbsp;&nbsp;
 					<input type="button" value="计划" onclick="window.open('/${ctx}/admin/deptkpi/${year}/department/${item.id}/planmonth','_self');"/>
+					&nbsp;&nbsp;
+					<input type="button" value="预览" onclick="window.open('/${ctx}/admin/deptkpi/${year}/department/${item.id}/preview','_self');"/>
 				</td>
 			</tr>
 			</c:forEach> 

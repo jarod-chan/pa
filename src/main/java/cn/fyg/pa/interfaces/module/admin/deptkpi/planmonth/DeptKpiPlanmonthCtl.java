@@ -53,7 +53,6 @@ public class DeptKpiPlanmonthCtl {
 	public String save(@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,HttpServletRequest request,Map<String,Object> map){
 		Department department = departmentRepository.find(departmentId);
 		DeptKpi deptKpi = deptKpiService.getDeptKpiByYearAndDepartment(year, department);
-		deptKpi.sortByIdrCompanySnAndDeptKpiItemSn();
 		PageEdit pageEdit=new PageEdit();
 		pageEdit.setDeptKpiItems(deptKpi.getDeptKpiItems());
 		ServletRequestDataBinder binder = new ServletRequestDataBinder(pageEdit);//XXX 能否修改这里的逻辑？

@@ -8,9 +8,14 @@
 </head>
 <body>
 <h2>部门KPI预览</h2>
+<br/>
+<a href="/${ctx}/admin/deptkpi/${previewPage.year}">部门KPI列表</a>
+&gt;<a href="/${ctx}/admin/deptkpi/${previewPage.year}/department/${previewPage.department.id}/preview">${previewPage.department.name}KPI分解预览</a>
+<br/>
+<br/>
+
 年度：${previewPage.year}&nbsp;&nbsp;部门:${previewPage.department.name}<br/>
 <%@ include file="../../common/message.jsp"%>
-
 <table border="1" class="tbldef" >
 		<thead>
 			<tr>

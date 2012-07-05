@@ -21,7 +21,6 @@ public class DeptKpiEvaluateFacade {
 	public PageBean getDeptKpiForEvaluateList(Long year, Long departmentId) {
 		Department department = departmentRepository.find(departmentId);
 		DeptKpi deptKpi=deptKpiService.getDeptKpiByYearAndDepartment(year, department);
-		deptKpi.sortByIdrCompanySnAndDeptKpiItemSn();
 		ListBuilder builder=new ListBuilder(deptKpi);
 		return builder.build();
 	}

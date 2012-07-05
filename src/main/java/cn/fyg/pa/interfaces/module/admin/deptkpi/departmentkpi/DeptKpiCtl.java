@@ -15,17 +15,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
+import cn.fyg.pa.application.DeptKpiService;
 import cn.fyg.pa.domain.model.companykpiitem.IdrCompanyRepository;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.department.DepartmentRepository;
+import cn.fyg.pa.domain.model.deptkpi.DeptKpi;
+import cn.fyg.pa.domain.model.deptkpi.DeptKpiRepository;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItemFactory;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItemRepository;
 import cn.fyg.pa.domain.shared.Result;
-import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.edit.EditPage;
 import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.list.ListPage;
-import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.preview.PreviewPage;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.evaluate.dto.edit.PageEdit;
 import cn.fyg.pa.interfaces.module.shared.message.MessagePasser;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
@@ -35,9 +36,7 @@ public class DeptKpiCtl {
 	
 	private interface Page {
 		String PATH = "deptkpi/breakdown/";
-		String LIST = PATH + "list";
-		String EDIT=PATH+"edit";
-		String PREVIEW=PATH+"preview";
+		String BREAKDOWN = PATH + "breakdown";
 	}
 	
 	
@@ -50,67 +49,43 @@ public class DeptKpiCtl {
 	@Resource
 	DeptKpiFacade deptKpiFacade;
 	@Resource
+	DeptKpiService deptKpiService;
+	@Resource
 	MessagePasser messagePasser;
+	@Resource
+	DeptKpiRepository deptKpiRepository;
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String toList(@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,Map<String,Object> map){
 		ListPage listPage=deptKpiFacade.getDeptKpiByYearAndDepartment(year,departmentId);
 		map.put("listPage", listPage);
 		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
-		return Page.LIST;
+		return Page.BREAKDOWN;
 	}
 	
-	@RequestMapping(value="/preview",method=RequestMethod.GET)
-	public String toPreview(@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,Map<String,Object> map){
-		PreviewPage previewPage = deptKpiFacade.getDeptKpiForPreview(year, departmentId);
-		map.put("previewPage", previewPage);
-		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
-		return Page.PREVIEW;
-	}
-	
-	@RequestMapping(value="/commit",method=RequestMethod.POST)
-	public String commit(@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,Map<String,Object> map){
-		Result result = deptKpiFacade.commitDeptKpi(year, departmentId);
-		if(result.pass()){
-			messagePasser.setMessage("提交通过！");
-		}else{
-			messagePasser.setMessage(String.format("提交失败，%s!", result.cause()));
-		}
-		return "redirect:../"+departmentId;
-	}
-	
-	@RequestMapping(value="/idrcompany/{idrcompanyId}",method=RequestMethod.GET)
-	public String toEdit(@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,@PathVariable("idrcompanyId")Long idrcompanyId,Map<String,Object> map){
-		Department department=departmentRepository.find(departmentId);
-		IdrCompany idrCompany = idrCompanyRepository.find(idrcompanyId);
-		List<DeptKpiItem> deptKpiItems = deptKpiItemRepository.findByYearAndDepartmentAndIdrCompanyOrderBySn(year, department,idrCompany);
-		map.put("year", year);
-		map.put("department", department);
-		map.put("idrCompany", idrCompany);
-		map.put("deptKpiItems", deptKpiItems);
-		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
-		return Page.EDIT;
-	}
-	
-	
-	@RequestMapping(value="/idrcompany/{idrcompanyId}/save",method=RequestMethod.POST)
-	public String save(HttpServletRequest request,@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,@PathVariable("idrcompanyId")Long idrcompanyId){
-
-		Department department=departmentRepository.find(departmentId);
-		IdrCompany idrCompany = idrCompanyRepository.find(idrcompanyId);
-		List<DeptKpiItem> deptKpiItems = deptKpiItemRepository.findByYearAndDepartmentAndIdrCompanyOrderBySn(year, department,idrCompany);
-		String[] deptKpiItemsKey = request.getParameterValues("deptKpiItemsKey");
-		List<DeptKpiItem> receiveDeptKpiItems=createDeptKpiItems(deptKpiItemsKey,deptKpiItems);
-		EditPage editPage=new EditPage();
-		editPage.setDeptKpiItems(receiveDeptKpiItems);
-		ServletRequestDataBinder binder = new ServletRequestDataBinder(editPage);//XXX 能否修改这里的逻辑？
-		binder.bind(request);
-		deptKpiFacade.saveDeptKpiItems(year,departmentId,idrcompanyId,editPage.getDeptKpiItems());
+	@RequestMapping(value="/save",method=RequestMethod.POST)
+	public String save(HttpServletRequest request,@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,Map<String,Object> map){
+		saveDeptKpiFromPage(request, year, departmentId);
 		messagePasser.setMessage("保存成功！");
-		return "redirect:../../../"+departmentId;
+		return "redirect:/admin/deptkpi/{year}/department/{departmentId}";
 	}
 
-	private List<DeptKpiItem> createDeptKpiItems(String[] deptKpiItemsKey,List<DeptKpiItem> deptKpiItems) {
+	private DeptKpi saveDeptKpiFromPage(HttpServletRequest request, Long year,Long departmentId) {
+		Department department = departmentRepository.find(departmentId);
+		DeptKpi deptKpi = deptKpiService.getDeptKpiByYearAndDepartment(year, department);
+		String[] deptKpiItemsKey = request.getParameterValues("deptKpiItemsKey");
+		List<DeptKpiItem> receiveDeptKpiItems=prepareDeptKpiItems(deptKpiItemsKey,deptKpi.getDeptKpiItems());
+
+		PageEdit pageEdit=new PageEdit();
+		pageEdit.setDeptKpiItems(receiveDeptKpiItems);
+		ServletRequestDataBinder binder = new ServletRequestDataBinder(pageEdit);//XXX 能否修改这里的逻辑？
+		binder.bind(request);
+		
+		deptKpi.setDeptKpiItems(pageEdit.getDeptKpiItems());
+		return deptKpiService.save(deptKpi);
+	}
+	
+	private List<DeptKpiItem> prepareDeptKpiItems(String[] deptKpiItemsKey,List<DeptKpiItem> deptKpiItems) {
 		List<DeptKpiItem> retList=new ArrayList<DeptKpiItem>();
 		if(deptKpiItemsKey==null) return retList;
 		if(deptKpiItems==null) return retList;
@@ -128,6 +103,18 @@ public class DeptKpiCtl {
 			retList.add(deptKpiItem);
 		}
 		return retList;
+	}
+	
+	@RequestMapping(value="/commit",method=RequestMethod.POST)
+	public String commit(HttpServletRequest request,@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,Map<String,Object> map){
+		DeptKpi deptKpi = saveDeptKpiFromPage(request, year, departmentId);
+		Result result = deptKpiService.commitDeptKpi(deptKpi);
+		if(result.pass()){
+			messagePasser.setMessage("提交通过！");
+		}else{
+			messagePasser.setMessage(String.format("提交失败，%s!", result.cause()));
+		}
+		return "redirect:../"+departmentId;
 	}
 
 }

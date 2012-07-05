@@ -6,6 +6,7 @@ session 其实是和浏览器相关的 当浏览器进程开着的时候，sessi
 
 日志可以采用spring aop来实现 
 只记录controller类的public方法执行
+用来实现权限功能
 
 spring 环境的加载顺序？ 如何配置才合理
 

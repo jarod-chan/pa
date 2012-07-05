@@ -47,6 +47,8 @@ public class DeptKpiFacade {
 		return builder.build(year,department);
 	}
 	
+	
+	
 	public PreviewPage getDeptKpiForPreview(Long year,Long departmentId){
 		Department department = departmentRepository.find(departmentId);
 		DeptKpi deptKpi = deptKpiService.getDeptKpiByYearAndDepartment(year, department);

@@ -20,7 +20,6 @@ import javax.persistence.OrderBy;
 
 import org.apache.commons.lang.StringUtils;
 
-import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.deptindicator.DeptIndicator;
 import cn.fyg.pa.domain.model.deptindicator.IndicatorOption;
@@ -39,8 +38,6 @@ public class DeptKpi {
 	 * 必选项分解总分值
 	 */
 	private static final Long MUST_SELECT_TOTAL_POINT=100L;
-	
-	
 	/**
 	 * 非必选项分解总分值
 	 */
@@ -58,11 +55,12 @@ public class DeptKpi {
 	
 	@OneToMany(mappedBy = "deptKpi",
 			fetch = FetchType.EAGER, 
-			cascade = {CascadeType.REFRESH},
-			targetEntity = DeptKpiItem.class)
+			cascade = {CascadeType.ALL},
+			targetEntity = DeptKpiItem.class,
+			orphanRemoval=true)
 	@OrderBy("sn ASC")
 	private List<DeptKpiItem> deptKpiItems=new ArrayList<DeptKpiItem>();
-
+								
 	public Long getId() {
 		return id;
 	}
@@ -88,33 +86,31 @@ public class DeptKpi {
 	}
 
 	public List<DeptKpiItem> getDeptKpiItems() {
+		Collections.sort(deptKpiItems, new  Comparator<DeptKpiItem>(){
+			@Override
+			public int compare(DeptKpiItem one, DeptKpiItem two) {
+				if(one.getIdrCompany().getSn().compareTo(two.getIdrCompany().getSn())==0){
+					return one.getSn().compareTo(two.getSn());
+				}
+				return one.getIdrCompany().getSn().compareTo(two.getIdrCompany().getSn());
+			}
+		});
 		return deptKpiItems;
 	}
 
 	public void setDeptKpiItems(List<DeptKpiItem> deptKpiItems) {
+		for (DeptKpiItem deptKpiItem : deptKpiItems) {
+			deptKpiItem.setDeptKpi(this);
+		}
 		this.deptKpiItems = deptKpiItems;
 	}
 	
-	/**
-	 * 返回某个公司指标的分解
-	 * @param idrCompany
-	 */
-	public DeptKpi getDeptKpiViewByIdrCompany(IdrCompany idrCompany){
-		DeptKpi deptKpi=new DeptKpi();
-		deptKpi.setId(this.id);
-		deptKpi.setDepartment(this.department);
-		deptKpi.setYear(this.year);
-		List<DeptKpiItem> copyDeptKpiItems=new ArrayList<DeptKpiItem>();
-		for(DeptKpiItem deptKpiItem:this.deptKpiItems){
-			if(deptKpiItem.getIdrCompany().getId().equals(idrCompany.getId())){
-				copyDeptKpiItems.add(deptKpiItem);
-			}
-		}
-		deptKpi.setDeptKpiItems(copyDeptKpiItems);
-		return deptKpi;
- 	}
 	
-	//XXX  重构此处，采用其它方式处理
+	
+	
+
+	
+	//XXX  重构此处，采用其它方式处理,参考规格模式
 	public Result verifySelf(DeptIndicator deptIndicator){
 		if(deptIndicator==null){
 			return new Result().pass(false).cause("部门指标未分配");
@@ -136,11 +132,11 @@ public class DeptKpi {
 		Set<Long> mustSelectCompanyKpiIds=getMustSelectCompanyKpiIds(deptIndicator.getIndiactorOptions());
 		Long mustSelectBreakPoint=getMustSelectBreakPoint(mustSelectCompanyKpiIds);
 		if(!mustSelectBreakPoint.equals(MUST_SELECT_TOTAL_POINT)){
-			return new Result().pass(false).cause(String.format("必选公司指标总分值为:%s,不等于%s。", mustSelectBreakPoint,MUST_SELECT_TOTAL_POINT));
+			return new Result().pass(false).cause(String.format("必选公司指标总分值为:%s,不等于%s", mustSelectBreakPoint,MUST_SELECT_TOTAL_POINT));
 		}
 		Long otherBreakPoint=getOtherBreakPoint(mustSelectCompanyKpiIds);
 		if(!otherBreakPoint.equals(OTHER_TOTAL_POINT)){
-			return new Result().pass(false).cause(String.format("非公司必选指标总分值为:%s,不等于%s。",otherBreakPoint,OTHER_TOTAL_POINT));
+			return new Result().pass(false).cause(String.format("非公司必选指标总分值为:%s,不等于%s",otherBreakPoint,OTHER_TOTAL_POINT));
 		}
 		
 		return new Result().pass(true);
@@ -193,20 +189,5 @@ public class DeptKpi {
 		}
 		return hasBreakSet;
 	}
-	
-	public void sortByIdrCompanySnAndDeptKpiItemSn(){
-		Collections.sort(deptKpiItems, new  Comparator<DeptKpiItem>(){
-			@Override
-			public int compare(DeptKpiItem one, DeptKpiItem two) {
-				if(one.getIdrCompany().getSn().compareTo(two.getIdrCompany().getSn())==0){
-					return one.getSn().compareTo(two.getSn());
-				}
-				return one.getIdrCompany().getSn().compareTo(two.getIdrCompany().getSn());
-			}
-			
-		});
-	}
-	
-
 
 }

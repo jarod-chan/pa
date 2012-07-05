@@ -2,7 +2,6 @@ package cn.fyg.pa.domaintest.valueobject.four;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -11,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
 @Entity

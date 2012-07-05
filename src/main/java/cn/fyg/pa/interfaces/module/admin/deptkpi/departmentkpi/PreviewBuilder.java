@@ -29,7 +29,6 @@ public class PreviewBuilder {
 		if(this.deptKpi.getDeptKpiItems().isEmpty()){
 			return null;
 		}
-		this.deptKpi.sortByIdrCompanySnAndDeptKpiItemSn();
 		
 		List<PreviewItem> returnList=new ArrayList<PreviewItem>();
 		PreviewItem previewItem=null;

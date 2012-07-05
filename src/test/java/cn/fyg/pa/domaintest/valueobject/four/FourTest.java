@@ -1,8 +1,6 @@
 package cn.fyg.pa.domaintest.valueobject.four;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Resource;
