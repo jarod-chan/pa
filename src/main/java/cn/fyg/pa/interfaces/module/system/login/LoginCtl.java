@@ -7,8 +7,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,15 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.application.LoginService;
 import cn.fyg.pa.domain.model.person.ManageEnum;
-import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
+import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
 
 @Controller
 @RequestMapping("/login")
 public class LoginCtl {
-
-	private static final Logger logger = LoggerFactory.getLogger(LoginCtl.class);
 	
 	@Resource
 	private LoginService loginService;
@@ -33,13 +29,11 @@ public class LoginCtl {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getLogin() {
-		logger.info("getLogin");
 		return "redirect:first";
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView postLogin(LoginBean loginBean,HttpServletRequest request, HttpServletResponse response) {
-		logger.info("postLogin");
 		
 		LoginRetBean loginRetBean=loginService.checkLoginPerson(loginBean);
 				

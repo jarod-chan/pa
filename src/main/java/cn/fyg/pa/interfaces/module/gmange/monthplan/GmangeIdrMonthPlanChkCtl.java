@@ -50,13 +50,11 @@ public class GmangeIdrMonthPlanChkCtl {
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
-		logger.info("initPerson");
 		return personRepository.find(personId);
 	}
 	
 	@RequestMapping(value="")
 	public String toList(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
-		logger.info("toList");
 		List<Department> departments = departmentRepository.findDepartmentsByGmanage(person);
 		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByDepartmentAndState(departments,IdrMonthPlanEnum.SUBMITTED,IdrMonthPlanEnum.EXECUTE);
 		map.put("person", person);
@@ -67,7 +65,6 @@ public class GmangeIdrMonthPlanChkCtl {
 	
 	@RequestMapping(value="/{idrmonthplanId}")
 	public String toAudit(@PathVariable("idrmonthplanId")Long idrmonthplanId,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
-		logger.info("toAudit");
 		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillRepository.find(idrmonthplanId);
 		Person mange=personRepository.findDepartmentMange(idrMonthPlanBill.getDepartment().getName());
 		map.put("mange", mange);

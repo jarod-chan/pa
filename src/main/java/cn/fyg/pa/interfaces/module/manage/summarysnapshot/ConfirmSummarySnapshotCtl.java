@@ -57,7 +57,6 @@ public class ConfirmSummarySnapshotCtl {
 
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
-		logger.info("initPerson");
 		return personRepository.find(personId);
 	}
 	

@@ -12,7 +12,6 @@ public class Dispatcher {
 	public static final Logger logger=LoggerFactory.getLogger(Dispatcher.class);
 	
 	public static String dispatcher(LoginRetBean loginRet) {
-		logger.info("dispatcher");
 		
 		if(loginRet.getMange().equals("A")){
 			return "redirect:admin/all";

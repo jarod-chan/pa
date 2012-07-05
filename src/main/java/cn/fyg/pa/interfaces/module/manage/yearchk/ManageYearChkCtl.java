@@ -9,8 +9,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +33,6 @@ import cn.fyg.pa.interfaces.module.shared.tool.Tool;
 @RequestMapping("/mange/{personId}/yearchk")
 public class ManageYearChkCtl {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ManageYearChkCtl.class);
-	
 	@Resource
 	PersonRepository personRepository;
 	
@@ -54,7 +50,6 @@ public class ManageYearChkCtl {
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
-		logger.info("initPerson");
 		return personRepository.find(personId);
 	}
 	

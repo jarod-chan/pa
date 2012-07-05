@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,12 +21,10 @@ import cn.fyg.pa.domain.model.person.TypeEnum;
 import cn.fyg.pa.interfaces.module.shared.tool.EnumUtil;
 import cn.fyg.pa.interfaces.module.shared.tool.Tool;
 
-
+//XXX   用户模块待重构，独立用户模块？
 @Controller
 @RequestMapping("/admin/person")
 public class PersonCtl {
-	
-	private static final Logger logger = LoggerFactory.getLogger(PersonCtl.class);
 
 	@Resource
 	PersonRepository personRepository;
@@ -37,7 +33,6 @@ public class PersonCtl {
 	
 	@RequestMapping(value="")
 	public ModelAndView index() {
-		logger.info("index");
 		
 		ModelAndView mav = new ModelAndView();
 		List<Person> persons = personRepository.getAllFyperson();
@@ -48,7 +43,6 @@ public class PersonCtl {
 	
 	@RequestMapping(value="/new")
 	public ModelAndView _new(){
-		logger.info("_new");
 		Person person=new Person();
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("typeEnum",EnumUtil.enumToMap(TypeEnum.values()));
@@ -76,7 +70,6 @@ public class PersonCtl {
 	/**显示编辑*/
 	@RequestMapping(value="/{personId}")
 	public ModelAndView edit(@PathVariable("personId")Long personId){
-		logger.info("get user with id");
 		Person person=personRepository.find(personId);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("typeEnum",EnumUtil.enumToMap(TypeEnum.values()));
@@ -98,7 +91,6 @@ public class PersonCtl {
 			mav.setViewName("person/edit");
 			return mav;
 		}
-		logger.info("post user");
 		person.setId(personId);
 		personService.save(person);
 		ModelAndView mav=new ModelAndView();
@@ -108,7 +100,6 @@ public class PersonCtl {
 	
 	@RequestMapping(value="/{personId}",method=RequestMethod.DELETE)
 	public ModelAndView delete(@PathVariable("personId")Long personId){
-		logger.info("post user");
 		personService.remove(personId);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("redirect:person");
@@ -117,7 +108,6 @@ public class PersonCtl {
 	
 	@RequestMapping(method=RequestMethod.POST,value="/password")
 	public ModelAndView initPassword(@RequestParam(value="passlen",required=false) Long passlen,@RequestParam(value="type",required=false) String type) {
-		logger.info("post initPassword");
 		
 		List<Person> people = personRepository.getAllFyperson();
 		List<Person> peopleHasPassword=new ArrayList<Person>();

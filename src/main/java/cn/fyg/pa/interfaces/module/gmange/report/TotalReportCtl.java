@@ -5,8 +5,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,14 +20,11 @@ import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 @RequestMapping("/gmange/{personId}/totalreport")
 public class TotalReportCtl {
 	
-	private static final Logger logger=LoggerFactory.getLogger(TotalReportCtl.class);
-	
 	@Resource
 	PersonRepository personRepository;
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
-		logger.info("initPerson");
 		return personRepository.find(personId);
 	}
 	
