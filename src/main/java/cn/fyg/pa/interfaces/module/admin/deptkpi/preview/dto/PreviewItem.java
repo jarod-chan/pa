@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.preview;
+package cn.fyg.pa.interfaces.module.admin.deptkpi.preview.dto;
 
 import java.util.ArrayList;
 import java.util.List;

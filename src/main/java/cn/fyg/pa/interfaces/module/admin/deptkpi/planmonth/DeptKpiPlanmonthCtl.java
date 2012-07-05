@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.application.DeptKpiItemService;
 import cn.fyg.pa.application.DeptKpiService;
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.department.DepartmentRepository;
 import cn.fyg.pa.domain.model.deptkpi.DeptKpi;
-import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.DeptKpiFacade;
-import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.preview.PreviewPage;
 import cn.fyg.pa.interfaces.module.admin.deptkpi.evaluate.dto.edit.PageEdit;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.preview.PreviewFacade;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.preview.dto.PreviewPage;
 import cn.fyg.pa.interfaces.module.shared.message.MessagePasser;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
@@ -33,9 +34,11 @@ public class DeptKpiPlanmonthCtl {
 	@Resource
 	MessagePasser messagePasser;
 	@Resource
-	DeptKpiFacade deptKpiFacade;
+	PreviewFacade reviewFacade;
 	@Resource
 	DeptKpiService deptKpiService;
+	@Resource
+	DeptKpiItemService deptKpiItemService;
 	@Resource
 	DepartmentRepository departmentRepository;
 	
@@ -43,7 +46,7 @@ public class DeptKpiPlanmonthCtl {
 
 	@RequestMapping(value="/planmonth",method=RequestMethod.GET)
 	public String toPlanmonth(@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,Map<String,Object> map){
-		PreviewPage previewPage = deptKpiFacade.getDeptKpiForPreview(year, departmentId);
+		PreviewPage previewPage = reviewFacade.getDeptKpiForPreview(year, departmentId);
 		map.put("previewPage", previewPage);
 		map.put(Constant.MESSAGE_NAME,messagePasser.getMessage());
 		return Page.PLANMONTH;
@@ -57,7 +60,7 @@ public class DeptKpiPlanmonthCtl {
 		pageEdit.setDeptKpiItems(deptKpi.getDeptKpiItems());
 		ServletRequestDataBinder binder = new ServletRequestDataBinder(pageEdit);//XXX 能否修改这里的逻辑？
 		binder.bind(request);	
-		deptKpiService.saveDeptKpiItems(pageEdit.getDeptKpiItems());
+		deptKpiItemService.saveDeptKpiItems(pageEdit.getDeptKpiItems());
 		messagePasser.setMessage("保存成功！");
 		return "redirect:planmonth";
 	}

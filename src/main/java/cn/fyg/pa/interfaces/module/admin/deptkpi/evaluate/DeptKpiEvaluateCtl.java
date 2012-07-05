@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.application.DeptKpiService;
+import cn.fyg.pa.application.DeptKpiItemService;
 import cn.fyg.pa.domain.model.companykpiitem.IdrCompany;
 import cn.fyg.pa.domain.model.companykpiitem.IdrCompanyRepository;
 import cn.fyg.pa.domain.model.department.Department;
@@ -43,7 +43,7 @@ public class DeptKpiEvaluateCtl {
 	@Resource
 	DeptKpiItemRepository deptKpiItemRepository;
 	@Resource
-	DeptKpiService deptKpiService;
+	DeptKpiItemService deptKpiItemService;
 	@Resource
 	DeptKpiEvaluateFacade deptKpiEvaluateFacade;
 	
@@ -78,7 +78,7 @@ public class DeptKpiEvaluateCtl {
 		pageEdit.setDeptKpiItems(deptKpiItems);
 		ServletRequestDataBinder binder = new ServletRequestDataBinder(pageEdit);//XXX 能否修改这里的逻辑？
 		binder.bind(request);	
-		deptKpiService.saveDeptKpiItems(pageEdit.getDeptKpiItems());
+		deptKpiItemService.saveDeptKpiItems(pageEdit.getDeptKpiItems());
 		return "redirect:../../evaluate";
 	}
 

@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.DeptKpiFacade;
-import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.preview.PreviewPage;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.preview.dto.PreviewPage;
 import cn.fyg.pa.interfaces.module.shared.message.MessagePasser;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
@@ -19,7 +18,7 @@ import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 public class PreviewCtl {
 	
 	@Resource
-	DeptKpiFacade deptKpiFacade;
+	PreviewFacade previewFacade;
 	@Resource
 	MessagePasser messagePasser;
 
@@ -31,7 +30,7 @@ public class PreviewCtl {
 
 	@RequestMapping(value="/preview",method=RequestMethod.GET)
 	public String toPreview(@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,Map<String,Object> map){
-		PreviewPage previewPage = deptKpiFacade.getDeptKpiForPreview(year, departmentId);
+		PreviewPage previewPage = previewFacade.getDeptKpiForPreview(year, departmentId);
 		map.put("previewPage", previewPage);
 		map.put(Constant.MESSAGE_NAME, messagePasser.getMessage());
 		return Page.PREVIEW;

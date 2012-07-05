@@ -1,12 +1,12 @@
-package cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi;
+package cn.fyg.pa.interfaces.module.admin.deptkpi.preview;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.fyg.pa.domain.model.deptkpi.DeptKpi;
 import cn.fyg.pa.domain.model.deptkpiitem.DeptKpiItem;
-import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.preview.PreviewItem;
-import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.preview.PreviewPage;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.preview.dto.PreviewItem;
+import cn.fyg.pa.interfaces.module.admin.deptkpi.preview.dto.PreviewPage;
 
 public class PreviewBuilder {
 	
