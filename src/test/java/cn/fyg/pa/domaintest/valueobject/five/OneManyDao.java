@@ -1,4 +1,4 @@
-package cn.fyg.pa.domaintest.valueobject.onetomany;
+package cn.fyg.pa.domaintest.valueobject.five;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

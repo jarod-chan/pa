@@ -1,4 +1,4 @@
-package cn.fyg.pa.domaintest.valueobject.onetomany;
+package cn.fyg.pa.domaintest.valueobject.five;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
