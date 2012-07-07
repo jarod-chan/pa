@@ -21,15 +21,17 @@ import cn.fyg.pa.interfaces.module.admin.deptkpi.preview.PreviewFacade;
 import cn.fyg.pa.interfaces.module.admin.deptkpi.preview.dto.PreviewPage;
 import cn.fyg.pa.interfaces.module.shared.message.MessagePasser;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
+import cn.fyg.pa.interfaces.module.shared.tool.Strpath;
 
 @Controller
 @RequestMapping("/admin/deptkpi/{year}/department/{departmentId}")
 public class DeptKpiPlanmonthCtl {
 	
-	private interface Page {
-		String PATH = "deptkpi/planmonth/";
-		String PLANMONTH = PATH + "planmonth";
+	private static Strpath TEMPLATE_FACTORY=new Strpath("deptkpi/planmonth/");
+	private static class Page{
+		static String PLANMONTH=TEMPLATE_FACTORY.getPath("planmonth");
 	}
+	
 	
 	@Resource
 	MessagePasser messagePasser;

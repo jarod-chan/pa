@@ -163,8 +163,9 @@
 	function reIndexTable(tbody){
 		var index=0;
 		tbody.find("tr").each(function(){
+			index++;
 			$(this).find("td").eq(0).find("[name='deptKpiItems_sn']").val(index);			
-			$(this).find("td").eq(1).html(++index);
+			$(this).find("td").eq(1).html(index);
 		});
 		tbody.parents(".context").find(".head .breakitems").html("项数:"+index);
 	}
@@ -204,6 +205,7 @@
 	function commit(){
 		var actionFrom=$("form");
 		var oldAction=actionFrom.attr("action");
+		$(".subtab tbody tr").formatName();
 		var msg="确定提交？";
 		if(confirm(msg)){
 			actionFrom.attr("action",oldAction+"/commit").submit();

@@ -23,15 +23,22 @@ import cn.fyg.pa.interfaces.module.admin.deptkpi.evaluate.dto.edit.PageEdit;
 import cn.fyg.pa.interfaces.module.admin.deptkpi.evaluate.dto.list.PageBean;
 import cn.fyg.pa.interfaces.module.shared.message.MessagePasser;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
+import cn.fyg.pa.interfaces.module.shared.tool.Strpath;
+import cn.fyg.pa.interfaces.module.shared.tool.Urlpath;
 
 @Controller
 @RequestMapping("/admin/deptkpi/{year}/department/{departmentId}")
 public class DeptKpiEvaluateCtl {
 	
-	private interface Page {
-		String PATH = "deptkpi/evaluate/";
-		String LIST = PATH + "list";
-		String EVALUATE=PATH+"evaluate";
+	private static Strpath TEMPLATE_FACTORY=new Strpath("deptkpi/evaluate/");
+	private static class Page{
+		static String LIST=TEMPLATE_FACTORY.getPath("list");
+		static String EVALUATE=TEMPLATE_FACTORY.getPath("evaluate");
+	}
+	
+	private static Strpath URL_FACTORY=new Strpath("/admin/deptkpi/{year}/department/{departmentId}");
+	private static class Url{
+		static Urlpath LIST=new Urlpath(URL_FACTORY.getPath("/evaluate"));
 	}
 	
 	@Resource
@@ -79,7 +86,7 @@ public class DeptKpiEvaluateCtl {
 		ServletRequestDataBinder binder = new ServletRequestDataBinder(pageEdit);//XXX 能否修改这里的逻辑？
 		binder.bind(request);	
 		deptKpiItemService.saveDeptKpiItems(pageEdit.getDeptKpiItems());
-		return "redirect:../../evaluate";
+		return Url.LIST.redirect();
 	}
 
 }

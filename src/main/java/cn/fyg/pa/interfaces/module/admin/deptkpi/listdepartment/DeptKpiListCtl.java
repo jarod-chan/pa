@@ -14,15 +14,17 @@ import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.department.DepartmentRepository;
 import cn.fyg.pa.interfaces.module.shared.message.MessagePasser;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
+import cn.fyg.pa.interfaces.module.shared.tool.Strpath;
 
 @Controller
 @RequestMapping("/admin/deptkpi/{year}")
 public class DeptKpiListCtl {
 	
-	private interface Page {
-		String PATH = "deptkpi/listdepartment/";
-		String LIST = PATH + "list";
+	private static Strpath TEMPLATE_FACTORY=new Strpath("deptkpi/listdepartment/");
+	private static class Page{
+		static String LIST=TEMPLATE_FACTORY.getPath("list");
 	}
+
 	
 	@Resource
 	MessagePasser messagePasser;

@@ -29,15 +29,22 @@ import cn.fyg.pa.interfaces.module.admin.deptkpi.departmentkpi.dto.list.ListPage
 import cn.fyg.pa.interfaces.module.admin.deptkpi.evaluate.dto.edit.PageEdit;
 import cn.fyg.pa.interfaces.module.shared.message.MessagePasser;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
+import cn.fyg.pa.interfaces.module.shared.tool.Strpath;
+import cn.fyg.pa.interfaces.module.shared.tool.Urlpath;
 
 @Controller
 @RequestMapping("/admin/deptkpi/{year}/department/{departmentId}")
 public class DeptKpiCtl {
 	
-	private interface Page {
-		String PATH = "deptkpi/breakdown/";
-		String BREAKDOWN = PATH + "breakdown";
+	private static Strpath TEMPLATE_FACTORY=new Strpath("deptkpi/breakdown/");
+	private static class Page{
+		static String BREAKDOWN=TEMPLATE_FACTORY.getPath("breakdown");
 	}
+	private static Strpath URL_FACTORY=new Strpath("/admin/deptkpi/{year}/department/{departmentId}");
+	private static class Url{
+		static Urlpath LIST=new Urlpath(URL_FACTORY.getPath(""));
+	}
+
 	
 	
 	@Resource 
@@ -67,7 +74,7 @@ public class DeptKpiCtl {
 	public String save(HttpServletRequest request,@PathVariable("year")Long year,@PathVariable("departmentId")Long departmentId,Map<String,Object> map){
 		saveDeptKpiFromPage(request, year, departmentId);
 		messagePasser.setMessage("保存成功！");
-		return "redirect:/admin/deptkpi/{year}/department/{departmentId}";
+		return Url.LIST.redirect();
 	}
 
 	private DeptKpi saveDeptKpiFromPage(HttpServletRequest request, Long year,Long departmentId) {
@@ -114,7 +121,7 @@ public class DeptKpiCtl {
 		}else{
 			messagePasser.setMessage(String.format("提交失败，%s!", result.cause()));
 		}
-		return "redirect:../"+departmentId;
+		return Url.LIST.redirect();
 	}
 
 }
