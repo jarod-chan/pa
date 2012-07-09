@@ -15,8 +15,18 @@
 		$(this).addClass("currRow");
 	};
 	
+	var optColorArr=["#FF8080","#FECF78","#B9EA48","#00C462","#1E8EFF"];
+	
 	$(document).ready(function() {
 		$(".tbldef tbody tr").click(rowClick);
+		$(".tbldef tbody select[name='monthChkItems_point']").each(function(){
+			$(this).find("option").each(function(idx){
+				$(this).css("background-color",optColorArr[idx]);
+			});
+			$(this).bind("change",function(){
+				$(this).css("background-color",optColorArr[this.selectedIndex])
+			}).triggerHandler("change");
+		});
 	});
 
 	function save(){
