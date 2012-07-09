@@ -1,9 +1,7 @@
 package cn.fyg.pa.infrastructure.persistence.jpa;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,34 +34,12 @@ public class MonthChkRepositoryJpa implements MonthChkRepository {
 		for (MonthChkItem monthChkItem : monthChk.getMonthChkItems()) {
 			monthChkItem.setMonthChk(monthChk);
 		}
-		MonthChk oldMonthChk = null;
-		if (monthChk.getId() != null) {
-			oldMonthChk = entityManager.find(MonthChk.class, monthChk.getId());
-		}
-		if(oldMonthChk==null){
-			return create(monthChk);
-		}
-		return update(monthChk,oldMonthChk);
-	}
-	
-	private MonthChk create(MonthChk monthChk) {
-		entityManager.persist(monthChk);
-		return monthChk;
-	}
-	
-	private MonthChk update(MonthChk monthChk, MonthChk oldMonthChk) {
-		Set<Long> monthChkItemIds=new HashSet<Long>();
-		for(MonthChkItem monthChkItem:monthChk.getMonthChkItems()){
-			monthChkItemIds.add(monthChkItem.getId());
-		}
-		for(MonthChkItem monthChkItem:oldMonthChk.getMonthChkItems()){
-			if(!monthChkItemIds.contains(monthChkItem.getId())){
-				entityManager.remove(monthChkItem);
-			}
+		if(monthChk.getId()==null){
+			entityManager.persist(monthChk);
+			return monthChk;
 		}
 		return entityManager.merge(monthChk);
 	}
-	
 	
 	@Override
 	public MonthChk findLastMonthMonthChk(Person person){

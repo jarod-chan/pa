@@ -1,6 +1,5 @@
 package cn.fyg.pa.domain.model.monthchk;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +20,7 @@ import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 
 @Entity
-public class MonthChk implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class MonthChk {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,7 +40,8 @@ public class MonthChk implements Serializable {
 	@OneToMany(mappedBy = "monthChk",
 			fetch = FetchType.EAGER, 
 			cascade = {CascadeType.ALL},
-			targetEntity = MonthChkItem.class)
+			targetEntity = MonthChkItem.class,
+			orphanRemoval=true)
 	@OrderBy("sn ASC")
 	private List<MonthChkItem> monthChkItems=new ArrayList<MonthChkItem>();
 	

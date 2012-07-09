@@ -35,13 +35,20 @@ import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 @RequestMapping("/person/{personId}/monthchk")
 public class MonthChkCtl {
 	
-	public static Map<MonthChkEnum,String> PAGEMAP=new HashMap<MonthChkEnum,String>();
+	private static final String PATH="monthchk/";	
+	private static class  Page{
+		static String EDIT = PATH + "edit";
+		static String VIEW = PATH + "view";
+		static String HISTROY = PATH + "histroy";
+		static String IDRMONTHPLAN = PATH + "idrmonthplan";
+	}
 	
+	public static Map<MonthChkEnum,String> PAGEMAP=new HashMap<MonthChkEnum,String>();
 	static{
-		PAGEMAP.put(MonthChkEnum.NEW, "monthchk/edit");
-		PAGEMAP.put(MonthChkEnum.SAVED, "monthchk/edit");
-		PAGEMAP.put(MonthChkEnum.SUBMITTED, "monthchk/view");
-		PAGEMAP.put(MonthChkEnum.FINISHED, "monthchk/view");
+		PAGEMAP.put(MonthChkEnum.NEW, Page.EDIT);
+		PAGEMAP.put(MonthChkEnum.SAVED, Page.EDIT);
+		PAGEMAP.put(MonthChkEnum.SUBMITTED, Page.VIEW);
+		PAGEMAP.put(MonthChkEnum.FINISHED, Page.VIEW);
 	}
 	
 	@Resource
@@ -108,7 +115,7 @@ public class MonthChkCtl {
 		map.put("monthChks", monthChks);
 		map.put("person", person);
 		map.put("message",new SessionMPR(session).getMessage());
-		return "monthchk/histroy";
+		return Page.HISTROY;
 	}
 	
 	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
@@ -122,7 +129,7 @@ public class MonthChkCtl {
 		map.put("dateTool", new DateTool());
 		map.put("queryBean", queryBean);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);
-		return "monthchk/idrmonthplan";
+		return Page.IDRMONTHPLAN;
 	}
 	
 }

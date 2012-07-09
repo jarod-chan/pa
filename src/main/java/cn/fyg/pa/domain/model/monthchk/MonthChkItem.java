@@ -1,6 +1,5 @@
 package cn.fyg.pa.domain.model.monthchk;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -14,9 +13,8 @@ import javax.persistence.ManyToOne;
 import cn.fyg.pa.domain.model.worktype.WorkType;
 
 @Entity
-public class MonthChkItem implements Serializable {
+public class MonthChkItem {
 	
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
