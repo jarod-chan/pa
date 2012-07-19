@@ -70,9 +70,10 @@ public class YearChkRepositroyJpa implements YearChkRepositroy{
 		CriteriaQuery<Fycheck> query = builder.createQuery(Fycheck.class);
 		Root<Fycheck> root = query.from(Fycheck.class);
 		Predicate chkPersonCriteria=builder.equal(root.get("chkId"), chkPerson.getId());
+		Predicate yearCriteria=builder.equal(root.get("year"), year);
 		Predicate aboutPersonCriteria=builder.equal(root.get("colId"), aboutPerson.getId());
 		aboutPersonCriteria=builder.or(aboutPersonCriteria,builder.equal(root.get("rowId"), aboutPerson.getId()));
-		query.where(chkPersonCriteria,aboutPersonCriteria);
+		query.where(chkPersonCriteria,yearCriteria,aboutPersonCriteria);
 		return entityManager.createQuery(query).getResultList();
 	}
 
@@ -88,12 +89,13 @@ public class YearChkRepositroyJpa implements YearChkRepositroy{
 	}
 
 	@Override
-	public List<Fycheck> getPersonYearChkByChkperson(Person person) {
+	public List<Fycheck> getPersonYearChkByChkperson(Long year,Person person) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Fycheck> query = builder.createQuery(Fycheck.class);
 		Root<Fycheck> root = query.from(Fycheck.class);
-		Predicate criteria=builder.equal(root.get("chkId"), person.getId());
-		query.where(criteria);
+		Predicate yearCriteria=builder.equal(root.get("year"),year);
+		Predicate chkPersonCriteria=builder.equal(root.get("chkId"), person.getId());
+		query.where(yearCriteria,chkPersonCriteria);
 		return entityManager.createQuery(query).getResultList();
 	}
 }

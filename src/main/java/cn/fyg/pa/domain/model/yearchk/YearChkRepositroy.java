@@ -14,6 +14,6 @@ public interface YearChkRepositroy {
 	
 	void saveFychecks(List<Fycheck> fychecks);
 
-	List<Fycheck> getPersonYearChkByChkperson(Person person);
+	List<Fycheck> getPersonYearChkByChkperson(Long year,Person person);
 
 }

@@ -181,7 +181,7 @@ public class PersonYearChkCtl {
 		List<Person> sameTypePerson=personRepository.getStaffByType(person.getType());
 		sameTypePerson=removePerson(sameTypePerson, person);
 		List<Fycheck> fychecks=createFychecksByDefault(year,sameTypePerson,person);
-		List<Fycheck> savedFychecks=yearChkRepositroy.getPersonYearChkByChkperson(person);
+		List<Fycheck> savedFychecks=yearChkRepositroy.getPersonYearChkByChkperson(year,person);
 		Map<String,Fycheck> hasCheckedValues=changeChecksToMap(savedFychecks);
 		fychecks=setValuesToFychecks(fychecks,hasCheckedValues);
 		yearCheckService.saveFychecks(fychecks);
