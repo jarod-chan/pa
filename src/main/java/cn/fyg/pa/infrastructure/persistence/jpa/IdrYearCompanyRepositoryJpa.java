@@ -54,6 +54,13 @@ public class IdrYearCompanyRepositoryJpa implements IdrYearCompanyRepository {
 		}
 		for(IdrCompany idrCompany:oldIdrYearCompany.getIdrCompany()){
 			if(!idrCompamyIdSet.contains(idrCompany.getId())){
+				//XXX 删除关联数据
+				entityManager.createNativeQuery("delete from deptindicator_indiactoroptions where idrcompany_id=:idrcompany_id")
+					.setParameter("idrcompany_id", idrCompany.getId())
+					.executeUpdate();
+				entityManager.createNativeQuery("delete from deptkpiitem where idrcompany_id=:idrcompany_id")
+					.setParameter("idrcompany_id", idrCompany.getId())
+					.executeUpdate();
 				entityManager.remove(idrCompany);
 			}
 		}

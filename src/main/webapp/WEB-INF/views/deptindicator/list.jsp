@@ -42,6 +42,8 @@
 			</c:forEach> 
 		</tbody>
 </table>
+<br>
+<input type="button" onclick="window.open('/pa/admin/all','_self');" value="返回管理员页面<<">
 
 </body>
 </html>

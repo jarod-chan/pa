@@ -175,8 +175,10 @@
 			</c:forEach>
 		</tbody>
 </table>
+<br>
 <input type="button" value="保存" onclick="save()"/>
 <input type="button" value="提交" onclick="commit()"/>
+<input type="button" onclick="window.open('/pa/admin/all','_self');" value="返回管理员页面<<">
 </form>
 </body>
 </html>
