@@ -42,11 +42,11 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 
 </style>
 
-<div class="notification_title"><h2>2012年6-7月份公司宣传通讯稿执行情况通报</h2></div>
+<div class="notification_title"><h2>2012年8-9月份公司宣传通讯稿执行情况通报</h2></div>
 <div class="notification_context">
 	<div class="context">
 		<div class="top">
-			&nbsp;&nbsp;&nbsp;&nbsp;根据《通讯稿考核管理办法》的要求，截止2012年7月25日（星期三）前，各职能部门通迅报道供稿的完成情况良好，现通报如下：
+			&nbsp;&nbsp;&nbsp;&nbsp;截止2012年8月31日（星期五），各职能部门通迅报道供稿情况通报如下:
 		</div>
 		<div class="middle">
 			<table>
@@ -58,28 +58,28 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 					<th style="width:140px;">月度执行情况</th>
 				</tr>	
 				<tr>
-					<td>工程部</td><td>4</td><td>7</td><td>5</td><td>超额完成</td>
+					<td>工程部</td><td>4</td><td>3</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>产品部</td><td>1</td><td>1</td><td>0</td><td>完成</td>
+					<td>产品部</td><td>1</td><td>0</td><td>0</td><td></td>
 				</tr>
 				<tr>
-					<td>技术部</td><td>1</td><td>1</td><td>1</td><td>完成</td>
+					<td>技术部</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>成本管理部</td><td>1</td><td>2</td><td>0</td><td>完成</td>
+					<td>成本管理部</td><td>1</td><td>0</td><td>0</td><td></td>
 				</tr>
 				<tr>
-					<td>销售部</td><td>2</td><td>3</td><td>3</td><td>超额完成</td>
+					<td>销售部</td><td>2</td><td>2</td><td>1</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>采购部</td><td>1</td><td>1</td><td>1</td><td>完成</td>
+					<td>采购部</td><td>1</td><td>0</td><td>0</td><td></td>
 				</tr>
 				<tr>
-					<td>财务部</td><td>1</td><td>1</td><td>0</td><td>完成</td>
+					<td>财务部</td><td>1</td><td>0</td><td>0</td><td></td>
 				</tr>
 				<tr>
-					<td>办公室</td><td>4</td><td>4</td><td>3</td><td>完成</td>
+					<td>办公室</td><td>4</td><td>2</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
 					<td colspan="4">月度优秀通讯员</td><td>销售部:王如虹</td>
@@ -87,13 +87,21 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 			</table>
 		</div>
 		<div class="bottom">
-			注：1、工程部其中一篇稿件上交时间延迟，留至下月统计。
+			说明:
 			<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、未发表稿件质量有待进一步提升。
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自公司《通讯稿考核管理办法》颁布以来，各部门积极响应，及时供稿，稿件内容围绕公司的重点要点工作展开，塑造了公司良好的企业形象。办公室根据《通讯稿考核管理办法》要求，对于出色完成通信报道任务的个人，评出了月度优秀通讯员，优秀通讯员评比标准为:
+			<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（一）每月投稿2篇或以上，《方远报》发稿1篇或以上；
+			<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（二）稿件内容围绕公司的重点要点工作展开，信息完整（时间，地点，目的，过程，意义等），真实性、时效性和可读性强；
+			<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）语句通顺流畅，内容健康上进。
+			<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为表彰优秀，鼓励更多员工继续创作好作品，促进《通讯稿考核管理办法》进一步实施，公司经研究决定，除集团《方远报》编辑部发放稿费外，额外给予6 -8月份优秀通讯员奖励：电影票2张，今后公司还将采取多种形式奖励优秀通讯员。
 		</div>
 		<div class="company">
 			<div>方远建设集团房地产开发有限公司</div>
-			<div>二○一二年七月二十五日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<div>二○一二年八月三十一日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</div>
 	</div>
 </div>
