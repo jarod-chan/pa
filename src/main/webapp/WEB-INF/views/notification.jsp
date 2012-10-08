@@ -46,40 +46,40 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 <div class="notification_context">
 	<div class="context">
 		<div class="top">
-			&nbsp;&nbsp;&nbsp;&nbsp;截止2012年8月31日（星期五），各职能部门通迅报道供稿情况通报如下:
+			&nbsp;&nbsp;&nbsp;&nbsp;截止2012年9月29日（星期六），各职能部门通迅报道供稿情况通报如下:
 		</div>
 		<div class="middle">
 			<table>
 				<tr>
 					<th style="width:120px;">部门</th>
-					<th style="width:120px;">计划供稿</th>
+					<th style="width:120px;">计划供稿<br>(8-9)月</th>
 					<th style="width:120px;">实际供稿</th>
 					<th style="width:100px;">发表稿件</th>
 					<th style="width:140px;">月度执行情况</th>
 				</tr>	
 				<tr>
-					<td>工程部</td><td>4</td><td>3</td><td>0</td><td>完成</td>
+					<td>工程部</td><td>4</td><td>4</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>产品部</td><td>1</td><td>0</td><td>0</td><td></td>
+					<td>产品部</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>技术部</td><td>1</td><td>1</td><td>0</td><td>完成</td>
+					<td>技术部</td><td>1</td><td>1</td><td>1</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>成本管理部</td><td>1</td><td>0</td><td>0</td><td></td>
+					<td>成本管理部</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
 					<td>销售部</td><td>2</td><td>2</td><td>1</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>采购部</td><td>1</td><td>0</td><td>0</td><td></td>
+					<td>采购部</td><td>1</td><td>2</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>财务部</td><td>1</td><td>0</td><td>0</td><td></td>
+					<td>财务部</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>办公室</td><td>4</td><td>2</td><td>0</td><td>完成</td>
+					<td>办公室</td><td>4</td><td>4</td><td>2</td><td>完成</td>
 				</tr>
 				<tr>
 					<td colspan="4">月度优秀通讯员</td><td>销售部:王如虹</td>
@@ -97,11 +97,11 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 			<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（三）语句通顺流畅，内容健康上进。
 			<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为表彰优秀，鼓励更多员工继续创作好作品，促进《通讯稿考核管理办法》进一步实施，公司经研究决定，除集团《方远报》编辑部发放稿费外，额外给予6 -8月份优秀通讯员奖励：电影票2张，今后公司还将采取多种形式奖励优秀通讯员。
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为表彰优秀，鼓励更多员工继续创作好作品，促进《通讯稿考核管理办法》进一步实施，公司经研究决定，除集团《方远报》编辑部发放稿费外，额外给予6-9月份优秀通讯员奖励：电影票2张，今后公司还将采取多种形式奖励优秀通讯员。
 		</div>
 		<div class="company">
 			<div>方远建设集团房地产开发有限公司</div>
-			<div>二○一二年八月三十一日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<div>二○一二年九月二十九日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</div>
 	</div>
 </div>
