@@ -13,7 +13,7 @@
 			<div class="main_head">方远房产卓越绩效管理平台</div>
 		</div>
 		<div class="top_right">
-			<div class="main_blank"><input id="btn_login" type="button" value="登录\/" />&nbsp;&nbsp;</div>
+			<div class="main_blank"><input id="btn_login" type="button" value="登录\/" />&nbsp;&nbsp;<input id="btn_qs" type="button" value="满意度调查-&gt;" />&nbsp;&nbsp;</div>
 			<div class="main_info"></div>
 		</div>
 		<div class="clear_div"></div>
@@ -85,6 +85,11 @@ body {
 	$(document).ready(function() {
 		$("#loginform :input[name='username']").bind("blur",blurUsername).triggerHandler("blur");
 		$("#btn_login").bind("click",toggleLoginDiv);
+		
+		$("#btn_qs").bind("click",function(){
+			window.open('/pa/qs/login','_self');
+		});
+		
 		<c:if test="${message!=null}">
 		$("#fixdiv").show();
 		$("#btn_login").val("登录/\\");

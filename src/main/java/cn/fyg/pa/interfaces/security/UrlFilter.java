@@ -98,6 +98,12 @@ public class UrlFilter implements Filter {
 //        	return;
 //        }
         
+        //不过滤满意度调查页面
+        if(url.indexOf("/pa/qs")>=0){
+        	chain.doFilter(request, response);
+        	return;
+        }
+        
         if(isNofilterUrl(url)){
         	chain.doFilter(request, response);
         	return;
