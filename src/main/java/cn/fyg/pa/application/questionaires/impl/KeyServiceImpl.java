@@ -24,4 +24,9 @@ public class KeyServiceImpl implements KeyService{
 		return key.getState()!=KeyState.invalid;
 	}
 
+	@Override
+	public Key find(String keystr) {
+		return keyRepository.find(keystr);
+	}
+
 }

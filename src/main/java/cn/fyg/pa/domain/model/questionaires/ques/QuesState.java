@@ -3,7 +3,7 @@ package cn.fyg.pa.domain.model.questionaires.ques;
 import cn.fyg.pa.domain.shared.CommonEnum;
 
 public enum QuesState implements CommonEnum {
-	notstarted("未开始"),
+	
 	active("执行中"),
 	finish("已完成")
 	;
