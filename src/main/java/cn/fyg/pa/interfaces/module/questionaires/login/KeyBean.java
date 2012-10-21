@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.questionaires;
+package cn.fyg.pa.interfaces.module.questionaires.login;
 
 public class KeyBean {
 	private static final String SEPARATE="-";
