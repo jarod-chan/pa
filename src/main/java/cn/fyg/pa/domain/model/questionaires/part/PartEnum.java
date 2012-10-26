@@ -1,10 +1,10 @@
-package cn.fyg.pa.domain.model.questionaires.problem;
+package cn.fyg.pa.domain.model.questionaires.part;
 
 import cn.fyg.pa.domain.shared.CommonEnum;
 
 public enum PartEnum implements CommonEnum {
 	choice("选择题"),
-	answert("简答题");
+	answer("简答题");
 	
 	private String name;
 	

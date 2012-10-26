@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.application.questionaires.PartService;
 import cn.fyg.pa.application.questionaires.QuesService;
+import cn.fyg.pa.domain.model.questionaires.part.Part;
 import cn.fyg.pa.domain.model.questionaires.ques.Ques;
 import cn.fyg.pa.interfaces.module.questionaires.QsConstant;
 import cn.fyg.pa.interfaces.module.questionaires.common.Filter;
@@ -17,24 +19,28 @@ import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 
 @Controller
-@RequestMapping("/qs/fixed")
 public class FixedCtl {
 	
 	@Resource
 	QuesService quesService;
 	@Resource
+	PartService partService;
+	@Resource
 	SessionUtil sessionUtil;
 	
-	@RequestMapping(value="/start",method=RequestMethod.GET)
+	@RequestMapping(value="/qs/start",method=RequestMethod.GET)
 	public String toStart(Map<String,Object> map,HttpSession session){
 		if(!Filter.isLogin(sessionUtil)){
 			return Filter.reLongin(session);
 		}
+		Long qtid=sessionUtil.getValue(QsConstant.QTID);
+		Part part = partService.findFirstPart(qtid);
+		map.put("part", part);
 		map.put("message",new SessionMPR(session).getMessage());
 		return "questionaires/start";
 	}
 	
-	@RequestMapping(value="/end",method=RequestMethod.GET)
+	@RequestMapping(value="/qs/end",method=RequestMethod.GET)
 	public String toEnd(Map<String,Object> map,HttpSession session){
 		if(!Filter.isLogin(sessionUtil)){
 			return Filter.reLongin(session);
@@ -46,7 +52,7 @@ public class FixedCtl {
 		return "questionaires/end";
 	}
 	
-	@RequestMapping(value="/close",method=RequestMethod.GET)
+	@RequestMapping(value="/qs/close",method=RequestMethod.GET)
 	public String toClose(Map<String,Object> map,HttpSession session){
 		if(!Filter.isLogin(sessionUtil)){
 			return Filter.reLongin(session);
