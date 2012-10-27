@@ -28,11 +28,13 @@ public class PartFacade {
 	public void saveChoice(ReceivePage receivePage,String uuid,Long qtid,Long partid){
 		List<UuidAnswer> uuidAnswers=new ArrayList<UuidAnswer>();
 		for (ReceiveBean receiveBean : receivePage.getReceiveBeans()) {
-			UuidAnswer uuidAnswer = receiveBean.getId() == null ? 
-					choiceAnswerService.create(uuid, qtid, partid) : 
-					choiceAnswerService.find(receiveBean.getId());
-			uuidAnswer.setValue(receiveBean.getValue());
-			uuidAnswers.add(uuidAnswer);
+			if(receiveBean.getValue()!=null){
+				UuidAnswer uuidAnswer = receiveBean.getId() == null ? 
+						choiceAnswerService.create(uuid, qtid, partid) : 
+						choiceAnswerService.find(receiveBean.getId());
+				uuidAnswer.setValue(receiveBean.getValue());
+				uuidAnswers.add(uuidAnswer);
+			}
 		}
 		choiceAnswerService.save(uuidAnswers);
 	}

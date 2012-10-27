@@ -13,7 +13,7 @@
 			<div class="main_head">方远房产卓越绩效管理平台</div>
 		</div>
 		<div class="top_right">
-			<div class="main_blank"><input id="btn_login" type="button" value="登录\/" />&nbsp;&nbsp;<input id="btn_qs" type="button" value="满意度调查-&gt;" />&nbsp;&nbsp;</div>
+			<div class="main_blank"><input id="btn_login" type="button" value="登录\/" />&nbsp;&nbsp;</div>
 			<div class="main_info"></div>
 		</div>
 		<div class="clear_div"></div>
@@ -72,7 +72,7 @@ body {
 	height: 25px;
 }
 </style>
-<!--[if IE 6]>
+<!--[if IE]>
    <style type="text/css">
    /*<![CDATA[*/
 	html {overflow-x:auto; overflow-y:hidden;}
@@ -85,10 +85,6 @@ body {
 	$(document).ready(function() {
 		$("#loginform :input[name='username']").bind("blur",blurUsername).triggerHandler("blur");
 		$("#btn_login").bind("click",toggleLoginDiv);
-		
-		$("#btn_qs").bind("click",function(){
-			window.open('/pa/qs/login','_self');
-		});
 		
 		<c:if test="${message!=null}">
 		$("#fixdiv").show();
@@ -153,5 +149,71 @@ body {
 		</div>
 	</div>
 </form>	
+
+<style type="text/css">
+
+#goques {
+	display: block;
+	border: 2px solid red;
+	top: 20px;
+	background-color:  #FFFF00;
+	left: 500px; 
+	width: 200px;
+	height:100px;
+	position: absolute;
+}
+
+</style>
+<script type="text/javascript">
+function dragAble(id){
+	var drag=false;
+	var startX,startY;
+	var objX,objY;
+	var _id = "#"+id;
+	var obj=$(_id);
+	obj.mouseup(function(e){
+		obj.css("cursor","");
+		drag=false;
+	});
+	$("document").mouseup(function(e){
+		obj.css("cursor","");
+		drag=false;
+	});
+	obj.mousedown(function(e){
+			obj.css("cursor","move");
+			drag=true;
+			startX=parseInt(e.clientX);
+			startY=parseInt(e.clientY);
+			objX=parseInt($(this).css("left"));
+			objY=parseInt($(this).css("top"));
+					
+	});
+	obj.mousemove(function(e){
+			if(drag==true){
+				var left=parseInt(e.clientX)-startX+objX;
+				var top=parseInt(e.clientY)-startY+objY;
+				obj.css("top",top).css("left",left);
+			}
+	});
+}
+
+$(function(){
+	$("#btn_qs").bind("click",function(){
+		window.open('/pa/qs/login','_self');
+	});
+	dragAble("goques");
+});
+</script>
+
+
+<div id="goques">
+	<div style="color: red;margin:5px;">
+		<strong>注意：<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;如果你想参与满意度调查，请点击以下按钮。</strong>
+	</div>
+	<div style="margin:0px 5px 0px 5px; "><input id="btn_qs" type="button" value="--&gt;参与满意度调查" /></div>
+</div>
+
+
 </body>
 </html>
