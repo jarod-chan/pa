@@ -36,17 +36,18 @@ public class QsloginCtl {
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.POST)
-	public String login(KeyBean keyBean,HttpSession session){
+	public String login(KeyBean keyBean,Map<String,Object> map,HttpSession session){
 		boolean result=keyService.checkKey(keyBean.getKey());
 		if(result){
 			Key key = keyService.find(keyBean.getKey());
 			Ques ques=quesService.find(key.getQtid());
 			sessionUtil.setValue(QsConstant.UUID, keyBean.getKey());
 			sessionUtil.setValue(QsConstant.QTID, ques.getId());
-			return ques.getState()==QuesState.active?"redirect:start":"redirect:close";
+			return ques.getState()==QuesState.active?"redirect:beg":"redirect:close";
 		}
-		new SessionMPR(session).setMessage(String.format("您输入的认证码:[%s]没有通过校验，请核对以后重新输入！", keyBean.getKey()));
-		return "redirect:login";
+		map.put("message",String.format("您输入的认证码:[%s]没有通过校验，请核对以后重新输入！", keyBean.getKey()));
+		map.put("keyBean", keyBean);
+		return "questionaires/login";
 	}
 
 }

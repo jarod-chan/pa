@@ -7,5 +7,10 @@ public interface KeyService {
 	boolean checkKey(String keystr);
 	
 	Key find(String keystr);
-
+	
+	void used(String keystr);
+	
+	void finish(String keystr);
+	
+	void invalid(String keystr);
 }

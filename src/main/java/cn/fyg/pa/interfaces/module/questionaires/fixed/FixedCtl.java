@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.application.questionaires.KeyService;
 import cn.fyg.pa.application.questionaires.PartService;
 import cn.fyg.pa.application.questionaires.QuesService;
+import cn.fyg.pa.domain.model.questionaires.key.Key;
 import cn.fyg.pa.domain.model.questionaires.part.Part;
 import cn.fyg.pa.domain.model.questionaires.ques.Ques;
 import cn.fyg.pa.interfaces.module.questionaires.QsConstant;
@@ -24,20 +26,22 @@ public class FixedCtl {
 	@Resource
 	QuesService quesService;
 	@Resource
+	KeyService keyService;
+	@Resource
 	PartService partService;
 	@Resource
 	SessionUtil sessionUtil;
 	
-	@RequestMapping(value="/qs/start",method=RequestMethod.GET)
-	public String toStart(Map<String,Object> map,HttpSession session){
+	@RequestMapping(value="/qs/beg",method=RequestMethod.GET)
+	public String toBeg(Map<String,Object> map,HttpSession session){
 		if(!Filter.isLogin(sessionUtil)){
 			return Filter.reLongin(session);
 		}
-		Long qtid=sessionUtil.getValue(QsConstant.QTID);
-		Part part = partService.findFirstPart(qtid);
-		map.put("part", part);
+		String uuid=sessionUtil.getValue(QsConstant.UUID);
+		Key key = keyService.find(uuid);
+		map.put("key", key);
 		map.put("message",new SessionMPR(session).getMessage());
-		return "questionaires/start";
+		return "questionaires/beg";
 	}
 	
 	@RequestMapping(value="/qs/end",method=RequestMethod.GET)
@@ -64,5 +68,23 @@ public class FixedCtl {
 		return "questionaires/close";
 	}
 	
+
+	@RequestMapping(value="/qs/start",method=RequestMethod.POST)
+	public String start(Map<String,Object> map,HttpSession session){
+		if(!Filter.isLogin(sessionUtil)){
+			return Filter.reLongin(session);
+		}
+		Long qtid=sessionUtil.getValue(QsConstant.QTID);
+		String uuid=sessionUtil.getValue(QsConstant.UUID);
+		keyService.used(uuid);
+		Part part = partService.findFirstPart(qtid);
+		return String.format("redirect:/qs/part/%s",part.getId());
+	}
+	
+	@RequestMapping(value="/qs/logout",method=RequestMethod.POST)
+	public String logout(Map<String,Object> map,HttpSession session){
+		sessionUtil.invalidate();
+		return "redirect:/first";
+	}
 
 }

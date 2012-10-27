@@ -11,10 +11,8 @@
 <%@ include file="common/message_nohide.jsp"%>
 <br>
 <form action="/${ctx}/qs/login" method="post">
-认证码：<input type="text" name="keypart1" size="10" value="" />&nbsp;-&nbsp;
-	   <input type="text" name="keypart2" size="10" value="" />&nbsp;-&nbsp;
-	   <input type="text" name="keypart3" size="10" value="" />&nbsp;-&nbsp;
-	   <input type="text" name="keypart4" size="10" value="" />
+认证码：<input type="text" name="keypart1" size="10" value="${keyBean.keypart1}" />&nbsp;-&nbsp;
+	   <input type="text" name="keypart2" size="10" value="${keyBean.keypart2}" />
 <br>
 <br>
 <div style="text-align: right; width: 450px;">

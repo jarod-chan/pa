@@ -5,6 +5,7 @@ import cn.fyg.pa.domain.shared.CommonEnum;
 public enum KeyState implements CommonEnum {
 	nouse("未使用"),
 	used("已使用"),
+	finish("已完成"),
 	invalid("无效");
 	
 	private String name;

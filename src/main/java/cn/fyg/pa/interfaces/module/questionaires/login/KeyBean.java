@@ -7,12 +7,9 @@ public class KeyBean {
 	
 	private String keypart2;
 	
-	private String keypart3;
-	
-	private String keypart4;
 	
 	public String getKey(){
-		return keypart1+SEPARATE+keypart2+SEPARATE+keypart3+SEPARATE+keypart4;
+		return keypart1+SEPARATE+keypart2;
 	}
 	
 	public String getKeypart1() {
@@ -27,19 +24,5 @@ public class KeyBean {
 	public void setKeypart2(String keypart2) {
 		this.keypart2 = keypart2;
 	}
-	public String getKeypart3() {
-		return keypart3;
-	}
-	public void setKeypart3(String keypart3) {
-		this.keypart3 = keypart3;
-	}
-	public String getKeypart4() {
-		return keypart4;
-	}
-	public void setKeypart4(String keypart4) {
-		this.keypart4 = keypart4;
-	}
-	
-	
 
 }

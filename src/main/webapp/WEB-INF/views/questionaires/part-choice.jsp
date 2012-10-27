@@ -10,6 +10,7 @@
 			checkbox.attr("checked",true);
 			checkbox.parent().find(".partItemValue").val(checkbox.val());
 			checkbox.parent().find("input[type=checkbox]").not(checkbox).removeAttr("checked");
+			checkbox.parent().css("border-color","white");
 		});
 		
 		$("#btn_prev").click(function(){
@@ -17,6 +18,14 @@
 		});
 		
 		$("#btn_next").click(function(){
+			var partItems=$(".partItemValue[value='']");
+			if(partItems.size()!=0){
+				partItems.each(function(){
+					$(this).parent().css("border-color","red");
+				});
+				alert("红色标注项目未被选择，无法跳转下一页！");
+				return;
+			}
 			var actionFrom=$("form");
 			var oldAction=actionFrom.attr("action");
 			actionFrom.attr("action",oldAction+"/next_choice").submit();
@@ -46,7 +55,7 @@
 		<div style="margin-bottom: 20px;">
 			<div>${status.count}.${partBean.choice.subject}</div>
 			<c:forEach var="partItem" items="${partBean.partItems}" >
-				<div style="margin-left: 20px;">
+				<div style="margin-left: 15px;border-left: 5px solid white;margin-top: 2px;">
 					<input type="hidden" name="receiveBeans[${index}].id"    class="partItemId" value="${partItem.id}">
 					<input type="hidden" name="receiveBeans[${index}].value" class="partItemValue" value="${partItem.value}">
 					<c:forEach var="answer" items="${partItem.answerList}">
@@ -59,8 +68,8 @@
 	</c:forEach>
 </form>
 
-<div style="width:600px;">
-	<div style="width:300px;float: left;">
+<div style="width:800px;">
+	<div style="width:400px;float: left;">
 		<c:choose>
 			<c:when test="${not empty prev}">
 				<input id="btn_prev" type="button" value="上一页">
@@ -68,7 +77,7 @@
 		</c:choose>	
 		&nbsp;
 	</div>
-	<div style="width:300px;float: right;text-align: right;">
+	<div style="width:400px;float: right;text-align: right;">
 		<c:choose>
 			<c:when test="${not empty next}">
 				<input id="btn_next" type="button" value="下一页">

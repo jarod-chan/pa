@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.application.questionaires.ChoiceService;
+import cn.fyg.pa.application.questionaires.KeyService;
 import cn.fyg.pa.application.questionaires.PartService;
 import cn.fyg.pa.application.questionaires.ChoiceAnswerService;
 import cn.fyg.pa.application.questionaires.ShortAnswerService;
@@ -51,6 +52,8 @@ public class PartCtl {
 	ShortService shortService;
 	@Resource
 	ShortAnswerService shortAnswerService;
+	@Resource
+	KeyService keyService;
 	
 	@RequestMapping(value="/{partid}",method=RequestMethod.GET)
 	public String toPart(@PathVariable("partid")Long partid,Map<String,Object> map,HttpSession session){
@@ -97,6 +100,7 @@ public class PartCtl {
 		String uuid=sessionUtil.getValue(QsConstant.UUID);
 		partFacade.saveChoice(receivePage, uuid, qtid, partid);
 		if(receivePage.isFinish()){
+			keyService.finish(uuid);
 			return Filter.finish();
 		}
 		return String.format("redirect:../%s",partid.intValue()+1);
@@ -111,6 +115,7 @@ public class PartCtl {
 		String uuid=sessionUtil.getValue(QsConstant.UUID);
 		partFacade.saveAnswer(shortPage,uuid,qtid,partid);
 		if(shortPage.isFinish()){
+			keyService.finish(uuid);
 			return Filter.finish();
 		}
 		return String.format("redirect:../%s",partid.intValue()+1);

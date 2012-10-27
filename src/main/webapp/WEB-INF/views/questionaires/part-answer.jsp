@@ -5,12 +5,8 @@
 <%@ include file="common/head.jsp"%>
 <script type="text/javascript">
 	$(function(){
-		$("input[type=checkbox]").click(function(){
-			var checkbox=$(this);
-			checkbox.attr("checked",true);
-			checkbox.parent().find(".partItemValue").val(checkbox.val());
-			checkbox.parent().find("input[type=checkbox]").not(checkbox).removeAttr("checked");
-		});
+		
+		$("textarea").attr({"maxlength":"500"}).iemaxlength();
 		
 		$("#btn_prev").click(function(){
 			window.open('/pa/qs/part/${prev.id}','_self');
@@ -43,7 +39,7 @@
 	
 	<c:forEach var="shortBean"  items="${shortBeanList}" varStatus="status">
 		<div style="margin-bottom: 20px;">
-			<div>${status.count}.${shortBean.shortAnswer.subject}</div>
+			<div>${status.count}.${shortBean.shortAnswer.subject}<span style="color: red;">（可以不填，字数控制500以内）</span></div>
 			<div style="margin-left: 20px;">
 				<input type="hidden" name="shortBeans[${status.index}].id" value="${shortBean.id}">
 				<input type="hidden" name="shortBeans[${status.index}].problemid" value="${shortBean.problemid}">
