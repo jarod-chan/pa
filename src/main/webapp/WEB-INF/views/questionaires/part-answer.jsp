@@ -23,7 +23,7 @@
 </head>
 <body>
 <div style="margin-left:20px;margin-top: 50px;">
-<h3>${part.name}</h3>
+<h3>${part.name}(共${fn:length(shortBeanList)}个问题)</h3>
 <%@ include file="common/message_nohide.jsp"%>
 
 <form action="/${ctx}/qs/part/${part.id}" method="post">
