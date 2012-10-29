@@ -1,5 +1,9 @@
 package cn.fyg.pa.application.questionaires.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -49,6 +53,25 @@ public class KeyServiceImpl implements KeyService{
 	public void invalid(String keystr) {
 		Key key = keyRepository.find(keystr);
 		key.setState(KeyState.invalid);
+	}
+
+	@Override
+	public Map<KeyState, Integer> getKeyStateCount(Long qtid) {
+		List<Object[]> keyStateCount = keyRepository.getKeyStateCount(qtid);
+		 Map<KeyState, Integer> map=new HashMap<KeyState, Integer>();
+		 for (Object[] objects : keyStateCount) {
+			 Long count=(Long)objects[1];
+			 map.put((KeyState)objects[0], count.intValue());
+		}
+		 return map;
+	}
+
+	@Override
+	@Transactional
+	public void save(List<Key> Keys) {
+		for (Key key : Keys) {
+			keyRepository.save(key);
+		}
 	}
 
 }

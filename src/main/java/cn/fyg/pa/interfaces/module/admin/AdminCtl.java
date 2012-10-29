@@ -26,6 +26,7 @@ public class AdminCtl {
 		list.add(new UrlNameBean("3.公司KPI分解","/pa/admin/idrcompany/edit/2012"));
 		list.add(new UrlNameBean("4.公司KPI指标分配部门","/pa/admin/deptindicator/2012"));
 		list.add(new UrlNameBean("5.公司KPI指标部门分解","/pa/admin/deptkpi/2012"));
+		list.add(new UrlNameBean("满意度调查","/pa/admin/ques"));
 		map.put("title", title);
 		map.put("urls", list);
 		
