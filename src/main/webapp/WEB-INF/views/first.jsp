@@ -6,7 +6,7 @@
 <link type="text/css" rel="stylesheet" href="/${ctx}/resources/css/mainbar.css" /> 
 
 </head>
-<body>
+<body >
 <div id="mainbar">
 	<div class="top">
 		<div class="top_left">
@@ -72,7 +72,7 @@ body {
 	height: 25px;
 }
 </style>
-<!--[if IE]>
+<!--[if IE  6]>
    <style type="text/css">
    /*<![CDATA[*/
 	html {overflow-x:auto; overflow-y:hidden;}
@@ -149,7 +149,7 @@ body {
 		</div>
 	</div>
 </form>	
-
+<!-- 
 <style type="text/css">
 
 #goques {
@@ -213,7 +213,7 @@ $(function(){
 	</div>
 	<div style="margin:0px 5px 0px 5px; "><input id="btn_qs" type="button" value="--&gt;参与满意度调查" /></div>
 </div>
-
+ -->
 
 </body>
 </html>

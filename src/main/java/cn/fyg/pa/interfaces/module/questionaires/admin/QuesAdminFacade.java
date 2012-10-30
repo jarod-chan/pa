@@ -50,7 +50,7 @@ public class QuesAdminFacade {
 			Key key = new Key();
 			key.setQtid(qtid);
 			key.setState(KeyState.nouse);
-			key.setUuid(Tool.getPassword(4L)+"-"+Tool.getPassword(4L));
+			key.setUuid(Tool.getPassword(8L));
 			keys.add(key);
 		}
 		keyService.save(keys);
