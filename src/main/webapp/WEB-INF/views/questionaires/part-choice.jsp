@@ -18,14 +18,19 @@
 		});
 		
 		$("#btn_next").click(function(){
-			var partItems=$(".partItemValue[value='']");
-			if(partItems.size()!=0){
-				partItems.each(function(){
-					$(this).parent().find(".not_choice").show();
-				});
+			var partItems=$(".partItemValue");
+			var flag=false;
+			partItems.each(function(){
+				if($(this).val()==""){
+				   $(this).parent().find(".not_choice").show();
+				   flag=true;
+				}
+			});
+			if(flag){
 				alert("红色标注项目未被选择，无法跳转下一页！");
 				return;
 			}
+			
 			var actionFrom=$("form");
 			var oldAction=actionFrom.attr("action");
 			actionFrom.attr("action",oldAction+"/next_choice").submit();
