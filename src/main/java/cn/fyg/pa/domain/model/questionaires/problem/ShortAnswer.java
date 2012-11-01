@@ -18,8 +18,17 @@ public class ShortAnswer {
 	
 	private Long partid;//部分id
 	
+	private String no;//序号
+	
 	private String subject;//问题内容
 	
+	public String getNo() {
+		return no;
+	}
+
+	public void setNo(String no) {
+		this.no = no;
+	}
 
 	public Long getId() {
 		return id;

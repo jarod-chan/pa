@@ -43,7 +43,7 @@ $(function(){
 		</div>
 	</div>
 	<div style="margin:10px 5px 0px 5px; text-align: center;">
-	<input id="btn_qs" type="button" value="满意度调查" />
+	<input id="btn_qs" style="height: 50px;width: 200px;font-size: 25px;" type="button" value="满意度调查" />&nbsp;&nbsp;&nbsp;&nbsp;
 	<input id="btn_pa" type="button" value="绩效考核系统" />
 	</div>
 </div>

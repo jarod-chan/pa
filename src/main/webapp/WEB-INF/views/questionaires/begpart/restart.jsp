@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<div style="margin-left:20px;margin-top: 50px;">
+<div style="margin-left:20px;margin-top: 30px;width: 600px;">
 <%@ include file="../common/message_nohide.jsp"%>
 	<div>
 	1.你已经完成本次调查，直接点击【安全退出】按钮退出。<br>

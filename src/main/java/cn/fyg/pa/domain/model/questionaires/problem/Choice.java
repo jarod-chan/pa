@@ -25,6 +25,8 @@ public class Choice {
 	
 	private Long partid;//部分id
 	
+	private String no;//序号
+	
 	private String subject;//问题内容
 	
 	@OneToMany(fetch = FetchType.EAGER, 
@@ -33,6 +35,15 @@ public class Choice {
 	@JoinColumn(name="problem_id")
 	@OrderBy("id ASC")
 	private List<Answer> answers;//问题答案
+	
+	
+	public String getNo() {
+		return no;
+	}
+
+	public void setNo(String no) {
+		this.no = no;
+	}
 
 	public Long getId() {
 		return id;

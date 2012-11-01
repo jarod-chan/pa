@@ -38,8 +38,11 @@ public class FixedCtl {
 			return Filter.reLongin(session);
 		}
 		String uuid=sessionUtil.getValue(QsConstant.UUID);
+		Long qtid=sessionUtil.getValue(QsConstant.QTID);
 		Key key = keyService.find(uuid);
+		Ques ques = quesService.find(qtid);
 		map.put("key", key);
+		map.put("ques", ques);
 		map.put("message",new SessionMPR(session).getMessage());
 		return "questionaires/beg";
 	}

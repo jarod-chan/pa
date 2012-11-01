@@ -10,7 +10,7 @@
 			checkbox.attr("checked",true);
 			checkbox.parent().find(".partItemValue").val(checkbox.val());
 			checkbox.parent().find("input[type=checkbox]").not(checkbox).removeAttr("checked");
-			checkbox.parent().css("border-color","white");
+			$(this).parent().find(".not_choice").hide();
 		});
 		
 		$("#btn_prev").click(function(){
@@ -21,7 +21,7 @@
 			var partItems=$(".partItemValue[value='']");
 			if(partItems.size()!=0){
 				partItems.each(function(){
-					$(this).parent().css("border-color","red");
+					$(this).parent().find(".not_choice").show();
 				});
 				alert("红色标注项目未被选择，无法跳转下一页！");
 				return;
@@ -30,11 +30,17 @@
 			var oldAction=actionFrom.attr("action");
 			actionFrom.attr("action",oldAction+"/next_choice").submit();
 		});
+		
+		$(".problem_div").mouseover(function() {
+		     $(this).css("background-color","#99FFFF");
+		  }).mouseout(function(){
+			 $(this).css("background-color","#FFFFFF");
+		  });
 	});
 </script>
 </head>
 <body>
-<div style="margin-left:20px;margin-top: 50px;">
+<div style="margin-left:20px;margin-top: 50px; ">
 <h3>${part.name}(共${fn:length(partBeanList)}个问题)</h3>
 <%@ include file="common/message_nohide.jsp"%>
 
@@ -52,15 +58,16 @@
 	<c:set value="0" var="index" /> 
 	
 	<c:forEach var="partBean"  items="${partBeanList}" varStatus="status">
-		<div style="margin-bottom: 20px;">
-			<div>${status.count}.${partBean.choice.subject}</div>
+		<div class="problem_div" style="margin-bottom: 20px;padding:10px;width: 800px;border: 1px dashed #000000;">
+			<div>${partBean.choice.no}、${partBean.choice.subject}</div>
 			<c:forEach var="partItem" items="${partBean.partItems}" >
-				<div style="margin-left: 15px;border-left: 5px solid white;margin-top: 2px;">
+				<div style="margin-left: 15px; margin-top: 2px;">
 					<input type="hidden" name="receiveBeans[${index}].id"    class="partItemId" value="${partItem.id}">
 					<input type="hidden" name="receiveBeans[${index}].value" class="partItemValue" value="${partItem.value}">
 					<c:forEach var="answer" items="${partItem.answerList}">
-						<input type="checkbox" name="chk_${status.count}_${partItem.type}" value="${answer.id}" <c:if test="${answer.id==partItem.value}">checked="true"</c:if> />${answer.no}.${answer.name}&nbsp;&nbsp;
+						<input type="checkbox" name="chk_${status.count}_${partItem.type}" value="${answer.id}" <c:if test="${answer.id==partItem.value}">checked="true"</c:if> />(${answer.no})&nbsp;${answer.name}&nbsp;&nbsp;
 					</c:forEach>
+					<span class="not_choice" style="color: red;display: none;">【X】</span>
 				</div>
 				<c:set value="${index+1}" var="index" />
 			</c:forEach>

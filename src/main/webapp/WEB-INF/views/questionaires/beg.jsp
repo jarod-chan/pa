@@ -5,6 +5,7 @@
 <%@ include file="common/head.jsp"%>
 </head>
 <body>
+<div style="margin-left: 200px;margin-top: 20px;"><h2>${ques.name}</h2></div>
 <c:choose>
 <c:when test="${key.state=='nouse'}">
 <%@ include file="begpart/start.jsp"%>
