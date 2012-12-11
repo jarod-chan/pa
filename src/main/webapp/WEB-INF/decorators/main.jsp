@@ -44,7 +44,7 @@ $(function(){
 });
 
 function logout(){
-	window.open('/${ctx}','_self');
+	window.open('/${ctx}/first','_self');
 }
 </script>
 
