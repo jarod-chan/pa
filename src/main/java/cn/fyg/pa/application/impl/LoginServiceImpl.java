@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import cn.fyg.pa.application.LoginService;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
+import cn.fyg.pa.domain.model.person.StateEnum;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 import cn.fyg.pa.interfaces.module.system.login.LoginBean;
 import cn.fyg.pa.interfaces.module.system.login.LoginRetBean;
@@ -37,7 +38,8 @@ public class LoginServiceImpl implements LoginService {
 
 	private boolean isPerson(Person person,LoginBean login) {
 		return person != null 
-				&& person.getChkstr().equals(login.getPassword());
+				&& person.getChkstr().equals(login.getPassword())
+				&& person.getState()==StateEnum.valid;
 	}
 	
 	private LoginRetBean getPerson(Person person) {

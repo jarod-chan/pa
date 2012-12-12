@@ -54,7 +54,7 @@ public class PersonYearChkCtl {
 			Long year=yearConfigService.getEnableYear();
 			List<PersonChkBean> yearChkBeans = yearChkRepositroy.getPersonYearChkResult(year, person);
 			PageBeanBuilder builder=new PageBeanBuilder(yearChkBeans);
-			int needChkPersons=personRepository.countStaffByType(person.getType())-2;
+			int needChkPersons=personRepository.countStaffByType(person.getType())-2;//2代表去掉两个人，一个是自己，另外一个被考评的人
 			PageBean pageBean = builder.builder(year, needChkPersons);
 			map.put("person", person);
 			map.put("pageBean", pageBean);
@@ -67,7 +67,8 @@ public class PersonYearChkCtl {
 	}
 							
 	@RequestMapping(value="/personchk/{colId}",method=RequestMethod.GET)
-	public String personchk(@PathVariable("colId") Long colPersonId,@ModelAttribute("person")Person chkPerson,Map<String,Object> map,HttpSession session){
+	public String toPersonchk(@PathVariable("colId") Long colPersonId,@ModelAttribute("person")Person chkPerson,Map<String,Object> map,HttpSession session){
+		
 		Long year=0L;
 		try {
 			year=yearConfigService.getEnableYear();
@@ -159,7 +160,8 @@ public class PersonYearChkCtl {
 	}
 	
 	@RequestMapping(value="/personchk/{colId}/save",method=RequestMethod.POST)
-	public String save(@PathVariable("colId") Long colPersonId,@ModelAttribute("person")Person chkPerson,PersonPageReceiveBean page,Map<String,Object> map,HttpSession session){
+	public String save(@PathVariable("colId") Long colPersonId,Long token,@ModelAttribute("person")Person chkPerson,PersonPageReceiveBean page,Map<String,Object> map,HttpSession session){
+		
 		List<Fycheck> fychecks=page.getFychecks();
 		fychecks=changeChecksForColSave(fychecks);
 		yearCheckService.saveFychecks(fychecks);
@@ -167,6 +169,7 @@ public class PersonYearChkCtl {
 		return "redirect:../"+colPersonId;
 	}
 	
+
 	private List<Fycheck> changeChecksForColSave(List<Fycheck> fychecks) {
 		for (Fycheck fycheck : fychecks) {
 			if(fycheck.getColId().intValue()<fycheck.getRowId().intValue()){

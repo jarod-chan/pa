@@ -6,9 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
-@Entity(name = "fyperson")
+@Entity
+@Table(name = "fyperson")
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -20,15 +22,27 @@ public class Person implements Serializable {
 
 	private String chkstr;
 	
+	/**
+	 * 职能部室，项目部所有部门分成两部分
+	 */
 	@Enumerated(EnumType.STRING)
 	private TypeEnum type;
 	
 	private String department;
 	
+	/**
+	 *是否经理
+	 */
 	@Enumerated(EnumType.STRING)
 	private ManageEnum manage;
 
 	private String email;
+	
+	/**
+	 * 有效，无效状态，用于处理员工离职情况
+	 */
+	@Enumerated(EnumType.STRING)
+	private StateEnum state;
 
 	public String getEmail() {
 		return email;
@@ -86,4 +100,13 @@ public class Person implements Serializable {
 		this.type = type;
 	}
 
+	public StateEnum getState() {
+		return state;
+	}
+
+	public void setState(StateEnum state) {
+		this.state = state;
+	}
+    
+	
 }

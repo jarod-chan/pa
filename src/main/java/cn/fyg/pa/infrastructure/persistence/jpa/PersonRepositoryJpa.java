@@ -15,6 +15,7 @@ import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.person.ManageEnum;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
+import cn.fyg.pa.domain.model.person.StateEnum;
 import cn.fyg.pa.domain.model.person.TypeEnum;
 
 @Service
@@ -54,7 +55,7 @@ public class PersonRepositoryJpa implements PersonRepository {
 
 	@Override
 	public Person findDepartmentMange(String department) {
-		String sql="select p from fyperson p where p.department=:department and p.manage=:manage";
+		String sql="select p from Person p where p.department=:department and p.manage=:manage";
 		List<Person> ret=entityManager.createQuery(sql,Person.class)
 				.setParameter("department", department)
 				.setParameter("manage", ManageEnum.Y)
@@ -85,6 +86,7 @@ public class PersonRepositoryJpa implements PersonRepository {
 		Root<Person> root=query.from(Person.class);
 		Predicate criteria=builder.equal(root.get("type"), type);
 		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		criteria=builder.and(criteria,builder.equal(root.get("state"), StateEnum.valid));
 		query.select(builder.count(root.get("id")));
 		query.where(criteria);
 		return entityManager.createQuery(query).getSingleResult().intValue();
@@ -97,6 +99,7 @@ public class PersonRepositoryJpa implements PersonRepository {
 		Root<Person> root=query.from(Person.class);
 		Predicate criteria=builder.equal(root.get("type"), type);
 		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		criteria=builder.and(criteria,builder.equal(root.get("state"), StateEnum.valid));
 		query.where(criteria);
 		query.orderBy(builder.asc(root.get("id")));
 		return entityManager.createQuery(query).getResultList();
