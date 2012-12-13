@@ -22,7 +22,4 @@ public interface MonthChkRepository {
 	List<MonthChk> getMonthChkByPersonAndState(Long year, Person person,MonthChkEnum... states);
 
 	
-
-	
-
 }

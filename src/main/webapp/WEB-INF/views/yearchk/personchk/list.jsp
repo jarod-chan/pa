@@ -23,7 +23,7 @@
 考核年份:${pageBean.year}&nbsp;&nbsp;状态:<c:choose><c:when test="${pageBean.finish==true}">已完成</c:when><c:otherwise>未完成</c:otherwise></c:choose>
 </div>
 <div class="headright" >
-<input type="button" value="快速完成全部考核" onclick="saveAllChecks()"/>
+<input type="button" value="对所有未评价人员平分评价" onclick="saveAllChecks()"/>
 </div>
 <div  class="headnone"></div>
 </div>

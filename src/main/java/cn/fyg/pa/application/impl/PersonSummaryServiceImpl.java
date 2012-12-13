@@ -38,6 +38,18 @@ public class PersonSummaryServiceImpl implements PersonSummaryService {
 		personSummary.initTitleContent(titles);
 		return personSummary;
 	}
+	
+	@Override
+	public PersonSummary find(Long year, Long personId) {
+		PersonSummary personSummary=personSummaryRepository.findByYearAndPersonId(year, personId);
+		if(personSummary==null){
+			personSummary=PersonSummaryFactory.create(year, personId);
+		}
+		List<Title> titles=titleRepository.findByYearOrderByNoASC(year);
+		personSummary.initTitleContent(titles);
+		return personSummary;
+	}
+
 
 	@Override
 	@Transactional

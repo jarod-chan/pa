@@ -7,6 +7,8 @@ public interface PersonSummaryService {
 	
 	PersonSummary findAndCreate(Long year,Long personId);
 	
+	PersonSummary find(Long year,Long personId);
+	
 	PersonSummary save(PersonSummary personSummary);
 	
 	Content save(Content content);

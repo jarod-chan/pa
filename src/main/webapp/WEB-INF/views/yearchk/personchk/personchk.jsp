@@ -16,6 +16,11 @@
 		$(".mainul").formatName();
 		actionFrom.attr("action",oldAction+"/save").submit();
 	}
+	
+	function personCompare(comparePersonId){
+		if(comparePersonId=='') return;
+		OpenEnvDefineWin("/${ctx}/person/${person.id}/yearchk/personchk/${pageBean.personChkBean.id}/comparework/"+comparePersonId,880,600);
+	}
 </script>
 </head>
 <c:set target="${pagefunc}" property="name" value="年终员工考核" />
@@ -66,6 +71,9 @@
 							<option value="0"    <c:if test="${item.fycheck.val=='0'}">selected="true"</c:if> >平</option>
 							<option value="-1"   <c:if test="${item.fycheck.val=='-1'}">selected="true"</c:if> >${item.rowPerson.name}胜</option>
 						</select>
+					</div>
+					<div>
+						<input type="button" value="对比两人" onclick="personCompare('${item.rowPerson.id}')">
 					</div>
 				</li>
 			</c:forEach>
