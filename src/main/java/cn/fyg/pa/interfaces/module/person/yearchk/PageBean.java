@@ -11,6 +11,8 @@ public class PageBean {
 	
 	private boolean finish;
 	
+	private boolean commit;
+	
 	private List<DepartmentChkBean> departmentChkBeans=new ArrayList<DepartmentChkBean>();
 
 	public Long getYear() {
@@ -57,4 +59,14 @@ public class PageBean {
 		}
 	}
 
+	public boolean isCommit() {
+		return commit;
+	}
+
+	public void setCommit(boolean commit) {
+		this.commit = commit;
+	}
+
+
+	
 }

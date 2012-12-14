@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import cn.fyg.pa.application.PersonSummaryService;
 import cn.fyg.pa.application.YearCheckService;
 import cn.fyg.pa.application.YearConfigService;
+import cn.fyg.pa.application.YearchkStateService;
 import cn.fyg.pa.domain.model.monthchk.MonthChk;
 import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
 import cn.fyg.pa.domain.model.monthchk.MonthChkItem;
@@ -61,7 +62,8 @@ public class PersonYearChkCtl {
 			List<PersonChkBean> yearChkBeans = yearChkRepositroy.getPersonYearChkResult(year, person);
 			PageBeanBuilder builder=new PageBeanBuilder(yearChkBeans);
 			int needChkPersons=personRepository.countStaffByType(person.getType())-2;//2代表去掉两个人，一个是自己，另外一个被考评的人
-			PageBean pageBean = builder.builder(year, needChkPersons);
+			boolean commit = yearchkStateService.isCommit(year, person.getId());
+			PageBean pageBean = builder.builder(year, needChkPersons,commit);
 			map.put("person", person);
 			map.put("pageBean", pageBean);
 		} catch (EnableYearNotExist e) {
@@ -227,6 +229,8 @@ public class PersonYearChkCtl {
 	MonthChkRepository monthChkRepository;
 	@Resource
 	PersonSummaryService personSummaryService;
+	@Resource
+	YearchkStateService yearchkStateService;
 	
 	@RequestMapping(value="/personchk/{colId}/comparework/{rowId}",method=RequestMethod.GET)
 	public String toCompareWork(@PathVariable("colId") Long colPersonId,@PathVariable("rowId") Long rowPersonId,Map<String,Object> map,HttpSession session){
@@ -284,5 +288,13 @@ public class PersonYearChkCtl {
 		map.put("rowPerson", rowPerson);
 		
 		return "yearchk/personchk/comparesummary";
+	}
+	
+	
+	@RequestMapping(value="/commitAllChecks",method=RequestMethod.POST)
+	public String commitAllChecks(@RequestParam("year") Long year,@PathVariable("personId") Long personId,Map<String,Object> map,HttpSession session){
+		yearchkStateService.commitYearchk(year, personId);
+		new SessionMPR(session).setMessage("全部评价已提交！");
+		return "redirect:../yearchk";
 	}
 }

@@ -9,6 +9,14 @@
 		var oldAction=actionFrom.attr("action");
 		actionFrom.attr("action",oldAction+"/saveAllChecks").submit();
 	}
+	
+	function commitAllChecks(){
+		if(confirm("提交以后，你将无法再对评价结果进行修改，确定提交？")){
+			var actionFrom=$("form");
+			var oldAction=actionFrom.attr("action");
+			actionFrom.attr("action",oldAction+"/commitAllChecks").submit();
+		}
+	}
 </script>
 </head>
 <c:set target="${pagefunc}" property="name" value="年终员工考核" />
@@ -20,10 +28,13 @@
 
 <div class="headdiv" >
 <div class="headleft"  >
-考核年份:${pageBean.year}&nbsp;&nbsp;状态:<c:choose><c:when test="${pageBean.finish==true}">已完成</c:when><c:otherwise>未完成</c:otherwise></c:choose>
+考核年份:${pageBean.year}&nbsp;&nbsp;状态:<c:choose><c:when test="${pageBean.commit==true}">已提交</c:when><c:when test="${pageBean.finish==true}">已完成</c:when><c:otherwise>未完成</c:otherwise></c:choose>
 </div>
 <div class="headright" >
-<input type="button" value="对所有未评价人员平分评价" onclick="saveAllChecks()"/>
+	<c:if test="${not pageBean.commit}">
+		<input type="button" value="对所有未评价人员平分评价" onclick="saveAllChecks()"/>
+		<input type="button" value="提交评价结果" onclick="commitAllChecks()"/>
+	</c:if>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -36,7 +47,7 @@
 	<tr>
 		<th style="width:50px;">序号</th>
 		<th style="width:150px;">员工</th>
-		<th style="width:500px;">考核结果</th>
+		<th style="width:500px;">评价结果</th>
 		<th style="width:100px;">操作</th>
 	</tr>
 </thead>
@@ -54,7 +65,11 @@
 		<td><% out.print(num); %></td>
 		<td>${personResult.name}</td>
 		<td>胜${personResult.win}&nbsp;负${personResult.lose}&nbsp;平${personResult.draw}&nbsp;</td>
-		<td><input type="button" value="评价" onclick="javascript:window.open('/${ctx}/person/${person.id}/yearchk/personchk/${personResult.id}','_self')"/></td>
+		<td>
+		<c:if test="${not pageBean.commit}">
+			<input type="button" value="评价" onclick="javascript:window.open('/${ctx}/person/${person.id}/yearchk/personchk/${personResult.id}','_self')"/>
+		</c:if>
+		</td>
 	</tr>
 	</c:forEach>
 

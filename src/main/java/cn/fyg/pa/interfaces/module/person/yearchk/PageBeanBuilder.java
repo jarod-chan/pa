@@ -12,11 +12,12 @@ public class PageBeanBuilder {
 		this.personChkBeans = personChkBeans;
 	}
 	
-	public PageBean builder(Long year,int needChkPerson){
+	public PageBean builder(Long year,int needChkPerson,boolean commit){
 		
 		PageBean pageBean=new PageBean();
 		List<DepartmentChkBean> departmentChkBeanList = getDepartmentChkBeanList();
 		pageBean.setYear(year);
+		pageBean.setCommit(commit);
 		pageBean.setNeedChkPerson(needChkPerson);
 		pageBean.setDepartmentChkBeans(departmentChkBeanList);
 		pageBean.calculateSelf();
