@@ -65,7 +65,7 @@ public class ManageYearChkCtl {
 		}
 		
 		
-		List<Person> departmentPersons=personRepository.getStaffByDept(person.getDepartment());
+		List<Person> departmentPersons=personRepository.getStaffByDeptValid(person.getDepartment());
 	
 		List<Object[]> personPointArray=yearMangeChkRepositroy.getPseronPointsByDepartment(year,person.getDepartment());
 		Map<Long,Long> personPointMap=getPersonPointMap(personPointArray);
@@ -240,8 +240,8 @@ public class ManageYearChkCtl {
 		
 		String getPoint=Tool.format(new BigDecimal(totalPoin).divide(Constant.POINT_LEVEL,3,BigDecimal.ROUND_HALF_DOWN));
 		
-		new SessionMPR(session).setMessage("保存成功,合计"+getPoint+"分");
-		return "redirect:../"+checkPersonId;
+		new SessionMPR(session).setMessage("保存成功,"+checkPerson.getName()+"合计得"+getPoint+"分");
+		return "redirect:../../";
 	}
 
 }

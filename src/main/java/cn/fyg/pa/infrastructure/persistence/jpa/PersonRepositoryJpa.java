@@ -116,6 +116,20 @@ public class PersonRepositoryJpa implements PersonRepository {
 		query.orderBy(builder.asc(root.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
+	
+	@Override
+	public List<Person> getStaffByDeptValid(String department) {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query=builder.createQuery(Person.class);
+		Root<Person> root=query.from(Person.class);
+		Predicate criteria=builder.equal(root.get("department"), department);
+		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		criteria=builder.and(criteria,builder.equal(root.get("state"), StateEnum.valid));
+		query.where(criteria);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}
+
 
 	@Override
 	public List<Person> getAllFyperson() {

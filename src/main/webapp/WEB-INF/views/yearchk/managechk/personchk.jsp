@@ -4,6 +4,9 @@
 <head>
 <%@ include file="../../common/head.jsp"%>
 <script type="text/javascript">
+
+	var optColorArr=["#FF8080","#FECF78","#B9EA48","#00C462","#1E8EFF"];
+
 	$(document).ready(function() {
 		$("input[name='flagchk']").bind('click',function(){
 			var nextSel=$(this).parent().next().find("select");
@@ -14,6 +17,15 @@
 				$(this).next().val("false");
 				nextSel.hide();
 			}
+		});
+		
+		$("table select[name='val']").each(function(){
+			$(this).find("option").each(function(idx){
+				$(this).css("background-color",optColorArr[idx]);
+			});
+			$(this).bind("change",function(){
+				$(this).css("background-color",optColorArr[this.selectedIndex])
+			}).triggerHandler("change");
 		});
 	 });
 	
