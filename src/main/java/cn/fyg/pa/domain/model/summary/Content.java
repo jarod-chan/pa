@@ -25,6 +25,10 @@ public class Content {
 	
 	@Column(length=1024)
 	private String content;
+	
+	public String getFormatContent(){
+		return content.replaceAll("\n", "</br>");
+	}
 
 	public Long getId() {
 		return id;

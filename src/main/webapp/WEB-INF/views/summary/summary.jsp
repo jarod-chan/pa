@@ -113,7 +113,7 @@ function autosave(){
 </script>
 </head>
 
-<c:set target="${pagefunc}" property="name" value="年终员工总结" />
+<c:set target="${pagefunc}" property="name" value="个人述职报告" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/summary" />  
 
 <c:set var="pagesize" value="1010" scope="request"/> 
@@ -128,7 +128,7 @@ function autosave(){
 <input name="personId" type="hidden" value="${personSummary.personId}" /> 
 
 <div class="all">
-	<div class="all_head">${personSummary.year}年年终总结</div>
+	<div class="all_head">${personSummary.year}年度个人述职报告</div>
 	<c:forEach var="titleContent" items="${personSummary.titleContents}" varStatus="status">
 		<div class="title_content">
 			<div class="title">
