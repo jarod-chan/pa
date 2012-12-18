@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		setTimeout(function(){$("#msg").slideToggle(1000);},3000);
-		$('#tbl tr').find('td:gt(2):lt(13)').hide();
+		$("select[name=year]").bind("change",selChange);
 	 });
 	
 	function showHideItem(obj){
@@ -19,6 +19,13 @@
 		}
 	}
 	
+	var selChange=function(){
+		$('<form/>',{action:'/${ctx}/admin/rpt/point/'+$(this).val()+'/asc',method:'post'})
+		.append($('<input/>',{type:'hidden',name:'year',value:$("select[name=year]").val()}))
+	 	.appendTo($("body"))
+	 	.submit();
+	}
+	
 </script>
  
 </head>
@@ -27,12 +34,21 @@
 <c:if test="${msg!=null}">
  <div id="msg" style="background-color:red;width:300px">${msg}</div>
 </c:if>
-<input type="button" value="按排名从高到低展示"  onclick="javascript:window.open('/${ctx}/admin/rpt/point/desc','_self')"/>
-<input type="button" value="按排名从低到高展示"  onclick="javascript:window.open('/${ctx}/admin/rpt/point/asc','_self')"/>
-<br>
-<input type="button" value="显示明细"  onclick="showHideItem(this)"/>
-<input type="button" value="返回"  onclick="javascript:window.open('/pa/admin/all','_self')"/>
 
+<select name="year">
+		<c:forEach var="item" items="${yearSel}">
+			<option value="${item}" <c:if test="${item==year}">selected="true"</c:if> >${item}</option>
+		</c:forEach>
+	</select>年
+
+<input type="button" value="从高到低排名&darr;"  onclick="javascript:window.open('/${ctx}/admin/rpt/point/${year}/desc','_self')"/>
+<input type="button" value="从低到高排名&uarr;"  onclick="javascript:window.open('/${ctx}/admin/rpt/point/${year}/asc','_self')"/>
+
+&nbsp;&nbsp;
+
+<input type="button" value="隐藏明细"  onclick="showHideItem(this)"/>
+<br>
+<br>
 <table border=1 id="tbl">
 <tr>
 	<td>编号</td><td>用户名</td><td>部门</td><td>Scheck</td><td>mdep</td><td>mall</td><td>damp</td>
@@ -62,5 +78,11 @@
 	</tr>
 </c:forEach>
 </table>
+<div style="color:red;">
+${error_info}
+</div>
+<br>
+<input type="button" value="&lt;&lt;返回"  onclick="javascript:window.open('/pa/admin/all','_self')"/>
+
 </body>
 </html>
