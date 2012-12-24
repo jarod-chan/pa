@@ -33,6 +33,7 @@
 </div>
 <%@ include file="../common/message.jsp"%>
 <c:set var="urlRole"  value="person" scope="page"/>
+<c:set var="urlFunc"  value="monthchk" scope="page"/>
 <%@ include file="../common/business/summary_info.jsp"%>
 
 

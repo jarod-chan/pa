@@ -163,6 +163,7 @@
 </div>
 <%@ include file="../common/message.jsp"%>
 <c:set var="urlRole"  value="person" scope="page"/>
+<c:set var="urlFunc"  value="monthchk" scope="page"/>
 <%@ include file="../common/business/summary_info.jsp"%>
 
 <form id="monthChk" action="/${ctx}/person/${monthChk.person.id}/monthchk" method="post">
@@ -213,8 +214,6 @@
 	</c:forEach>
 </tbody>
 </table>
-
-<br/>
 <input type="button" value="保存" onclick="save()"/>
 <input type="button" value="提交部门经理" onclick="commit()"/>
 </form>
