@@ -3,7 +3,7 @@ package cn.fyg.pa.domain.model.yearchk;
 import java.util.List;
 
 import cn.fyg.pa.domain.model.person.Person;
-import cn.fyg.pa.interfaces.module.person.yearchk.PersonChkBean;
+import cn.fyg.pa.interfaces.module.person.yearchk.bak.PersonChkBean;
 
 public interface YearChkRepositroy {
 

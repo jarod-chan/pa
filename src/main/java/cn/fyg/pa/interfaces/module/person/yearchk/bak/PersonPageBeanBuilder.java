@@ -1,8 +1,9 @@
-package cn.fyg.pa.interfaces.module.person.yearchk;
+package cn.fyg.pa.interfaces.module.person.yearchk.bak;
 
 import java.util.List;
 
 import cn.fyg.pa.domain.model.person.Person;
+import cn.fyg.pa.interfaces.module.person.yearchk.CellBean;
 
 public class PersonPageBeanBuilder {
 	

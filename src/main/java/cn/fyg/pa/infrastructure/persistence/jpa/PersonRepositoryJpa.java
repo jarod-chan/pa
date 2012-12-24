@@ -92,8 +92,21 @@ public class PersonRepositoryJpa implements PersonRepository {
 		return entityManager.createQuery(query).getSingleResult().intValue();
 	}
 	
+	
 	@Override
 	public List<Person>  getStaffByType(TypeEnum type){
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query=builder.createQuery(Person.class);
+		Root<Person> root=query.from(Person.class);
+		Predicate criteria=builder.equal(root.get("type"), type);
+		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		query.where(criteria);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+	@Override
+	public List<Person> getStaffByTypeValid(TypeEnum type) {
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<Person> query=builder.createQuery(Person.class);
 		Root<Person> root=query.from(Person.class);
@@ -168,6 +181,5 @@ public class PersonRepositoryJpa implements PersonRepository {
 		query.orderBy(builder.asc(person.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
-
 
 }

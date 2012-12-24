@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.person.yearchk;
+package cn.fyg.pa.interfaces.module.person.yearchk.bak;
 
 public class PersonChkBean {
 	

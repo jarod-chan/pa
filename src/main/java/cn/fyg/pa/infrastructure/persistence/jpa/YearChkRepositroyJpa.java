@@ -19,7 +19,7 @@ import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.StateEnum;
 import cn.fyg.pa.domain.model.yearchk.Fycheck;
 import cn.fyg.pa.domain.model.yearchk.YearChkRepositroy;
-import cn.fyg.pa.interfaces.module.person.yearchk.PersonChkBean;
+import cn.fyg.pa.interfaces.module.person.yearchk.bak.PersonChkBean;
 
 @Repository
 public class YearChkRepositroyJpa implements YearChkRepositroy{
