@@ -32,6 +32,7 @@
 <div  class="headnone"></div>
 </div>
 <%@ include file="../common/message.jsp"%>
+<c:set var="urlRole"  value="person" scope="page"/>
 <%@ include file="../common/business/summary_info.jsp"%>
 
 

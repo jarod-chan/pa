@@ -83,6 +83,8 @@ public class SummaryCtl {
 	public String commit(PersonSummary personSummary,HttpSession session){
 		personSummary.setSummaryEnum(SummaryEnum.commit);
 		personSummaryService.save(personSummary);
+		//TODO 隐藏总结提示信息
+		SummaryCommon.hideSummaryInfo(session);
 		new SessionMPR(session).setMessage("提交成功！");
 		return "redirect:../summary"; 
 	}
