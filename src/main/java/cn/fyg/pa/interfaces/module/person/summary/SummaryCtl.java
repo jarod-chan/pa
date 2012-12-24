@@ -21,7 +21,7 @@ import cn.fyg.pa.domain.model.summary.SummaryEnum;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 
 @Controller
-@RequestMapping("/person/{personId}/summary")
+@RequestMapping({"/person/{personId}/summary" ,"/mange/{personId}/summary"})
 public class SummaryCtl {
 	
 	/**
@@ -52,7 +52,7 @@ public class SummaryCtl {
 		map.put("personSummary", personSummary);
 		map.put("person", person);
 		map.put("message",new SessionMPR(session).getMessage());
-		return personSummary.getSummaryEnum()==SummaryEnum.save?Page.SUMMARY:Page.VIEW;
+		return personSummary.getSummaryEnum()==SummaryEnum.commit?Page.VIEW:Page.SUMMARY;
 	}
 
 	@RequestMapping(value="/save",method=RequestMethod.POST)
