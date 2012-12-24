@@ -9,6 +9,8 @@ public interface PersonSummaryService {
 	
 	PersonSummary find(Long year,Long personId);
 	
+	boolean isCommit(Long year,Long personId);
+	
 	PersonSummary save(PersonSummary personSummary);
 	
 	Content save(Content content);

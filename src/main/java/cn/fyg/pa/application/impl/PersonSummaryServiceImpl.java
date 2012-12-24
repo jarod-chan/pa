@@ -13,6 +13,7 @@ import cn.fyg.pa.domain.model.summary.ContentRepository;
 import cn.fyg.pa.domain.model.summary.PersonSummary;
 import cn.fyg.pa.domain.model.summary.PersonSummaryFactory;
 import cn.fyg.pa.domain.model.summary.PersonSummaryRepository;
+import cn.fyg.pa.domain.model.summary.SummaryEnum;
 import cn.fyg.pa.domain.model.summary.Title;
 import cn.fyg.pa.domain.model.summary.TitleRepository;
 
@@ -61,6 +62,15 @@ public class PersonSummaryServiceImpl implements PersonSummaryService {
 	@Transactional
 	public Content save(Content content) {
 		return contentRepository.save(content);
+	}
+
+	@Override
+	public boolean isCommit(Long year, Long personId) {
+		PersonSummary personSummary=personSummaryRepository.findByYearAndPersonId(year, personId);
+		if(personSummary==null){
+			return false;
+		}
+		return personSummary.getSummaryEnum()==SummaryEnum.commit;
 	}
 
 }

@@ -162,6 +162,8 @@
 <div  class="headnone"></div>
 </div>
 <%@ include file="../common/message.jsp"%>
+<c:set var="urlRole"  value="person" scope="page"/>
+<%@ include file="../common/business/summary_info.jsp"%>
 
 <form id="monthChk" action="/${ctx}/person/${monthChk.person.id}/monthchk" method="post">
 <input name="id" type="hidden" value="${monthChk.id}" /> 

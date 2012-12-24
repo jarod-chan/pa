@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.fyg.pa.application.LoginService;
+import cn.fyg.pa.application.PersonSummaryService;
 import cn.fyg.pa.domain.model.person.ManageEnum;
+import cn.fyg.pa.interfaces.module.person.summary.SummaryCtl;
 import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
@@ -26,6 +28,14 @@ public class LoginCtl {
 	private LoginService loginService;
 	@Resource
 	SessionUtil sessionUtil;
+	
+	@Resource
+	PersonSummaryService personSummaryService;
+	/**
+	 * 
+	 * TODO 是否显示未完成总结通知
+	 */
+	public static final String IS_SHOW_PERSON_SUMMARY_INFO="show_pserson_summary";
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getLogin() {
@@ -48,6 +58,11 @@ public class LoginCtl {
 			sessionUtil.setValue("funcList", funcList);
 			List<UrlNameBean> queryList=getQueryList(loginRetBean);
 			sessionUtil.setValue("queryList", queryList);
+			
+			//TODO  用于是否显示总结通知
+			if(loginRetBean.getMange().equals("Y")||loginRetBean.getMange().equals("N")){				
+				sessionUtil.setValue(IS_SHOW_PERSON_SUMMARY_INFO,!personSummaryService.isCommit(SummaryCtl.FIX_YEAR,Long.valueOf(loginRetBean.getPersonid())));
+			}
 			
 			return dispatcherMav(loginRetBean);
 		}

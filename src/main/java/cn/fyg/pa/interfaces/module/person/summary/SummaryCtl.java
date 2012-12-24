@@ -33,7 +33,7 @@ public class SummaryCtl {
 	 * 固定年份
 	 * 后续可能改成从参数取
 	 */
-	private static final Long FIX_YEAR=2012L;
+	public static final Long FIX_YEAR=2012L;
 	
 	private static final String PATH = "summary/";
 	private interface Page {
@@ -59,7 +59,7 @@ public class SummaryCtl {
 		map.put("message",new SessionMPR(session).getMessage());
 		
 		//TODO url特殊如理
-		map.put("urlRole", "pserson");
+		map.put("urlRole", "person");
 		Object loginRetObj=session.getAttribute("loginRet");
 		if(loginRetObj!=null){	
 			LoginRetBean loginRet=(LoginRetBean)loginRetObj;

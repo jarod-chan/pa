@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.fyg.pa.application.MonthChkService;
 import cn.fyg.pa.domain.model.department.Department;
@@ -28,6 +29,7 @@ import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.model.worktype.WorkType;
 import cn.fyg.pa.domain.model.worktype.WorkTypeRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
+import cn.fyg.pa.interfaces.module.person.summary.SummaryCommon;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
@@ -130,6 +132,13 @@ public class MonthChkCtl {
 		map.put("queryBean", queryBean);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);
 		return Page.IDRMONTHPLAN;
+	}
+	
+	
+	@RequestMapping(value="/hideSummaryInfo",method=RequestMethod.POST)
+	@ResponseBody
+	public void hideSummaryInfo(HttpSession session){
+		SummaryCommon.hideSummaryInfo(session);
 	}
 	
 }
