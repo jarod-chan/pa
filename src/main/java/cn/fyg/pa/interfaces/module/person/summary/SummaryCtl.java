@@ -19,7 +19,12 @@ import cn.fyg.pa.domain.model.summary.Content;
 import cn.fyg.pa.domain.model.summary.PersonSummary;
 import cn.fyg.pa.domain.model.summary.SummaryEnum;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
+import cn.fyg.pa.interfaces.module.system.login.LoginRetBean;
 
+/**
+ * @author jhon.chen@gmail.com
+ *TODO  要匹配两个url，在页面显示及url出要特殊处理，注意todo 注释处
+ */
 @Controller
 @RequestMapping({"/person/{personId}/summary" ,"/mange/{personId}/summary"})
 public class SummaryCtl {
@@ -52,6 +57,17 @@ public class SummaryCtl {
 		map.put("personSummary", personSummary);
 		map.put("person", person);
 		map.put("message",new SessionMPR(session).getMessage());
+		
+		//TODO url特殊如理
+		map.put("urlRole", "pserson");
+		Object loginRetObj=session.getAttribute("loginRet");
+		if(loginRetObj!=null){	
+			LoginRetBean loginRet=(LoginRetBean)loginRetObj;
+			if(loginRet.getMange().equals("Y")){
+				map.put("urlRole", "mange");
+			}
+		}
+		
 		return personSummary.getSummaryEnum()==SummaryEnum.commit?Page.VIEW:Page.SUMMARY;
 	}
 

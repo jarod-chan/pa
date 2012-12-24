@@ -55,6 +55,14 @@ $(function() {
 	});
 	
 	$("#btn_commit").click(function(){
+		var content_text=$(".content_text");
+		for(var i=0;i<content_text.size();i++){
+			val=content_text.eq(i).val();
+			if(Trim(val)==""){
+				alert("所有内容必须填写！");
+				return;
+			}
+		}
 		if(confirm("提交以后，你的总结将无法修改,确定提交?")){
 			var actionFrom=$("form");
 			var oldAction=actionFrom.attr("action"); 
@@ -87,7 +95,7 @@ function autosave(){
 	var content_text=$(".content_text");
 	title_flag.each(function(index,t_flag){
 		if($(t_flag).val()=="false"){
-			$.post("/${ctx}/person/${person.id}/summary/content/save",
+			$.post("/${ctx}/${urlRole}/${person.id}/summary/content/save",
 					{
 					  id:content_id.eq(index).val(),
 					  titleId:content_titleId.eq(index).val(),
@@ -114,7 +122,7 @@ function autosave(){
 </head>
 
 <c:set target="${pagefunc}" property="name" value="个人述职报告" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/summary" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/${urlRole}/${person.id}/summary" />  
 
 <c:set var="pagesize" value="1010" scope="request"/> 
 <body> 
@@ -122,7 +130,7 @@ function autosave(){
 
 <%@ include file="../common/message.jsp"%>
 
-<form  action="/${ctx}/person/${person.id}/summary" method="post">
+<form  action="/${ctx}/${urlRole}/${person.id}/summary" method="post">
 <input name="id" type="hidden" value="${personSummary.id}" /> 
 <input name="year" type="hidden" value="${personSummary.year}" /> 
 <input name="personId" type="hidden" value="${personSummary.personId}" /> 
@@ -132,7 +140,7 @@ function autosave(){
 	<c:forEach var="titleContent" items="${personSummary.titleContents}" varStatus="status">
 		<div class="title_content">
 			<div class="title">
-				${titleContent.title.no}.${titleContent.title.title}(1000字以内)
+				${titleContent.title.no}.${titleContent.title.title}<span style="color:red;">(必填，1000字以内)</span>
 				<span  class="title_info" >草稿已经自动保存！</span>
 				<input class="title_flag" type="hidden" value="true" /> 
 			</div>
