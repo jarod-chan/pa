@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.fyg.pa.application.IdrMonthPlanBillService;
 import cn.fyg.pa.domain.model.department.Department;
@@ -28,6 +29,7 @@ import cn.fyg.pa.domain.model.deptmonthplan.IdrTask;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
+import cn.fyg.pa.interfaces.module.person.summary.SummaryCommon;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
@@ -148,6 +150,14 @@ public class IdrMonthPlanCtl {
 		map.put("person", person);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);
 		return "idrmonthplan/histroy";
+	}
+	
+	
+	//TODO 
+	@RequestMapping(value="/hideSummaryInfo",method=RequestMethod.POST)
+	@ResponseBody
+	public void hideSummaryInfo(HttpSession session){
+		SummaryCommon.hideSummaryInfo(session);
 	}
 
 }

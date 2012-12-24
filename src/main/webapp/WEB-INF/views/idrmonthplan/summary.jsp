@@ -145,6 +145,14 @@
 <body>
 <%@ include file="personinfo.jsp"%>
 <%@ include file="../common/message.jsp"%>
+<c:set var="urlRole"  value="mange" scope="page"/>
+<c:set var="urlFunc"  value="idrmonthplan" scope="page"/>
+<%@ include file="../common/business/summary_info.jsp"%>
+
+
+
+
+
 <form  action="/${ctx}/mange/${person.id}/idrmonthplan/${idrMonthPlanBill.id}" method="post">
 
 <input name="id" type="hidden" value="${idrMonthPlanBill.id}" /> 

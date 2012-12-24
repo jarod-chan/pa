@@ -26,7 +26,7 @@
 		});
 		$("#summaryinfo_next").click(function(){
 			$("#summaryinfo").hide();
-			$.post("/${ctx}/${urlRole}/${loginRet.personid}/monthchk/hideSummaryInfo",function(){});
+			$.post("/${ctx}/${urlRole}/${loginRet.personid}/${urlFunc}/hideSummaryInfo",function(){});
 		});
 	})
 </script>

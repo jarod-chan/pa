@@ -28,6 +28,11 @@ $(document).ready(function() {
 
 <%@ include file="personinfo.jsp"%>
 <%@ include file="../common/message.jsp"%>
+<c:set var="urlRole"  value="mange" scope="page"/>
+<c:set var="urlFunc"  value="idrmonthplan" scope="page"/>
+<%@ include file="../common/business/summary_info.jsp"%>
+
+
 <table border=1 style="table-layout:fixed;width:650px;" class="tbldef">
 <thead>
 	<tr>
