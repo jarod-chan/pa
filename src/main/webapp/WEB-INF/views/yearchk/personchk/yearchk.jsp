@@ -62,14 +62,22 @@
 				var len=${fn:length(rowBeanList)};
 				$(".mainul").width(len*85+5+len);
 				$(".block_div").show();
+				$(this).val("紧凑");
 			}else{
 				isOpen=false;
 				var len=10;
 				$(".mainul").width(len*85+5+len);
 				$(".block_div").hide();
+				$(this).val("平铺");
 			}			
 		});
 	});
+	
+	function personCompare(colPersonId,rowPersonId){
+		if(colPersonId=='') return;
+		if(rowPersonId=='') return;
+		OpenEnvDefineWin("/${ctx}/person/${person.id}/yearchk/personchk/"+colPersonId+"/comparework/"+rowPersonId,880,600);
+	}
 	
 	
 </script>
@@ -121,7 +129,7 @@
 									<option value="0"    <c:if test="${cellBean.fycheck.val=='0'}">selected="true"</c:if> >${cellBean.colPerson.name}平</option>
 									<option value="-1"   <c:if test="${cellBean.fycheck.val=='-1'}">selected="true"</c:if>>${cellBean.colPerson.name}劣</option>
 								</select>
-								<div class="btn_compare">对比参考</div>
+								<div class="btn_compare" onclick="personCompare( ${cellBean.colPerson.id},${cellBean.rowPerson.id})">对比参考</div>
 							</div>
 						</li>
 					</c:when>

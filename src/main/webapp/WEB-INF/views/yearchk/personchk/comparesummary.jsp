@@ -6,7 +6,7 @@
 <%@ include file="../../common/head.jsp"%>
 <style type="text/css">
 	.all{
- 		width:820px;
+ 		width:48%;
 		margin-bottom:20px;
 		border-width:2px;
 		border-style:solid ;           /* dashed ; */
@@ -24,7 +24,6 @@
 	}
 	
 	.content {
-		width:800px;
 		border-width: 1px;
 		border-style: dashed ;           /* dashed ; */
 		border-color:  #000000;
@@ -36,10 +35,6 @@
 	}
 	
 	.content .content_text{
-		width: 785px;
-		height:450px;
-		overflow-y:scroll; 
-		border: 1px solid #000000;
 		margin-left: 5px;
 		margin-bottom: 5px;
 	}
@@ -86,7 +81,7 @@
 		<c:forEach var="titleContent" items="${rowSummary.titleContents}">
 		<div class="content">
 			<div class="title">${titleContent.title.no}.${titleContent.title.title}</div>
-			<div class="content_text"  >${titleContent.content.content}</div>
+			<div class="content_text"  >${titleContent.content.formatContent}</div>
 		</div>
 		</c:forEach>
 </div>

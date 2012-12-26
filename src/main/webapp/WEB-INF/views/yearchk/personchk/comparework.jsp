@@ -5,14 +5,18 @@
 <meta name="decorator" content="none"/>
 <%@ include file="../../common/head.jsp"%>
 <style type="text/css">
+	.contain_all{
+		width: 100%;
+	}
+
 	div.all{
-		width:800px;
+		width:48%;
 		margin-bottom:20px;
 		border-width:2px;
 		border-style:solid ;           /* dashed ; */
 		border-color:  #000000;
 		float: left;
-		margin-left: 5px;
+		margin-right: 5px;
 	}
 	
 	div.head{
@@ -28,7 +32,6 @@
 		border-width: 1px;
 		border-color:  #000000;
 		height: 100%;
-		width: 780px;
 	}
 	
 	div.context .month{
@@ -43,7 +46,7 @@
 	
 	div.context .task{
 		float:left;
-		padding-left: 10px;
+		padding-left: 5px;
 	}
 	
 	
@@ -70,29 +73,33 @@
 <input type="button" id="btn_jump" value="年终工作总结对比-&gt;" />
 </div>
 <br>
-<div class="all">
-		<div class="head">${year}年${colPerson.name}月工作总结</div>
-		
-		<c:forEach var="colItem" items="${colItems}">
-			<div class="context">
-				<div class="month">${colItem.monthChk.month}月</div>
-				<div class="task" >${colItem.sn}.${colItem.task}</div>
-				<div class="none"></div>
-			</div>
-		</c:forEach>
-</div>
 
 
-<div class="all">
-		<div class="head">${year}年${rowPerson.name}月工作总结</div>
-		
-		<c:forEach var="rowItem" items="${rowItems}">
-			<div class="context">
-				<div class="month">${rowItem.monthChk.month}月</div>
-				<div class="task" >${rowItem.sn}.${rowItem.task}</div>
-				<div class="none"></div>
-			</div>
-		</c:forEach>
+<div class="contain_all">
+	<div class="all">
+			<div class="head">${year}年${colPerson.name}月工作总结</div>
+			
+			<c:forEach var="colItem" items="${colItems}">
+				<div class="context">
+					<div class="month">${colItem.monthChk.month}月</div>
+					<div class="task" >${colItem.sn}.${colItem.task}</div>
+					<div class="none"></div>
+				</div>
+			</c:forEach>
+	</div>
+	<div class="all">
+			<div class="head">${year}年${rowPerson.name}月工作总结</div>
+			
+			<c:forEach var="rowItem" items="${rowItems}">
+				<div class="context">
+					<div class="month">${rowItem.monthChk.month}月</div>
+					<div class="task" >${rowItem.sn}.${rowItem.task}</div>
+					<div class="none"></div>
+				</div>
+			</c:forEach>
+	</div> 
+	
 </div>
+
 </body>
 </html>

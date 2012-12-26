@@ -1,5 +1,6 @@
 package cn.fyg.pa.interfaces.module.person.yearchk;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,10 +15,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.application.PersonSummaryService;
 import cn.fyg.pa.application.YearCheckService;
 import cn.fyg.pa.application.YearConfigService;
+import cn.fyg.pa.application.YearchkStateService;
+import cn.fyg.pa.domain.model.monthchk.MonthChk;
+import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
+import cn.fyg.pa.domain.model.monthchk.MonthChkItem;
+import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
+import cn.fyg.pa.domain.model.summary.PersonSummary;
 import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.model.yearchk.Fycheck;
 import cn.fyg.pa.domain.model.yearchk.YearChkRepositroy;
@@ -83,6 +91,72 @@ public class PersonYearChkCtl {
 			}
 		}
 		return sameTypePerson;
+	}
+	
+	
+	@Resource
+	MonthChkRepository monthChkRepository;
+	@Resource
+	PersonSummaryService personSummaryService;
+	@Resource
+	YearchkStateService yearchkStateService;
+	
+	@RequestMapping(value="/personchk/{colPersonId}/comparework/{rowPersonId}",method=RequestMethod.GET)
+	public String toCompareWork(@PathVariable("colPersonId") Long colPersonId,@PathVariable("rowPersonId") Long rowPersonId,Map<String,Object> map,HttpSession session){
+		Long year=0L;
+		try {
+			year=yearConfigService.getEnableYear();
+		}catch (EnableYearNotExist e) {
+			map.put("message","当前时间无法进行年终员工考核");
+		}
+		
+		map.put("year",year);
+		
+		Person colPerson=personRepository.find(colPersonId);
+		List<MonthChk> colMonthChk = monthChkRepository.getMonthChkByPersonAndState(year, colPerson, MonthChkEnum.FINISHED);
+		List<MonthChkItem> colItems=fetchMonthChkItems(colMonthChk);
+		map.put("colItems", colItems);
+		map.put("colPerson", colPerson);
+		
+		Person rowPerson = personRepository.find(rowPersonId);
+		List<MonthChk> rowMonthChk = monthChkRepository.getMonthChkByPersonAndState(year, rowPerson, MonthChkEnum.FINISHED);
+		List<MonthChkItem> rowItems=fetchMonthChkItems(rowMonthChk);
+		map.put("rowItems", rowItems);
+		map.put("rowPerson", rowPerson);
+		
+		return "yearchk/personchk/comparework";
+	}
+
+	private List<MonthChkItem> fetchMonthChkItems(List<MonthChk> colMonthChk) {
+		ArrayList<MonthChkItem> monthChkItems = new ArrayList<MonthChkItem>();
+		for(MonthChk monthChk:colMonthChk){
+			monthChkItems.addAll(monthChk.getMonthChkItems());
+		}
+		return monthChkItems;
+	}
+	
+	@RequestMapping(value="/personchk/{colPersonId}/comparesummary/{rowPersonId}",method=RequestMethod.GET)
+	public String toCompareSummary(@PathVariable("colPersonId") Long colPersonId,@PathVariable("rowPersonId") Long rowPersonId,Map<String,Object> map,HttpSession session){
+		Long year=0L;
+		try {
+			year=yearConfigService.getEnableYear();
+		}catch (EnableYearNotExist e) {
+			map.put("message","当前时间无法进行年终员工考核");
+		}
+		
+		map.put("year",year);
+		
+		Person colPerson=personRepository.find(colPersonId);
+		PersonSummary colSummary = personSummaryService.find(year, colPersonId);
+		map.put("colSummary", colSummary);
+		map.put("colPerson", colPerson);
+		
+		Person rowPerson = personRepository.find(rowPersonId);
+		PersonSummary rowSummary = personSummaryService.find(year, rowPersonId);
+		map.put("rowSummary", rowSummary);
+		map.put("rowPerson", rowPerson);
+		
+		return "yearchk/personchk/comparesummary";
 	}
 
 }
