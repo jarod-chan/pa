@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,17 +60,22 @@ public class PersonYearChkCtl {
 			map.put("message","当前时间无法进行年终员工考核");
 			return "yearchk/personchk/nottime";
 		}
+		boolean commit = yearchkStateService.isCommit(year, chkPerson.getId());
 		
-		List<Person> sameTypePerson=personRepository.getStaffByTypeValid(chkPerson.getType());
-		sameTypePerson=removePerson(sameTypePerson,chkPerson);
-		List<Fycheck> hasChkFycheck=yearChkRepositroy.getPersonYearChkByChkperson(year,chkPerson);
-		Map<String,Fycheck> hasChecksValues=changeChecksToMap(hasChkFycheck);
-		PageBuilder builder=new PageBuilder(year, chkPerson, sameTypePerson, hasChecksValues);
-		List<RowBean> rowBeanList = builder.createRowBeanList();
+		if(!commit){
+			List<Person> sameTypePerson=personRepository.getStaffByTypeValid(chkPerson.getType());
+			sameTypePerson=removePerson(sameTypePerson,chkPerson);
+			List<Fycheck> hasChkFycheck=yearChkRepositroy.getPersonYearChkByChkperson(year,chkPerson);
+			Map<String,Fycheck> hasChecksValues=changeChecksToMap(hasChkFycheck);
+			PageBuilder builder=new PageBuilder(year, chkPerson, sameTypePerson, hasChecksValues);
+			List<RowBean> rowBeanList = builder.createRowBeanList();
+			map.put("rowBeanList", rowBeanList);
+		}
+		
 		map.put("year", year);
-		map.put("rowBeanList", rowBeanList);
 		map.put("message",new SessionMPR(session).getMessage());
-		return "yearchk/personchk/yearchk";
+		return commit?"yearchk/personchk/yearchk_commit":"yearchk/personchk/yearchk";
+		
 	}
 	
 	private Map<String, Fycheck> changeChecksToMap(List<Fycheck> hasChkFycheck) {
@@ -123,6 +130,7 @@ public class PersonYearChkCtl {
 		List<MonthChkItem> rowItems=fetchMonthChkItems(rowMonthChk);
 		map.put("rowItems", rowItems);
 		map.put("rowPerson", rowPerson);
+		map.put("message",new SessionMPR(session).getMessage());
 		
 		return "yearchk/personchk/comparework";
 	}
@@ -158,5 +166,58 @@ public class PersonYearChkCtl {
 		
 		return "yearchk/personchk/comparesummary";
 	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		dataBinder.setAutoGrowCollectionLimit(1000);
+	}
+	
+	/**
+	 *获得用户提交值，如果直接提交，表单可能过大，造成jetty服务器越界
+	 *可以通过修改jetty.xml来取消限制
+	 */
+	@RequestMapping(value="/{year}/save",method=RequestMethod.POST)
+	public String save(@ModelAttribute("person")Person chkPerson,@PathVariable("year")Long year,RecvBean recvBean,HttpSession session){
+		List<Person> sameTypePerson=personRepository.getStaffByTypeValid(chkPerson.getType());
+		sameTypePerson=removePerson(sameTypePerson,chkPerson);
+		List<Fycheck> receiveFycheckList=createReceiveFycheck(year,recvBean.getIds(),recvBean.getVal(),chkPerson,sameTypePerson);
+	    yearCheckService.saveFychecks(receiveFycheckList);
+		new SessionMPR(session).setMessage("保存成功！");
+		return "redirect:../../yearchk";
+	}
+	
+
+	private List<Fycheck> createReceiveFycheck(Long year,List<Long> ids, List<Long> val,Person chkPerson,List<Person> sameTypePerson) {
+		ArrayList<Fycheck> fycheckList = new ArrayList<Fycheck>();
+		int i=0;
+		for (Person rowPerson : sameTypePerson) {
+			for (Person colPerson : sameTypePerson) {
+				if(colPerson.getId().compareTo(rowPerson.getId())>0){
+					Fycheck fycheck = new Fycheck();
+					fycheck.setId(ids.get(i));
+					fycheck.setYear(year);
+					fycheck.setChkId(chkPerson.getId());
+					fycheck.setColId(colPerson.getId());
+					fycheck.setRowId(rowPerson.getId());
+					fycheck.setVal(val.get(i));
+					fycheckList.add(fycheck);
+					i++;
+				}
+			}
+		}
+		return fycheckList;	
+	}
+	
+	@RequestMapping(value="/{year}/commit",method=RequestMethod.POST)
+	public String commit(@ModelAttribute("person")Person chkPerson,@PathVariable("year")Long year,RecvBean recvBean,HttpSession session){
+		List<Person> sameTypePerson=personRepository.getStaffByTypeValid(chkPerson.getType());
+		sameTypePerson=removePerson(sameTypePerson,chkPerson);
+		List<Fycheck> receiveFycheckList=createReceiveFycheck(year,recvBean.getIds(),recvBean.getVal(),chkPerson,sameTypePerson);
+	    yearCheckService.saveFychecks(receiveFycheckList);	  
+	    yearchkStateService.commitYearchk(year, chkPerson.getId());
+		new SessionMPR(session).setMessage("提交成功！");
+		return "redirect:../../yearchk";
+	}
+
 
 }

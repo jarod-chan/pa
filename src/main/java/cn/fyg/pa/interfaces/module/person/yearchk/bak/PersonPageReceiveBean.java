@@ -7,13 +7,15 @@ import cn.fyg.pa.domain.model.yearchk.Fycheck;
 
 public class PersonPageReceiveBean {
 
-	private List<Fycheck> fychecks=new ArrayList<Fycheck>();
+	private List<Fycheck> f=new ArrayList<Fycheck>();
 
-	public List<Fycheck> getFychecks() {
-		return fychecks;
+	public List<Fycheck> getF() {
+		return f;
 	}
 
-	public void setFychecks(List<Fycheck> fychecks) {
-		this.fychecks = fychecks;
+	public void setF(List<Fycheck> f) {
+		this.f = f;
 	}
+
+
 }

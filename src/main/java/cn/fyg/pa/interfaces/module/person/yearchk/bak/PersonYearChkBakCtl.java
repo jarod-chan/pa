@@ -171,7 +171,7 @@ public class PersonYearChkBakCtl {
 	@RequestMapping(value="/personchk/{colId}/save",method=RequestMethod.POST)
 	public String save(@PathVariable("colId") Long colPersonId,Long token,@ModelAttribute("person")Person chkPerson,PersonPageReceiveBean page,Map<String,Object> map,HttpSession session){
 		
-		List<Fycheck> fychecks=page.getFychecks();
+		List<Fycheck> fychecks=page.getF();
 		fychecks=changeChecksForColSave(fychecks);
 		yearCheckService.saveFychecks(fychecks);
 		new SessionMPR(session).setMessage("保存成功！");
