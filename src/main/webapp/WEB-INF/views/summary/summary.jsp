@@ -73,7 +73,7 @@ $(function() {
 	//每5分钟执行自动保存
 	setInterval("autosave()",1000*60*5);
 	//文本最大长度控制在1000以内
-	$(".content_text").attr({"maxlength":"1000"}).iemaxlength();
+	$(".content_text").attr({"maxlength":"4000"}).iemaxlength();
 });
 
 /*ajax 请求状态， 默认为false,出错为true*/
@@ -140,7 +140,7 @@ function autosave(){
 	<c:forEach var="titleContent" items="${personSummary.titleContents}" varStatus="status">
 		<div class="title_content">
 			<div class="title">
-				${titleContent.title.no}.${titleContent.title.title}<span style="color:red;">(必填，1000字以内)</span>
+				${titleContent.title.no}.${titleContent.title.title}<span style="color:red;">(必填，4000字以内)</span>
 				<span  class="title_info" >草稿已经自动保存！</span>
 				<input class="title_flag" type="hidden" value="true" /> 
 			</div>

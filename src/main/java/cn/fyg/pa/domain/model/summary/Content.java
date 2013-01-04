@@ -23,7 +23,7 @@ public class Content {
 	@Column(name="personsummary_id")
 	private Long personsummaryId;
 	
-	@Column(length=1024)
+	@Column(length=5120)
 	private String content;
 	
 	public String getFormatContent(){
