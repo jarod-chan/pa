@@ -24,6 +24,7 @@
 		var actionFrom=$("form");
 		var oldAction=actionFrom.attr("action");
 		actionFrom.attr("action",oldAction+"/save").submit();
+		afterAction();
 	}
 	
 	function commit(){
@@ -31,7 +32,13 @@
 			var actionFrom=$("form");
 			var oldAction=actionFrom.attr("action");
 			actionFrom.attr("action",oldAction+"/commit").submit();
+			afterAction();
 		}
+	}
+	
+	function afterAction(){
+		$("#wait_msg").show();
+		$(".act_btn").hide();
 	}
 	
 	$(function() {
@@ -58,7 +65,7 @@
 		$("#btn_open").click(function(){
 			if(!isOpen){
 				isOpen=true;
-				var len=${fn:length(rowBeanList)};
+				var len=${maxLen};
 				$(".mainul").width(len*85+5+len);
 				$(".block_div").show();
 				$(this).val("紧凑");
@@ -93,9 +100,10 @@
 考核年份:${year}&nbsp;&nbsp;状态:<c:choose><c:when test="${pageBean.commit==true}">已提交</c:when><c:when test="${pageBean.finish==true}">已完成</c:when><c:otherwise>未完成</c:otherwise></c:choose>
 </div>
 <div class="headright" >
+	<span id="wait_msg" style="color: red;display: none;">数据提交中，请稍后···</span>
 	<c:if test="${not pageBean.commit}">
-		<input type="button" value="保存" onclick="save()"/>
-		<input type="button" value="提交评价结果" onclick="commit()"/>
+		<input type="button" class="act_btn" value="保存" onclick="save()"/>
+		<input type="button" class="act_btn" value="提交评价结果" onclick="commit()"/>
 	</c:if>
 </div>
 <div  class="headnone"></div>

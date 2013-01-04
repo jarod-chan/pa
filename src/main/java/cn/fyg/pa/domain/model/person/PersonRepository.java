@@ -30,6 +30,8 @@ public interface PersonRepository {
 	 * @return
 	 */
 	List<Person> getStaffByTypeValid(TypeEnum type);
+	
+	List<Person> getStaffByTypeNotDeptValid(TypeEnum type,String department);
 
 	List<Person> getStaffByDept(String department);
 	

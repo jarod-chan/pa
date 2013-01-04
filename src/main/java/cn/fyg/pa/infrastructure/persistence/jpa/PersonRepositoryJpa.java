@@ -119,6 +119,19 @@ public class PersonRepositoryJpa implements PersonRepository {
 	}
 	
 	@Override
+	public List<Person> getStaffByTypeNotDeptValid(TypeEnum type,String department){
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query=builder.createQuery(Person.class);
+		Root<Person> root=query.from(Person.class);
+		Predicate criteria=builder.equal(root.get("type"), type);
+		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		criteria=builder.and(criteria,builder.notEqual(root.get("department"), department));
+		query.where(criteria);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+	@Override
 	public List<Person> getStaffByDept(String department){
 		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
 		CriteriaQuery<Person> query=builder.createQuery(Person.class);

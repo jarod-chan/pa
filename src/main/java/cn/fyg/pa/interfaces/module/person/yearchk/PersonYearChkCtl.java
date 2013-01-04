@@ -27,6 +27,7 @@ import cn.fyg.pa.domain.model.monthchk.MonthChkItem;
 import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
+import cn.fyg.pa.domain.model.person.TypeEnum;
 import cn.fyg.pa.domain.model.summary.PersonSummary;
 import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.model.yearchk.Fycheck;
@@ -63,13 +64,25 @@ public class PersonYearChkCtl {
 		boolean commit = yearchkStateService.isCommit(year, chkPerson.getId());
 		
 		if(!commit){
-			List<Person> sameTypePerson=personRepository.getStaffByTypeValid(chkPerson.getType());
-			sameTypePerson=removePerson(sameTypePerson,chkPerson);
 			List<Fycheck> hasChkFycheck=yearChkRepositroy.getPersonYearChkByChkperson(year,chkPerson);
 			Map<String,Fycheck> hasChecksValues=changeChecksToMap(hasChkFycheck);
-			PageBuilder builder=new PageBuilder(year, chkPerson, sameTypePerson, hasChecksValues);
+			
+			String chkPersonDept=chkPerson.getDepartment();
+			TypeEnum chkPersonType = chkPerson.getType();
+			
+			List<Person> sameDeptPerson=personRepository.getStaffByDeptValid(chkPersonDept);
+			sameDeptPerson=removePerson(sameDeptPerson,chkPerson);
+			PageBuilder builder=new PageBuilder(year, chkPerson, sameDeptPerson, hasChecksValues);
 			List<RowBean> rowBeanList = builder.createRowBeanList();
+			int maxLen_dept=builder.getMaxLen();
+			
+			List<Person> otherDeptPerson=personRepository.getStaffByTypeNotDeptValid(chkPersonType,chkPersonDept);
+			builder=new PageBuilder(year, chkPerson, otherDeptPerson, hasChecksValues);
+			rowBeanList.addAll(builder.createRowBeanList());
+			int maxLen_otherDept=builder.getMaxLen();
+			
 			map.put("rowBeanList", rowBeanList);
+			map.put("maxLen", maxLen_dept>=maxLen_otherDept?maxLen_dept:maxLen_otherDept);
 		}
 		
 		map.put("year", year);
