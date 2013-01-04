@@ -35,7 +35,6 @@
 	}
 	
 	$(function() {
-		
 		var optColorArr=["#FF8080","#FECF78","#1E8EFF"];
 		
 		$("table .selectperson").each(function(){
@@ -125,13 +124,15 @@
 					<c:when test="${not empty cellBean}">
 						<li>
 							<div>
-							 	<input type="hidden"          name="ids[<%=num %>]"  value="${cellBean.fycheck.id}"/> 
-								<select class="selectperson"  name="val[<%=num %>]" >
-									<option value="1"    <c:if test="${cellBean.fycheck.val=='1'}">selected="true"</c:if> >${cellBean.colPerson.name}优</option>
+							 	<input type="hidden"          name="fk[<%=num %>].id"     value="${cellBean.fycheck.id}"/> 
+							 	<input type="hidden"          name="fk[<%=num %>].colId"  value="${cellBean.colPerson.id}"/> 
+							 	<input type="hidden"          name="fk[<%=num %>].rowId"  value="${rowBean.rowPerson.id}"/> 
+								<select class="selectperson"  name="fk[<%=num %>].val" >
+									<option value="1"    <c:if test="${cellBean.fycheck.val=='1'}">selected="true"</c:if> >${cellBean.colPerson.name}胜</option>
 									<option value="0"    <c:if test="${cellBean.fycheck.val=='0'}">selected="true"</c:if> >${cellBean.colPerson.name}平</option>
-									<option value="-1"   <c:if test="${cellBean.fycheck.val=='-1'}">selected="true"</c:if>>${cellBean.colPerson.name}劣</option>
+									<option value="-1"   <c:if test="${cellBean.fycheck.val=='-1'}">selected="true"</c:if>>${cellBean.colPerson.name}负</option>
 								</select>
-								<div class="btn_compare" onclick="personCompare( ${cellBean.colPerson.id},${cellBean.rowPerson.id})">对比参考</div>
+								<div class="btn_compare" onclick="personCompare( ${cellBean.colPerson.id},${cellBean.rowPerson.id})">对比业绩</div>
 							</div>
 						</li>
 						<% num++;%>

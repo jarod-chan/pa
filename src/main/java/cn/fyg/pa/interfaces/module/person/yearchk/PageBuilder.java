@@ -57,7 +57,7 @@ public class PageBuilder {
 	}
 
 	private CellBean createCellBean(Person colPerson, Person rowPerson) {
-		if(colPerson.getId().compareTo(rowPerson.getId())>0){
+		if(ifCreateCellBean(colPerson, rowPerson)){
 			CellBean cellBean = new CellBean();
 			cellBean.setColPerson(colPerson);
 			cellBean.setRowPerson(rowPerson);
@@ -65,6 +65,26 @@ public class PageBuilder {
 			return cellBean;
 		}
 		return null;
+	}
+
+	/**
+	 * 同部门可以互相比较，其它部门可以互相比较，部门内部和部门外部不比较
+	 * @param colPerson
+	 * @param rowPerson
+	 * @return
+	 */
+	private boolean ifCreateCellBean(Person colPerson, Person rowPerson) {
+		if(colPerson.getId().compareTo(rowPerson.getId())>0
+				&&colPerson.getDepartment().equals(chkPerson.getDepartment())
+				&&rowPerson.getDepartment().equals(chkPerson.getDepartment())){
+			return true;
+		}
+		if(colPerson.getId().compareTo(rowPerson.getId())>0
+				&&!colPerson.getDepartment().equals(chkPerson.getDepartment())
+				&&!rowPerson.getDepartment().equals(chkPerson.getDepartment())){
+			return true;
+		}
+		return false;
 	}
 
 	private Fycheck getFycheck(Person colPerson, Person rowPerson) {

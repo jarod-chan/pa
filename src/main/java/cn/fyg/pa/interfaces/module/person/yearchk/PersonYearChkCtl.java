@@ -178,42 +178,28 @@ public class PersonYearChkCtl {
 	 */
 	@RequestMapping(value="/{year}/save",method=RequestMethod.POST)
 	public String save(@ModelAttribute("person")Person chkPerson,@PathVariable("year")Long year,RecvBean recvBean,HttpSession session){
-		List<Person> sameTypePerson=personRepository.getStaffByTypeValid(chkPerson.getType());
-		sameTypePerson=removePerson(sameTypePerson,chkPerson);
-		List<Fycheck> receiveFycheckList=createReceiveFycheck(year,recvBean.getIds(),recvBean.getVal(),chkPerson,sameTypePerson);
-	    yearCheckService.saveFychecks(receiveFycheckList);
+		List<Fycheck> fycheck=recvBean.getFk();
+		fycheck=fillFycheck(fycheck,year,chkPerson);
+	    yearCheckService.saveFychecks(fycheck);
 		new SessionMPR(session).setMessage("保存成功！");
 		return "redirect:../../yearchk";
 	}
 	
-
-	private List<Fycheck> createReceiveFycheck(Long year,List<Long> ids, List<Long> val,Person chkPerson,List<Person> sameTypePerson) {
-		ArrayList<Fycheck> fycheckList = new ArrayList<Fycheck>();
-		int i=0;
-		for (Person rowPerson : sameTypePerson) {
-			for (Person colPerson : sameTypePerson) {
-				if(colPerson.getId().compareTo(rowPerson.getId())>0){
-					Fycheck fycheck = new Fycheck();
-					fycheck.setId(ids.get(i));
-					fycheck.setYear(year);
-					fycheck.setChkId(chkPerson.getId());
-					fycheck.setColId(colPerson.getId());
-					fycheck.setRowId(rowPerson.getId());
-					fycheck.setVal(val.get(i));
-					fycheckList.add(fycheck);
-					i++;
-				}
-			}
+	private List<Fycheck> fillFycheck(List<Fycheck> fycheckList, Long year,Person chkPerson) {
+		for (Fycheck fycheck : fycheckList) {
+			fycheck.setYear(year);
+			fycheck.setChkId(chkPerson.getId());
 		}
-		return fycheckList;	
+		return fycheckList;
 	}
+
+
 	
 	@RequestMapping(value="/{year}/commit",method=RequestMethod.POST)
 	public String commit(@ModelAttribute("person")Person chkPerson,@PathVariable("year")Long year,RecvBean recvBean,HttpSession session){
-		List<Person> sameTypePerson=personRepository.getStaffByTypeValid(chkPerson.getType());
-		sameTypePerson=removePerson(sameTypePerson,chkPerson);
-		List<Fycheck> receiveFycheckList=createReceiveFycheck(year,recvBean.getIds(),recvBean.getVal(),chkPerson,sameTypePerson);
-	    yearCheckService.saveFychecks(receiveFycheckList);	  
+		List<Fycheck> fycheck=recvBean.getFk();
+		fycheck=fillFycheck(fycheck,year,chkPerson);
+	    yearCheckService.saveFychecks(fycheck);
 	    yearchkStateService.commitYearchk(year, chkPerson.getId());
 		new SessionMPR(session).setMessage("提交成功！");
 		return "redirect:../../yearchk";
