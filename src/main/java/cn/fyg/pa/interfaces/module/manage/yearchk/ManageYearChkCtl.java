@@ -200,7 +200,7 @@ public class ManageYearChkCtl {
 		Fychkmange fychkmange=hasCheckMap.get(chkitemId);
 		if(fychkmange==null){
 			fychkmange=new Fychkmange();
-			fychkmange.setVal(new Long(1));
+			fychkmange.setVal(new Long(3));
 		}
 		return fychkmange;
 	}
