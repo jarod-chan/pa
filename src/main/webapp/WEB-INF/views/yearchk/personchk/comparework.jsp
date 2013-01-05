@@ -66,11 +66,11 @@
 <body>
 <%@ include file="../../common/message.jsp"%>
 <div style="text-align: center;">
-<span style="font-size: 50px;">月工作总结对比 </span> 
+<span style="font-size: 50px;">月度小结对比 </span> 
 </div>
 <div style="margin-left: 5px;">
-<input type="button"  value="&lt;-月工作总结对比" disabled="disabled"/>
-<input type="button" id="btn_jump" value="年终工作总结对比-&gt;" />
+<input type="button"  value="查看双方月度小结" disabled="disabled"/>
+<input type="button" id="btn_jump" value="查看双方述职报告" />
 </div>
 <br>
 
