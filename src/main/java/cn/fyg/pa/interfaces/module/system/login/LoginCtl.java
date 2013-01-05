@@ -98,8 +98,8 @@ public class LoginCtl {
 				menuList.add(new UrlNameBean("部门月度计划",String.format("mange/%s/idrmonthplan",personId)));
 			}else{				
 				menuList.add(new UrlNameBean("部门月度计划",String.format("mange/%s/idrmonthplan",personId)));
-				menuList.add(new UrlNameBean("员工工作评价",String.format("mange/%s/monthchk",personId)));
-				menuList.add(new UrlNameBean("员工年度考核",String.format("mange/%s/yearchk",personId)));
+				menuList.add(new UrlNameBean("月度小结评价",String.format("mange/%s/monthchk",personId)));
+				menuList.add(new UrlNameBean("年度绩效评价",String.format("mange/%s/yearchk",personId)));
 				//XXX 财务部  胡吉运 增加考核结果确认菜单
 				if(personId.equals("31")){
 					menuList.add(new UrlNameBean("考核结果确认",String.format("mange/%s/summarysnapshot",personId)));
@@ -107,8 +107,8 @@ public class LoginCtl {
 			}
 		}
 		if (loginRetBean.getMange().equals("N")) {
-			menuList.add(new UrlNameBean("月度工作任务",String.format("person/%s/monthchk",personId)));
-			menuList.add(new UrlNameBean("年终员工评价",String.format("person/%s/yearchk",personId)));
+			menuList.add(new UrlNameBean("月度工作小结",String.format("person/%s/monthchk",personId)));
+			menuList.add(new UrlNameBean("年度横向评价",String.format("person/%s/yearchk",personId)));
 		}
 		if (loginRetBean.getMange().equals("F")) {
 			menuList.add(new UrlNameBean("考核结果接收",String.format("finance/%s/summarysnapshot",personId)));

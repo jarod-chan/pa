@@ -5,7 +5,7 @@
 <%@ include file="../../common/head.jsp"%>
 </head> 
 
-<c:set target="${pagefunc}" property="name" value="员工年度考核" />
+<c:set target="${pagefunc}" property="name" value="年度绩效评价" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/yearchk" />  
 
 

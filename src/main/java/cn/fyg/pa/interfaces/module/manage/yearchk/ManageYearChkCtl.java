@@ -54,7 +54,7 @@ public class ManageYearChkCtl {
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String list(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	public String toList(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
 	
 		Long year = 0L;
 		try {

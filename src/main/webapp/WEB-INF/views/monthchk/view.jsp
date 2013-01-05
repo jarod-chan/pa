@@ -19,7 +19,7 @@
 	});
 </script> 
 </head>
-<c:set target="${pagefunc}" property="name" value="月度工作任务" />
+<c:set target="${pagefunc}" property="name" value="月度工作小结" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/person/${monthChk.person.id}/monthchk" />  
 
 
