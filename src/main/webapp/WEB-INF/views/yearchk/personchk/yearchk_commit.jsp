@@ -6,19 +6,16 @@
 
 <style type="text/css">
 .mainul{list-style-type:none; margin:0px 100px 0px 100px;padding:5px 0px 0px 5px; }
-.mainul li { width:75px; float:left;margin: 0px 5px 5px 0px;text-align: center; }
+.mainul li { width:75px; float:left;margin: 0px 5px 5px 0px;text-align: center; border: 1px solid #000000;}
 .win{
 background-color: #FF8080;
-border: 1px solid #000000;
 }
 .draw{
 background-color: #FECF78;
-border: 1px solid #000000;
 }
 
 .lose{
 background-color: #1E8EFF;
-border: 1px solid #000000;
 }
 
 
@@ -56,7 +53,7 @@ border: 1px solid #000000;
 <tbody>
 	<c:forEach var="item" items="${resultBeanList}">
 	<tr>
-		<td>
+		<td style="text-align: center;">
 			${item.person.name}
 		</td>
 		<td >
