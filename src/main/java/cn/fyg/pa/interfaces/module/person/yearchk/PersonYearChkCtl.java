@@ -63,13 +63,14 @@ public class PersonYearChkCtl {
 		}
 		boolean commit = yearchkStateService.isCommit(year, chkPerson.getId());
 		
+		
+		String chkPersonDept=chkPerson.getDepartment();
+		TypeEnum chkPersonType = chkPerson.getType();
+		
 		if(!commit){
 			List<Fycheck> hasChkFycheck=yearChkRepositroy.getPersonYearChkByChkperson(year,chkPerson);
 			Map<String,Fycheck> hasChecksValues=changeChecksToMap(hasChkFycheck);
-			
-			String chkPersonDept=chkPerson.getDepartment();
-			TypeEnum chkPersonType = chkPerson.getType();
-			
+				
 			List<Person> sameDeptPerson=personRepository.getStaffByDeptValid(chkPersonDept);
 			sameDeptPerson=removePerson(sameDeptPerson,chkPerson);
 			PageBuilder builder=new PageBuilder(year, chkPerson, sameDeptPerson, hasChecksValues);
@@ -83,6 +84,17 @@ public class PersonYearChkCtl {
 			
 			map.put("rowBeanList", rowBeanList);
 			map.put("maxLen", maxLen_dept>=maxLen_otherDept?maxLen_dept:maxLen_otherDept);
+		}else{
+			List<Person> personList=new ArrayList<Person>();
+			List<Person> sameDeptPerson=personRepository.getStaffByDeptValid(chkPersonDept);
+			sameDeptPerson=removePerson(sameDeptPerson,chkPerson);
+			List<Person> otherDeptPerson=personRepository.getStaffByTypeNotDeptValid(chkPersonType,chkPersonDept);
+			personList.addAll(sameDeptPerson);
+			personList.addAll(otherDeptPerson);
+			Map<Long, Object[]> personYearChkResult = yearChkRepositroy.getPersonYearChkResult(year, chkPerson);
+			ResultBuilder builder = new ResultBuilder(personList,personYearChkResult);
+			List<ResultBean> resultBeanList = builder.create();
+			map.put("resultBeanList", resultBeanList);
 		}
 		
 		map.put("year", year);

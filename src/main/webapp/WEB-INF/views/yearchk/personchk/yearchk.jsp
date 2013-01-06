@@ -115,7 +115,7 @@
 <thead>
 	<tr>
 		<th style="width: 80px;">员工</th>
-		<th >对比评价结果&nbsp;&nbsp;<input type="button" id="btn_open" value="平铺"></th>
+		<th >员工横向评价&nbsp;&nbsp;<input type="button" id="btn_open" value="平铺"></th>
 	</tr>
 </thead>
 <tbody>

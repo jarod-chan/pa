@@ -34,6 +34,7 @@ public class PageBuilder {
 
 	public List<RowBean> createRowBeanList(){
 		ArrayList<RowBean> rowBeanList = new ArrayList<RowBean>();
+		if(this.personList.size()<=1) return rowBeanList;
 		for (Person person : this.personList) {
 			RowBean rowBean=createRowBean(person);
 			rowBeanList.add(rowBean);
