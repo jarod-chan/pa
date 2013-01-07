@@ -77,7 +77,7 @@
 
 <div class="contain_all">
 	<div class="all">
-			<div class="head">${year}年${colPerson.name}月工作总结</div>
+			<div class="head">${year}年${colPerson.name}月度小结</div>
 			
 			<c:forEach var="colItem" items="${colItems}">
 				<div class="context">
@@ -88,7 +88,7 @@
 			</c:forEach>
 	</div>
 	<div class="all">
-			<div class="head">${year}年${rowPerson.name}月工作总结</div>
+			<div class="head">${year}年${rowPerson.name}月度小结</div>
 			
 			<c:forEach var="rowItem" items="${rowItems}">
 				<div class="context">

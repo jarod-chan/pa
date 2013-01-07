@@ -65,7 +65,7 @@
 </div>
 <br>
 <div class="all">
-		<div class="head">${year}年${colPerson.name}年终员工总结</div>
+		<div class="head">${year}年${colPerson.name}述职报告</div>
 		
 		<c:forEach var="titleContent" items="${colSummary.titleContents}">
 		<div class="content">
@@ -76,7 +76,7 @@
 </div>
 
 <div class="all">
-		<div class="head">${year}年${rowPerson.name}年终员工总结</div>
+		<div class="head">${year}年${rowPerson.name}述职报告</div>
 		
 		<c:forEach var="titleContent" items="${rowSummary.titleContents}">
 		<div class="content">
