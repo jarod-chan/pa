@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.fyg.pa.infrastructure.persistence.jpa.RptJpa;
+import cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2011.Point_10;
+import cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2011.PointUtil_10;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
 @Controller
@@ -32,14 +34,17 @@ public class RptCtl {
 		if(year.compareTo(YEAR_SEL.get(0))>0){
 			year=YEAR_SEL.get(0);
 		}
-		return toPoint(year, order, map);
+		return String.format("redirect:./%s/%s",year,order);
 	}
 	
-	@RequestMapping(value="/point/{year}/{order}")
-	public String toPoint(@PathVariable("year")Long year,@PathVariable("order")String order,Map<String,Object> map){
-		
-		PointUtil pointUtil=new PointUtil(rptDao.getCheckPoint(year),rptDao.getVal(year));
-		List<Point> points=null;
+	/**
+	 *2011年的绩效考核得分算法
+	 */
+	@RequestMapping(value="/point/2011/{order}")
+	public String toPoint(@PathVariable("order")String order,Map<String,Object> map){
+		final Long year=2011L;
+		PointUtil_10 pointUtil=new PointUtil_10(rptDao.getCheckPoint(year),rptDao.getVal(year));
+		List<Point_10> points=null;
 		try {
 			pointUtil.calculate();
 			pointUtil.orderByPoint(order);
@@ -53,7 +58,7 @@ public class RptCtl {
 		map.put("points",points);
 		map.put("yearSel",YEAR_SEL);
 		map.put("year", year);
-		return "rpt/point";
+		return "rpt/point"+year;
 
 	}
 
