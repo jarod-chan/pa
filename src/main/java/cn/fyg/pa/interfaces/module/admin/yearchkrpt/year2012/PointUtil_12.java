@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2011;
+package cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2012;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,16 +11,16 @@ import java.util.Map;
 
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
-public class PointUtil_10 {
+public class PointUtil_12 {
 	
-	private List<Point_10> rptList;
+	private List<Point_12> rptList;
 	private boolean hasCalculate=false;
 	
-	public PointUtil_10(List<Object[]> checkPoint,List<Object[]> val){
-		rptList=new ArrayList<Point_10>(checkPoint.size());
+	public PointUtil_12(List<Object[]> checkPoint,List<Object[]> val){
+		rptList=new ArrayList<Point_12>(checkPoint.size());
 		for (int i = 0; i < checkPoint.size(); i++) {
 			Object[] arr=checkPoint.get(i);
-			Point_10 point=new Point_10().personId(((Integer)arr[0]).longValue())
+			Point_12 point=new Point_12().personId(((Integer)arr[0]).longValue())
 					.personName(arr[1].toString())
 					.personDept(arr[2].toString())
 					.scheck((BigDecimal)arr[3]);
@@ -31,7 +31,7 @@ public class PointUtil_10 {
 			Object[] arr=val.get(i);
 			temp.put(((Integer)arr[0]).longValue(), (BigDecimal)arr[1]);
 		}
-		for(Point_10 point:rptList){
+		for(Point_12 point:rptList){
 			BigDecimal val2 = temp.get(point.getPersonId());
 			point.val(val2==null?new BigDecimal("0"):val2);
 		}
@@ -50,13 +50,13 @@ public class PointUtil_10 {
 	}
 
 	private void calculatResult() {
-		for(Point_10 point:rptList){
+		for(Point_12 point:rptList){
 			point.calculatResult();
 		}
 	}
 
 	private void calculatU() {
-		for(Point_10 point:rptList){
+		for(Point_12 point:rptList){
 			point.calculatUpsilon();
 		}
 	}
@@ -65,32 +65,32 @@ public class PointUtil_10 {
 		BigDecimal Smax=rptList.get(0).getS();
 		BigDecimal Smin=rptList.get(0).getS();
 		BigDecimal Samp=Constant.ZERO;
-		for(Point_10 point : rptList){
+		for(Point_12 point : rptList){
 			BigDecimal s = point.getS();
 			Smax = s.compareTo(Smax) > 0 ? s : Smax;
 			Smin = s.compareTo(Smin) < 0 ? s : Smin;
 		}
 		Samp = Smax.subtract(Smin);
-		for(Point_10 point:rptList){
+		for(Point_12 point:rptList){
 			point.samp(Samp).maxs(Smax).mins(Smin);
 		}
 	}
 
 	//计算s值
 	private void calculateS() {
-		for (Point_10 point : rptList) {
+		for (Point_12 point : rptList) {
 			point.calculatS();
 		}
 		BigDecimal Smean = Constant.ZERO;
 		int count = 0;
-		for (Point_10 point : rptList) {
+		for (Point_12 point : rptList) {
 			if(point.getS()!=null){
 				Smean=Smean.add(point.getS());
 				count++;
 			}
 		}
 		Smean=Smean.divide(new BigDecimal(count),Constant.SCALE,Constant.ROUND_MODEL);
-		for(Point_10 point : rptList){
+		for(Point_12 point : rptList){
 			if(point.getS()==null){
 				point.s(Smean);
 			}
@@ -108,7 +108,7 @@ public class PointUtil_10 {
 			count++;
 		}
 		BigDecimal mamp=total.divide(new BigDecimal(count),Constant.SCALE,Constant.ROUND_MODEL);
-		for(Point_10 point:rptList){
+		for(Point_12 point:rptList){
 			point.mamp(mamp);
 		}
 	}
@@ -127,7 +127,7 @@ public class PointUtil_10 {
 	//计算部门考核幅度，如果部门只有一个人，那么考核幅度就为0
 	private void calculateDamp() {
 		Map<String, BigDecimal> depAmp = calculateEveryDepAmp();
-		for(Point_10 point:rptList){
+		for(Point_12 point:rptList){
 			point.damp(depAmp.get(point.getPersonDept()));
 		}
 	}
@@ -136,7 +136,7 @@ public class PointUtil_10 {
 	private Map<String, BigDecimal> calculateEveryDepAmp() {
 		Map<String,BigDecimal> depMax=new HashMap<String,BigDecimal>();
 		Map<String,BigDecimal> depMin=new HashMap<String,BigDecimal>();
-		for(Point_10 point:rptList){
+		for(Point_12 point:rptList){
 			String personDept=point.getPersonDept();
 			BigDecimal scheck = point.getScheck();
 			updateDepMax(depMax, personDept, scheck);
@@ -178,7 +178,7 @@ public class PointUtil_10 {
 	private void calculateMdep() {
 		Map<String,BigDecimal> depMean=new HashMap<String,BigDecimal>();
 		Map<String,Integer> depCount=new HashMap<String,Integer>();
-		for (Point_10 point : rptList) {
+		for (Point_12 point : rptList) {
 			String personDept=point.getPersonDept();
 			if(depMean.containsKey(personDept)){
 				depMean.put(personDept, depMean.get(personDept).add(point.getScheck()));
@@ -192,7 +192,7 @@ public class PointUtil_10 {
 			BigDecimal count=new BigDecimal(depCount.get(key));
 			depMean.put(key,depMean.get(key).divide(count,Constant.SCALE,Constant.ROUND_MODEL));
 		}
-		for(Point_10 point:rptList){
+		for(Point_12 point:rptList){
 			point.mdep(depMean.get(point.getPersonDept()));
 		}
 	}
@@ -200,16 +200,16 @@ public class PointUtil_10 {
 	//总体考核平均值
 	private void calculateMall(){
 		BigDecimal total=new BigDecimal("0");
-		for (Point_10 point:rptList) {
+		for (Point_12 point:rptList) {
 			total=total.add(point.getScheck());
 		}
 		BigDecimal mall=total.divide(new BigDecimal(rptList.size()),Constant.SCALE,Constant.ROUND_MODEL);
-		for(Point_10 point:rptList){
+		for(Point_12 point:rptList){
 			point.mall(mall);
 		}
 	}
 	
-	public List<Point_10> getResult() throws Exception{
+	public List<Point_12> getResult() throws Exception{
 		if(!hasCalculate) throw new Exception("point dont  calculate!");
 		return rptList;
 	}
@@ -218,17 +218,17 @@ public class PointUtil_10 {
 		if(!hasCalculate) throw new Exception("point dont  calculate!");
 		Collections.sort(rptList, new PointDescComparator());
 		int i=1;
-		for (Point_10 point : rptList) {
+		for (Point_12 point : rptList) {
 			point.ranking(i++);
 		}
-		if(order.equals("asc")){
+		if(order.equals("desc")){
 			Collections.reverse(rptList);
 		}
 	}
 	
-	private class PointDescComparator implements Comparator<Point_10> {
+	private class PointDescComparator implements Comparator<Point_12> {
 		@Override
-		public int compare(Point_10 p1, Point_10 p2) {
+		public int compare(Point_12 p1, Point_12 p2) {
 			return p2.getResult().compareTo(p1.getResult());
 		}
 	}
