@@ -26,7 +26,7 @@ public class YearMangeChkRepositroyJpa implements YearMangeChkRepositroy {
 				"where mange.itemid=items.id " +
 				"and mange.year=:year " +
 				"and mange.personid in (" +
-				"select id from fyperson where manage=:manage and department=:department )" +
+				"select id from Person where manage=:manage and department=:department )" +
 				"group by mange.personid")
 				.setParameter("year", year)
 				.setParameter("manage", ManageEnum.N)

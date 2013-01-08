@@ -20,10 +20,10 @@ public class Dispatcher {
 			return "redirect:gmange/"+loginRet.getPersonid()+"/idrmonthplan";
 		}
 		if(loginRet.getMange().equals("Y")){
-			return "redirect:mange/"+loginRet.getPersonid()+"/idrmonthplan";
+			return "redirect:mange/"+loginRet.getPersonid()+"/yearchk";
 		}
 		if (loginRet.getMange().equals("N")) {
-			return "redirect:person/"+loginRet.getPersonid()+"/monthchk";
+			return "redirect:person/"+loginRet.getPersonid()+"/yearchk";
 		}
 		if (loginRet.getMange().equals("F")) {
 			return "redirect:finance/"+loginRet.getPersonid()+"/summarysnapshot";

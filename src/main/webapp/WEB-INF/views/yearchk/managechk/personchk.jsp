@@ -4,6 +4,9 @@
 <head>
 <%@ include file="../../common/head.jsp"%>
 <script type="text/javascript">
+
+	var optColorArr=["#FF8080","#FECF78","#B9EA48","#00C462","#1E8EFF"];
+
 	$(document).ready(function() {
 		$("input[name='flagchk']").bind('click',function(){
 			var nextSel=$(this).parent().next().find("select");
@@ -15,6 +18,15 @@
 				nextSel.hide();
 			}
 		});
+		
+		$("table select[name='val']").each(function(){
+			$(this).find("option").each(function(idx){
+				$(this).css("background-color",optColorArr[idx]);
+			});
+			$(this).bind("change",function(){
+				$(this).css("background-color",optColorArr[this.selectedIndex])
+			}).triggerHandler("change");
+		});
 	 });
 	
 	function save(){
@@ -24,10 +36,10 @@
 	}
 </script> 
 </head>  
-<c:set target="${pagefunc}" property="name" value="员工年度考核" />
+<c:set target="${pagefunc}" property="name" value="年度绩效评价" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/yearchk" />  
 
-<c:set target="${pagetitle}" property="name" value="部门员工年度工作评价" /> 
+<c:set target="${pagetitle}" property="name" value="部门员工年度绩效评价" /> 
 <c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${person.id}/yearchk/person/${checkPerson.id}" />
 
 <c:set var="pagesize" value="768" scope="request"/>

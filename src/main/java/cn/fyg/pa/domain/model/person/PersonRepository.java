@@ -23,8 +23,24 @@ public interface PersonRepository {
 	List<Person> findPersonByManageOrderByDepartment(ManageEnum... mangeEnum);
 
 	List<Person> getStaffByType(TypeEnum type);
+	
+	/**
+	 * 获得同类型人员，过滤掉无效人员
+	 * @param type
+	 * @return
+	 */
+	List<Person> getStaffByTypeValid(TypeEnum type);
+	
+	List<Person> getStaffByTypeNotDeptValid(TypeEnum type,String department);
 
 	List<Person> getStaffByDept(String department);
+	
+	/**
+	 * 获得部门人员，过滤掉无效人员
+	 * @param department
+	 * @return
+	 */
+	List<Person> getStaffByDeptValid(String department);
 	
 	List<Person> getAllFyperson();
 	

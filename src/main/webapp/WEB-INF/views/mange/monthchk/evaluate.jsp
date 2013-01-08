@@ -56,10 +56,10 @@
 </script> 
 </head>
 
-<c:set target="${pagefunc}" property="name" value="员工工作评价" />
+<c:set target="${pagefunc}" property="name" value="月度小结评价" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${mange.id}/monthchk" />  
 
-<c:set target="${pagetitle}" property="name" value="员工月度工作任务评价" /> 
+<c:set target="${pagetitle}" property="name" value="员工月度小结评价" /> 
 <c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${mange.id}/monthchk/${monthChk.id}" /> 
 
 <c:set var="pagesize" value="990" scope="request"/>  

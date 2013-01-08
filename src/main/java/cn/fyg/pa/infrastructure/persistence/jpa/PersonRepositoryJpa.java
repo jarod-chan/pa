@@ -15,6 +15,7 @@ import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.person.ManageEnum;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
+import cn.fyg.pa.domain.model.person.StateEnum;
 import cn.fyg.pa.domain.model.person.TypeEnum;
 
 @Service
@@ -54,7 +55,7 @@ public class PersonRepositoryJpa implements PersonRepository {
 
 	@Override
 	public Person findDepartmentMange(String department) {
-		String sql="select p from fyperson p where p.department=:department and p.manage=:manage";
+		String sql="select p from Person p where p.department=:department and p.manage=:manage";
 		List<Person> ret=entityManager.createQuery(sql,Person.class)
 				.setParameter("department", department)
 				.setParameter("manage", ManageEnum.Y)
@@ -85,10 +86,12 @@ public class PersonRepositoryJpa implements PersonRepository {
 		Root<Person> root=query.from(Person.class);
 		Predicate criteria=builder.equal(root.get("type"), type);
 		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		criteria=builder.and(criteria,builder.equal(root.get("state"), StateEnum.valid));
 		query.select(builder.count(root.get("id")));
 		query.where(criteria);
 		return entityManager.createQuery(query).getSingleResult().intValue();
 	}
+	
 	
 	@Override
 	public List<Person>  getStaffByType(TypeEnum type){
@@ -97,6 +100,32 @@ public class PersonRepositoryJpa implements PersonRepository {
 		Root<Person> root=query.from(Person.class);
 		Predicate criteria=builder.equal(root.get("type"), type);
 		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		query.where(criteria);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+	@Override
+	public List<Person> getStaffByTypeValid(TypeEnum type) {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query=builder.createQuery(Person.class);
+		Root<Person> root=query.from(Person.class);
+		Predicate criteria=builder.equal(root.get("type"), type);
+		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		criteria=builder.and(criteria,builder.equal(root.get("state"), StateEnum.valid));
+		query.where(criteria);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+	@Override
+	public List<Person> getStaffByTypeNotDeptValid(TypeEnum type,String department){
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query=builder.createQuery(Person.class);
+		Root<Person> root=query.from(Person.class);
+		Predicate criteria=builder.equal(root.get("type"), type);
+		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		criteria=builder.and(criteria,builder.notEqual(root.get("department"), department));
 		query.where(criteria);
 		query.orderBy(builder.asc(root.get("id")));
 		return entityManager.createQuery(query).getResultList();
@@ -113,6 +142,20 @@ public class PersonRepositoryJpa implements PersonRepository {
 		query.orderBy(builder.asc(root.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
+	
+	@Override
+	public List<Person> getStaffByDeptValid(String department) {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query=builder.createQuery(Person.class);
+		Root<Person> root=query.from(Person.class);
+		Predicate criteria=builder.equal(root.get("department"), department);
+		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		criteria=builder.and(criteria,builder.equal(root.get("state"), StateEnum.valid));
+		query.where(criteria);
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}
+
 
 	@Override
 	public List<Person> getAllFyperson() {
@@ -151,6 +194,5 @@ public class PersonRepositoryJpa implements PersonRepository {
 		query.orderBy(builder.asc(person.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
-
 
 }
