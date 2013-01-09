@@ -125,6 +125,7 @@ public class PersonRepositoryJpa implements PersonRepository {
 		Root<Person> root=query.from(Person.class);
 		Predicate criteria=builder.equal(root.get("type"), type);
 		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		criteria=builder.and(criteria,builder.equal(root.get("state"), StateEnum.valid));
 		criteria=builder.and(criteria,builder.notEqual(root.get("department"), department));
 		query.where(criteria);
 		query.orderBy(builder.asc(root.get("id")));
