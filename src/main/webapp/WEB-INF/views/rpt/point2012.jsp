@@ -93,9 +93,16 @@
 		<input type="button" value="&darr;"  onclick="javascript:window.open('/${ctx}/admin/rpt/point/${year}/desc','_self')" />
 	</div>
 	</td>
-	<td>Scheck</td><td>mdep</td><td>mall</td><td>damp</td>
-	<td>mamp</td><td>stotal</td><td>s</td><td>alpha</td><td>maxs</td><td>mins</td><td>samp</td>
-	<td>upsilon</td><td>val</td><td>result=upsilon+val</td>
+	<td>Scheck</td>
+	<td>mamp</td>
+	<td>stotal</td>
+	<td>alpha</td>
+	<td>maxs</td>
+	<td>mins</td>
+	<td>samp</td>
+	<td>upsilon</td>
+	<td>val</td>
+	<td>result=upsilon+val</td>
 </tr>
 <c:forEach var="item" items="${points}" >
 	<tr>
@@ -104,12 +111,8 @@
 	<td>${item.personDept}</td>
 	<td>${item.ranking}</td>
 	<td>${item.scheck}</td>
-	<td>${item.mdep}</td>
-	<td>${item.mall}</td>
-	<td>${item.damp}</td>
 	<td>${item.mamp}</td>
 	<td>${item.stotal}</td>
-	<td>${item.s}</td>
 	<td>${item.alpha}</td>
 	<td>${item.maxs}</td>
 	<td>${item.mins}</td>

@@ -12,20 +12,13 @@ public class Point_12 {
 	private String personName;
 	//人员部门
 	private String personDept;
+
 	//分级考核得分
 	private BigDecimal scheck=null; 
-	//部门考核平均值
-	private BigDecimal mdep=null;
-	//总体考核平均值
-	private BigDecimal mall=null;
-	//部门考核幅度
-	private BigDecimal damp=null;
 	//考核幅度平均值
 	private BigDecimal mamp=null;
 	//分级考核总分
 	private BigDecimal stotal=new BigDecimal("150");
-	//分级均衡得分值
-	private BigDecimal s=null;
 	
 	
 	//分级考核幅度
@@ -46,29 +39,18 @@ public class Point_12 {
 	private int ranking=0;
 	//最终得分
 	private BigDecimal result=null;
-	
-	/**
-	 * 根据提供的值，计算s 公式如下
-	 * [(Scheck-Mdep)*Mamp+Damp*Mall]/(Damp*Stotal)
-	 */
-	public void calculatS(){
-		if(damp.compareTo(Constant.ZERO)==0) return;
-		
-		BigDecimal up=scheck.subtract(mdep).multiply(mamp).add(damp.multiply(mall));
-		BigDecimal down=damp.multiply(stotal);
-		s=up.divide(down,Constant.SCALE,Constant.ROUND_MODEL);
-	}
+
 	
 	/**
 	 * 计算upsilon
 	 * 分级平均考核幅度 alpha=Mamp/Stotal;
-	 * upsilon=[(S-Smin)/Samp*alpha-alpha/2]*100=[((S-Smin)*2-Samp)*Alpha/(Samp*2)]*100
+	 * upsilon=[(Scheck-Smin)/Samp*alpha-alpha/2]*100=[((Scheck-Smin)*2-Samp)*Alpha/(Samp*2)]*100
 	 */
 	public void calculatUpsilon(){
 		if(samp.compareTo(Constant.ZERO)==0) return;
 		
 		alpha=mamp.divide(stotal, Constant.SCALE, Constant.ROUND_MODEL);
-		BigDecimal up=s.subtract(mins).multiply(new BigDecimal("2")).subtract(samp).multiply(alpha);
+		BigDecimal up=scheck.subtract(mins).multiply(new BigDecimal("2")).subtract(samp).multiply(alpha);
 		BigDecimal down=samp.multiply(new BigDecimal("2"));
 		upsilon=up.multiply(Constant.HUNDRED).divide(down,Constant.SCALE,Constant.ROUND_MODEL);
 	}
@@ -99,26 +81,6 @@ public class Point_12 {
 	
 	public Point_12 scheck(BigDecimal scheck) {
 		this.scheck = scheck;
-		return this;
-	}
-	
-	public Point_12 mdep(BigDecimal mdep) {
-		this.mdep = mdep;
-		return this;
-	}
-	
-	public Point_12 mall(BigDecimal mall) {
-		this.mall = mall;
-		return this;
-	}
-	
-	public Point_12 damp(BigDecimal damp) {
-		this.damp = damp;
-		return this;
-	}
-	
-	public Point_12 s(BigDecimal s) {
-		this.s = s;
 		return this;
 	}
 	
@@ -191,18 +153,6 @@ public class Point_12 {
 	public BigDecimal getScheck() {
 		return scheck;
 	}
-
-	public BigDecimal getMdep() {
-		return mdep;
-	}
-
-	public BigDecimal getMall() {
-		return mall;
-	}
-
-	public BigDecimal getDamp() {
-		return damp;
-	}
 	
 	public BigDecimal getMamp() {
 		return mamp;
@@ -210,9 +160,6 @@ public class Point_12 {
 	
 	public BigDecimal getStotal() {
 		return stotal;
-	}
-	public BigDecimal getS() {
-		return s;
 	}
 
 	public BigDecimal getAlpha() {
