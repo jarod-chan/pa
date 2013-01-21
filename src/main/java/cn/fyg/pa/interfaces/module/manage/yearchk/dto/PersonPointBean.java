@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.manage.yearchk;
+package cn.fyg.pa.interfaces.module.manage.yearchk.dto;
 
 import cn.fyg.pa.domain.model.person.Person;
 

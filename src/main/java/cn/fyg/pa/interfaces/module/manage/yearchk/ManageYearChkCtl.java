@@ -2,7 +2,6 @@ package cn.fyg.pa.interfaces.module.manage.yearchk;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +23,10 @@ import cn.fyg.pa.domain.model.yearchk.ChkitemRepository;
 import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.model.yearchk.Fychkitem;
 import cn.fyg.pa.domain.model.yearchk.Fychkmange;
-import cn.fyg.pa.domain.model.yearchk.YearMangeChkRepositroy;
+import cn.fyg.pa.interfaces.module.manage.yearchk.dto.CheckPage;
+import cn.fyg.pa.interfaces.module.manage.yearchk.dto.ChkmangeTab;
+import cn.fyg.pa.interfaces.module.manage.yearchk.dto.PersonPointBean;
+import cn.fyg.pa.interfaces.module.manage.yearchk.facade.YearchkFacade;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 import cn.fyg.pa.interfaces.module.shared.tool.Tool;
@@ -35,18 +37,15 @@ public class ManageYearChkCtl {
 	
 	@Resource
 	PersonRepository personRepository;
-	
-	@Resource
-	YearMangeChkRepositroy yearMangeChkRepositroy;
-	
 	@Resource
 	YearConfigService yearConfigService;
-	
+	@Resource
+	YearchkFacade yearchkFacade;
 	@Resource
 	ChkitemRepository chkitemRepository;
-	
 	@Resource
 	YearMangeChkService yearMangeChkService;
+	
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
@@ -64,12 +63,7 @@ public class ManageYearChkCtl {
 			return "yearchk/managechk/nottime";
 		}
 		
-		
-		List<Person> departmentPersons=personRepository.getStaffByDeptValid(person.getDepartment());
-	
-		List<Object[]> personPointArray=yearMangeChkRepositroy.getPseronPointsByDepartment(year,person.getDepartment());
-		Map<Long,Long> personPointMap=getPersonPointMap(personPointArray);
-		List<PersonPointBean> personPointList=caretPersonPointList(departmentPersons,personPointMap); 
+		List<PersonPointBean> personPointList = yearchkFacade.getPersonList(year, person.getDepartment()); 
 		
 		map.put("year", year);
 		map.put("person",person);
@@ -78,30 +72,8 @@ public class ManageYearChkCtl {
 
 		return "yearchk/managechk/list";
 	}
-	
-	private Map<Long,Long> getPersonPointMap(List<Object[]> pointArr) {
-		Map<Long,Long> personPoint=new HashMap<Long,Long>();
-		for (Object[] objects : pointArr) {
-			personPoint.put((Long)objects[0], (Long)objects[1]);
-		}
-		return personPoint;
-	}
 
-	private List<PersonPointBean> caretPersonPointList(List<Person> sameDepartmentPerson,
-			Map<Long, Long> personPoint) {
-		List<PersonPointBean> ret=new ArrayList<PersonPointBean>();
-		for (Person fyperson : sameDepartmentPerson) {
-			PersonPointBean page=new PersonPointBean();
-			page.setPerson(fyperson);
-			Long point=personPoint.get(fyperson.getId());
-			if(point!=null){
-				String getPoint=Tool.format(new BigDecimal(point).divide(Constant.POINT_LEVEL,3,BigDecimal.ROUND_HALF_DOWN));
-				page.setGetPoint(getPoint);
-			}
-			ret.add(page);
-		}
-		return ret;
-	}
+	
 
 	@RequestMapping(value="/person/{checkPersonId}",method=RequestMethod.GET)
 	public String toPersonchk(@ModelAttribute("person")Person person,@PathVariable("checkPersonId") Long checkPersonId,Map<String,Object> map,HttpSession session){
@@ -116,11 +88,8 @@ public class ManageYearChkCtl {
 
 		Person checkPerson=personRepository.find(checkPersonId);
 		
-		List<Fychkitem> yearItems=chkitemRepository.getItemsByYear(year);
-		List<Fychkmange> chkmanges=yearMangeChkRepositroy.getPseronChkmange(year, checkPerson);
+		List<ChkmangeTab> chkmangeTabs =yearchkFacade.getChkmangeTab(year, checkPerson);
 		
-		Map<Long,Fychkmange> hasCheckMap=chkitemToMap(chkmanges);
-		List<ChkmangeTab> chkmangeTabs=createChkmangeTabs(yearItems,hasCheckMap);
 		Long sumall=getSumallPoint(chkmangeTabs);
 		
 		map.put("year", year);
@@ -140,74 +109,6 @@ public class ManageYearChkCtl {
 		return sumall;
 	}
 
-	private Map<Long, Fychkmange> chkitemToMap(List<Fychkmange> manges) {
-		Map<Long, Fychkmange> map = new HashMap<Long, Fychkmange>();
-		for (Fychkmange fychkmange : manges) {
-			map.put(fychkmange.getItemid(), fychkmange);
-		}
-		return map;
-	}
-	
-	private List<ChkmangeTab> createChkmangeTabs(List<Fychkitem> items, Map<Long, Fychkmange> hasCheckMap) {
-		List<ChkmangeTab> result=new ArrayList<ChkmangeTab>();
-		if(items.isEmpty()) return result;
-		String type=items.get(0).getType();
-		Long typesum=new Long(0);
-		int rownum=0;
-		
-		for (int i=0,len=items.size();i<len;i++) {
-			Fychkitem fychkitem=items.get(i);
-			ChkmangeTab page=new ChkmangeTab();
-			page.setChkitem(fychkitem);
-			Fychkmange fychkmange = getFychkmange(fychkitem.getId(),hasCheckMap);
-			boolean ischeck=isCheck(fychkitem,fychkmange);
-			page.setIscheck(ischeck);
-			page.setChkmange(fychkmange);
-			result.add(page);
-			if(fychkitem.getType().equals(type)){
-				typesum+=fychkitem.getPoint();
-				rownum++;
-			}else{
-				ChkmangeTab begPage=result.get(i-rownum);
-				begPage.setSpecial("Y");
-				begPage.setType(type);
-				begPage.setTypesum(typesum);
-				begPage.setRownum(rownum);
-				type=fychkitem.getType();
-				typesum=fychkitem.getPoint();
-				rownum=1;
-			}
-		}
-		ChkmangeTab begPage=result.get(items.size()-rownum);
-		begPage.setSpecial("Y");
-		begPage.setType(type);
-		begPage.setTypesum(typesum);
-		begPage.setRownum(rownum);
-		return result;
-	}
-	
-	private boolean isCheck(Fychkitem fychkitem, Fychkmange fychkmange) {
-		if(fychkmange.getId()!=null){
-			return true;
-		}
-		if(fychkmange.getId()==null && fychkitem.getMust()){
-			return true;
-		}
-		return false;
-	}
-	
-	private Fychkmange getFychkmange(Long chkitemId,Map<Long, Fychkmange> hasCheckMap) {
-		Fychkmange fychkmange=hasCheckMap.get(chkitemId);
-		if(fychkmange==null){
-			fychkmange=new Fychkmange();
-			fychkmange.setVal(new Long(3));
-		}
-		return fychkmange;
-	}
-	
-	
-	
-	
 	@RequestMapping(value="/person/{checkPersonId}/save",method=RequestMethod.POST)
 	public String savePersonchk(@ModelAttribute CheckPage checkPage,@RequestParam("year") Long year,@ModelAttribute("person")Person person,@PathVariable("checkPersonId") Long checkPersonId,Map<String,Object> map,HttpSession session) {
 		Person checkPerson=personRepository.find(checkPersonId);

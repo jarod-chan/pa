@@ -63,6 +63,7 @@ public class LoginCtl {
 		if(loginRetBean.getMange().equals("G")){
 			menuList.add(new UrlNameBean("部门月度计划历史",String.format("gmange/%s/idrmonthplan/history",personId)));
 			menuList.add(new UrlNameBean("公司考核情况查询",String.format("gmange/%s/totalreport",personId)));
+			menuList.add(new UrlNameBean("年度考核评分查询",String.format("gmange/%s/yearchk",personId)));
 		}
 		if(loginRetBean.getMange().equals("Y")){
 			if(isSpecialPerson(personId)){
