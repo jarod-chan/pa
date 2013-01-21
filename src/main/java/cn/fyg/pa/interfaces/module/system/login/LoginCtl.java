@@ -49,6 +49,12 @@ public class LoginCtl {
 			List<UrlNameBean> queryList=getQueryList(loginRetBean);
 			sessionUtil.setValue("queryList", queryList);
 			
+			/**
+			 * TODO:待修改  当是特殊人员时，不跳转到年终考核页面 　
+			*/
+			if(isSpecialPerson(loginRetBean.getPersonid())){
+				return new ModelAndView("redirect:mange/"+loginRetBean.getPersonid()+"/idrmonthplan");
+			}
 			return dispatcherMav(loginRetBean);
 		}
 				
