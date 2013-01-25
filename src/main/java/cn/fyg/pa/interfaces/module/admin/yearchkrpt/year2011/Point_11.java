@@ -50,6 +50,13 @@ public class Point_11 {
 	/**
 	 * 根据提供的值，计算s 公式如下
 	 * [(Scheck-Mdep)*Mamp+Damp*Mall]/(Damp*Stotal)
+	 * 
+	 * 					           平均考核幅度
+	 * （个人得分-部门平均分）* ------------   +员工平均得分
+	 * 						部门平均考核幅度			
+	 * -----------------------------------------------------
+	 * 				总分
+	 * 
 	 */
 	public void calculatS(){
 		if(damp.compareTo(Constant.ZERO)==0) return;

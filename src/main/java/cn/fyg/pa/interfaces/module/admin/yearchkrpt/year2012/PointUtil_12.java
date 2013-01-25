@@ -38,7 +38,11 @@ public class PointUtil_12 {
 	}
 	
 	public void calculate(){
+		calculateMdep();
+		calculateMall();
+		calculateDamp();
 		calculateMamp();
+		calculateS();
 		calculateSmaxAndSmainAndSamp();
 		calculatU();
 		calculatResult();
@@ -58,11 +62,11 @@ public class PointUtil_12 {
 	}
 
 	private void calculateSmaxAndSmainAndSamp() {
-		BigDecimal Smax=rptList.get(0).getScheck();
-		BigDecimal Smin=rptList.get(0).getScheck();
+		BigDecimal Smax=rptList.get(0).getS();
+		BigDecimal Smin=rptList.get(0).getS();
 		BigDecimal Samp=Constant.ZERO;
 		for(Point_12 point : rptList){
-			BigDecimal s = point.getScheck();
+			BigDecimal s = point.getS();
 			Smax = s.compareTo(Smax) > 0 ? s : Smax;
 			Smin = s.compareTo(Smin) < 0 ? s : Smin;
 		}
@@ -72,6 +76,26 @@ public class PointUtil_12 {
 		}
 	}
 
+	//计算s值
+	private void calculateS() {
+		for (Point_12 point : rptList) {
+			point.calculatS();
+		}
+		BigDecimal Smean = Constant.ZERO;
+		int count = 0;
+		for (Point_12 point : rptList) {
+			if(point.getS()!=null){
+				Smean=Smean.add(point.getS());
+				count++;
+			}
+		}
+		Smean=Smean.divide(new BigDecimal(count),Constant.SCALE,Constant.ROUND_MODEL);
+		for(Point_12 point : rptList){
+			if(point.getS()==null){
+				point.s(Smean);
+			}
+		}
+	}
 
 	//考核幅度平均值
 	private void calculateMamp() {
@@ -100,6 +124,13 @@ public class PointUtil_12 {
 		}
 	}
 
+	//计算部门考核幅度，如果部门只有一个人，那么考核幅度就为0
+	private void calculateDamp() {
+		Map<String, BigDecimal> depAmp = calculateEveryDepAmp();
+		for(Point_12 point:rptList){
+			point.damp(depAmp.get(point.getPersonDept()));
+		}
+	}
 	
 	//计算所有部门的考核幅度
 	private Map<String, BigDecimal> calculateEveryDepAmp() {
@@ -143,7 +174,40 @@ public class PointUtil_12 {
 		depMax.put(personDept, scheck);
 	}
 
+	//部门考核平均值
+	private void calculateMdep() {
+		Map<String,BigDecimal> depMean=new HashMap<String,BigDecimal>();
+		Map<String,Integer> depCount=new HashMap<String,Integer>();
+		for (Point_12 point : rptList) {
+			String personDept=point.getPersonDept();
+			if(depMean.containsKey(personDept)){
+				depMean.put(personDept, depMean.get(personDept).add(point.getScheck()));
+				depCount.put(personDept, depCount.get(personDept)+1);
+			}else{
+				depMean.put(personDept, point.getScheck());
+				depCount.put(personDept, new Integer(1));
+			}
+		}
+		for(String key:depMean.keySet()){
+			BigDecimal count=new BigDecimal(depCount.get(key));
+			depMean.put(key,depMean.get(key).divide(count,Constant.SCALE,Constant.ROUND_MODEL));
+		}
+		for(Point_12 point:rptList){
+			point.mdep(depMean.get(point.getPersonDept()));
+		}
+	}
 
+	//总体考核平均值
+	private void calculateMall(){
+		BigDecimal total=new BigDecimal("0");
+		for (Point_12 point:rptList) {
+			total=total.add(point.getScheck());
+		}
+		BigDecimal mall=total.divide(new BigDecimal(rptList.size()),Constant.SCALE,Constant.ROUND_MODEL);
+		for(Point_12 point:rptList){
+			point.mall(mall);
+		}
+	}
 	
 	public List<Point_12> getResult() throws Exception{
 		if(!hasCalculate) throw new Exception("point dont  calculate!");
