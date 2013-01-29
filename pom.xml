@@ -22,7 +22,7 @@
 			<id>dev</id>
 			<properties>
 				<dbs.driver>com.mysql.jdbc.Driver</dbs.driver>
-				<dbs.url>jdbc:mysql://localhost:3306/test</dbs.url>
+				<dbs.url>jdbc:mysql://172.16.0.162:3306/fygchk</dbs.url><!-- jdbc:mysql://localhost:3306/test -->
 				<dbs.dialect>org.hibernate.dialect.MySQL5Dialect</dbs.dialect>
 				<dbs.username>root</dbs.username>
 				<dbs.password>0</dbs.password>
