@@ -282,6 +282,26 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 					<td>1</td>
 					<td>1</td>
 				</tr>
+				<tr>
+					<td class="title">应利君</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>1</td>
+					<td>&nbsp;</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td class="title"></td>
+					<td colspan="13">年度优秀通讯员:毛微&nbsp;王如虹&nbsp;全小锋</td>
+				</tr>
 			</table>
 		</div>
 		<div class="bottom">
