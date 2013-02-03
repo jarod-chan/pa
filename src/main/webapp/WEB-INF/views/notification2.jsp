@@ -313,6 +313,39 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 <br/>
 <br/>
 <br/>
+<div class="notification_title"><h2>2013年1月份通讯稿执行情况</h2></div>
+<div class="notification_context">
+	<div class="context">
+		<div class="middle">
+			<table>
+				<tr>
+					<th style="width: 200px;" rowSpan=2>部门</th>
+					<th style="width: 150px;">计划供稿</th>
+					<th rowSpan=2 style="width: 150px;">实际供稿</th>
+					<th rowSpan=2 style="width: 150px;">发表稿件</th>
+					<th rowSpan=2 style="width: 150px;">月度执行情况</th>
+				</tr>
+				<tr>
+					<th>(1-2月)</th>
+				</tr>
+				<tr><td class="title">工程部</td><td>4</td><td>2</td><td>&nbsp;</td><td>完成</td></tr>
+				<tr><td class="title">产品部</td><td>1</td><td>0</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td class="title">技术部</td><td>1</td><td>0</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td class="title">成本管理部</td><td>1</td><td>0</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td class="title">销售部</td><td>2</td><td>2</td><td>2</td><td>完成</td></tr>
+				<tr><td class="title">采购部</td><td>1</td><td>0</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td class="title">财务部</td><td>1</td><td>0</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td class="title">办公室</td><td>4</td><td>2</td><td>1</td><td>完成</td></tr>
+				<tr><td class="title">&nbsp;</td><td colSpan=3>月度优秀通讯员</td><td>销售部：王如虹</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<br/>
+<br/>
+<br/>
 <div class="notification_title"><h2>2013年通讯稿考核标准</h2></div>
 <div class="notification_context">
 	<div class="context">
