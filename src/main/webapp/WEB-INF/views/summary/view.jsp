@@ -40,7 +40,7 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="个人述职报告" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/summary" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/${urlRole}/${person.id}/summary" />  
 
 <c:set var="pagesize" value="1010" scope="request"/> 
 <body> 
