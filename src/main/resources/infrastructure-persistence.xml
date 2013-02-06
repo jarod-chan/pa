@@ -15,17 +15,23 @@
     	<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="location" value="classpath:config/db.properties" />
 	</bean>
-
+	
+		<!-- 使用hibernate jpa -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="persistenceXmlLocation" value="classpath:infrastructure-persistence-jpa.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName" value="pu" /> 
 		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="showSql" value="false" />
-				<property name="generateDdl" value="true" />
-				<property name="databasePlatform" value="${db.dialect}" />
-			</bean>
-		</property>		
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.dialect">${db.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+            </props>
+        </property>	
 	</bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
