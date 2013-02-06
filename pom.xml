@@ -26,6 +26,8 @@
 				<dbs.dialect>org.hibernate.dialect.MySQL5Dialect</dbs.dialect>
 				<dbs.username>root</dbs.username>
 				<dbs.password>0</dbs.password>
+				<dbs.showsql>true</dbs.showsql>
+				<dbs.formatsql>true</dbs.formatsql>
 			</properties>
 		</profile>
 		<profile>
@@ -36,6 +38,8 @@
 				<dbs.dialect>org.hibernate.dialect.MySQL5Dialect</dbs.dialect>
 				<dbs.username>root</dbs.username>
 				<dbs.password>0</dbs.password>
+				<dbs.showsql>true</dbs.showsql>
+				<dbs.formatsql>true</dbs.formatsql>
 			</properties>
 		</profile>
 		<profile>
@@ -46,6 +50,8 @@
 				<dbs.dialect>org.hibernate.dialect.MySQL5Dialect</dbs.dialect>
 				<dbs.username>root</dbs.username>
 				<dbs.password>0</dbs.password>
+				<dbs.showsql>false</dbs.showsql>
+				<dbs.formatsql>false</dbs.formatsql>
 			</properties>
 		</profile>
 	</profiles>

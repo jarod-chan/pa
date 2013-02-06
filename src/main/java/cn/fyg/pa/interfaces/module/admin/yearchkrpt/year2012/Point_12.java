@@ -49,13 +49,17 @@ public class Point_12 {
 	
 	/**
 	 * 根据提供的值，计算s 公式如下
-	 * [(Scheck-Mdep)*Mamp+Damp*Mall]/(Damp*Stotal)
+	 * [Scheck+(Mall-Mdep)]/Stotal
+	 *					          
+	 * 个人得分   + ( 员工平均得分 - 部门平均分 )			
+	 * -----------------------------------
+	 * 				总分
 	 */
 	public void calculatS(){
 		if(damp.compareTo(Constant.ZERO)==0) return;
 		
-		BigDecimal up=scheck.subtract(mdep).multiply(mamp).add(damp.multiply(mall));
-		BigDecimal down=damp.multiply(stotal);
+		BigDecimal up=scheck.subtract(mdep).add(mall);
+		BigDecimal down=stotal;
 		s=up.divide(down,Constant.SCALE,Constant.ROUND_MODEL);
 	}
 	

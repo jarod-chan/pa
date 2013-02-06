@@ -42,23 +42,23 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 
 </style>
 
-<div class="notification_title"><h2>2012年 10-11月份公司宣传通讯稿执行情况通报</h2></div>
+<div class="notification_title"><h2>2012年 10-12月份公司宣传通讯稿执行情况通报</h2></div>
 <div class="notification_context">
 	<div class="context">
 		<div class="top">
-			&nbsp;&nbsp;&nbsp;&nbsp;截止2012年11月30日（星期五），各职能部门通迅报道供稿情况通报如下：
+			&nbsp;&nbsp;&nbsp;&nbsp;截止2012年12月31日（星期一），各职能部门通迅报道供稿情况通报如下：
 		</div>
 		<div class="middle">
 			<table>
 				<tr>
 					<th style="width:120px;">部门</th>
-					<th style="width:120px;">计划供稿<br>(10-11)月</th>
+					<th style="width:120px;">计划供稿<br>(10-12)月</th>
 					<th style="width:120px;">实际供稿</th>
 					<th style="width:100px;">发表稿件</th>
 					<th style="width:140px;">月度执行情况</th>
 				</tr>	
 				<tr>
-					<td>工程部</td><td>4</td><td>4</td><td>0</td><td>完成</td>
+					<td>工程部</td><td>4</td><td>5</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
 					<td>产品部</td><td>1</td><td>1</td><td>1</td><td>完成</td>
@@ -67,7 +67,7 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 					<td>技术部</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>成本管理部</td><td>1</td><td>1</td><td>0</td><td>完成</td>
+					<td>成本管理部</td><td>1</td><td>2</td><td>2</td><td>完成</td>
 				</tr>
 				<tr>
 					<td>销售部</td><td>2</td><td>4</td><td>2</td><td>完成</td>
@@ -79,10 +79,10 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 					<td>财务部</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				<tr>
-					<td>办公室</td><td>4</td><td>6(省杂志2篇)</td><td>2</td><td>完成</td>
+					<td>办公室</td><td>4</td><td>11(省杂志2篇)</td><td>8</td><td>完成</td>
 				</tr>
 				<tr>
-					<td colspan="4">月度优秀通讯员</td><td>办公室：全小锋</td>
+					<td colspan="4">月度优秀通讯员</td><td>办公室：毛微</td>
 				</tr>
 			</table>
 		</div>
@@ -101,7 +101,7 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 		</div>
 		<div class="company">
 			<div>方远建设集团房地产开发有限公司</div>
-			<div>二○一二年十一月三十日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<div>二○一二年十二月三十一日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		</div>
 	</div>
 </div>

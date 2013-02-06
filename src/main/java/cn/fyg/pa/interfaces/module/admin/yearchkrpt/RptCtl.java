@@ -17,6 +17,8 @@ import cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2011.Point_11;
 import cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2011.PointUtil_11;
 import cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2012.PointUtil_12;
 import cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2012.Point_12;
+import cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2012_V2.PointUtil_v2;
+import cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2012_V2.Point_v2;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
 @Controller
@@ -66,7 +68,7 @@ public class RptCtl {
 	}
 	
 
-	@RequestMapping(value="/point/2012/{order}",method=RequestMethod.GET)
+//	@RequestMapping(value="/point/2012/{order}",method=RequestMethod.GET)
 	public String toPoint2012(@PathVariable("order")String order,Map<String,Object> map){
 		final Long year=2012L;
 		PointUtil_12 pointUtil_12=new PointUtil_12(rptDao.getCheckPoint(year),rptDao.getVal(year));
@@ -82,6 +84,28 @@ public class RptCtl {
 		}
 		
 		map.put("points",points_12);
+		map.put("yearSel",YEAR_SEL);
+		map.put("year", year);
+		return "rpt/point"+year;
+
+	}
+	
+	@RequestMapping(value="/point/2012/{order}",method=RequestMethod.GET)
+	public String toPoint2012_V2(@PathVariable("order")String order,Map<String,Object> map){
+		final Long year=2012L;
+		PointUtil_v2 pointUtil_v2=new PointUtil_v2(rptDao.getCheckPoint(year),rptDao.getVal(year));
+		List<Point_v2> points_v2=null;
+		try {
+			pointUtil_v2.calculate();
+			pointUtil_v2.orderByPoint(order);
+			points_v2 = pointUtil_v2.getResult();
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			map.put("error_info", sw.getBuffer().toString().replaceAll("\n","</br>"));
+		}
+		
+		map.put("points",points_v2);
 		map.put("yearSel",YEAR_SEL);
 		map.put("year", year);
 		return "rpt/point"+year;

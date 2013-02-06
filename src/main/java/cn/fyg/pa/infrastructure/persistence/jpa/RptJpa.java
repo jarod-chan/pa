@@ -54,4 +54,23 @@ public class RptJpa {
 		return resultList;
 	}
 	
+	/**
+	 * 计算员工评价中的得分
+	 * 胜2分，负1分，平1分
+	 * @param year
+	 * @return
+	 */
+	public List<Object[]> getValWithDefaultOne(Long year){
+		String sql="select personid,sum(val)/count(personid)/2*100 from(" +
+				"select colid as personid, case when val= 1 then 2 else 1 end as val from fycheck where year=:year " +
+				"union all " +
+				"select rowid as personid, case when val=-1 then 2 else 1 end as val from fycheck where year=:year " +
+				") as temp group by personid";
+		@SuppressWarnings("unchecked")
+		List<Object[]> resultList = entityManager.createNativeQuery(sql).setParameter("year", year).getResultList();
+		return resultList;
+	}
+	
+	
+	
 }
