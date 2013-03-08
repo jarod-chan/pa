@@ -59,12 +59,12 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 		<div class="middle">
 			<table>
 				<tr>
-					<th style="width:100px;">部门</th>
+					<th style="width:120px;">部门</th>
 					<th style="width:100px;">计划供稿<br>(1-2)月</th>
 					<th style="width:200px;" colspan="2">供稿人及数量</th>
 					<th style="width:100px;">合计供稿</th>
-					<th style="width:100px;">发表稿件</th>
-					<th style="width:100px;">执行结果</th>
+					<th style="width:90px;">发表稿件</th>
+					<th style="width:90px;">执行结果</th>
 				</tr>	
 				<tr>
 					<td rowspan="3">工程部</td><td rowspan="3">4</td><td style="width: 150px;">董灵君</td><td style="width: 50px;">2</td><td rowspan="3">4</td><td rowspan="3">0</td><td rowspan="3">完成</td>
