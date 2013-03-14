@@ -76,6 +76,14 @@ function logout(){
 		<div class="second_right" >
 			<!-- 功能菜单  -->
 			<ul class="nav" style="float:left">
+				
+				<li>
+					<div><img class="img_down" src="/${ctx}/resources/img/down.gif" />勤假功能&nbsp;&nbsp;</div>
+					<ul>
+						<li><a href="/${ctx}/atten/${loginRet.personid}/busiout/list">&nbsp;&nbsp;公出申请&nbsp;&nbsp;</a></li>
+					</ul>
+				</li>
+				
 				<li>
 					<div><img class="img_down" src="/${ctx}/resources/img/down.gif" />绩效考核功能&nbsp;&nbsp;</div>
 					<ul>

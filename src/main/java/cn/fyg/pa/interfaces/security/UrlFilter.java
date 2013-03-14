@@ -41,7 +41,7 @@ public class UrlFilter implements Filter {
 	/**
 	 * 公共url
 	 */
-	private static final List<String> commonUrl=Arrays.asList("/pa/common/settings/person","/pa/common/userhome");
+	private static final List<String> commonUrl=Arrays.asList("/pa/common/settings/person","/pa/common/userhome","/pa/atten");
 	
 	/**
 	 * 职员url
@@ -93,10 +93,10 @@ public class UrlFilter implements Filter {
 //        logger.info(method+":"+url);
          
         //开发临时去掉url过滤
-//        if(true){
-//        	chain.doFilter(request, response);
-//        	return;
-//        }
+        if(true){
+        	chain.doFilter(request, response);
+        	return;
+        }
         
         if(isNofilterUrl(url)){
         	chain.doFilter(request, response);

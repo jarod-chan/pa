@@ -6,6 +6,7 @@
 	<pattern>/mange/*</pattern>
 	<pattern>/gmange/*</pattern>
 	<pattern>/finance/*</pattern>
+	<pattern>/atten/*</pattern>
 </decorator>
 
 <!-- 此处用来定义不需要过滤的页面 --> 
