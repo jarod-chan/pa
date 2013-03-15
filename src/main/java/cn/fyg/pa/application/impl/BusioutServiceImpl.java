@@ -10,6 +10,7 @@ import cn.fyg.pa.domain.model.busiout.BusioutFactory;
 import cn.fyg.pa.domain.model.busiout.BusioutRepository;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.Result;
+import cn.fyg.pa.infrastructure.util.NoComputer;
 
 @Service
 public class BusioutServiceImpl implements BusioutService {
@@ -32,5 +33,14 @@ public class BusioutServiceImpl implements BusioutService {
 	public Result verify(Busiout busiout) {
 		return busiout.verifyself();
 	}
+
+	@Override
+	public String getNextNo(Person person,Long year,Long month) {
+		String maxNo = busioutRepository.getMaxNo(person, year, month);
+		String nextNo = NoComputer.computeNo(Busiout.BUSINESS_CODE, person.getKey(), maxNo);
+		return nextNo;
+	}
+	
+	
 
 }

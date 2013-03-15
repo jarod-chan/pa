@@ -109,4 +109,9 @@ public class Person implements Serializable {
 	}
     
 	
+	public String getKey(){
+		String AT = "@";
+		return this.email.substring(0,this.email.lastIndexOf(AT));
+	}
+	
 }

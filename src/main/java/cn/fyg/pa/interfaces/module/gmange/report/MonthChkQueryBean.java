@@ -1,6 +1,6 @@
 package cn.fyg.pa.interfaces.module.gmange.report;
 
-import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
+import cn.fyg.pa.infrastructure.util.DateTool;
 
 public class MonthChkQueryBean {
 	

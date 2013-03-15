@@ -19,7 +19,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.Result;
@@ -30,6 +29,11 @@ import cn.fyg.pa.domain.shared.Result;
 @Entity
 @Table(name="at_busiout")
 public class Busiout {
+	
+	/**
+	 * 公务外出
+	 */
+	public static final String BUSINESS_CODE="GC";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,8 +47,6 @@ public class Busiout {
 	private Long year;//请假年份
 	
 	private Long month;//请假月份
-	
-	private Boolean singel;//表明是否是时间短
 	
 	@Embedded
 	@AttributeOverrides({
@@ -80,13 +82,6 @@ public class Busiout {
 		this.id = id;
 	}
 	
-	public Boolean getSingel() {
-		return singel;
-	}
-
-	public void setSingel(Boolean singel) {
-		this.singel = singel;
-	}
 
 	public String getNo() {
 		return no;
@@ -164,24 +159,9 @@ public class Busiout {
 		if(this.reason==null||StringUtils.trim(this.reason).equals("")){
 			return new Result().pass(Boolean.FALSE).cause("公出原因不能为空");
 		}
-		//开始日期不为空
-		if(this.begDayitem.getDate()==null){
-			return new Result().pass(Boolean.FALSE).cause("开始日期不能为空");
+		if(this.begDayitem.compareTo(this.endDayitem)>=0){
+			return new Result().pass(Boolean.FALSE).cause("结束日期不能在开始日期之前");
 		}
-		//如果有结束日期，则不为空
-		if(this.singel==false && this.endDayitem.getDate()==null){
-			return new Result().pass(Boolean.FALSE).cause("如果公出超过半天，请选择结束日期");
-		}
-		//结束日期大于开始日期
-		 if(this.singel==false){
-			 if(this.getBegDayitem().getDate().compareTo(this.getEndDayitem().getDate())>0){
-				 return new Result().pass(Boolean.FALSE).cause("开始日期不能在结束日期之前");
-			 }
-			 if(this.getBegDayitem().getDate().compareTo(this.getEndDayitem().getDate())==0){
-				 
-			 }
-		 }
-		
 		
 		return new Result().pass(Boolean.TRUE);
 	}

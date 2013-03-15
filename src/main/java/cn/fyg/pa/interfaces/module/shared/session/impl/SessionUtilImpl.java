@@ -34,5 +34,12 @@ public class SessionUtilImpl implements SessionUtil {
 	public void invalidate(){
 		httpSession.invalidate();
 	}
+
+	@Override
+	public Object getValueAndRemove(String key) {
+		Object obj=httpSession.getAttribute(key);
+		httpSession.setAttribute(key, null);
+		return obj;
+	}
 	
 }

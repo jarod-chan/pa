@@ -1,33 +1,26 @@
 package cn.fyg.pa.domain.model.busiout;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 
 @Embeddable
-public class Dayitem {
-	
-	public static final BigDecimal ITEM_VALUE=new BigDecimal("0.5");
+public class Dayitem implements Comparable<Dayitem> {
+
 	
 	@Column(name="date_")
-	@Temporal(TemporalType.DATE)
-	private Date date;//日期
+	private Long date;//日期
 	
 	@Enumerated(EnumType.STRING)
 	private AMPM ampm;//上下午
 
-	
-	public Date getDate() {
+	public Long getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 
@@ -38,6 +31,17 @@ public class Dayitem {
 	public void setAmpm(AMPM ampm) {
 		this.ampm = ampm;
 	}
+	
+
+	@Override
+	public int compareTo(Dayitem another) {
+		if(another==null)
+			throw new NullPointerException();
+		Long thisvalue=(this.date-1)*2+this.ampm.value();
+		Long anotherValue=(another.getDate()-1)*2+another.getAmpm().value();
+		return thisvalue.compareTo(anotherValue);
+	}
+	
 	
 	
 

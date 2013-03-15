@@ -1,6 +1,6 @@
 package cn.fyg.pa.interfaces.module.shared.bean;
 
-import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
+import cn.fyg.pa.infrastructure.util.DateTool;
 
 public class YearAndMonthBean {
 	private Long year;

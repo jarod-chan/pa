@@ -1,7 +1,7 @@
 package cn.fyg.pa.domain.model.monthchk;
 
 import cn.fyg.pa.domain.model.person.Person;
-import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
+import cn.fyg.pa.infrastructure.util.DateTool;
 
 public class MonthChkFactory {
 

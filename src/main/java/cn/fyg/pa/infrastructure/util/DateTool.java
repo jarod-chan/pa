@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.shared.tool;
+package cn.fyg.pa.infrastructure.util;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,22 +7,34 @@ import java.util.List;
 
 public class DateTool {
 	public static Long BEG_YEAR=2012L;
+	private final Calendar today;
 	private final Calendar thisMonthFirstDay;
 	private final Calendar prevMonthFirstDay;
+	private final Calendar thisMonthLastDay;
 	
 	public DateTool(){
-		Calendar day=Calendar.getInstance();
-		day.set(Calendar.DATE, 1);
+		this.today=Calendar.getInstance();
 		
-		thisMonthFirstDay=createNewCalendar(day);
-		day.add(Calendar.MONTH, -1);
-		prevMonthFirstDay=createNewCalendar(day);
+		Calendar var=copyCalendar(this.today);
+		var.set(Calendar.DATE, 1);
+		this.thisMonthFirstDay=var;
 		
+		var=copyCalendar(this.today);
+		var.set(Calendar.DATE, 1);
+		var.add(Calendar.MONTH, -1);
+		this.prevMonthFirstDay=var;
+		
+		var=copyCalendar(this.today);
+		var.set(Calendar.DATE, 1);
+		var.add(Calendar.MONTH, 1);
+		var.add(Calendar.DATE, -1);
+		this.thisMonthLastDay=var;
 	
 	}
-	private static Calendar createNewCalendar(Calendar calendar){
+	
+	private Calendar copyCalendar(final Calendar today) {
 		Calendar newCalendar=Calendar.getInstance();
-		newCalendar.setTime(calendar.getTime());
+		newCalendar.setTime(today.getTime());
 		return newCalendar;
 	}
 	
@@ -59,6 +71,16 @@ public class DateTool {
 		}
 		Collections.reverse(months);
 		return months;
+	}
+	
+	public List<Long> theDaysAfterToday(){
+		List<Long> days=new ArrayList<Long>();
+		int begday=this.today.get(Calendar.DATE);
+		int endday=this.thisMonthLastDay.get(Calendar.DATE);
+		for(int i=begday;i<=endday;i++){
+			days.add(new Long(i));
+		}
+		return days;
 	}
 
 }

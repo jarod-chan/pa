@@ -5,7 +5,6 @@ import cn.fyg.pa.domain.shared.CommonEnum;
 
 public enum BusiState implements CommonEnum {
 	new_("新建"),
-	saved("保存"),
 	committed("已提交"),
 	confirmed("已确认"),
 	voided("作废"); 

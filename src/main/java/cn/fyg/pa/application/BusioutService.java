@@ -11,5 +11,7 @@ public interface BusioutService {
 	Result verify(Busiout busiout);
 	
 	Busiout save(Busiout busiout);
+	
+	String getNextNo(Person person,Long year,Long month);
 
 }
