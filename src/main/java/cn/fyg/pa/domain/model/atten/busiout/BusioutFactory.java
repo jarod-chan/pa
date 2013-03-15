@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model.busiout;
+package cn.fyg.pa.domain.model.atten.busiout;
 
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.infrastructure.util.DateTool;

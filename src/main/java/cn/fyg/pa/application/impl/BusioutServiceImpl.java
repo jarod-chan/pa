@@ -7,9 +7,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import cn.fyg.pa.application.BusioutService;
-import cn.fyg.pa.domain.model.busiout.Busiout;
-import cn.fyg.pa.domain.model.busiout.BusioutFactory;
-import cn.fyg.pa.domain.model.busiout.BusioutRepository;
+import cn.fyg.pa.domain.model.atten.busiout.Busiout;
+import cn.fyg.pa.domain.model.atten.busiout.BusioutFactory;
+import cn.fyg.pa.domain.model.atten.busiout.BusioutRepository;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.Result;
 import cn.fyg.pa.infrastructure.util.NoComputer;
@@ -33,7 +33,7 @@ public class BusioutServiceImpl implements BusioutService {
 
 	@Override
 	public Result verify(Busiout busiout) {
-		return busiout.verifyself();
+		return busiout.verify();
 	}
 
 	@Override

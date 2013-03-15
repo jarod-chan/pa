@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model.busiout;
+package cn.fyg.pa.domain.model.atten.common;
 
 import cn.fyg.pa.domain.shared.CommonEnum;
 

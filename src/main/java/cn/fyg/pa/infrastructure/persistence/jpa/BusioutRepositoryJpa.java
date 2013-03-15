@@ -8,8 +8,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.fyg.pa.domain.model.busiout.Busiout;
-import cn.fyg.pa.domain.model.busiout.BusioutRepository;
+import cn.fyg.pa.domain.model.atten.busiout.Busiout;
+import cn.fyg.pa.domain.model.atten.busiout.BusioutRepository;
 import cn.fyg.pa.domain.model.person.Person;
 
 @Repository
@@ -32,15 +32,12 @@ public class BusioutRepositoryJpa implements BusioutRepository {
 	public String getMaxNo(Person person, Long year, Long month) {
 		String jpql="select a.no from Busiout a " +
 				"where a.id=(select max(b.id) from Busiout b where b.person=:person and b.year=:year and b.month=:month ) ";
-		@SuppressWarnings("unchecked")
-		List<String> resultList = entityManager.createQuery(jpql)
+		List<String> resultList = entityManager.createQuery(jpql,String.class)
 			.setParameter("person", person)
 			.setParameter("year", year)
 			.setParameter("month", month)
 			.getResultList();
-		if(resultList.isEmpty())
-			return null;
-		return resultList.get(0);
+		return resultList.isEmpty()?null:resultList.get(0);
 	}
 
 	@Override
@@ -48,8 +45,7 @@ public class BusioutRepositoryJpa implements BusioutRepository {
 		String jpql="select b " +
 				"from Busiout b where b.person=:person and b.year=:year and b.month=:month " +
 				"order by b.id ";
-		@SuppressWarnings("unchecked")
-		List<Busiout> resultList = entityManager.createQuery(jpql)
+		List<Busiout> resultList = entityManager.createQuery(jpql,Busiout.class)
 			.setParameter("person", person)
 			.setParameter("year", year)
 			.setParameter("month", month)

@@ -1,21 +1,12 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
+<%@ include file="../../common/common.jsp"%>
 <html>
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../../common/head.jsp"%>
 
 <script type="text/javascript">
 	$(function(){
-		$("#btn_singel").click(function(){
-			$("#span_end").toggle();
-			var singel=$("input[name=singel]");
-			if($("#span_end").is(":visible")){
-				singel.val("false");
-			}else{
-				singel.val("true");
-			}
-		});
-		
+
 		$("#btnCommit").click(function(){
 			var actionFrom=$("form");
 			var oldAction=actionFrom.attr("action");
@@ -42,7 +33,7 @@
 	
 		
 
-<%@ include file="../common/message.jsp"%>
+<%@ include file="../../common/message.jsp"%>
 
 <form action="/${ctx}/atten/${person.id}/busiout" method="post">
 

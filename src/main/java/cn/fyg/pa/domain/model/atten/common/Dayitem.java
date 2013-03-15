@@ -1,9 +1,10 @@
-package cn.fyg.pa.domain.model.busiout;
+package cn.fyg.pa.domain.model.atten.common;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+
 
 
 @Embeddable

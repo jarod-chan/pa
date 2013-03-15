@@ -1,4 +1,4 @@
-package cn.fyg.pa.domain.model.busiout;
+package cn.fyg.pa.domain.model.atten.preatten;
 
 import java.util.Date;
 
@@ -20,48 +20,40 @@ import javax.persistence.TemporalType;
 
 import org.apache.commons.lang.StringUtils;
 
+import cn.fyg.pa.domain.model.atten.common.Dayitem;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.Result;
 
-/**
- *公事外出
- */
 @Entity
-@Table(name="at_busiout")
-public class Busiout {
+@Table(name="at_preatten")
+public class Preatten {
 	
 	/**
-	 * 公务外出
+	 * 预约打卡
 	 */
-	public static final String BUSINESS_CODE="GC";
+	public static final String BUSINESS_CODE="YD";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long id;//id
 	
 	private String no;//编号
 	
 	@Enumerated(EnumType.STRING)
-	private BusiState busiState;//状态
+	private Prestate state; 
 	
-	private Long year;//请假年份
+	@Column(name="year_")
+	private Long year;//年份
 	
-	private Long month;//请假月份
-	
-	@Embedded
-	@AttributeOverrides({
-	    @AttributeOverride(name="date", column=@Column(name="beg_date")),
-	    @AttributeOverride(name="ampm", column=@Column(name="beg_ampm"))
-	})
-	private Dayitem begDayitem;//开始日期
+	@Column(name="month_")
+	private Long month;//月份
 	
 	@Embedded
 	@AttributeOverrides({
-		 @AttributeOverride(name="date", column=@Column(name="end_date")),
-		 @AttributeOverride(name="ampm", column=@Column(name="end_ampm"))
+		 @AttributeOverride(name="date", column=@Column(name="di_date")),
+		 @AttributeOverride(name="ampm", column=@Column(name="di_ampm"))
 	})
-	private Dayitem endDayitem;//结束日期
-	
+	private Dayitem dayitem;//预约时间
 	
 	@Column(length=512)
 	private String  reason;//事由
@@ -72,7 +64,6 @@ public class Busiout {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date commitDate;//提交日期
-	
 
 	public Long getId() {
 		return id;
@@ -81,7 +72,6 @@ public class Busiout {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 
 	public String getNo() {
 		return no;
@@ -91,28 +81,36 @@ public class Busiout {
 		this.no = no;
 	}
 
-	public Dayitem getBegDayitem() {
-		return begDayitem;
+	public Prestate getState() {
+		return state;
 	}
 
-	public void setBegDayitem(Dayitem begDayitem) {
-		this.begDayitem = begDayitem;
+	public void setState(Prestate state) {
+		this.state = state;
 	}
 
-	public Dayitem getEndDayitem() {
-		return endDayitem;
+	public Long getYear() {
+		return year;
 	}
 
-	public void setEndDayitem(Dayitem endDayitem) {
-		this.endDayitem = endDayitem;
+	public void setYear(Long year) {
+		this.year = year;
 	}
 
-	public BusiState getBusiState() {
-		return busiState;
+	public Long getMonth() {
+		return month;
 	}
 
-	public void setBusiState(BusiState busiState) {
-		this.busiState = busiState;
+	public void setMonth(Long month) {
+		this.month = month;
+	}
+
+	public Dayitem getDayitem() {
+		return dayitem;
+	}
+
+	public void setDayitem(Dayitem dayitem) {
+		this.dayitem = dayitem;
 	}
 
 	public String getReason() {
@@ -139,32 +137,13 @@ public class Busiout {
 		this.commitDate = commitDate;
 	}
 
-	public Long getYear() {
-		return year;
-	}
-
-	public void setYear(Long year) {
-		this.year = year;
-	}
-
-	public Long getMonth() {
-		return month;
-	}
-
-	public void setMonth(Long month) {
-		this.month = month;
-	}
-
-	public Result verifyself() {
+	public Result verify() {
 		if(this.reason==null||StringUtils.trim(this.reason).equals("")){
-			return new Result().pass(Boolean.FALSE).cause("公出原因不能为空");
+			return new Result().pass(Boolean.FALSE).cause("预约打卡原因不能为空");
 		}
-		if(this.begDayitem.compareTo(this.endDayitem)>=0){
-			return new Result().pass(Boolean.FALSE).cause("结束日期不能在开始日期之前");
-		}
-		
 		return new Result().pass(Boolean.TRUE);
 	}
 
+	
 	
 }

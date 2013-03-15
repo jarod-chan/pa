@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
+<%@ include file="../../common/common.jsp"%>
 <html>
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../../common/head.jsp"%>
 
 <script type="text/javascript">
 	$(function(){
@@ -17,7 +17,7 @@
 <c:set target="${pagefunc}" property="name" value="公出申请" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/atten/${person.id}/busiout/list" />  
 
-<c:set target="${pagetitle}" property="name" value="公出申请新建" /> 
+<c:set target="${pagetitle}" property="name" value="公出申请查看" /> 
 <c:set target="${pagetitle}" property="url" value="/${ctx}/atten/${person.id}/busiout/new" /> 
 
 <c:set var="pagesize" value="990" scope="request"/>  
@@ -27,7 +27,7 @@
 	
 		
 
-<%@ include file="../common/message.jsp"%>
+<%@ include file="../../common/message.jsp"%>
 
 
 <table>

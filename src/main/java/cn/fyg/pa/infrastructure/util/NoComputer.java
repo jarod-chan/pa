@@ -12,11 +12,11 @@ public class NoComputer {
 	
 	private static final String SEPARATE = "-";
 	
-	public static String computeNo(String businessCode,String key,String maxNo){
+	public static String computeNo(String businessCode,String personKey,String maxNo){
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMM");
 		String prev=businessCode+simpleDateFormat.format(calendar.getTime()).substring(2);
-		String midl=key.toUpperCase();
+		String midl=personKey.toUpperCase();
 		String post=getNextFlowNo(maxNo);
 		return prev+SEPARATE+midl+SEPARATE+post;
 	}

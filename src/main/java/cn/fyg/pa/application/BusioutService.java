@@ -2,7 +2,7 @@ package cn.fyg.pa.application;
 
 import java.util.List;
 
-import cn.fyg.pa.domain.model.busiout.Busiout;
+import cn.fyg.pa.domain.model.atten.busiout.Busiout;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.Result;
 
