@@ -43,4 +43,23 @@ public class BusioutRepositoryJpa implements BusioutRepository {
 		return resultList.get(0);
 	}
 
+	@Override
+	public List<Busiout> getBusioutByPersonAndYearAndMonth(Person person,Long year, Long month) {
+		String jpql="select b " +
+				"from Busiout b where b.person=:person and b.year=:year and b.month=:month " +
+				"order by b.id ";
+		@SuppressWarnings("unchecked")
+		List<Busiout> resultList = entityManager.createQuery(jpql)
+			.setParameter("person", person)
+			.setParameter("year", year)
+			.setParameter("month", month)
+			.getResultList();
+		return resultList;
+	}
+
+	@Override
+	public Busiout find(Long id) {
+		return entityManager.find(Busiout.class, id);
+	}
+
 }

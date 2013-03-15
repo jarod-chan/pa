@@ -1,6 +1,7 @@
 package cn.fyg.pa.interfaces.module.atten.busiout;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,6 +24,7 @@ import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.shared.Result;
 import cn.fyg.pa.infrastructure.util.DateTool;
+import cn.fyg.pa.interfaces.module.shared.bean.YearAndMonthBean;
 import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
@@ -34,6 +36,7 @@ public class BusioutCtl {
 		String PATH = "busiout/";
 		String LIST = PATH + "list";
 		String NEW = PATH + "new";
+		String VIEW = PATH + "view";
 	}
 	
 	@Resource
@@ -49,7 +52,11 @@ public class BusioutCtl {
 	}
 	
 	@RequestMapping(value="list",method=RequestMethod.GET)
-	public String toList(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	public String toList(YearAndMonthBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+		List<Busiout> busioutList=busioutService.getBusioutByPersonAndYearAndMonth(person, queryBean.getYear(), queryBean.getMonth());
+		map.put("dateTool", new DateTool());
+		map.put("queryBean", queryBean);
+		map.put("busioutList", busioutList);
 		return Page.LIST;
 	}
 
@@ -82,6 +89,14 @@ public class BusioutCtl {
 		busiout.setCommitDate(new Date());
 		busioutService.save(busiout);
 		return "redirect:list";
+	}
+	
+	@RequestMapping(value="view/{busioutId}",method=RequestMethod.GET)
+	public String toView( @PathVariable("busioutId")Long busioutId,YearAndMonthBean queryBean,Map<String,Object> map){
+		Busiout busiout=busioutService.find(busioutId);
+		map.put("busiout", busiout);
+		map.put("queryBean", queryBean);
+		return Page.VIEW;
 	}
 	
 }

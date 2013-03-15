@@ -1,5 +1,7 @@
 package cn.fyg.pa.application.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -39,6 +41,16 @@ public class BusioutServiceImpl implements BusioutService {
 		String maxNo = busioutRepository.getMaxNo(person, year, month);
 		String nextNo = NoComputer.computeNo(Busiout.BUSINESS_CODE, person.getKey(), maxNo);
 		return nextNo;
+	}
+
+	@Override
+	public List<Busiout> getBusioutByPersonAndYearAndMonth(Person person,Long year, Long month) {
+		return busioutRepository.getBusioutByPersonAndYearAndMonth(person,year,month);
+	}
+
+	@Override
+	public Busiout find(Long id) {
+		return busioutRepository.find(id);
 	}
 	
 	
