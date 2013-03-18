@@ -14,6 +14,7 @@
 		<slf4j.version>1.5.10</slf4j.version>
 		<java.version>1.6</java.version>
 		<junit.version>4.8.2</junit.version>
+		<activi.version>5.12</activi.version>
 	</properties>
 	
 	<!-- database configuration -->
@@ -55,12 +56,21 @@
 			</properties>
 		</profile>
 	</profiles>
-	
-	
-	
 
 	<dependencies>
 
+		<!-- activi 整合 -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>${activi.version}</version>
+			<scope>compile</scope>
+		</dependency>
 
 		<!-- Bean Validation Dependencies -->
 
@@ -284,6 +294,12 @@
 	</dependencies>
 
 	<repositories>
+		<!-- activiti repository -->
+		<repository>
+			<id>activiti</id>
+			<name>Activiti Repository</name>
+			<url>http://maven.alfresco.com/nexus/content/repositories/activiti/</url>
+		</repository>
 		<!-- JBoss Repository used for Java EE 6 pieces -->
 		<repository>
 			<id>repository.jboss.org</id>

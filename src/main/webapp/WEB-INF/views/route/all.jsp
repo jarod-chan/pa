@@ -18,6 +18,9 @@
 </c:forEach>
 
 <br/>
-<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/><br>
+<br/>
+<br/>
+<input type="button" value="退出"  onclick="javascript:window.open('/${ctx}/login','_self')"/>
+
 </body>
 </html>
