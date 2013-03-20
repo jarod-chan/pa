@@ -58,7 +58,7 @@
 		.append(
 				$("<input type='button' class='add' onclick='add(this)' value='+'   />").css(leftcss).hide())
 		.append(
-				$("<input type='button' class='remove' onclick='remove(this)' value='-'   />").css(leftAndMargin).hide())
+				$("<input type='button' class='del' onclick='del(this)' value='-'   />").css(leftAndMargin).hide())
 		.append(
 				$("<input type='button' class='up' onclick='up(this)' value='/\\'  />").css(leftAndMargin).hide())
 		.append(
@@ -67,7 +67,7 @@
 	
 	$(document).ready(function() { 
 		$(".add").css(leftcss).hide();
-		$(".remove").add(".up").add(".down").css(leftAndMargin).hide();
+		$(".del").add(".up").add(".down").css(leftAndMargin).hide();
 		$(".tbldef tbody tr").click(rowClick);
 		$("textarea[name='idrTasks_summary']").css(summaryCss).attr(summaryLength).autoResize(summaryOption).iemaxlength();
 		$(".tbldef tbody tr").find("td:last").slice(0,contextSize).each(function(index){
@@ -88,7 +88,7 @@
 		reIndexTable();
 	}
 
-	function remove(obj) {
+	function del(obj) {
 		$(obj).parent().parent().remove();
 		reIndexTable();
 	}
@@ -180,7 +180,7 @@
 			</td>
 			<td>
 				<input type="button" class="add" onclick='add(this)' value="+"  />
-				<input type="button" class="remove" onclick='remove(this)' value="-"  />
+				<input type="button" class="del" onclick='del(this)' value="-"  />
 				<input type="button" class="up" onclick='up(this)' value="/\" />
 				<input type="button" class="down" onclick='down(this)' value="\/" />
 			</td>
