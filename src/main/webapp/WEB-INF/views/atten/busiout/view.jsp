@@ -14,10 +14,10 @@
 </script>
 </head>
 
-<c:set target="${pagefunc}" property="name" value="公出申请" />
+<c:set target="${pagefunc}" property="name" value="短期公出" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/atten/${person.id}/busiout/list" />  
 
-<c:set target="${pagetitle}" property="name" value="公出申请查看" /> 
+<c:set target="${pagetitle}" property="name" value="短期公出查看" /> 
 <c:set target="${pagetitle}" property="url" value="/${ctx}/atten/${person.id}/busiout/new" /> 
 
 <c:set var="pagesize" value="990" scope="request"/>  
@@ -42,12 +42,14 @@
 	</td>
 </tr>
 <tr>
-	<td colspan="2">原因：<br>
-	<textarea name="reason" style="height: 180px;width: 600px;">${busiout.reason}</textarea>
-	</td>
+	<td colspan="2">地点：${busiout.place}</td>
 </tr>
 <tr>
-	<td colspan="2">申请人：${busiout.person.name}</td>
+	<td colspan="2">原因：${busiout.reason}</td>
+</tr>
+<tr>
+	<td>上级：${busiout.leader}已同意本次外出。</td>
+	<td>申请人：${busiout.person.name}</td>
 </tr>
 </table>
 <br>

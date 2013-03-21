@@ -6,6 +6,9 @@
 
 <script type="text/javascript">
 	$(function(){
+		
+		//ie6不支持maxlength属性
+		$("input[name=place],input[name=leader],input[name=reason]").iemaxlength();
 
 		$("#btnCommit").click(function(){
 			var actionFrom=$("form");
@@ -20,10 +23,10 @@
 </script>
 </head>
 
-<c:set target="${pagefunc}" property="name" value="公出申请" />
+<c:set target="${pagefunc}" property="name" value="短期公出" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/atten/${person.id}/busiout/list" />  
 
-<c:set target="${pagetitle}" property="name" value="公出申请新建" /> 
+<c:set target="${pagetitle}" property="name" value="短期公出新建" /> 
 <c:set target="${pagetitle}" property="url" value="/${ctx}/atten/${person.id}/busiout/new" /> 
 
 <c:set var="pagesize" value="990" scope="request"/>  
@@ -42,7 +45,7 @@
 
 <table>
 <tr>
-	<td style="width: 300px;">编号：系统自动生成</td> <td style="width: 300px;">状态：${busiout.busiState.name}</td>
+	<td style="width: 300px;">编号：系统自动生成</td> <td style="width: 500px;">状态：${busiout.busiState.name}</td>
 </tr>
 <tr>
 	<td colspan="2">	
@@ -72,12 +75,15 @@
 	</td>
 </tr>
 <tr>
-	<td colspan="2">原因：<br>
-	<textarea name="reason" style="height: 180px;width: 600px;">${busiout.reason}</textarea>
+	<td colspan="2">地点：<input type="text"  style="width: 190px;" name="place"  maxlength="10" value="${busiout.place}" /><font style="color:red">[10字以内，简略写明外出地点]</font></td>
+</tr>
+<tr>
+	<td colspan="2">原因：<input type="text"  style="width: 500px;" name="reason" maxlength="50" value="${busiout.reason}" /><font style="color:red">[50字以内，简略写明外出原因]</font>
 	</td>
 </tr>
 <tr>
-	<td colspan="2">申请人：${busiout.person.name}</td>
+	<td >上级：<input type="text"  style="width: 100px;" name="leader" maxlength="10" value="${busiout.leader}" />已同意本次外出。</td>
+	<td >申请人：${busiout.person.name}</td>
 </tr>
 </table>
 <br>

@@ -23,7 +23,7 @@
 
 </head>
 
-<c:set target="${pagefunc}" property="name" value="公出申请" />
+<c:set target="${pagefunc}" property="name" value="短期公出" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/atten/${person.id}/busiout/list" />  
 
 
@@ -52,13 +52,14 @@
 <%@ include file="../../common/message.jsp"%>
 
 
-<table border=1 style="table-layout:fixed;width:800px;">
+<table border=1 style="table-layout:fixed;width:860px;">
 <thead>
 	<tr>
-		<th style="width:500px;">编号</th>
+		<th style="width:200px;">编号</th>
+		<th style="width:350x;">原因</th>
 		<th style="width:150px;">请假期间</th>
-		<th style="width:100px;">状态</th>
-		<th style="width:100px;">详细</th>
+		<th style="width:80px;">状态</th>
+		<th style="width:80px;">详细</th>
 	</tr>
 </thead>
 <tbody>
@@ -66,6 +67,9 @@
 	<tr>
 	<td>
 		${busiout.no}
+	</td>
+	<td>
+		${busiout.reason}
 	</td>
 	<td>
 		${busiout.begDayitem.date}日${busiout.begDayitem.ampm.name}-&gt;

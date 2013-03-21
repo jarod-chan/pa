@@ -43,13 +43,11 @@
 	<td colspan="2">地点：${preatten.place}</td>
 </tr>
 <tr>
-	<td colspan="2">上级：${preatten.leader}</td>
-</tr>
-<tr>
 	<td colspan="2">原因：${preatten.reason}</td>
 </tr>
 <tr>
-	<td colspan="2">申请人：${preatten.person.name}</td>
+	<td >上级：${preatten.leader}已同意本次外出。</td>
+	<td >申请人：${preatten.person.name}</td>
 </tr>
 </table>
 <br>

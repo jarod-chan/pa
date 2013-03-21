@@ -65,14 +65,12 @@
 	<td colspan="2">地点：<input type="text"  style="width: 190px;" name="place"  maxlength="10" value="${preatten.place}" /><font style="color:red">[10字以内，简略写明外出地点]</font></td>
 </tr>
 <tr>
-	<td colspan="2">上级：<input type="text"  style="width: 190px;" name="leader" maxlength="10" value="${preatten.leader}" /><font style="color:red">[10字以内，同意本次外出的领导姓名]</font></td>
-</tr>
-<tr>
 	<td colspan="2">原因：<input type="text"  style="width: 500px;" name="reason" maxlength="50" value="${preatten.reason}" /><font style="color:red">[50字以内，简略写明外出原因]</font>
 	</td>
 </tr>
 <tr>
-	<td colspan="2">申请人：${preatten.person.name}</td>
+	<td>上级：<input type="text"  style="width: 100px;" name="leader" maxlength="10" value="${preatten.leader}" />已同意本次外出。</td>
+	<td>申请人：${preatten.person.name}</td>
 </tr>
 </table>
 <br>

@@ -45,9 +45,18 @@ public class Busiout {
 	@Enumerated(EnumType.STRING)
 	private BusiState busiState;//状态
 	
+	private String place;//地点
+	
+	private String leader;//领导
+	
+	@Column(length=256)
+	private String  reason;//事由
+	
 	private Long year;//请假年份
 	
 	private Long month;//请假月份
+	
+	
 	
 	@Embedded
 	@AttributeOverrides({
@@ -62,10 +71,6 @@ public class Busiout {
 		 @AttributeOverride(name="ampm", column=@Column(name="end_ampm"))
 	})
 	private Dayitem endDayitem;//结束日期
-	
-	
-	@Column(length=512)
-	private String  reason;//事由
 	
 	@ManyToOne
 	@JoinColumn(name = "person_id")
@@ -155,10 +160,32 @@ public class Busiout {
 	public void setMonth(Long month) {
 		this.month = month;
 	}
+	
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public String getLeader() {
+		return leader;
+	}
+
+	public void setLeader(String leader) {
+		this.leader = leader;
+	}
 
 	public Result verify() {
-		if(this.reason==null||StringUtils.trim(this.reason).equals("")){
-			return new Result().pass(Boolean.FALSE).cause("公出原因不能为空");
+		if(StringUtils.isBlank(this.place)){
+			return new Result().pass(Boolean.FALSE).cause("【地点】不能为空");
+		}
+		if(StringUtils.isBlank(this.leader)){
+			return new Result().pass(Boolean.FALSE).cause("【上级】不能为空");
+		}
+		if(StringUtils.isBlank(this.reason)){
+			return new Result().pass(Boolean.FALSE).cause("【原因】不能为空");
 		}
 		if(this.begDayitem.compareTo(this.endDayitem)>=0){
 			return new Result().pass(Boolean.FALSE).cause("结束日期不能在开始日期之前");

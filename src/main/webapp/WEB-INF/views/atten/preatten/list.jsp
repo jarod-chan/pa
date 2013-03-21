@@ -56,7 +56,7 @@
 <thead>
 	<tr>
 		<th style="width:200px;">编号</th>
-		<th style="width:300x;">原因</th>
+		<th style="width:360x;">原因</th>
 		<th style="width:80px;">日期</th>
 		<th style="width:80px;">状态</th>
 		<th style="width:80px;">详细</th>
