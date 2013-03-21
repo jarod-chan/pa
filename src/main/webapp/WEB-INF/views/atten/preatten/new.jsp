@@ -6,6 +6,8 @@
 
 <script type="text/javascript">
 	$(function(){
+		//ie6不支持maxlength属性
+		$("input[name=place],input[name=leader],input[name=reason]").iemaxlength();
 		
 		$("#btnCommit").click(function(){
 			var actionFrom=$("form");
@@ -20,10 +22,10 @@
 </script>
 </head>
 
-<c:set target="${pagefunc}" property="name" value="预约打卡" />
+<c:set target="${pagefunc}" property="name" value="临时公出" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/atten/${person.id}/preatten/list" />  
 
-<c:set target="${pagetitle}" property="name" value="预约打卡新建" /> 
+<c:set target="${pagetitle}" property="name" value="临时公出新建" /> 
 <c:set target="${pagetitle}" property="url" value="/${ctx}/atten/${person.id}/preatten/new" /> 
 
 <c:set var="pagesize" value="990" scope="request"/>  
@@ -42,7 +44,7 @@
 
 <table>
 <tr>
-	<td style="width: 300px;">编号：系统自动生成</td> <td style="width: 300px;">状态：${preatten.state.name}</td>
+	<td style="width: 300px;">编号：系统自动生成</td> <td style="width: 500px;">状态：${preatten.state.name}</td>
 </tr>
 <tr>
 	<td colspan="2">	
@@ -60,8 +62,13 @@
 	</td>
 </tr>
 <tr>
-	<td colspan="2">原因：<br>
-	<textarea name="reason" style="height: 180px;width: 600px;">${preatten.reason}</textarea>
+	<td colspan="2">地点：<input type="text"  style="width: 190px;" name="place"  maxlength="10" value="${preatten.place}" /><font style="color:red">[10字以内，简略写明外出地点]</font></td>
+</tr>
+<tr>
+	<td colspan="2">上级：<input type="text"  style="width: 190px;" name="leader" maxlength="10" value="${preatten.leader}" /><font style="color:red">[10字以内，同意本次外出的领导姓名]</font></td>
+</tr>
+<tr>
+	<td colspan="2">原因：<input type="text"  style="width: 500px;" name="reason" maxlength="50" value="${preatten.reason}" /><font style="color:red">[50字以内，简略写明外出原因]</font>
 	</td>
 </tr>
 <tr>

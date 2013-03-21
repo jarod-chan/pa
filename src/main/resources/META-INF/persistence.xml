@@ -5,7 +5,6 @@
       http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 	version="1.0">
 
-
 	<persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
 	</persistence-unit>
 

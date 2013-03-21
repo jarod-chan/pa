@@ -29,9 +29,9 @@ import cn.fyg.pa.domain.shared.Result;
 public class Preatten {
 	
 	/**
-	 * 预约打卡
+	 * 临时公出
 	 */
-	public static final String BUSINESS_CODE="YD";
+	public static final String BUSINESS_CODE="LS";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,6 +41,13 @@ public class Preatten {
 	
 	@Enumerated(EnumType.STRING)
 	private Prestate state; 
+	
+	private String place;//地点
+	
+	private String leader;//领导
+	
+	@Column(length=256)
+	private String  reason;//事由
 	
 	@Column(name="year_")
 	private Long year;//年份
@@ -55,8 +62,7 @@ public class Preatten {
 	})
 	private Dayitem dayitem;//预约时间
 	
-	@Column(length=512)
-	private String  reason;//事由
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "person_id")
@@ -136,11 +142,34 @@ public class Preatten {
 	public void setCommitDate(Date commitDate) {
 		this.commitDate = commitDate;
 	}
+	
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public String getLeader() {
+		return leader;
+	}
+
+	public void setLeader(String leader) {
+		this.leader = leader;
+	}
 
 	public Result verify() {
-		if(this.reason==null||StringUtils.trim(this.reason).equals("")){
-			return new Result().pass(Boolean.FALSE).cause("预约打卡原因不能为空");
+		if(StringUtils.isBlank(this.place)){
+			return new Result().pass(Boolean.FALSE).cause("【地点】不能为空");
 		}
+		if(StringUtils.isBlank(this.leader)){
+			return new Result().pass(Boolean.FALSE).cause("【上级】不能为空");
+		}
+		if(StringUtils.isBlank(this.reason)){
+			return new Result().pass(Boolean.FALSE).cause("【原因】不能为空");
+		}
+		
 		return new Result().pass(Boolean.TRUE);
 	}
 

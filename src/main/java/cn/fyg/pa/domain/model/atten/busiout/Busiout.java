@@ -32,9 +32,9 @@ import cn.fyg.pa.domain.shared.Result;
 public class Busiout {
 	
 	/**
-	 * 公务外出
+	 * 短期公出
 	 */
-	public static final String BUSINESS_CODE="GC";
+	public static final String BUSINESS_CODE="DQ";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

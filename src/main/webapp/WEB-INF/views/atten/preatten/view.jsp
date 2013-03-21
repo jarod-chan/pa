@@ -14,11 +14,11 @@
 </script>
 </head>
 
-<c:set target="${pagefunc}" property="name" value="预约打卡" />
+<c:set target="${pagefunc}" property="name" value="临时公出" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/atten/${person.id}/preatten/list" />  
 
-<c:set target="${pagetitle}" property="name" value="预约打卡查看" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/atten/${person.id}/preatten/new" /> 
+<c:set target="${pagetitle}" property="name" value="临时公出查看" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/atten/${person.id}/preatten/view/${preatten.id}" /> 
 
 <c:set var="pagesize" value="990" scope="request"/>  
 <body>
@@ -40,9 +40,13 @@
 	</td>
 </tr>
 <tr>
-	<td colspan="2">原因：<br>
-	<textarea name="reason" style="height: 180px;width: 600px;">${preatten.reason}</textarea>
-	</td>
+	<td colspan="2">地点：${preatten.place}</td>
+</tr>
+<tr>
+	<td colspan="2">上级：${preatten.leader}</td>
+</tr>
+<tr>
+	<td colspan="2">原因：${preatten.reason}</td>
 </tr>
 <tr>
 	<td colspan="2">申请人：${preatten.person.name}</td>

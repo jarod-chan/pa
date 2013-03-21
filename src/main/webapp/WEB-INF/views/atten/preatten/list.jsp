@@ -23,7 +23,7 @@
 
 </head>
 
-<c:set target="${pagefunc}" property="name" value="预约打卡" />
+<c:set target="${pagefunc}" property="name" value="临时公出" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/atten/${person.id}/preatten/list" />  
 
 
@@ -55,10 +55,11 @@
 <table border=1 style="table-layout:fixed;width:800px;">
 <thead>
 	<tr>
-		<th style="width:500px;">编号</th>
-		<th style="width:150px;">预约时间</th>
-		<th style="width:100px;">状态</th>
-		<th style="width:100px;">详细</th>
+		<th style="width:200px;">编号</th>
+		<th style="width:300x;">原因</th>
+		<th style="width:80px;">日期</th>
+		<th style="width:80px;">状态</th>
+		<th style="width:80px;">详细</th>
 	</tr>
 </thead>
 <tbody>
@@ -66,6 +67,9 @@
 	<tr>
 	<td>
 		${preatten.no}
+	</td>
+	<td>
+		${preatten.reason}
 	</td>
 	<td>
 		${preatten.dayitem.date}日${preatten.dayitem.ampm.name}
