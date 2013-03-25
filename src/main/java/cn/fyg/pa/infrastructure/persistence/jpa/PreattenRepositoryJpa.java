@@ -21,7 +21,7 @@ public class PreattenRepositoryJpa implements PreattenRepository {
 	@Override
 	public String getMaxNo(Person person, Long year, Long month) {
 		String jpql="select a.no from Preatten a "+
-				"where a.id=(select max(b.id) from Preatten b where b.person=:person and b.year=:year and b.month=:month )";
+				"where a.id=(select max(b.id) from Preatten b where b.person=:person and b.dayitem.year=:year and b.dayitem.month=:month )";
 		List<String> resultList = entityManager.createQuery(jpql, String.class)
 			.setParameter("person", person)
 			.setParameter("year", year)
@@ -48,7 +48,7 @@ public class PreattenRepositoryJpa implements PreattenRepository {
 	@Override
 	public List<Preatten> findByPersonAndYearAndMonth(Person person, Long year,Long month) {
 		String jpql="select p from Preatten p "+
-				"where p.person=:person and p.year=:year and p.month=:month "+
+				"where p.person=:person and p.dayitem.year=:year and p.dayitem.month=:month "+
 				"order by p.id";
 		List<Preatten> resultList = entityManager.createQuery(jpql, Preatten.class)
 			.setParameter("person", person)

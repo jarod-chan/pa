@@ -83,7 +83,7 @@ public class BusioutCtl {
 			sessionUtil.setValue("busiout", busiout);
 			return "redirect:new";
 		}
-		busiout.setNo(busioutService.getNextNo(person, busiout.getYear(), busiout.getMonth()));
+		busiout.setNo(busioutService.getNextNo(person, busiout.getBegDayitem().getYear(), busiout.getBegDayitem().getMonth()));
 		busiout.setPerson(person);
 		busiout.setBusiState(BusiState.committed);
 		busiout.setCommitDate(new Date());

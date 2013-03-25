@@ -31,7 +31,7 @@ public class BusioutRepositoryJpa implements BusioutRepository {
 	@Override
 	public String getMaxNo(Person person, Long year, Long month) {
 		String jpql="select a.no from Busiout a " +
-				"where a.id=(select max(b.id) from Busiout b where b.person=:person and b.year=:year and b.month=:month ) ";
+				"where a.id=(select max(b.id) from Busiout b where b.person=:person and b.begDayitem.year=:year and b.begDayitem.month=:month ) ";
 		List<String> resultList = entityManager.createQuery(jpql,String.class)
 			.setParameter("person", person)
 			.setParameter("year", year)
@@ -43,7 +43,7 @@ public class BusioutRepositoryJpa implements BusioutRepository {
 	@Override
 	public List<Busiout> getBusioutByPersonAndYearAndMonth(Person person,Long year, Long month) {
 		String jpql="select b " +
-				"from Busiout b where b.person=:person and b.year=:year and b.month=:month " +
+				"from Busiout b where b.person=:person and b.begDayitem.year=:year and b.begDayitem.month=:month " +
 				"order by b.id ";
 		List<Busiout> resultList = entityManager.createQuery(jpql,Busiout.class)
 			.setParameter("person", person)

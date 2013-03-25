@@ -39,6 +39,7 @@ public class PreattenServiceImpl implements PreattenService {
 
 	@Override
 	public Preatten save(Preatten preatten) {
+		preatten.computeDayitemValueBeforeSave();
 		return preattenRepository.save(preatten);
 	}
 

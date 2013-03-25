@@ -47,6 +47,10 @@ public class DateTool {
 		return 1L+thisMonthFirstDay.get(Calendar.MONTH);
 	}
 	
+	public Long getCurrentDay(){
+		return 1L+thisMonthFirstDay.get(Calendar.DATE);
+	}
+	
 	public Long getPrevMonthYear(){
 		return 0L+prevMonthFirstDay.get(Calendar.YEAR);
 	}

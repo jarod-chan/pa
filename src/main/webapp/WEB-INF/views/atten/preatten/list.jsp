@@ -57,7 +57,7 @@
 	<tr>
 		<th style="width:200px;">编号</th>
 		<th style="width:360x;">原因</th>
-		<th style="width:80px;">日期</th>
+		<th style="width:80px;">公出日期</th>
 		<th style="width:80px;">状态</th>
 		<th style="width:80px;">详细</th>
 	</tr>
@@ -72,7 +72,7 @@
 		${preatten.reason}
 	</td>
 	<td>
-		${preatten.dayitem.date}日${preatten.dayitem.ampm.name}
+		${preatten.dayitem.day}日${preatten.dayitem.ampm.name}
 	</td>
 	<td>
 		${preatten.state.name}

@@ -36,7 +36,7 @@
 </tr>
 <tr>
 	<td colspan="2">	
-		日期：${preatten.year}年${preatten.month}月${preatten.dayitem.date}日${preatten.dayitem.ampm.name}
+		日期：${preatten.dayitem.year}年${preatten.dayitem.month}月${preatten.dayitem.day}日${preatten.dayitem.ampm.name}
 	</td>
 </tr>
 <tr>

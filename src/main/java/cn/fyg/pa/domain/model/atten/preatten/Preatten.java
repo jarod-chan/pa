@@ -49,20 +49,15 @@ public class Preatten {
 	@Column(length=256)
 	private String  reason;//事由
 	
-	@Column(name="year_")
-	private Long year;//年份
-	
-	@Column(name="month_")
-	private Long month;//月份
-	
 	@Embedded
 	@AttributeOverrides({
-		 @AttributeOverride(name="date", column=@Column(name="di_date")),
-		 @AttributeOverride(name="ampm", column=@Column(name="di_ampm"))
+		 @AttributeOverride(name="year", column=@Column(name="di_year")),
+		 @AttributeOverride(name="month", column=@Column(name="di_month")),
+		 @AttributeOverride(name="day", column=@Column(name="di_day")),
+		 @AttributeOverride(name="ampm", column=@Column(name="di_ampm")),
+		 @AttributeOverride(name="value", column=@Column(name="di_value"))
 	})
 	private Dayitem dayitem;//预约时间
-	
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "person_id")
@@ -70,6 +65,11 @@ public class Preatten {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date commitDate;//提交日期
+	
+	public void computeDayitemValueBeforeSave(){
+		this.dayitem.computeValue();
+	}
+	
 
 	public Long getId() {
 		return id;
@@ -93,22 +93,6 @@ public class Preatten {
 
 	public void setState(Prestate state) {
 		this.state = state;
-	}
-
-	public Long getYear() {
-		return year;
-	}
-
-	public void setYear(Long year) {
-		this.year = year;
-	}
-
-	public Long getMonth() {
-		return month;
-	}
-
-	public void setMonth(Long month) {
-		this.month = month;
 	}
 
 	public Dayitem getDayitem() {

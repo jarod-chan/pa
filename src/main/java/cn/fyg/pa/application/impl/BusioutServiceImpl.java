@@ -28,6 +28,7 @@ public class BusioutServiceImpl implements BusioutService {
 
 	@Override
 	public Busiout save(Busiout busiout) {
+		busiout.computeDayitemValueBeforeSave();
 		return busioutRepository.save(busiout);
 	}
 

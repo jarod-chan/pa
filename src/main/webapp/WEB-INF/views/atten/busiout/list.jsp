@@ -57,7 +57,7 @@
 	<tr>
 		<th style="width:200px;">编号</th>
 		<th style="width:350x;">原因</th>
-		<th style="width:150px;">请假期间</th>
+		<th style="width:150px;">公出日期</th>
 		<th style="width:80px;">状态</th>
 		<th style="width:80px;">详细</th>
 	</tr>
@@ -72,8 +72,11 @@
 		${busiout.reason}
 	</td>
 	<td>
-		${busiout.begDayitem.date}日${busiout.begDayitem.ampm.name}-&gt;
-		${busiout.endDayitem.date}日${busiout.endDayitem.ampm.name}
+		${busiout.begDayitem.year}年${busiout.begDayitem.month}月${busiout.begDayitem.day}日${busiout.begDayitem.ampm.name}
+		<br>
+		-&gt;
+		<br>
+		${busiout.endDayitem.year}年${busiout.endDayitem.month}月${busiout.endDayitem.day}日${busiout.endDayitem.ampm.name}
 	</td>
 	<td>
 		${busiout.busiState.name}

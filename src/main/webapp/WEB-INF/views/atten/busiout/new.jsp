@@ -40,8 +40,6 @@
 
 <form action="/${ctx}/atten/${person.id}/busiout" method="post">
 
-<input type="hidden" name="year" value="${busiout.year}">
-<input type="hidden" name="month" value="${busiout.month}">
 
 <table>
 <tr>
@@ -49,10 +47,15 @@
 </tr>
 <tr>
 	<td colspan="2">	
-		日期：${busiout.year}年${busiout.month}月
-		<select name="begDayitem.date">
+		日期：<select name="begDayitem.year">
+			<option value="${busiout.begDayitem.year}" selected="true">${busiout.begDayitem.year}</option>
+		</select>年
+		<select name="begDayitem.month">
+			<option value="${busiout.begDayitem.month}" selected="true">${busiout.begDayitem.month}</option>
+		</select>月
+		<select name="begDayitem.day">
 			<c:forEach var="day" items="${dayList}">
-				<option value="${day}" <c:if test="${day==busiout.begDayitem.date}">selected="true"</c:if> >${day}</option>
+				<option value="${day}" <c:if test="${day==busiout.begDayitem.day}">selected="true"</c:if> >${day}</option>
 			</c:forEach>
 		</select>日
 		<select name="begDayitem.ampm">
@@ -60,10 +63,15 @@
 				<option value="${ampm}" <c:if test="${ampm==busiout.begDayitem.ampm}">selected="true"</c:if> >${ampm.name}</option>
 			</c:forEach>
 		</select>
-		&nbsp;<span>-&gt;</span>&nbsp;
-		<select name="endDayitem.date">
+		&nbsp;<span>-&gt;</span>&nbsp;<select name="endDayitem.year">
+			<option value="${busiout.endDayitem.year}" selected="true">${busiout.endDayitem.year}</option>
+		</select>年
+		<select name="endDayitem.month">
+			<option value="${busiout.endDayitem.month}" selected="true">${busiout.endDayitem.month}</option>
+		</select>月
+		<select name="endDayitem.day">
 			<c:forEach var="day" items="${dayList}">
-				<option value="${day}" <c:if test="${day==busiout.endDayitem.date}">selected="true"</c:if> >${day}</option>
+				<option value="${day}" <c:if test="${day==busiout.endDayitem.day}">selected="true"</c:if> >${day}</option>
 			</c:forEach>
 		</select>日
 	    <select name="endDayitem.ampm">

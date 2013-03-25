@@ -51,24 +51,24 @@ public class Busiout {
 	
 	@Column(length=256)
 	private String  reason;//事由
-	
-	private Long year;//请假年份
-	
-	private Long month;//请假月份
-	
-	
-	
+
 	@Embedded
 	@AttributeOverrides({
-	    @AttributeOverride(name="date", column=@Column(name="beg_date")),
-	    @AttributeOverride(name="ampm", column=@Column(name="beg_ampm"))
+		 @AttributeOverride(name="year", column=@Column(name="beg_year")),
+		 @AttributeOverride(name="month", column=@Column(name="beg_month")),
+		 @AttributeOverride(name="day", column=@Column(name="beg_day")),
+		 @AttributeOverride(name="ampm", column=@Column(name="beg_ampm")),
+		 @AttributeOverride(name="value", column=@Column(name="beg_value"))
 	})
 	private Dayitem begDayitem;//开始日期
 	
 	@Embedded
 	@AttributeOverrides({
-		 @AttributeOverride(name="date", column=@Column(name="end_date")),
-		 @AttributeOverride(name="ampm", column=@Column(name="end_ampm"))
+		 @AttributeOverride(name="year", column=@Column(name="end_year")),
+		 @AttributeOverride(name="month", column=@Column(name="end_month")),
+		 @AttributeOverride(name="day", column=@Column(name="end_day")),
+		 @AttributeOverride(name="ampm", column=@Column(name="end_ampm")),
+		 @AttributeOverride(name="value", column=@Column(name="end_value"))
 	})
 	private Dayitem endDayitem;//结束日期
 	
@@ -79,6 +79,10 @@ public class Busiout {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date commitDate;//提交日期
 	
+	public void computeDayitemValueBeforeSave(){
+		this.begDayitem.computeValue();
+		this.endDayitem.computeValue();
+	}
 
 	public Long getId() {
 		return id;
@@ -145,22 +149,6 @@ public class Busiout {
 		this.commitDate = commitDate;
 	}
 
-	public Long getYear() {
-		return year;
-	}
-
-	public void setYear(Long year) {
-		this.year = year;
-	}
-
-	public Long getMonth() {
-		return month;
-	}
-
-	public void setMonth(Long month) {
-		this.month = month;
-	}
-	
 	public String getPlace() {
 		return place;
 	}
@@ -187,7 +175,7 @@ public class Busiout {
 		if(StringUtils.isBlank(this.reason)){
 			return new Result().pass(Boolean.FALSE).cause("【原因】不能为空");
 		}
-		if(this.begDayitem.compareTo(this.endDayitem)>=0){
+		if(this.begDayitem.compareTo(this.endDayitem)>0){
 			return new Result().pass(Boolean.FALSE).cause("结束日期不能在开始日期之前");
 		}
 		

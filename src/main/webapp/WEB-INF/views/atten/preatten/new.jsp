@@ -39,8 +39,8 @@
 
 <form action="/${ctx}/atten/${person.id}/preatten" method="post">
 
-<input type="hidden" name="year" value="${preatten.year}">
-<input type="hidden" name="month" value="${preatten.month}">
+<input type="hidden" name="dayitem.year" value="${preatten.dayitem.year}">
+<input type="hidden" name="dayitem.month" value="${preatten.dayitem.month}">
 
 <table>
 <tr>
@@ -48,10 +48,10 @@
 </tr>
 <tr>
 	<td colspan="2">	
-		日期：${preatten.year}年${preatten.month}月
-		<select name="dayitem.date">
+		日期：${preatten.dayitem.year}年${preatten.dayitem.month}月
+		<select name="dayitem.day">
 			<c:forEach var="day" items="${dayList}">
-				<option value="${day}" <c:if test="${day==preatten.dayitem.date}">selected="true"</c:if> >${day}</option>
+				<option value="${day}" <c:if test="${day==preatten.dayitem.day}">selected="true"</c:if> >${day}</option>
 			</c:forEach>
 		</select>日
 		<select name="dayitem.ampm">

@@ -83,7 +83,7 @@ public class PreattenCtl {
 			sessionUtil.setValue("preatten", preatten);
 			return "redirect:new";
 		}
-		preatten.setNo(preattenService.getNextNo(person, preatten.getYear(), preatten.getMonth()));
+		preatten.setNo(preattenService.getNextNo(person, preatten.getDayitem().getYear(), preatten.getDayitem().getMonth()));
 		preatten.setPerson(person);
 		preatten.setState(Prestate.committed);
 		preatten.setCommitDate(new Date());
