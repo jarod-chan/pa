@@ -20,6 +20,63 @@
 		});
 	})
 </script>
+
+<style type="text/css">
+.calendar-month  {
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    width: 428px;
+    line-height: 30px;
+}
+
+.calendar-month  th{
+  	background: none repeat scroll 0 0 #666666;
+    color: #FFFFFF;
+}
+
+.calendar-month td, .calendar-month th {
+    border-bottom: 1px solid #999999;
+    border-left: 1px solid #999999;
+    padding: 0;
+    text-align: center;
+    width: 60px;
+}
+
+.calendar-title {
+	width: 426px;
+	text-align: right;
+	border-right: 1px solid #999999;
+    border-left: 1px solid #999999;
+    border-top: 1px solid #999999;
+}
+
+.calendar-title .nav-prev{
+	height: 18px;
+}
+
+.current-month .ampm{
+	display: none;
+	list-style:none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.current-month .ampm li {
+	float:left;
+	background:#CCC;
+	width:30px;
+	margin-left:0x;
+	line-height:30px;
+}
+
+.current-month .ampm li a{text-decoration: none;color:#000000;white-space:nowrap;display:block;text-align:center;height:30px;}
+.current-month .ampm li a:HOVER{background-color: #5BADFF;height: 30px;}
+.current-month .ampm li a:VISITED{color: #000000;height: 30px;}
+
+
+
+</style>
+
 </head>
 
 <c:set target="${pagefunc}" property="name" value="临时公出" />
@@ -30,6 +87,18 @@
 
 <c:set var="pagesize" value="990" scope="request"/>  
 <body>
+
+<span id="target">2013-3-20:上午</span><img id="idimg"  style="vertical-align: bottom;" src="/${ctx}/resources/img/calendar.gif">
+
+<script type="text/javascript">
+	$(function(){
+		$("#idimg").calendarWidget({
+		
+			begdate: '2013-1-3:am',
+			enddate: '2013-5-10:pm'
+		});
+	})
+</script>
 
 
 	

@@ -32,10 +32,6 @@
 <c:set var="pagesize" value="990" scope="request"/>  
 <body>
 
-
-	
-		
-
 <%@ include file="../../common/message.jsp"%>
 
 <form action="/${ctx}/atten/${person.id}/busiout" method="post">

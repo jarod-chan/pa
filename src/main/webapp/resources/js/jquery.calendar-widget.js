@@ -1,6 +1,12 @@
 (function($) { 
    
-	function calendarWidget(el, params) { 
+	function calendarWidget(params) { 
+		var monthNames = ['1', '2', '3', '4', '5', '6', '7', '8', '8', '10', '11', '12'];
+		var dayNames = ['日', '一', '二', '三', '四', '五', '六'];
+		
+		
+		
+		
 		
 		var now   = new Date();
 		var thismonth = now.getMonth();
@@ -13,8 +19,7 @@
 		
 		$.extend(opts, params);
 		
-		var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-		var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+		
 		month = i = parseInt(opts.month);
 		year = parseInt(opts.year);
 		var m = 0;
@@ -34,10 +39,13 @@
 				var prev_month = '<a href="?month=' + (month) + '&amp;year=' + (year) + '" title="' + monthNames[month - 1] + ' ' + (year) + '">' + monthNames[month - 1] + ' ' + (year) + '</a>';
 			}		
 				
-			table += ('<h3 id="current-month">'+monthNames[month]+' '+year+'</h3>');
-			// uncomment the following lines if you'd like to display calendar month based on 'month' and 'view' paramaters from the URL
-			//table += ('<div class="nav-prev">'+ prev_month +'</div>');
-			//table += ('<div class="nav-next">'+ next_month +'</div>');
+			table += ('<div class="calendar-title"><span id="current-month">'+year+'年'+monthNames[month]+'月</span>');
+			table += ('<input type="button"  class="nav-prev" value="&lt;" />');
+			table += ('&nbsp;');
+			table += ('<input type="button"  class="nav-prev" value="&gt;" />&nbsp;</div>');
+
+//			table += ('<div>'+ prev_month +'</div>');
+//			table += ('<div class="nav-next">'+ next_month +'</div>');
 			table += ('<table class="calendar-month " ' +'id="calendar-month'+i+' " cellspacing="0">');	
 		
 			table += '<tr>';
@@ -52,32 +60,34 @@
             var firstDayDate=new Date(year,month,1);
             var firstDay=firstDayDate.getDay();
 			
-			var prev_days = getDaysInMonth(month,year);
-            var firstDayDate=new Date(year,month,1);
-            var firstDay=firstDayDate.getDay();
-			
 			var prev_m = month == 0 ? 11 : month-1;
 			var prev_y = prev_m == 11 ? year - 1 : year;
 			var prev_days = getDaysInMonth(prev_m, prev_y);
 			firstDay = (firstDay == 0 && firstDayDate) ? 7 : firstDay;
 	
-			var i = 0;
             for (j=0;j<42;j++){
 			  
               if ((j<firstDay)){
-                table += ('<td class="other-month"><span class="day">'+ (prev_days-firstDay+j+1) +'</span></td>');
-			  } else if ((j>=firstDay+getDaysInMonth(month,year))) {
-				i = i+1;
-                table += ('<td class="other-month"><span class="day">'+ i +'</span></td>');			 
+                table += ('<td class="other-month"><span class="day">&nbsp;</span></td>');
+			  } else if (j>=firstDay+days) {
+                table += ('<td class="other-month"><span class="day">&nbsp;</span></td>');			 
               }else{
-                table += ('<td class="current-month day'+(j-firstDay+1)+'"><span class="day">'+(j-firstDay+1)+'</span></td>');
+                table += ('<td class="current-month day'+(j-firstDay+1)+'"><span class="day">'+(j-firstDay+1)+'</span><ul class="ampm"><li><a href="#">上午</a></li><li><a href="#">下午</a></li></ul></td>');
               }
               if (j%7==6)  table += ('</tr>');
             }
 
             table += ('</table>');
-
-		el.html(table);
+            
+            var div=$('<div><div>');
+    		div.css("position","absolute");
+    		div.css("left",30);
+    		div.css("top",300);
+    		div.css("background-color","#FFFFFF");
+    		div.html(table);
+    		$("body").append(div);
+    		
+            return div;
 	}
 	
 	function getDaysInMonth(month,year)  {
@@ -91,8 +101,33 @@
 	
 	
 	// jQuery plugin initialisation
-	$.fn.calendarWidget = function(params) {    
-		calendarWidget(this, params);		
+	$.fn.calendarWidget = function(params) { 
+		var obj=$(this);
+		var div=calendarWidget( params);
+		$(this).click(function(){
+			div.toggle();
+		});
+		$(".current-month",div).hover(
+			function(){
+				var t=$(this).find(".day").html();
+				if(t>10){
+				$(this).find(".day").hide();
+				$(this).find(".ampm").find("li:eq(0)").hide();
+				
+				$(this).find(".ampm").css("float","right").show();
+				}
+			},
+			function(){
+				$(this).find(".day").show();
+				$(this).find(".ampm").hide();
+			}
+		); 
+		
+		$(".current-month a",div).click(function(){
+			$("#target").html("DD");
+			obj.calendarWidget(params);
+		}); 
+		
 		return this; 
 	}; 
 
