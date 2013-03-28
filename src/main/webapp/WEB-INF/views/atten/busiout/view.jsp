@@ -38,7 +38,7 @@
 	<td colspan="2">	
 		日期：${busiout.begDayitem.year}年${busiout.begDayitem.month}月${busiout.begDayitem.day}日${busiout.begDayitem.ampm.name}
 		&nbsp;<span>-&gt;</span>&nbsp;
-		日期：${busiout.endDayitem.year}年${busiout.endDayitem.month}月${busiout.endDayitem.day}日${busiout.endDayitem.ampm.name}
+		${busiout.endDayitem.year}年${busiout.endDayitem.month}月${busiout.endDayitem.day}日${busiout.endDayitem.ampm.name}
 	</td>
 </tr>
 <tr>

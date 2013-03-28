@@ -18,7 +18,7 @@ import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 
 @Controller
 @RequestMapping("/atten/{personId}/task")
-public class ProcessCtl {
+public class TaskCtl {
 	
 	private static final String PATH = "atten/task/";
 	private interface Page {

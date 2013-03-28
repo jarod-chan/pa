@@ -8,7 +8,8 @@
 	    $(function() {
 	    	$('.btn_execute').click(function(){
 	    		var param=jQuery.parseJSON($(this).attr("param"));
-	    		$('<form/>',{action:'${ctx}/'+param.formKey+'/'+param.businessId,method:'get'})
+	    		var url=param.formKey.replace('{personId}',${person.id}).replace('{businessId}',param.businessId);
+	    		$('<form/>',{action:'/${ctx}/'+url})
 	    			.append($('<input/>',{type:'hidden',name:'taskId',value:param.taskId}))
 					.appendTo($("body"))
 				.submit();
@@ -18,6 +19,9 @@
 
 
 </head>
+<c:set target="${pagefunc}" property="name" value="任务中心" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/atten/${person.id}/task/list" />  
+
 <body class="tbody">
 		<h2>任务中心</h2>
 		<%@ include file="../../common/message.jsp"%> 
@@ -36,7 +40,7 @@
 						<td>${processTask.processName}</td>
 						<td>${processTask.taskName}</td>
 						<td>
-							<button class="btn_delete" param='{"taskId":"${processTask.taskId }","formKey":"${processTask.formKey}","businessId":"${processTask.businessId}"}'>处理</button>
+							<button class="btn_execute" param='{"taskId":"${processTask.taskId }","formKey":"${processTask.formKey}","businessId":"${processTask.businessId}"}'>处理</button>
 						</td>
 					</tr>
 				</c:forEach>

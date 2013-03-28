@@ -15,7 +15,6 @@
 <script type="text/javascript" src="/${ctx}/resources/js/myfloat.js"></script>
 <script type="text/javascript" src="/${ctx}/resources/js/jquery.autoresize.js"></script>
 <script type="text/javascript" src="/${ctx}/resources/js/ptahjs.js"></script>
-<script type="text/javascript" src="/${ctx}/resources/js/jquery.calendar-widget.js"  ></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
