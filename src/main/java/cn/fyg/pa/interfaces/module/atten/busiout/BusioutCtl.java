@@ -109,10 +109,15 @@ public class BusioutCtl {
 		busioutService.save(busiout);
 		
 		try{
+			String userKey = person.getKey();
 			Map<String, Object> variableMap = new HashMap<String, Object>();
 			variableMap.put(FlowConstant.BUSINESS_ID, busiout.getId());
-			variableMap.put(FlowConstant.APPLY_USER, person.getKey());
-			identityService.setAuthenticatedUserId(person.getKey());
+			variableMap.put(FlowConstant.APPLY_USER, userKey);
+			variableMap.put(BusioutVarName.CHECKER, userKey);
+			variableMap.put(BusioutVarName.OUTDAYS, busiout.computeBetweendays());
+			variableMap.put(BusioutVarName.IS_LAST, false);
+			variableMap.put(BusioutVarName.OPINION, ResultEnum.agree.val(String.class));
+			identityService.setAuthenticatedUserId(userKey);
 			runtimeService.startProcessInstanceByKey(BusioutVarName.PROCESS_DEFINITION_KEY, variableMap);			
 		} finally {
 			identityService.setAuthenticatedUserId(null);

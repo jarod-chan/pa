@@ -1,5 +1,6 @@
 package cn.fyg.pa.domain.model.atten.busiout;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.AttributeOverride;
@@ -82,6 +83,10 @@ public class Busiout {
 	public void computeDayitemValueBeforeSave(){
 		this.begDayitem.computeValue();
 		this.endDayitem.computeValue();
+	}
+	
+	public BigDecimal computeBetweendays(){
+		return this.endDayitem.sub(this.begDayitem);
 	}
 
 	public Long getId() {

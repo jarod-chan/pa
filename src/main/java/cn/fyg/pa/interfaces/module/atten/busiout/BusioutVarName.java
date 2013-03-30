@@ -8,16 +8,30 @@ public interface BusioutVarName {
 	String PROCESS_DEFINITION_KEY="pa-atten-busiout";
 
 	
+	/**
+	 * 最后审批人
+	 */
+	String CHECKER="checker";
 	
 	/**
 	 * 实际请假天数
 	 */
-	String ACTURL_DAY="acturlDay";
+	String OUTDAYS="outDays";
 	
 	/**
-	 *是否同意
+	 * 是否最后一次审批
 	 */
-	String IS_AGGREE="isAggree";
+	String IS_LAST="isLast";
+	
+	/**
+	 *审批意见
+	 */
+	String OPINION="opinion";
+	
+	/**
+	 * 总经理
+	 */
+	String IS_TMANAGE="isTmanage";
 
 	
 }

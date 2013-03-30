@@ -1,8 +1,13 @@
 package cn.fyg.pa.domain.model.atten.common;
 
+import java.math.BigDecimal;
+import java.util.Calendar;
+
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+
+import cn.fyg.pa.infrastructure.util.DateTool;
 
 @Embeddable
 public class Dayitem implements Comparable<Dayitem> {
@@ -21,6 +26,14 @@ public class Dayitem implements Comparable<Dayitem> {
 	public Long computeValue(){
 		this.value=this.year*100000+this.month*1000+this.day*10+this.ampm.value();
 		return this.value;
+	}
+	
+	public BigDecimal sub(Dayitem another){
+		Calendar thisday=DateTool.create(this.year, this.month, this.day);
+		Calendar anotherday=DateTool.create(another.getYear(), another.getMonth(), another.getDay());
+		//计算相差的天数
+		long betweenHalfdays=(thisday.getTimeInMillis()-anotherday.getTimeInMillis())/(1000*3600*24)*2+another.getAmpm().value()-this.ampm.value()+1; 
+		return new BigDecimal(betweenHalfdays).divide(new BigDecimal("2"), 2, BigDecimal.ROUND_HALF_UP);
 	}
 
 	public Long getYear() {

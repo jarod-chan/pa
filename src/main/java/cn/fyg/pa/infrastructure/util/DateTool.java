@@ -32,6 +32,12 @@ public class DateTool {
 	
 	}
 	
+	public static Calendar  create(Long year,Long month,Long day){
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year.intValue(), month.intValue()-1, day.intValue());
+		return calendar;
+	}
+	
 	private Calendar copyCalendar(final Calendar today) {
 		Calendar newCalendar=Calendar.getInstance();
 		newCalendar.setTime(today.getTime());
