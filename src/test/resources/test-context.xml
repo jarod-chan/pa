@@ -18,6 +18,7 @@
 	<tx:annotation-driven />
 	<context:component-scan base-package="cn.fyg.pa" >
 		<context:exclude-filter type="regex" expression="cn\.fyg\.pa\.interfaces\..*"/>
+		<context:exclude-filter type="assignable" expression="cn.fyg.pa.application.impl.WorkflowServiceImpl"/>
 	</context:component-scan>	
 
 </beans>
