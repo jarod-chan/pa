@@ -12,9 +12,9 @@ public enum ResultEnum implements CommonEnum {
 	
 	private String name;
 	
-	private Object val;//流程值，用来控制流程分支
+	private String val;//流程值，用来控制流程分支
 	
-	private ResultEnum(String name,Object val){
+	private ResultEnum(String name,String val){
 		this.name=name;
 		this.val=val;
 	}
@@ -29,11 +29,8 @@ public enum ResultEnum implements CommonEnum {
 		this.name=name;
 	}
 
-	public <T>T val(Class<T> resultClass) {
-		if(val==null) return null;
-		@SuppressWarnings("unchecked")
-		T ret=(T)resultClass;
-		return ret;
+	public String val() {
+		return this.val;
 	}
 	
 	public static List<ResultEnum> agreeItems(){

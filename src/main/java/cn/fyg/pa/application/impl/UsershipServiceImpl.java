@@ -9,7 +9,7 @@ import cn.fyg.pa.application.UsershipService;
 import cn.fyg.pa.domain.model.usership.Usership;
 import cn.fyg.pa.domain.model.usership.UsershipRepository;
 
-@Service
+@Service("usershipService")
 public class UsershipServiceImpl implements UsershipService {
 	
 	@Resource
@@ -18,7 +18,7 @@ public class UsershipServiceImpl implements UsershipService {
 	@Override
 	public String parent(String tree, String userKey) {
 		Usership usership = usershipRepository.find(tree, userKey);
-		return usership.getParentKey();
+		return usership==null? null:usership.getParentKey();
 	}
 
 	@Override

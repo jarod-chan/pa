@@ -14,7 +14,7 @@ import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.Result;
 import cn.fyg.pa.infrastructure.util.NoComputer;
 
-@Service
+@Service("busioutService")
 public class BusioutServiceImpl implements BusioutService {
 	
 	@Resource

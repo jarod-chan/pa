@@ -116,7 +116,7 @@ public class BusioutCtl {
 			variableMap.put(BusioutVarName.CHECKER, userKey);
 			variableMap.put(BusioutVarName.OUTDAYS, busiout.computeBetweendays());
 			variableMap.put(BusioutVarName.IS_LAST, false);
-			variableMap.put(BusioutVarName.OPINION, ResultEnum.agree.val(String.class));
+			variableMap.put(BusioutVarName.OPINION, ResultEnum.agree.val());
 			identityService.setAuthenticatedUserId(userKey);
 			runtimeService.startProcessInstanceByKey(BusioutVarName.PROCESS_DEFINITION_KEY, variableMap);			
 		} finally {
@@ -158,7 +158,7 @@ public class BusioutCtl {
 		opinion.setUserKey(person.getKey());
 		opinion.setUserName(person.getName());
 		opinionService.append(opinion);
-		//runtimeService.setVariableLocal(task.getExecutionId(), LeaveVarName.IS_AGGREE,opinion.getResult().<Boolean>val());
+		runtimeService.setVariableLocal(task.getExecutionId(), BusioutVarName.OPINION,opinion.getResult().val());
 		taskService.complete(task.getId());
 		redirectAttributes
 			.addFlashAttribute(Constant.MESSAGE_NAME,"任务完成！");

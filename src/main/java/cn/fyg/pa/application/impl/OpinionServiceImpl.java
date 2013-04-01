@@ -11,7 +11,7 @@ import cn.fyg.pa.application.OpinionService;
 import cn.fyg.pa.domain.model.atten.opinion.Opinion;
 import cn.fyg.pa.domain.model.atten.opinion.OpinionRepository;
 
-@Service
+@Service("opinionService")
 public class OpinionServiceImpl implements OpinionService {
 	
 	@Resource
