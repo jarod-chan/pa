@@ -9,6 +9,6 @@
 
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
-	<context:component-scan base-package="cn.fyg.pa" />
+	<context:component-scan base-package="cn.fyg.pa.interfaces" />
 	<tx:annotation-driven />
 </beans>
