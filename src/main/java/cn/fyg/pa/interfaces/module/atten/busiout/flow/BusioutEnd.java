@@ -23,7 +23,7 @@ public class BusioutEnd implements JavaDelegate {
 		Busiout busiout = busioutService.find(businessId);
 		//同意则状态变为确认，不同意则变为作废
 		if(ResultEnum.agree.val().equals(opinion)){
-			busiout.setBusiState(BusiState.confirmed);
+			busiout.setBusiState(BusiState.passed);
 		}
 		if(ResultEnum.disagree.val().equals(opinion)){
 			busiout.setBusiState(BusiState.voided);

@@ -78,9 +78,9 @@ function logout(){
 			<ul class="nav" style="float:left">
 				
 				<li>
-					<div><img class="img_down" src="/${ctx}/resources/img/down.gif" />勤假功能&nbsp;&nbsp;</div>
+					<div><img class="img_down" src="/${ctx}/resources/img/down.gif" />公出登记&nbsp;&nbsp;</div>
 					<ul>
-						<li><a href="/${ctx}/atten/${loginRet.personid}/task/list">&nbsp;&nbsp;任务中心&nbsp;&nbsp;</a></li>
+						<li><a href="/${ctx}/atten/${loginRet.personid}/task/list">&nbsp;&nbsp;公出审批&nbsp;&nbsp;</a></li>
 						<li><a href="/${ctx}/atten/${loginRet.personid}/preatten/list">&nbsp;&nbsp;临时公出&nbsp;&nbsp;</a></li>
 						<li><a href="/${ctx}/atten/${loginRet.personid}/busiout/list">&nbsp;&nbsp;短期公出&nbsp;&nbsp;</a></li>
 					</ul>

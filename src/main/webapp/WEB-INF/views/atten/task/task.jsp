@@ -19,11 +19,11 @@
 
 
 </head>
-<c:set target="${pagefunc}" property="name" value="任务中心" />
+<c:set target="${pagefunc}" property="name" value="公出审批" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/atten/${person.id}/task/list" />  
 
 <body class="tbody">
-		<h2>任务中心</h2>
+		<h2>公出审批</h2>
 		<%@ include file="../../common/message.jsp"%> 
 
 		<table border="1">

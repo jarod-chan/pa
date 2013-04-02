@@ -28,6 +28,7 @@ public class BusioutBeg implements JavaDelegate {
 		}
 		
 		//判断是否最后一个节点
+		execution.setVariableLocal(BusioutVarName.IS_TMANAGE, false);
 		String tag=usershipService.userTag("T1", parentKey);
 		RangeEnum level=RangeEnum.valueOf(tag);
 		RangeEnum requireLevel=RangeEnum.requireLevel(outDays);

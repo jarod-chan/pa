@@ -26,10 +26,10 @@
 </script>
 </head>
 
-<c:set target="${pagefunc}" property="name" value="任务中心" />
+<c:set target="${pagefunc}" property="name" value="公出审批" />
 <c:set target="${pagefunc}" property="url" value="/${ctx}/atten/${person.id}/task/list" />  
 
-<c:set target="${pagetitle}" property="name" value="任务执行" /> 
+<c:set target="${pagetitle}" property="name" value="审批单据" /> 
 <c:set target="${pagetitle}" property="url" value="#" /> 
 
 <c:set var="pagesize" value="990" scope="request"/>  
