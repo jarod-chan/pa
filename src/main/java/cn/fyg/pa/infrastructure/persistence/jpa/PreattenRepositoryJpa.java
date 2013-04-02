@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.domain.model.atten.preatten.Preatten;
 import cn.fyg.pa.domain.model.atten.preatten.PreattenRepository;
@@ -31,7 +30,6 @@ public class PreattenRepositoryJpa implements PreattenRepository {
 	}
 
 	@Override
-	@Transactional
 	public Preatten save(Preatten preatten) {
 		if(preatten.getId()==null){
 			entityManager.persist(preatten);

@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.domain.model.atten.busiout.Busiout;
 import cn.fyg.pa.domain.model.atten.busiout.BusioutRepository;
@@ -19,8 +18,7 @@ public class BusioutRepositoryJpa implements BusioutRepository {
 	private EntityManager entityManager;
 
 	@Override
-	@Transactional
-	public Busiout save(Busiout busiout) {
+	public Busiout save(Busiout busiout) {	
 		if(busiout.getId()==null){
 			entityManager.persist(busiout);
 			return busiout;

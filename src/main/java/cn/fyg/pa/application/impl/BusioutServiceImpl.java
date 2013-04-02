@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.application.BusioutService;
 import cn.fyg.pa.domain.model.atten.busiout.Busiout;
@@ -27,6 +28,7 @@ public class BusioutServiceImpl implements BusioutService {
 	}
 
 	@Override
+	@Transactional
 	public Busiout save(Busiout busiout) {
 		busiout.computeDayitemValueBeforeSave();
 		return busioutRepository.save(busiout);

@@ -12,6 +12,8 @@
 	<import resource="infrastructure-persistence.xml" />
 	<import resource="infrastructure-activiti.xml"/>
 	
+	<tx:annotation-driven />
+	
 	<context:component-scan base-package="cn.fyg.pa.infrastructure" />
 	<context:component-scan base-package="cn.fyg.pa.domain" />
 	<context:component-scan base-package="cn.fyg.pa.application" />

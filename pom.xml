@@ -14,7 +14,7 @@
 		<slf4j.version>1.5.10</slf4j.version>
 		<java.version>1.6</java.version>
 		<junit.version>4.8.2</junit.version>
-		<activi.version>5.10</activi.version>
+		<activi.version>5.12</activi.version>
 	</properties>
 	
 	<!-- database configuration -->

@@ -106,7 +106,7 @@ public class BusioutCtl {
 		busiout.setPerson(person);
 		busiout.setBusiState(BusiState.committed);
 		busiout.setCommitDate(new Date());
-		busioutService.save(busiout);
+		busiout=busioutService.save(busiout);
 		
 		try{
 			String userKey = person.getKey();
