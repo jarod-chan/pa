@@ -23,7 +23,7 @@ public class Six {
 			cascade = {CascadeType.ALL},
 			targetEntity = SixMany.class,
 			orphanRemoval=true)
-	@JoinColumn(name = "one_id")
+	@JoinColumn(name = "six_id")
 	private List<SixMany> manys=new ArrayList<SixMany>();
 
 	public Long getId() {
