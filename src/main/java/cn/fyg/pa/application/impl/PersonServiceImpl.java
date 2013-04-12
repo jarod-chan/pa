@@ -36,4 +36,9 @@ public class PersonServiceImpl implements PersonService {
 		personRepository.saveAll(persons);
 	}
 
+	@Override
+	public Person find(Long id) {
+		return personRepository.find(id);
+	}
+
 }

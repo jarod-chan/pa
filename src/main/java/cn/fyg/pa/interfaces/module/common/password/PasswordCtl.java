@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.fyg.pa.application.PersonService;
 import cn.fyg.pa.domain.model.person.Person;
-import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
@@ -22,13 +22,13 @@ import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 public class PasswordCtl {
 	
 	@Resource
-	PersonRepository personRepository;
-	@Resource
 	SessionUtil sessionUtil;
+	@Resource
+	PersonService personService;
 	
 	@ModelAttribute("person")
 	public Person initPerson(@PathVariable("personId") Long personId){
-		return personRepository.find(personId);
+		return personService.find(personId);
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
@@ -39,7 +39,6 @@ public class PasswordCtl {
 	}
 	
 
-	
 	@RequestMapping(value="",method=RequestMethod.POST)
 	public String savePassword(@ModelAttribute("person") Person person,PasswordPage page,Map<String,Object> map,HttpSession session){
 		page.setRealcsr(person.getChkstr());
@@ -51,12 +50,10 @@ public class PasswordCtl {
 		}
 		
 		person.setChkstr(page.getConfirmcsr());
-		personRepository.save(person);
+		personService.save(person);
 		sessionUtil.invalidate();
 		map.put(Constant.MESSAGE_NAME,"密码修改成功！");
 		return "password/sucess";	
 	}
-	
-	
 
 }
