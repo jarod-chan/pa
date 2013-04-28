@@ -54,7 +54,7 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 <div class="notification_context">
 	<div class="context">
 		<div class="top">
-			&nbsp;&nbsp;&nbsp;&nbsp;截止至3月31日，各职能部门通讯报道供稿情况通报如下：
+			&nbsp;&nbsp;&nbsp;&nbsp;截止至4月28日，各职能部门通讯报道供稿情况通报如下：
 		</div>
 		<div class="middle">
 			<table>
@@ -67,48 +67,55 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 					<th style="width:90px;">执行结果</th>
 				</tr>	
 				<tr>
-					<td >工程部</td><td>4</td><td style="width: 150px;">马 寄</td><td style="width: 50px;">1</td><td >1</td><td >0</td><td ></td>
+					<td rowspan="2">工程部</td><td rowspan="2">4</td><td style="width: 150px;">马 寄</td><td style="width: 50px;">1</td><td rowspan="2">4</td><td rowspan="2">1</td><td rowspan="2">完成</td>
+				</tr>
+				<tr>
+					<td>董灵君</td><td>3</td>
 				</tr>
 				
 				<tr>
-					<td>产品部</td><td>1</td><td>/</td><td>/</td><td>0</td><td>0</td><td></td>
+					<td>产品部</td><td>1</td><td>/</td><td>/</td><td>0</td><td>0</td><td>未完成</td>
 				</tr>
 				
 				<tr>
-					<td>技术部</td><td>1</td><td>/</td><td>/</td><td>0</td><td>0</td><td></td>
+					<td>技术部</td><td>1</td><td>/</td><td>/</td><td>0</td><td>0</td><td>未完成</td>
 				</tr>
 				
 				<tr>
-					<td>成本管理部</td><td>1</td><td>邬亚丹</td><td>1</td><td>1</td><td>1</td><td>完成</td>
+					<td>成本管理部</td><td>1</td><td>邬亚丹</td><td>2</td><td>2</td><td>1</td><td>完成</td>
 				</tr>
 				
 				<tr>
-					<td >销售部</td><td>2</td><td>王黎闻</td><td>1</td><td >1</td><td >0</td><td >完成</td>
+					<td rowspan="2">销售部</td><td rowspan="2">2</td><td>王黎闻</td><td>1</td><td rowspan="2" >2</td><td rowspan="2" >1</td><td rowspan="2" >完成</td>
+				</tr>
+				<tr>
+					<td>王如虹</td><td>1</td>
+				</tr>
+				
+				
+				<tr>
+					<td>采购部</td><td>1</td><td >王俊</td><td>1</td><td>1</td><td>(5月发)</td><td>完成</td>
 				</tr>
 				
 				<tr>
-					<td>采购部</td><td>1</td><td >/</td><td>/</td><td>0</td><td>0</td><td></td>
+					<td>财务部</td><td>1</td><td >林 俊</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				
 				<tr>
-					<td>财务部</td><td>1</td><td >/</td><td>/</td><td>0</td><td>0</td><td></td>
-				</tr>
-				
-				<tr>
-					<td rowspan="2">办公室</td><td rowspan="2">4</td><td >毛微</td><td>2</td><td rowspan="2">3</td><td rowspan="2">3</td><td rowspan="2">完成</td>
+					<td rowspan="2">办公室</td><td rowspan="2">4</td><td >毛微</td><td>4</td><td rowspan="2">5</td><td rowspan="2">4</td><td rowspan="2">完成</td>
 				</tr>
 				<tr>
 					<td>全小锋</td><td>1</td>
 				</tr>
 				
 				<tr>
-					<td colspan="7">3月优秀通讯员：邬亚丹</td>
+					<td colspan="7">本月优秀通讯员：董灵君</td>
 				</tr>
 			</table>
 		</div>
 		<div class="bottom">
 			<strong>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于个别部门供稿存在敷衍应付现象，为进一步提升稿件质量，自三月份起，各部门所投稿件需满足以下条件，才视为当月合格稿件，计入考核结果：
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于个别部门供稿存在敷衍应付现象，为进一步提升稿件质量，今后各部门所投稿件需满足以下条件，才视为当月合格稿件，计入考核结果：
 			<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1）每月20日前供稿；
 			<br/>
