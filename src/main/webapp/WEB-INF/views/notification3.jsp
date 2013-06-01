@@ -50,62 +50,56 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 
 </style>
 
-<div class="notification_title"><h2>2013年3-4月份通讯稿考核执行情况</h2></div>
+<div class="notification_title"><h2>2013年5-6月份通讯稿考核执行情况</h2></div>
 <div class="notification_context">
 	<div class="context">
 		<div class="top">
-			&nbsp;&nbsp;&nbsp;&nbsp;截止至4月28日，各职能部门通讯报道供稿情况通报如下：
+			&nbsp;&nbsp;&nbsp;&nbsp;截止至5月30日，各职能部门通讯报道供稿情况通报如下：
 		</div>
 		<div class="middle">
 			<table>
 				<tr>
 					<th style="width:120px;">部门</th>
-					<th style="width:100px;">计划供稿<br>(3-4)月</th>
+					<th style="width:100px;">计划供稿<br>(5-6)月</th>
 					<th style="width:200px;" colspan="2">供稿人及数量</th>
 					<th style="width:100px;">合计供稿</th>
 					<th style="width:90px;">发表稿件</th>
 					<th style="width:90px;">执行结果</th>
 				</tr>	
 				<tr>
-					<td rowspan="2">工程部</td><td rowspan="2">4</td><td style="width: 150px;">马 寄</td><td style="width: 50px;">1</td><td rowspan="2">4</td><td rowspan="2">1</td><td rowspan="2">完成</td>
-				</tr>
-				<tr>
-					<td>董灵君</td><td>3</td>
-				</tr>
-				
-				<tr style="background-color: red;">
-					<td>产品部</td><td>1</td><td>/</td><td>/</td><td>0</td><td>0</td><td>未完成</td>
-				</tr>
-				
-				<tr style="background-color: red;">
-					<td>技术部</td><td>1</td><td>/</td><td>/</td><td>0</td><td>0</td><td>未完成</td>
+					<td>工程部</td><td >4</td><td style="width: 150px;">董灵君</td><td style="width: 50px;">2</td><td >2</td><td >1</td><td>完成</td>
 				</tr>
 				
 				<tr>
-					<td>成本管理部</td><td>1</td><td>邬亚丹</td><td>2</td><td>2</td><td>1</td><td>完成</td>
+					<td>产品部</td><td>1</td><td>夏卫林</td><td>1</td><td>1</td><td>1</td><td>完成</td>
+				</tr>
+				
+				<tr >
+					<td>技术部</td><td>1</td><td>/</td><td>/</td><td>0</td><td>0</td><td></td>
 				</tr>
 				
 				<tr>
-					<td rowspan="2">销售部</td><td rowspan="2">2</td><td>王黎闻</td><td>1</td><td rowspan="2" >2</td><td rowspan="2" >1</td><td rowspan="2" >完成</td>
+					<td>成本管理部</td><td>1</td><td>/</td><td>/</td><td>0</td><td>0</td><td></td>
 				</tr>
+				
 				<tr>
-					<td>王如虹</td><td>1</td>
+					<td >销售部</td><td >2</td><td>杨继红</td><td>1</td><td >1</td><td >0</td><td>完成</td>
 				</tr>
 				
 				
 				<tr>
-					<td>采购部</td><td>1</td><td >王俊</td><td>1</td><td>1</td><td>(5月发)</td><td>完成</td>
+					<td>采购部</td><td>1</td><td >/</td><td>/</td><td>0</td><td>0</td><td></td>
 				</tr>
 				
 				<tr>
-					<td>财务部</td><td>1</td><td >林 俊</td><td>1</td><td>1</td><td>0</td><td>完成</td>
+					<td>财务部</td><td>1</td><td >/</td><td>/</td><td>0</td><td>0</td><td></td>
 				</tr>
 				
 				<tr>
-					<td rowspan="2">办公室</td><td rowspan="2">4</td><td >毛微</td><td>4</td><td rowspan="2">5</td><td rowspan="2">4</td><td rowspan="2">完成</td>
+					<td rowspan="2">办公室</td><td rowspan="2">4</td><td >毛微</td><td>1</td><td rowspan="2">2</td><td rowspan="2">2</td><td rowspan="2">完成</td>
 				</tr>
 				<tr>
-					<td>全小锋</td><td>1</td>
+					<td>全小锋</td><td>1(图)</td>
 				</tr>
 				
 				<tr>
