@@ -54,7 +54,7 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 <div class="notification_context">
 	<div class="context">
 		<div class="top">
-			&nbsp;&nbsp;&nbsp;&nbsp;截止至5月30日，各职能部门通讯报道供稿情况通报如下：
+			&nbsp;&nbsp;&nbsp;&nbsp;截止至6月29日，各职能部门通讯报道供稿情况通报如下：
 		</div>
 		<div class="middle">
 			<table>
@@ -67,7 +67,7 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 					<th style="width:90px;">执行结果</th>
 				</tr>	
 				<tr>
-					<td>工程部</td><td >4</td><td style="width: 150px;">董灵君</td><td style="width: 50px;">2</td><td >2</td><td >1</td><td>完成</td>
+					<td>工程部</td><td >4</td><td style="width: 150px;">董灵君</td><td style="width: 50px;">4</td><td >4</td><td >1</td><td>完成</td>
 				</tr>
 				
 				<tr>
@@ -75,35 +75,38 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 				</tr>
 				
 				<tr >
-					<td>技术部</td><td>1</td><td>/</td><td>/</td><td>0</td><td>0</td><td></td>
+					<td>技术部</td><td>1</td><td>冯鑫杰</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				
 				<tr>
-					<td>成本管理部</td><td>1</td><td>/</td><td>/</td><td>0</td><td>0</td><td></td>
+					<td>成本管理部</td><td>1</td><td>吴小友</td><td>1</td><td>1</td><td>1</td><td>完成</td>
 				</tr>
 				
 				<tr>
-					<td >销售部</td><td >2</td><td>杨继红</td><td>1</td><td >1</td><td >0</td><td>完成</td>
+					<td rowspan="2">销售部</td><td rowspan="2">2</td><td>杨继红</td><td>1</td><td rowspan="2">1</td><td rowspan="2">1</td><td rowspan="2">完成</td>
+				</tr>
+				<tr>
+												<td>王黎闻</td><td>1</td>
 				</tr>
 				
 				
 				<tr>
-					<td>采购部</td><td>1</td><td >/</td><td>/</td><td>0</td><td>0</td><td></td>
+					<td>采购部</td><td>1</td><td >黄忠</td><td>1</td><td>1</td><td>1</td><td>完成</td>
 				</tr>
 				
 				<tr>
-					<td>财务部</td><td>1</td><td >/</td><td>/</td><td>0</td><td>0</td><td></td>
+					<td>财务部</td><td>1</td><td >陈招君</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				
 				<tr>
-					<td rowspan="2">办公室</td><td rowspan="2">4</td><td >毛微</td><td>1</td><td rowspan="2">2</td><td rowspan="2">2</td><td rowspan="2">完成</td>
+					<td rowspan="2">办公室</td><td rowspan="2">4</td><td >毛微</td><td>1</td><td rowspan="2">4</td><td rowspan="2">3</td><td rowspan="2">完成</td>
 				</tr>
 				<tr>
-					<td>全小锋</td><td>1(图)</td>
+					<td>全小锋</td><td>3</td>
 				</tr>
 				
 				<tr>
-					<td colspan="7">本月优秀通讯员：董灵君</td>
+					<td colspan="7">本月优秀通讯员：全小锋</td>
 				</tr>
 			</table>
 		</div>
