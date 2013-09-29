@@ -50,59 +50,57 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 
 </style>
 
-<div class="notification_title"><h2>2013年7-8月份通讯稿考核执行情况</h2></div>
+<div class="notification_title"><h2>2013年9-10月份通讯稿考核执行情况</h2></div>
 <div class="notification_context">
 	<div class="context">
 		<div class="top">
-			&nbsp;&nbsp;&nbsp;&nbsp;截止至8月30日，各职能部门通讯报道供稿情况通报如下：
+			&nbsp;&nbsp;&nbsp;&nbsp;截止至9月30日，各职能部门通讯报道供稿情况通报如下：
 		</div>
 		<div class="middle">
 			<table>
 				<tr>
 					<th style="width:120px;">部门</th>
-					<th style="width:100px;">计划供稿<br>(7-8)月</th>
+					<th style="width:100px;">计划供稿<br>(9-10)月</th>
 					<th style="width:200px;" colspan="2">供稿人及数量</th>
 					<th style="width:100px;">合计供稿</th>
 					<th style="width:90px;">发表稿件</th>
 					<th style="width:90px;">执行结果</th>
 				</tr>	
 				<tr>
-					<td>工程部</td><td >4</td><td>董灵君</td><td>3</td><td >3</td><td >2</td><td>未完成</td>
+					<td>工程部</td><td >4</td><td>董灵君</td><td>2</td><td >2</td><td >1</td><td>完成</td>
 				</tr>
 				
 				<tr>
-					<td>产品部</td><td>1</td><td></td><td></td><td></td><td></td><td>未完成</td>
+					<td>产品部</td><td>1</td><td>夏卫林</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				
 				<tr >
-					<td>技术部</td><td>1</td><td>杨  益</td><td>1</td><td>1</td><td>1</td><td>完成</td>
+					<td>技术部</td><td>1</td><td></td><td></td><td></td><td></td><td></td>
 				</tr>
 				
 				<tr>
-					<td>成本管理部</td><td>1</td><td>任志玲</td><td>1</td><td>1</td><td>1</td><td>完成</td>
+					<td>成本管理部</td><td>1</td><td></td><td></td><td></td><td></td><td></td>
 				</tr>
 				
 				<tr>
-					<td >销售部</td><td >2</td><td>王黎闻</td><td>3</td><td>3</td><td>1</td><td>完成</td>
+					<td >销售部</td><td >2</td><td>王黎闻</td><td>1</td><td>1</td><td>0</td><td>完成</td>
 				</tr>
 				
 				<tr>
-					<td>采购部</td><td>1</td><td >王  俊</td><td>1</td><td>1</td><td>1</td><td>完成</td>
+					<td>采购部</td><td>1</td><td ></td><td></td><td></td><td></td><td></td>
 				</tr>
 				
 				<tr>
-					<td>财务部</td><td>1</td><td></td><td></td><td></td><td></td><td>未完成</td>
+					<td>财务部</td><td>1</td><td></td><td></td><td></td><td></td><td></td>
 				</tr>
 				
 				<tr>
-					<td rowspan="2">办公室</td><td rowspan="2">4</td><td >毛微</td><td>3</td><td>3</td><td>3</td><td rowspan="2">完成</td>
-				</tr>
-				<tr>
-					   <td >全小锋</td><td>1</td><td>1</td><td>0</td>
+					<td>办公室</td><td>4</td><td >毛微</td><td>2</td><td>2</td><td>2</td><td >完成</td>
 				</tr>
 				
+				
 				<tr>
-					<td colspan="7">本月优秀通讯员：董灵君</td>
+					<td colspan="7">本月优秀通讯员：毛微、董灵君</td>
 				</tr>
 			</table>
 		</div>
