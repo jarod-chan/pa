@@ -133,7 +133,8 @@ public class UrlFilter implements Filter {
 				chain.doFilter(request, response);
 				return;
 			}
-			if (isIndexOf(url, financeUrl) && loginRet.getMange().equals("F")) {
+			//财务人员取消，把任务分配给部门经理
+			if (isIndexOf(url, financeUrl) && loginRet.getMange().equals("Y")) {
 				chain.doFilter(request, response);
 				return;
 			}

@@ -77,14 +77,16 @@ public class LoginCtl {
 			}else{				
 				menuList.add(new UrlNameBean("部门月度计划历史",String.format("mange/%s/idrmonthplan/history",personId)));
 				menuList.add(new UrlNameBean("员工工作评价历史",String.format("mange/%s/monthchk/histroy",personId)));
+				String name=loginRetBean.getName();
+				//XXX 办公室  潘普兵 考核结果历史
+				if(name.equals("潘普兵")) {
+					menuList.add(new UrlNameBean("考核结果历史",String.format("finance/%s/summarysnapshot/history",personId)));
+				}
 			}
 		}
 		if (loginRetBean.getMange().equals("N")) {
 			menuList.add(new UrlNameBean("月度工作历史",String.format("person/%s/monthchk/histroy",personId)));
 			menuList.add(new UrlNameBean("部门计划查看",String.format("person/%s/monthchk/idrmonthplan",personId)));
-		}
-		if (loginRetBean.getMange().equals("F")) {
-			menuList.add(new UrlNameBean("考核结果历史",String.format("finance/%s/summarysnapshot/history",personId)));
 		}
 		
 		
@@ -109,8 +111,13 @@ public class LoginCtl {
 				menuList.add(new UrlNameBean("个人述职报告",String.format("mange/%s/summary",personId)));
 				menuList.add(new UrlNameBean("年度绩效评价",String.format("mange/%s/yearchk",personId)));
 				//XXX 财务部  胡吉运 增加考核结果确认菜单
-				if(personId.equals("31")){
+				String name=loginRetBean.getName();
+				if(name.equals("胡吉运")){
 					menuList.add(new UrlNameBean("考核结果确认",String.format("mange/%s/summarysnapshot",personId)));
+				}
+				//XXX 办公室  潘普兵 考核结果接收菜单
+				if(name.equals("潘普兵")) {
+					menuList.add(new UrlNameBean("考核结果接收",String.format("finance/%s/summarysnapshot",personId)));
 				}
 			}
 		}
@@ -119,9 +126,7 @@ public class LoginCtl {
 			menuList.add(new UrlNameBean("个人述职报告",String.format("person/%s/summary",personId)));
 			menuList.add(new UrlNameBean("年度横向评价",String.format("person/%s/yearchk",personId)));
 		}
-		if (loginRetBean.getMange().equals("F")) {
-			menuList.add(new UrlNameBean("考核结果接收",String.format("finance/%s/summarysnapshot",personId)));
-		}
+		
 		
 		
 		return menuList;
@@ -146,11 +151,11 @@ public class LoginCtl {
 		return loginInfo;
 	}
 
-	//XXX 此处待修改
+	//XXX 陆兆贤拥有副总和部门经理权限
 	private LoginRetBean doChangeForSpecialPerson(LoginBean loginBean,
 			LoginRetBean loginRet) {
 		String username=loginBean.getUsername().trim();
-		if(username.equals("牟一琦")||username.equals("陆兆贤")){
+		if(username.equals("陆兆贤")){
 			loginRet.setMange(loginBean.getSpecialPerson());
 		}
 		return loginRet;

@@ -6,8 +6,7 @@ public enum ManageEnum implements CommonEnum {
 	A("管理员"),
 	G("分管副总"),
 	Y("经理"),
-	N("员工"),
-	F("财务");
+	N("员工");
 	
 	private String name;
 	private ManageEnum(String name){
