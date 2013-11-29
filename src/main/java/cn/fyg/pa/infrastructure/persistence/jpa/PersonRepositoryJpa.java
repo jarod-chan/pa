@@ -10,6 +10,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.person.ManageEnum;
@@ -30,6 +31,7 @@ public class PersonRepositoryJpa implements PersonRepository {
 	}
 
 	@Override
+	@Transactional
 	public Person save(Person person) {
 		if (person.getId() == null) {
 			entityManager.persist(person);
