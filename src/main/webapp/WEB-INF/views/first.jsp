@@ -41,7 +41,7 @@
 	</div>
 </div>
 
-<%@ include file="notification3.jsp"%>
+<%@ include file="newsletter.jsp"%>
 
 <style type="text/css">
 body {
