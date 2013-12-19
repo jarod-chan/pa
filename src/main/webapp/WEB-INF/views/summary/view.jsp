@@ -51,6 +51,7 @@
 
 <div class="all">
 	<div class="all_head">${personSummary.year}年度个人述职报告</div>
+	<%@ include file="selectYear.jsp"%>
 	<c:forEach var="titleContent" items="${personSummary.titleContents}" varStatus="status">
 		<div class="title_content">
 			<div class="title">
