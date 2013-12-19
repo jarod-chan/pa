@@ -52,9 +52,9 @@
 </style>
 
 <!-- 每一题字数限制 -->
-<c:set var="limit"  scope="request" value="<%=new String[]{"200","300","300"}%>" /> 
+<c:set var="limit"  scope="request" value="<%=new String[]{"200","350","350"}%>" /> 
 <script type="text/javascript">
-	var limit=[200,300,300];
+	var limit=[200,350,350];
 </script>
 
 
