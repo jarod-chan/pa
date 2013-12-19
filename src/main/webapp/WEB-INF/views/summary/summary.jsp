@@ -1,5 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>
+
+
+
+
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
@@ -38,8 +42,20 @@
 		font-weight: bold;
 	}
 	
+	.not_enough{
+		display: none; 
+		color:#FFFFFF;
+		font-weight: bold;
+		background-color: #8080FF;
+	}
 	
 </style>
+
+<!-- 每一题字数限制 -->
+<c:set var="limit"  scope="request" value="<%=new String[]{"200","300","300"}%>" /> 
+<script type="text/javascript">
+	var limit=[200,300,300];
+</script>
 
 
 <script type="text/javascript">
@@ -54,15 +70,25 @@ $(function() {
 		actionFrom.attr("action",oldAction+"/save").submit();
 	});
 	
+	var hideSpan=function (index){
+		return function(){			
+			$(".not_enough").eq(index).hide();
+		}
+	}
+	
 	$("#btn_commit").click(function(){
 		var content_text=$(".content_text");
+		var flag=false;
 		for(var i=0;i<content_text.size();i++){
-			val=content_text.eq(i).val();
-			if(Trim(val)==""){
-				alert("所有内容必须填写！");
-				return;
+			val=content_text.eq(i).val(); 
+			var len=Trim(val).length;
+			if(len<limit[i]){
+				$(".not_enough").eq(i).show();
+				setTimeout(hideSpan(i),5000);
+				flag=true;
 			}
 		}
+		if(flag){alert("蓝色标注问题字数不够！");return}
 		if(confirm("提交以后，你的总结将无法修改,确定提交?")){
 			var actionFrom=$("form");
 			var oldAction=actionFrom.attr("action"); 
@@ -141,7 +167,7 @@ function autosave(){
 	<c:forEach var="titleContent" items="${personSummary.titleContents}" varStatus="status">
 		<div class="title_content">
 			<div class="title">
-				${titleContent.title.no}.${titleContent.title.title}<span style="color:red;">(必填，10000字以内)</span>
+				${titleContent.title.no}.${titleContent.title.title}<span style="color:red;">限制:${limit[status.index]}字以上</span><span class="not_enough" >字数不够！</span>
 				<span  class="title_info" >草稿已经自动保存！</span>
 				<input class="title_flag" type="hidden" value="true" /> 
 			</div>
