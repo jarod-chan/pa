@@ -1,10 +1,11 @@
-package cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2012;
+package cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2011;
 
 import java.math.BigDecimal;
 
+import cn.fyg.pa.interfaces.module.admin.yearchkrpt.PointItem;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
-public class Point_12 {
+public class Point  implements PointItem{
 	
 	//人员id
 	private Long personId;
@@ -49,17 +50,20 @@ public class Point_12 {
 	
 	/**
 	 * 根据提供的值，计算s 公式如下
-	 * [Scheck+(Mall-Mdep)]/Stotal
-	 *					          
-	 * 个人得分   + ( 员工平均得分 - 部门平均分 )			
-	 * -----------------------------------
+	 * [(Scheck-Mdep)*Mamp+Damp*Mall]/(Damp*Stotal)
+	 * 
+	 * 					           平均考核幅度
+	 * （个人得分-部门平均分）* ------------   +员工平均得分
+	 * 						部门平均考核幅度			
+	 * -----------------------------------------------------
 	 * 				总分
+	 * 
 	 */
 	public void calculatS(){
 		if(damp.compareTo(Constant.ZERO)==0) return;
 		
-		BigDecimal up=scheck.subtract(mdep).add(mall);
-		BigDecimal down=stotal;
+		BigDecimal up=scheck.subtract(mdep).multiply(mamp).add(damp.multiply(mall));
+		BigDecimal down=damp.multiply(stotal);
 		s=up.divide(down,Constant.SCALE,Constant.ROUND_MODEL);
 	}
 	
@@ -86,92 +90,92 @@ public class Point_12 {
 		result=upsilon.add(val);
 	}
 	
-	public Point_12 personId(Long personId) {
+	public Point personId(Long personId) {
 		this.personId = personId;
 		return this;
 	}
 	
-	public Point_12 personName(String personName) {
+	public Point personName(String personName) {
 		this.personName = personName;
 		return this;
 	}
 	
-	public Point_12 personDept(String personDept) {
+	public Point personDept(String personDept) {
 		this.personDept = personDept;
 		return this;
 	}
 	
-	public Point_12 scheck(BigDecimal scheck) {
+	public Point scheck(BigDecimal scheck) {
 		this.scheck = scheck;
 		return this;
 	}
 	
-	public Point_12 mdep(BigDecimal mdep) {
+	public Point mdep(BigDecimal mdep) {
 		this.mdep = mdep;
 		return this;
 	}
 	
-	public Point_12 mall(BigDecimal mall) {
+	public Point mall(BigDecimal mall) {
 		this.mall = mall;
 		return this;
 	}
 	
-	public Point_12 damp(BigDecimal damp) {
+	public Point damp(BigDecimal damp) {
 		this.damp = damp;
 		return this;
 	}
 	
-	public Point_12 s(BigDecimal s) {
+	public Point s(BigDecimal s) {
 		this.s = s;
 		return this;
 	}
 	
-	public Point_12 mamp(BigDecimal mamp) {
+	public Point mamp(BigDecimal mamp) {
 		this.mamp = mamp;
 		return this;
 	}
 	
-	public Point_12 maxs(BigDecimal maxs) {
+	public Point maxs(BigDecimal maxs) {
 		this.maxs = maxs;
 		return this;
 	}
 	
-	public Point_12 upsilon(BigDecimal upsilon) {
+	public Point upsilon(BigDecimal upsilon) {
 		this.upsilon = upsilon;
 		return this;
 	}
 	
-	public Point_12 alpha(BigDecimal alpha) {
+	public Point alpha(BigDecimal alpha) {
 		this.alpha = alpha;
 		return this;
 	}
 	
-	public Point_12 samp(BigDecimal samp) {
+	public Point samp(BigDecimal samp) {
 		this.samp = samp;
 		return this;
 	}
 	
-	public Point_12 stotal(BigDecimal stotal) {
+	public Point stotal(BigDecimal stotal) {
 		this.stotal = stotal;
 		return this;
 	}
 	
-	public Point_12 mins(BigDecimal mins) {
+	public Point mins(BigDecimal mins) {
 		this.mins = mins;
 		return this;
 	}
 	
-	public Point_12 val(BigDecimal val) {
+	public Point val(BigDecimal val) {
 		this.val = val;
 		return this;
 	}
 
-	public Point_12 result(BigDecimal result) {
+	public Point result(BigDecimal result) {
 		this.result = result;
 		return this;
 	}
 
-	public Point_12 ranking(int ranking) {
+	public Point ranking(int ranking) {
 		this.ranking = ranking;
 		return this;
 	}
@@ -243,6 +247,11 @@ public class Point_12 {
 
 	public BigDecimal getResult() {
 		return result;
+	}
+
+	@Override
+	public void setRanking(int i) {
+		this.ranking=i;
 	}
 
 	

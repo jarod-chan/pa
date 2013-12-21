@@ -1,10 +1,11 @@
-package cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2012_V2;
+package cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2012;
 
 import java.math.BigDecimal;
 
+import cn.fyg.pa.interfaces.module.admin.yearchkrpt.PointItem;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
-public class Point_v2 {
+public class Point  implements PointItem{
 	
 	//人员id
 	private Long personId;
@@ -86,97 +87,97 @@ public class Point_v2 {
 		result=upsilon.add(val);
 	}
 	
-	public Point_v2 personId(Long personId) {
+	public Point personId(Long personId) {
 		this.personId = personId;
 		return this;
 	}
 	
-	public Point_v2 personName(String personName) {
+	public Point personName(String personName) {
 		this.personName = personName;
 		return this;
 	}
 	
-	public Point_v2 personDept(String personDept) {
+	public Point personDept(String personDept) {
 		this.personDept = personDept;
 		return this;
 	}
 	
-	public Point_v2 scheck(BigDecimal scheck) {
+	public Point scheck(BigDecimal scheck) {
 		this.scheck = scheck;
 		return this;
 	}
 	
-	public Point_v2 mdep(BigDecimal mdep) {
+	public Point mdep(BigDecimal mdep) {
 		this.mdep = mdep;
 		return this;
 	}
 	
-	public Point_v2 mall(BigDecimal mall) {
+	public Point mall(BigDecimal mall) {
 		this.mall = mall;
 		return this;
 	}
 	
-	public Point_v2 damp(BigDecimal damp) {
+	public Point damp(BigDecimal damp) {
 		this.damp = damp;
 		return this;
 	}
 	
-	public Point_v2 s(BigDecimal s) {
+	public Point s(BigDecimal s) {
 		this.s = s;
 		return this;
 	}
 	
-	public Point_v2 mamp(BigDecimal mamp) {
+	public Point mamp(BigDecimal mamp) {
 		this.mamp = mamp;
 		return this;
 	}
 	
-	public Point_v2 maxs(BigDecimal maxs) {
+	public Point maxs(BigDecimal maxs) {
 		this.maxs = maxs;
 		return this;
 	}
 	
-	public Point_v2 upsilon(BigDecimal upsilon) {
+	public Point upsilon(BigDecimal upsilon) {
 		this.upsilon = upsilon;
 		return this;
 	}
 	
-	public Point_v2 alpha(BigDecimal alpha) {
+	public Point alpha(BigDecimal alpha) {
 		this.alpha = alpha;
 		return this;
 	}
 	
-	public Point_v2 samp(BigDecimal samp) {
+	public Point samp(BigDecimal samp) {
 		this.samp = samp;
 		return this;
 	}
 	
-	public Point_v2 stotal(BigDecimal stotal) {
+	public Point stotal(BigDecimal stotal) {
 		this.stotal = stotal;
 		return this;
 	}
 	
-	public Point_v2 mins(BigDecimal mins) {
+	public Point mins(BigDecimal mins) {
 		this.mins = mins;
 		return this;
 	}
 	
-	public Point_v2 val(BigDecimal val) {
+	public Point val(BigDecimal val) {
 		this.val = val;
 		return this;
 	}
 
-	public Point_v2 result(BigDecimal result) {
+	public Point result(BigDecimal result) {
 		this.result = result;
 		return this;
 	}
 
-	public Point_v2 ranking(int ranking) {
+	public Point ranking(int ranking) {
 		this.ranking = ranking;
 		return this;
 	}
 	
-	public Point_v2 savg(BigDecimal savg){
+	public Point savg(BigDecimal savg){
 		this.savg=savg;
 		return this;
 	}
@@ -252,6 +253,11 @@ public class Point_v2 {
 
 	public BigDecimal getSavg() {
 		return savg;
+	}
+
+	@Override
+	public void setRanking(int i) {
+		this.ranking=i;
 	}
 
 	
