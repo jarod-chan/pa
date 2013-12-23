@@ -6,14 +6,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import cn.fyg.pa.infrastructure.persistence.jpa.RptJpa;
 import cn.fyg.pa.interfaces.module.admin.yearchkrpt.common.AbstractPointUtil;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
 public class PointUtil extends AbstractPointUtil<Point> {
 	
 	@Override
-	public void initOriginalData(List<Object[]> personInfo_deptScore,
-			List<Object[]> personScore) {
+	public void initOriginalData(RptJpa rptJpa,Long year) {
+		
+		//部门领导评价
+		List<Object[]> personInfo_deptScore=rptJpa.getCheckPoint(year);
 		for (int i = 0; i < personInfo_deptScore.size(); i++) {
 			Object[] arr=personInfo_deptScore.get(i);
 			Point point=new Point().personId(((Integer)arr[0]).longValue())
@@ -22,15 +25,36 @@ public class PointUtil extends AbstractPointUtil<Point> {
 					.scheck((BigDecimal)arr[3]);
 			this.points().add(point);
 		}
-		Map<Long,BigDecimal> temp=new HashMap<Long,BigDecimal>();
-		for (int i = 0; i < personScore.size(); i++) {
-			Object[] arr=personScore.get(i);
-			temp.put(((Integer)arr[0]).longValue(), (BigDecimal)arr[1]);
-		}
+		
+		//员工互相评价
+		List<Object[]> personScore=rptJpa.getVal(year);
+		Map<Long, BigDecimal> temp = getPersonValueMap(personScore);
 		for(Point point:this.points()){
 			BigDecimal val2 = temp.get(point.getPersonId());
 			point.val(val2==null?new BigDecimal("0"):val2);
 		}
+		
+		//参与度
+		BigDecimal participationAvg = rptJpa.getParticipationAvg(year);
+		List<Object[]> personParticipation = rptJpa.getParticipationAbs(year);
+		temp=getPersonValueMap(personParticipation);
+		for(Point point:this.points()){
+			BigDecimal val2 = temp.get(point.getPersonId());
+			point.getPtn().setIabs(val2==null?new BigDecimal("0"):val2);
+		}
+		
+		for(Point point:this.points()){
+			point.getPtn().setIavg(participationAvg);
+		}
+	}
+
+	private Map<Long, BigDecimal> getPersonValueMap(List<Object[]> personValueList) {
+		Map<Long,BigDecimal> temp=new HashMap<Long,BigDecimal>();
+		for (int i = 0; i < personValueList.size(); i++) {
+			Object[] arr=personValueList.get(i);
+			temp.put(((Integer)arr[0]).longValue(), (BigDecimal)arr[1]);
+		}
+		return temp;
 	}
 		
 	public void calculate(){
@@ -39,12 +63,37 @@ public class PointUtil extends AbstractPointUtil<Point> {
 		calculateDamp();
 		calculateMamp();
 		calculateS();
-		calculateSmaxAndSmainAndSamp();
 		calculateSavg();
 		calculatU();
+		calculatVavg();
+		calculatParticipation();
 		calculatResult();
 		
 		this.setHasCalculate();
+	}
+
+	/**
+	 * 计算参与度值
+	 */
+	private void calculatParticipation() {
+		for (Point point:this.points()) {
+			point.getPtn().calculat();
+		}
+	}
+
+	/**
+	 * 计算个人评价平均值
+	 */
+	private void calculatVavg() {
+		BigDecimal total=new BigDecimal("0");
+		for (Point point:this.points()) {
+			total=total.add(point.getVal());
+		}
+		BigDecimal vavg=total.divide(new BigDecimal(this.points().size()),Constant.SCALE,Constant.ROUND_MODEL);
+		for(Point point:this.points()){
+			point.getPtn().setVavg(vavg);
+		}
+		
 	}
 
 	private void calculateSavg() {
@@ -72,20 +121,6 @@ public class PointUtil extends AbstractPointUtil<Point> {
 		}
 	}
 
-	private void calculateSmaxAndSmainAndSamp() {
-		BigDecimal Smax=this.points().get(0).getS();
-		BigDecimal Smin=this.points().get(0).getS();
-		BigDecimal Samp=Constant.ZERO;
-		for(Point point : this.points()){
-			BigDecimal s = point.getS();
-			Smax = s.compareTo(Smax) > 0 ? s : Smax;
-			Smin = s.compareTo(Smin) < 0 ? s : Smin;
-		}
-		Samp = Smax.subtract(Smin);
-		for(Point point:this.points()){
-			point.samp(Samp).maxs(Smax).mins(Smin);
-		}
-	}
 
 	//计算s值
 	private void calculateS() {

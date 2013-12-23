@@ -2,11 +2,13 @@ package cn.fyg.pa.interfaces.module.admin.yearchkrpt;
 
 import java.util.List;
 
+import cn.fyg.pa.infrastructure.persistence.jpa.RptJpa;
+
 
 
 public interface PointHelp<T extends PointItem> {
 	
-	void initOriginalData(List<Object[]> personInfo_deptScore,List<Object[]> personScore);
+	void initOriginalData(RptJpa rptJpa,Long year);
 	
 	void calculate();
 		

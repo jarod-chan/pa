@@ -1,5 +1,6 @@
 package cn.fyg.pa.infrastructure.persistence.jpa;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -72,5 +73,30 @@ public class RptJpa {
 	}
 	
 	
+	/**
+	 * 获得绝对参与度
+	 * @param year
+	 * @return
+	 */
+	public BigDecimal getParticipationAvg(Long year){
+		String sql="select round(sum(abs(val))/count(id),6) from fycheck where year=:year";
+		Object object= entityManager.createNativeQuery(sql).setParameter("year", year).getSingleResult();
+		if(object!=null){
+			return (BigDecimal)object;
+		}
+		return new BigDecimal("0");
+	}
+	
+	/**
+	 * 获得每个员工的绝对参与度
+	 * @param year
+	 * @return
+	 */
+	public List<Object[]> getParticipationAbs(Long year){
+		String sql="select chkid,round(sum(abs(val))/count(id),6) from fycheck where year=:year group by chkid";
+		@SuppressWarnings("unchecked")
+		List<Object[]> resultList = entityManager.createNativeQuery(sql).setParameter("year", year).getResultList();
+		return resultList;
+	}
 	
 }

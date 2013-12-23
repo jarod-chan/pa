@@ -95,14 +95,28 @@
 	</div>
 	</td>
 	<td>Scheck</td><td>mdep</td><td>mall</td><td>damp</td>
-	<td>mamp</td><td>stotal</td><td>s</td><td>alpha</td><td>maxs</td><td>mins</td><td>samp</td><td>savg</td>
-	<td>upsilon</td><td>val</td><td>result=upsilon+val</td>
+	<td>mamp</td><td>stotal</td><td>s</td><td>alpha</td><td>savg</td>
+	<td>upsilon</td><td>val</td>
+	<td>Vavg</td>
+	<td>Iavg</td>
+	<td>Iabs</td>
+	<td>Idir</td>
+	<td>Ibeta</td>
+	<td>Is</td>
+	<td>result=upsilon+val+Is</td>
 </tr>
 
 <tr>
 	<td>得分</td><td>部门平均</td><td>总平均</td><td>部门幅度</td>
-	<td>平均幅度</td><td>总分</td><td>得分s</td><td>系数</td><td>最大s</td><td>最小s</td><td>s幅度</td><td>s平均</td>
-	<td>upsilon</td><td>val</td><td>result=upsilon+val</td>
+	<td>平均幅度</td><td>总分</td><td>得分s</td><td>系数</td><td>s平均</td>
+	<td>部门得分</td><td>个人评价得分</td>
+	<td>平均得分</td>
+	<td>平均参与度</td>
+	<td>绝对参与度</td>
+	<td>有向参与度</td>
+	<td>加权系数</td>
+	<td>加权得分</td>
+	<td>最终得分</td>
 </tr>
 
 <c:forEach var="item" items="${points}" >
@@ -119,13 +133,16 @@
 	<td>${item.stotal}</td>
 	<td>${item.s}</td>
 	<td>${item.alpha}</td>
-	<td>${item.maxs}</td>
-	<td>${item.mins}</td>
-	<td>${item.samp}</td>
 	<td>${item.savg}</td>
 	<td>${item.upsilon}</td>
 	<td>${item.val}</td>
-	<td>${item.result}</td>
+	<td>${item.ptn.vavg}</td>
+	<td>${item.ptn.iavg}</td>
+	<td>${item.ptn.iabs}</td>
+	<td>${item.ptn.idir}</td>
+	<td>${item.ptn.ibeta}</td>
+	<td>${item.ptn.is}</td>
+ 	<td>${item.result}</td>
 	</tr>
 </c:forEach>
 </tbody>

@@ -19,7 +19,7 @@ import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 public class RptCtl {
 
 	@Autowired
-	private RptJpa rptDao;
+	private RptJpa rptJpa;
 	
 	@RequestMapping(value="/point/{order}",method=RequestMethod.GET)
 	public String pointNoYear(@PathVariable("order")String order,Map<String,Object> map){
@@ -34,7 +34,7 @@ public class RptCtl {
 	public String toPoint(@PathVariable("year")Long year,@PathVariable("order")String order,Map<String,Object> map){
 		PointHelp<?> pointHelp=RptConfig.getPointHelp(year);
 		try {
-			pointHelp.initOriginalData(rptDao.getCheckPoint(year),rptDao.getVal(year));
+			pointHelp.initOriginalData(rptJpa,year);
 			pointHelp.calculate();
 			pointHelp.orderByPoint(order);
 			map.put("points",pointHelp.getResult());

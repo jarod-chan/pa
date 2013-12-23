@@ -6,16 +6,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import cn.fyg.pa.infrastructure.persistence.jpa.RptJpa;
 import cn.fyg.pa.interfaces.module.admin.yearchkrpt.common.AbstractPointUtil;
-import cn.fyg.pa.interfaces.module.admin.yearchkrpt.year2013.Point;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
 public class PointUtil extends AbstractPointUtil<Point>{
 	
 	
 	@Override
-	public void initOriginalData(List<Object[]> personInfo_deptScore,
-			List<Object[]> personScore) {
+	public void initOriginalData(RptJpa rptJpa,Long year) {
+		List<Object[]> personInfo_deptScore=rptJpa.getCheckPoint(year);
+		List<Object[]> personScore=rptJpa.getVal(year);
 		for (int i = 0; i < personInfo_deptScore.size(); i++) {
 			Object[] arr=personInfo_deptScore.get(i);
 			Point point=new Point().personId(((Integer)arr[0]).longValue())
