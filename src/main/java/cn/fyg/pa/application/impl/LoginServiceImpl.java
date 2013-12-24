@@ -39,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
 	private boolean isPerson(Person person,LoginBean login) {
 		return person != null 
 				&& person.getChkstr().equals(login.getPassword())
-				&& person.getState()==StateEnum.valid;
+				&& (person.getState()==StateEnum.valid||person.getState()==StateEnum.invalid);
 	}
 	
 	private LoginRetBean getPerson(Person person) {
