@@ -27,6 +27,7 @@ import cn.fyg.pa.domain.model.monthchk.MonthChkItem;
 import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
+import cn.fyg.pa.domain.model.person.StateEnum;
 import cn.fyg.pa.domain.model.person.TypeEnum;
 import cn.fyg.pa.domain.model.summary.PersonSummary;
 import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
@@ -58,11 +59,16 @@ public class PersonYearChkCtl {
 		try {
 			year=yearConfigService.getEnableYear();
 		} catch (EnableYearNotExist e) {
-			map.put("message","当前时间无法进行年终员工考核");
+			map.put("message","年度横向评价功能暂时关闭！");
 			return "yearchk/personchk/nottime";
 		}
-		boolean commit = yearchkStateService.isCommit(year, chkPerson.getId());
+		//添加无效人员过滤（部分返聘人员不参与年度绩效评价）
+		if(chkPerson.getState()==StateEnum.invalid){
+			map.put("message","你无须参与年度横向评价！");
+			return "yearchk/personchk/nottime";
+		}
 		
+		boolean commit = yearchkStateService.isCommit(year, chkPerson.getId());
 		
 		String chkPersonDept=chkPerson.getDepartment();
 		TypeEnum chkPersonType = chkPerson.getType();
