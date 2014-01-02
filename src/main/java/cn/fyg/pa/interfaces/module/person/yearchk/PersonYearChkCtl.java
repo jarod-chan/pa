@@ -33,6 +33,10 @@ import cn.fyg.pa.domain.model.summary.PersonSummary;
 import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.model.yearchk.Fycheck;
 import cn.fyg.pa.domain.model.yearchk.YearChkRepositroy;
+import cn.fyg.pa.interfaces.module.person.yearchk.participation.Ptt;
+import cn.fyg.pa.interfaces.module.person.yearchk.participation.PttUtil;
+import cn.fyg.pa.interfaces.module.person.yearchk.participation.impl.PttUtilFycheck;
+import cn.fyg.pa.interfaces.module.person.yearchk.participation.impl.PttUtilRowBean;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 
 @Controller
@@ -87,6 +91,11 @@ public class PersonYearChkCtl {
 			builder=new PageBuilder(year, chkPerson, otherDeptPerson, hasChecksValues);
 			rowBeanList.addAll(builder.createRowBeanList());
 			int maxLen_otherDept=builder.getMaxLen();
+			
+			//计算参与度
+			PttUtil pttUtil=new PttUtilRowBean(rowBeanList);
+			Ptt ptt = pttUtil.computer();
+			map.put("ptt", ptt);
 			
 			map.put("rowBeanList", rowBeanList);
 			map.put("maxLen", maxLen_dept>=maxLen_otherDept?maxLen_dept:maxLen_otherDept);
@@ -231,8 +240,15 @@ public class PersonYearChkCtl {
 		List<Fycheck> fycheck=recvBean.getFk();
 		fycheck=fillFycheck(fycheck,year,chkPerson);
 	    yearCheckService.saveFychecks(fycheck);
-	    yearchkStateService.commitYearchk(year, chkPerson.getId());
-		new SessionMPR(session).setMessage("提交成功！");
+	    PttUtil pttUtil=new PttUtilFycheck(fycheck);
+		Ptt ptt = pttUtil.computer();
+		if(ptt.isPass()){			
+			yearchkStateService.commitYearchk(year, chkPerson.getId());
+			new SessionMPR(session).setMessage("提交成功！");
+		}else{
+			new SessionMPR(session).setMessage("参与度没有达到要求，提交失败！");
+		}
+		
 		return "redirect:../../yearchk";
 	}
 
