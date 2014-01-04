@@ -50,7 +50,13 @@
 	
 	function afterAction(){
 		$("#wait_msg").show();
-		$(".act_btn").hide();
+		$(".act_btn,#maintab").hide();
+	}
+	
+	function personCompare(colPersonId,rowPersonId){
+		if(colPersonId=='') return;
+		if(rowPersonId=='') return;
+		OpenEnvDefineWin("/${ctx}/person/${person.id}/yearchk/personchk/"+colPersonId+"/comparework/"+rowPersonId,880,600);
 	}
 	
 	$(function() {
@@ -99,13 +105,31 @@
 				$(this).val("平铺");
 			}			
 		});
+		
+		var errortime=0;
+		function errorDeal() {
+			errortime++;
+			if(errortime>2){
+				clearInterval(holdstate);
+				alert("页面运行出错，请重新登录！");
+				logout();
+			} 
+		}
+		
+		//每5分钟后台发送请求，保持session有效
+		var holdstate=setInterval(function(){
+			$.get("/${ctx}/hold",
+				function(data){
+					console.info(data);
+					if(data!="success"){
+						errorDeal();							
+					}
+				}
+			).error(errorDeal);
+		},1000*60*5);
 	});
 	
-	function personCompare(colPersonId,rowPersonId){
-		if(colPersonId=='') return;
-		if(rowPersonId=='') return;
-		OpenEnvDefineWin("/${ctx}/person/${person.id}/yearchk/personchk/"+colPersonId+"/comparework/"+rowPersonId,880,600);
-	}
+
 	
 	
 </script>
@@ -123,10 +147,11 @@
 <br>参与度:<span id="span_wl">${ptt.winOrLose}</span>个胜负，还需<span id="span_nc">${ptt.needCheck}</span>个。&nbsp;&nbsp;<span style="color: red;">注意：胜负个数达到${ptt.totalCheck}个才能提交成功！</span>
 </div>
 <div class="headright" >
-	<span id="wait_msg" style="color: red;display: none;">数据提交中，请等待···</span>
+	<span id="wait_msg" style="color: red; display: none;"><img src="/${ctx}/resources/img/save.gif" >数据提交中，请等待</span>
 	<c:if test="${not pageBean.commit}">
 		<input type="button" class="act_btn" value="保存" onclick="save()"/>
 		<input type="button" class="act_btn" value="提交评价结果" onclick="commit()"/>
+		
 	</c:if>
 </div>
 <div  class="headnone"></div>
@@ -134,7 +159,7 @@
 <%@ include file="../../common/message.jsp"%>
 
 <form action="/${ctx}/person/${person.id}/yearchk/${year}"  method="post" >
-<table border=1  >
+<table border=1   id="maintab" >
 <thead>
 	<tr>
 		<th style="width: 80px;">员工</th>

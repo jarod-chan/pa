@@ -31,7 +31,7 @@ public class UrlFilter implements Filter {
 	/**
 	 * 非过滤url
 	 */
-	private static final List<String> noFilterUrl=Arrays.asList("/pa/","/pa/first","/pa/fetchcsr","/pa/fail","/pa/login");
+	private static final List<String> noFilterUrl=Arrays.asList("/pa/","/pa/first","/pa/fetchcsr","/pa/fail","/pa/login","/pa/hold");
 	
 	/**
 	 * 资源url
