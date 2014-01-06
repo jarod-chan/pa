@@ -47,7 +47,7 @@
 		.append(
 				$("<input type='button' class='add' onclick='add(this)' value='+'   />").css(leftcss).hide())
 		.append(
-				$("<input type='button' class='remove' onclick='remove(this)' value='-'   />").css(leftAndMargin).hide())
+				$("<input type='button' class='remove' onclick='drop(this)' value='-'   />").css(leftAndMargin).hide())
 		.append(
 				$("<input type='button' class='up' onclick='up(this)' value='/\\'  />").css(leftAndMargin).hide())
 		.append(
@@ -69,7 +69,7 @@
 		reIndexTable();
 	}
 
-	function remove(obj) {
+	function drop(obj) {
 		$(obj).parent().parent().remove();
 		reIndexTable();
 	}
@@ -161,7 +161,7 @@
 			</td>
 			<td>
 				<input type="button" class="add" onclick='add(this)' value="+"  />
-				<input type="button" class="remove" onclick='remove(this)' value="-"  />
+				<input type="button" class="remove" onclick='drop(this)' value="-"  />
 				<input type="button" class="up" onclick='up(this)' value="/\" />
 				<input type="button" class="down" onclick='down(this)' value="\/" />
 			</td>
