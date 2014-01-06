@@ -17,6 +17,18 @@
 
 .block_div  div{background-color:#C0C0C0;}
 
+.s1{
+	background-color: #FF8080;
+}
+
+.s0{
+	background-color: #FECF78;
+}
+
+.s-1{
+	background-color: #1E8EFF;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -38,19 +50,35 @@
 	
 	function afterAction(){
 		$("#wait_msg").show();
-		$(".act_btn").hide();
+		$(".act_btn,#maintab").hide();
+	}
+	
+	function personCompare(colPersonId,rowPersonId){
+		if(colPersonId=='') return;
+		if(rowPersonId=='') return;
+		OpenEnvDefineWin("/${ctx}/person/${person.id}/yearchk/personchk/"+colPersonId+"/comparework/"+rowPersonId,880,600);
 	}
 	
 	$(function() {
-		var optColorArr=["#FF8080","#FECF78","#1E8EFF"];
+		var optColorArr=["s1","s0","s-1"];
 		
-		$("table .selectperson").each(function(){
-			$(this).find("option").each(function(idx){
-				$(this).css("background-color",optColorArr[idx]);
+		var winOrLose=${ptt.winOrLose}; 
+		var total=${ptt.totalCheck};
+		var changeWinOrLost=function(sel){
+			var oldVal=sel.next().val();
+			var newVal=sel.val();
+			winOrLose=winOrLose+Math.abs(newVal)-Math.abs(oldVal);
+			needcheck=total-winOrLose;
+			sel.next().val(newVal);
+			$("#span_wl").text(winOrLose);
+			$("#span_nc").text(needcheck>0?needcheck:0);
+		}
+		
+		$("table select").each(function(){
+ 			$(this).bind("change",function(){
+				$(this).attr("class",optColorArr[this.selectedIndex]);
+				changeWinOrLost($(this));
 			});
-			$(this).bind("change",function(){
-				$(this).css("background-color",optColorArr[this.selectedIndex])
-			}).triggerHandler("change");
 		});
 		
 		$(".btn_compare").hover(
@@ -77,13 +105,31 @@
 				$(this).val("平铺");
 			}			
 		});
+		
+		var errortime=0;
+		function errorDeal() {
+			errortime++;
+			if(errortime>2){
+				clearInterval(holdstate);
+				alert("页面运行出错，请重新登录！");
+				logout();
+			} 
+		}
+		
+		//每5分钟后台发送请求，保持session有效
+		var holdstate=setInterval(function(){
+			$.get("/${ctx}/hold",
+				function(data){
+					console.info(data);
+					if(data!="success"){
+						errorDeal();							
+					}
+				}
+			).error(errorDeal);
+		},1000*60*5);
 	});
 	
-	function personCompare(colPersonId,rowPersonId){
-		if(colPersonId=='') return;
-		if(rowPersonId=='') return;
-		OpenEnvDefineWin("/${ctx}/person/${person.id}/yearchk/personchk/"+colPersonId+"/comparework/"+rowPersonId,880,600);
-	}
+
 	
 	
 </script>
@@ -98,12 +144,14 @@
 <div class="headdiv" >
 <div class="headleft"  >
 考核年份:${year}&nbsp;&nbsp;状态:<c:choose><c:when test="${pageBean.commit==true}">已提交</c:when><c:when test="${pageBean.finish==true}">已完成</c:when><c:otherwise>未完成</c:otherwise></c:choose>
+<br>参与度:<span id="span_wl">${ptt.winOrLose}</span>个胜负，还需<span id="span_nc">${ptt.needCheck}</span>个。&nbsp;&nbsp;<span style="color: red;">注意：胜负个数达到${ptt.totalCheck}个才能提交成功！</span>
 </div>
 <div class="headright" >
-	<span id="wait_msg" style="color: red;display: none;">数据提交中，请稍后···</span>
+	<span id="wait_msg" style="color: red; display: none;"><img src="/${ctx}/resources/img/save.gif" >数据提交中，请等待</span>
 	<c:if test="${not pageBean.commit}">
 		<input type="button" class="act_btn" value="保存" onclick="save()"/>
 		<input type="button" class="act_btn" value="提交评价结果" onclick="commit()"/>
+		
 	</c:if>
 </div>
 <div  class="headnone"></div>
@@ -111,7 +159,7 @@
 <%@ include file="../../common/message.jsp"%>
 
 <form action="/${ctx}/person/${person.id}/yearchk/${year}"  method="post" >
-<table border=1  >
+<table border=1   id="maintab" >
 <thead>
 	<tr>
 		<th style="width: 80px;">员工</th>
@@ -135,11 +183,12 @@
 							 	<input type="hidden"          name="fk[<%=num %>].id"     value="${cellBean.fycheck.id}"/> 
 							 	<input type="hidden"          name="fk[<%=num %>].colId"  value="${cellBean.colPerson.id}"/> 
 							 	<input type="hidden"          name="fk[<%=num %>].rowId"  value="${rowBean.rowPerson.id}"/> 
-								<select class="selectperson"  name="fk[<%=num %>].val" >
-									<option value="1"    <c:if test="${cellBean.fycheck.val=='1'}">selected="true"</c:if> >${cellBean.colPerson.name}胜</option>
-									<option value="0"    <c:if test="${cellBean.fycheck.val=='0'}">selected="true"</c:if> >${cellBean.colPerson.name}平</option>
-									<option value="-1"   <c:if test="${cellBean.fycheck.val=='-1'}">selected="true"</c:if>>${cellBean.colPerson.name}负</option>
+								<select class="s${cellBean.fycheck.val}"  name="fk[<%=num %>].val" >
+									<option value="1"  class="s1"  <c:if test="${cellBean.fycheck.val=='1'}">selected="true"</c:if> >${cellBean.colPerson.name}胜</option>
+									<option value="0"  class="s0"  <c:if test="${cellBean.fycheck.val=='0'}">selected="true"</c:if> >${cellBean.colPerson.name}平</option>
+									<option value="-1" class="s-1"  <c:if test="${cellBean.fycheck.val=='-1'}">selected="true"</c:if>>${cellBean.colPerson.name}负</option>
 								</select>
+								<input type="hidden" value="${cellBean.fycheck.val}"/> 
 								<div class="btn_compare" onclick="personCompare( ${cellBean.colPerson.id},${cellBean.rowPerson.id})">对比绩效</div>
 							</div>
 						</li>
