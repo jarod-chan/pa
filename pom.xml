@@ -20,6 +20,9 @@
 	<profiles>
 		<profile>
 			<id>dev</id>
+			<activation>  
+		     <activeByDefault>true</activeByDefault>  
+		    </activation>  
 			<build>
 				<filters>
 					<filter>profile/profile-development.properties</filter>
