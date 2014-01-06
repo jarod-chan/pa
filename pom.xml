@@ -20,39 +20,27 @@
 	<profiles>
 		<profile>
 			<id>dev</id>
-			<properties>
-				<dbs.driver>com.mysql.jdbc.Driver</dbs.driver>
-				<dbs.url>jdbc:mysql://localhost:3306/test</dbs.url>
-				<dbs.dialect>org.hibernate.dialect.MySQL5Dialect</dbs.dialect>
-				<dbs.username>root</dbs.username>
-				<dbs.password>0</dbs.password>
-				<dbs.showsql>true</dbs.showsql>
-				<dbs.formatsql>true</dbs.formatsql>
-			</properties>
+			<build>
+				<filters>
+					<filter>profile/profile-development.properties</filter>
+				</filters>
+			</build>
 		</profile>
 		<profile>
 			<id>test</id>
-			<properties>
-				<dbs.driver>com.mysql.jdbc.Driver</dbs.driver>
-				<dbs.url>jdbc:mysql://localhost:3306/fygchk</dbs.url>
-				<dbs.dialect>org.hibernate.dialect.MySQL5Dialect</dbs.dialect>
-				<dbs.username>root</dbs.username>
-				<dbs.password>0</dbs.password>
-				<dbs.showsql>true</dbs.showsql>
-				<dbs.formatsql>true</dbs.formatsql>
-			</properties>
+			<build>
+				<filters>
+					<filter>profile/profile-test.properties</filter>
+				</filters>
+			</build>
 		</profile>
 		<profile>
 			<id>prod</id>
-			<properties>
-				<dbs.driver>com.mysql.jdbc.Driver</dbs.driver>
-				<dbs.url>jdbc:mysql://localhost:3306/fygchk</dbs.url>
-				<dbs.dialect>org.hibernate.dialect.MySQL5Dialect</dbs.dialect>
-				<dbs.username>root</dbs.username>
-				<dbs.password>fyg9900</dbs.password>
-				<dbs.showsql>false</dbs.showsql>
-				<dbs.formatsql>false</dbs.formatsql>
-			</properties>
+			<build>
+				<filters>
+					<filter>profile/profile-production.properties</filter>
+				</filters>
+			</build>
 		</profile>
 	</profiles>
 	
