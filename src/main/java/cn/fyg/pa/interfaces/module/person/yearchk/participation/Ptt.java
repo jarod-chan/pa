@@ -9,7 +9,7 @@ public class Ptt {
 	/**
 	 * 需要达到的参与度
 	 */
-	private static final BigDecimal reqPercent=new BigDecimal("0.3");
+	private static final BigDecimal reqPercent=new BigDecimal("0.2");
 	
 	private int winOrLose;
 	
