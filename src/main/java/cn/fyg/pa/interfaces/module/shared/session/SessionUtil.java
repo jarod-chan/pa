@@ -7,5 +7,9 @@ public interface SessionUtil {
 	<T> T getValue(String key);
 
 	void invalidate();
+	
+	String createToken();
+	
+	boolean checkToken(String token);
 
 }

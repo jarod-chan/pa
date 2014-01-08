@@ -1,8 +1,20 @@
 package cn.fyg.pa.interfaces.module.manage.yearchk.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CheckPage {
+	
+	private List<CheckItem> checkItems=new ArrayList<CheckItem>();
+
+	public List<CheckItem> getCheckItems() {
+		return checkItems;
+	}
+	
+	public void setCheckItems(List<CheckItem> checkItems) {
+		this.checkItems = checkItems;
+	}
+	
 	
 	private List<Long> id;
 	private List<Boolean> flag;

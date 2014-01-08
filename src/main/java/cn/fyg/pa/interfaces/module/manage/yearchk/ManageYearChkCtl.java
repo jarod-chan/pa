@@ -23,11 +23,13 @@ import cn.fyg.pa.domain.model.yearchk.ChkitemRepository;
 import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.model.yearchk.Fychkitem;
 import cn.fyg.pa.domain.model.yearchk.Fychkmange;
+import cn.fyg.pa.interfaces.module.manage.yearchk.dto.CheckItem;
 import cn.fyg.pa.interfaces.module.manage.yearchk.dto.CheckPage;
 import cn.fyg.pa.interfaces.module.manage.yearchk.dto.ChkmangeTab;
 import cn.fyg.pa.interfaces.module.manage.yearchk.dto.PersonPointBean;
 import cn.fyg.pa.interfaces.module.manage.yearchk.facade.YearchkFacade;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 import cn.fyg.pa.interfaces.module.shared.tool.Tool;
 
@@ -45,6 +47,8 @@ public class ManageYearChkCtl {
 	ChkitemRepository chkitemRepository;
 	@Resource
 	YearMangeChkService yearMangeChkService;
+	@Resource
+	SessionUtil sessionUtil; 
 	
 	
 	@ModelAttribute("person")
@@ -98,6 +102,8 @@ public class ManageYearChkCtl {
 		map.put("chkmangeTabs",chkmangeTabs);
 		map.put("sumall",sumall);
 		map.put("message",new SessionMPR(session).getMessage());
+		map.put("session_token", sessionUtil.createToken());
+
 		return "yearchk/managechk/personchk";
 	}
 	
@@ -110,33 +116,39 @@ public class ManageYearChkCtl {
 	}
 
 	@RequestMapping(value="/person/{checkPersonId}/save",method=RequestMethod.POST)
-	public String savePersonchk(@ModelAttribute CheckPage checkPage,@RequestParam("year") Long year,@ModelAttribute("person")Person person,@PathVariable("checkPersonId") Long checkPersonId,Map<String,Object> map,HttpSession session) {
+	public String savePersonchk(@RequestParam("session_token")String session_token,CheckPage checkPage,@RequestParam("year") Long year,@ModelAttribute("person")Person person,@PathVariable("checkPersonId") Long checkPersonId,Map<String,Object> map,HttpSession session) {
+		
+		if(!sessionUtil.checkToken(session_token)){
+			new SessionMPR(session).setMessage("重复提交数据导致数据重复，请重新填写。（请不要使用浏览器后退功能！）");
+			return "redirect:../../";
+		}
+		
 		Person checkPerson=personRepository.find(checkPersonId);
 		
 		List<Fychkmange> saveList=new ArrayList<Fychkmange>();
 		List<Fychkmange> removeList=new ArrayList<Fychkmange>();
 		int totalPoin=0;
-		for (int i=0,len=checkPage.getId().size();i<len;i++) {
-			if(!checkPage.getFlag().get(i)){
-				if(checkPage.getId().get(i)!=null){
+		for(CheckItem checkitem:checkPage.getCheckItems()){
+			if(!checkitem.getFlag()){
+				if(checkitem.getId()!=null){
 					Fychkmange fychkmange=new Fychkmange();
-					fychkmange.setId(checkPage.getId().get(i));
+					fychkmange.setId(checkitem.getId());
 					removeList.add(fychkmange);
-				}	
+				}
 				continue;
 			}
 			Fychkmange fychkmange=new Fychkmange();
-			fychkmange.setId(checkPage.getId().get(i));
+			fychkmange.setId(checkitem.getId());
 			fychkmange.setYear(year);
 			fychkmange.setMangeid(person.getId());
 			fychkmange.setPersonid(checkPerson.getId());
-			fychkmange.setItemid(checkPage.getItemid().get(i));
-			fychkmange.setVal(checkPage.getVal().get(i));
+			fychkmange.setItemid(checkitem.getItemid());
+			fychkmange.setVal(checkitem.getVal());
 			saveList.add(fychkmange);
-			Fychkitem fychkitem=chkitemRepository.find(checkPage.getItemid().get(i));
+			Fychkitem fychkitem=chkitemRepository.find(checkitem.getItemid());
 			totalPoin+=fychkitem.getPoint()*fychkmange.getVal();
 		}
-
+		
 		yearMangeChkService.saveAndRemoveList(saveList,removeList);
 		
 		String getPoint=Tool.format(new BigDecimal(totalPoin).divide(Constant.POINT_LEVEL,3,BigDecimal.ROUND_HALF_DOWN));

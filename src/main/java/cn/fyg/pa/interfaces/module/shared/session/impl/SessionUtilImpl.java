@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 
 import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
+import cn.fyg.pa.interfaces.module.shared.tool.Tool;
 
 /**
  * session 处理
@@ -13,6 +14,7 @@ import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 @Component
 public class SessionUtilImpl implements SessionUtil {
 	
+	private static final String PA_TOKEN = "pa-token";
 	@Resource
 	HttpSession httpSession;
 	
@@ -33,6 +35,22 @@ public class SessionUtilImpl implements SessionUtil {
 	@Override
 	public void invalidate(){
 		httpSession.invalidate();
+	}
+
+	@Override
+	public String createToken() {
+		String token = Tool.getPassword(6L);
+		httpSession.setAttribute(PA_TOKEN, token);
+		return token;
+	}
+
+	@Override
+	public boolean checkToken(String token) {
+		Object obj=httpSession.getAttribute(PA_TOKEN);
+		httpSession.setAttribute(PA_TOKEN, null);
+		if(obj==null) return false;
+		String saveToken=obj.toString();
+		return saveToken.equals(token);
 	}
 	
 }
