@@ -6,6 +6,6 @@
 </head>
 <c:set var="pagesize" value="990" scope="request"/> 
 <body>
-<%@ include file="../notification3.jsp"%>
+<%@ include file="../yearletter.jsp"%>
 </body>
 </html>

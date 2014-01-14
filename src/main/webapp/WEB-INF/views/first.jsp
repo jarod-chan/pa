@@ -41,7 +41,7 @@
 	</div>
 </div>
 
-<%@ include file="newsletter.jsp"%>
+<%@ include file="yearletter.jsp"%>
 
 <style type="text/css">
 body {
