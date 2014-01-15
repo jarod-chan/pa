@@ -46,6 +46,7 @@ public class SessionUtilImpl implements SessionUtil {
 
 	@Override
 	public boolean checkToken(String token) {
+		if(token==null) return false;
 		Object obj=httpSession.getAttribute(PA_TOKEN);
 		httpSession.setAttribute(PA_TOKEN, null);
 		if(obj==null) return false;

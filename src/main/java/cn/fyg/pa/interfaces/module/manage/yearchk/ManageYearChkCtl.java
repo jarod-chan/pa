@@ -30,6 +30,8 @@ import cn.fyg.pa.interfaces.module.manage.yearchk.dto.PersonPointBean;
 import cn.fyg.pa.interfaces.module.manage.yearchk.facade.YearchkFacade;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
+import cn.fyg.pa.interfaces.module.shared.token.annotation.CheckToken;
+import cn.fyg.pa.interfaces.module.shared.token.annotation.CreateToken;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 import cn.fyg.pa.interfaces.module.shared.tool.Tool;
 
@@ -80,6 +82,7 @@ public class ManageYearChkCtl {
 	
 
 	@RequestMapping(value="/person/{checkPersonId}",method=RequestMethod.GET)
+	@CreateToken(mapIndex=2)
 	public String toPersonchk(@ModelAttribute("person")Person person,@PathVariable("checkPersonId") Long checkPersonId,Map<String,Object> map,HttpSession session){
 		
 		Long year = 0L;
@@ -102,7 +105,6 @@ public class ManageYearChkCtl {
 		map.put("chkmangeTabs",chkmangeTabs);
 		map.put("sumall",sumall);
 		map.put("message",new SessionMPR(session).getMessage());
-		map.put("session_token", sessionUtil.createToken());
 
 		return "yearchk/managechk/personchk";
 	}
@@ -116,12 +118,8 @@ public class ManageYearChkCtl {
 	}
 
 	@RequestMapping(value="/person/{checkPersonId}/save",method=RequestMethod.POST)
+	@CheckToken(redirectUrl="redirect:../../")
 	public String savePersonchk(@RequestParam("session_token")String session_token,CheckPage checkPage,@RequestParam("year") Long year,@ModelAttribute("person")Person person,@PathVariable("checkPersonId") Long checkPersonId,Map<String,Object> map,HttpSession session) {
-		
-		if(!sessionUtil.checkToken(session_token)){
-			new SessionMPR(session).setMessage("重复提交数据导致数据重复，请重新填写。（请不要使用浏览器后退功能！）");
-			return "redirect:../../";
-		}
 		
 		Person checkPerson=personRepository.find(checkPersonId);
 		

@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.shared.token;
+package cn.fyg.pa.interfaces.module.shared.token.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -13,5 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface CheckToken {
+	
+	String redirectUrl() default "";
 
 }
