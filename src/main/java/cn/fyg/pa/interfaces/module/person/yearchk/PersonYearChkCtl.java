@@ -43,7 +43,7 @@ import cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn;
 @RequestMapping("/person/{personId}/yearchk")
 public class PersonYearChkCtl {
 	
-	private static final String PATH = "personchk/";
+	private static final String PATH = "yearchk/personchk/";
 	private interface Page {
 		String  EDIT= PATH + "yearchk";
 		String  COMMIT= PATH + "yearchk_commit";
