@@ -31,5 +31,10 @@
              <aop:pointcut expression="execution(@cn.fyg.pa.interfaces.module.shared.token.annotation.CheckToken * *(..)) and @annotation(checkToken)"  id="checkTokenCut"/>
           	 <aop:around method="around" arg-names="checkToken" pointcut-ref="checkTokenCut"/> 
         </aop:aspect>
+        <!--获得session中的当前用户，注入方法中 -->
+        <aop:aspect id="personIn" ref="personInAdvice">
+        	<aop:pointcut expression="execution(@cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn * *(..)) and @annotation(personIn)" id="personInCut"/>
+        	<aop:around method="injectPerson" arg-names="personIn" pointcut-ref="personInCut"/>
+        </aop:aspect>
     </aop:config>
 </beans>
