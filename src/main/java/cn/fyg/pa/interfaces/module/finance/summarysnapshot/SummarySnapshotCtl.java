@@ -8,13 +8,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.application.SummarySnapshotService;
-import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.model.summarysnapshot.SnapshotEnum;
 import cn.fyg.pa.domain.model.summarysnapshot.SnapshotItem;
@@ -55,10 +53,6 @@ public class SummarySnapshotCtl {
 	@Resource
 	MessagePasser messagePasser;
 	
-	@ModelAttribute("person")
-	public Person initPerson(@PathVariable("personId") Long personId){
-		return personRepository.find(personId);
-	}
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String toReceive(Map<String,Object> map,HttpSession session){
