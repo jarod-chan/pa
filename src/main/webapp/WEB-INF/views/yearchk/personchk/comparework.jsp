@@ -57,7 +57,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#btn_jump").click(function(){
-			window.open('/${ctx}/person/${person.id}/yearchk/personchk/${colPerson.id}/comparesummary/${rowPerson.id}','_self');
+			window.open('/${ctx}/person/${loginRet.personid}/yearchk/personchk/${colPerson.id}/comparesummary/${rowPerson.id}','_self');
 		});
 	});
 </script>

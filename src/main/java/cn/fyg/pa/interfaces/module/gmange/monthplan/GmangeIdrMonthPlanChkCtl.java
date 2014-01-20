@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +25,7 @@ import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn;
 
 @Controller
 @RequestMapping("/gmange/{personId}/idrmonthplan")
@@ -33,10 +33,17 @@ public class GmangeIdrMonthPlanChkCtl {
 	
 	private static final Logger logger=LoggerFactory.getLogger(GmangeIdrMonthPlanChkCtl.class);
 	
+	
+	private static final String PATH="gmangeidrmonthplan/";
+	private interface Page {
+		String AUDIT = PATH + "audit";
+		String VIEW  = PATH + "view";
+	}
+	
 	public static Map<IdrMonthPlanEnum,String> PAGEMAP=new HashMap<IdrMonthPlanEnum,String>();
-	{
-		PAGEMAP.put(IdrMonthPlanEnum.SUBMITTED, "gmangeidrmonthplan/audit");
-		PAGEMAP.put(IdrMonthPlanEnum.EXECUTE, "gmangeidrmonthplan/view");
+	static {
+		PAGEMAP.put(IdrMonthPlanEnum.SUBMITTED, Page.AUDIT);
+		PAGEMAP.put(IdrMonthPlanEnum.EXECUTE,  Page.VIEW);
 	}
 	
 	@Resource
@@ -48,13 +55,9 @@ public class GmangeIdrMonthPlanChkCtl {
 	@Resource
 	IdrMonthPlanBillRepository idrMonthPlanBillRepository;
 	
-	@ModelAttribute("person")
-	public Person initPerson(@PathVariable("personId") Long personId){
-		return personRepository.find(personId);
-	}
-	
 	@RequestMapping(value="")
-	public String toList(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toList(Person person,Map<String,Object> map,HttpSession session){
 		List<Department> departments = departmentRepository.findDepartmentsByGmanage(person);
 		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByDepartmentAndState(departments,IdrMonthPlanEnum.SUBMITTED,IdrMonthPlanEnum.EXECUTE);
 		map.put("person", person);
@@ -64,11 +67,13 @@ public class GmangeIdrMonthPlanChkCtl {
 	}
 	
 	@RequestMapping(value="/{idrmonthplanId}")
-	public String toAudit(@PathVariable("idrmonthplanId")Long idrmonthplanId,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toAudit(Person person,@PathVariable("idrmonthplanId")Long idrmonthplanId,Map<String,Object> map,HttpSession session){
 		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillRepository.find(idrmonthplanId);
 		Person mange=personRepository.findDepartmentMange(idrMonthPlanBill.getDepartment().getName());
 		map.put("mange", mange);
 		map.put("idrMonthPlanBill", idrMonthPlanBill);
+		map.put("person", person);
 		return PAGEMAP.get(idrMonthPlanBill.getState());
 	}
 	
@@ -99,7 +104,8 @@ public class GmangeIdrMonthPlanChkCtl {
 	}
 	
 	@RequestMapping(value="/history",method=RequestMethod.GET)
-	public String history(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String history(Person person,Map<String,Object> map,HttpSession session){
 		List<Department> departments = departmentRepository.findDepartmentsByGmanage(person);
 		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByDepartmentAndState(departments,IdrMonthPlanEnum.FINISHED);
 		map.put("person", person);

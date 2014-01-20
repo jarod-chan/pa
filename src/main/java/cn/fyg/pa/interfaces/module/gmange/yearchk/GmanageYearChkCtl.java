@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +23,7 @@ import cn.fyg.pa.interfaces.module.manage.yearchk.dto.ChkmangeTab;
 import cn.fyg.pa.interfaces.module.manage.yearchk.dto.PersonPointBean;
 import cn.fyg.pa.interfaces.module.manage.yearchk.facade.YearchkFacade;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn;
 
 @Controller
 @RequestMapping("/gmange/{personId}/yearchk")
@@ -40,18 +40,16 @@ public class GmanageYearChkCtl {
 	@Resource
 	DepartmentRepository departmentRepository;
 	
-	@ModelAttribute("person")
-	public Person initPerson(@PathVariable("personId") Long personId){
-		return personRepository.find(personId);
-	}
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String toListWithDefaultDepartment(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toListWithDefaultDepartment(Person person,Map<String,Object> map,HttpSession session){
 		return toList(person,null,map,session);
 	}
 	
 	@RequestMapping(value="/department/{departmentId}",method=RequestMethod.GET)
-	public String toList(@ModelAttribute("person")Person person,@PathVariable("departmentId")Long departmenId
+	@PersonIn(0)
+	public String toList(Person person,@PathVariable("departmentId")Long departmenId
 			,Map<String,Object> map,HttpSession session){
 		
 		Long year = 0L;
@@ -81,7 +79,8 @@ public class GmanageYearChkCtl {
 	}
 
 	@RequestMapping(value="/person/{checkPersonId}/year/{year}",method=RequestMethod.GET)
-	public String toItem(@ModelAttribute("person")Person person,@PathVariable("checkPersonId") Long checkPersonId,@PathVariable("year")Long year,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toItem(Person person,@PathVariable("checkPersonId") Long checkPersonId,@PathVariable("year")Long year,Map<String,Object> map,HttpSession session){
 		
 		Person checkPerson=personRepository.find(checkPersonId);
 		

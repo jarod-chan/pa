@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +23,7 @@ import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.interfaces.module.shared.bean.YearAndMonthBean;
 import cn.fyg.pa.interfaces.module.shared.bean.YearAndPrevMonth;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn;
 import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
@@ -35,8 +35,8 @@ import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 @RequestMapping("/mange/{personId}/monthchk")
 public class MangeMonthChkCtl {
 	
+	private static final String PATH="mange/monthchk/";
 	private interface Page {
-		String PATH = "mange/monthchk/";
 		String LIST     = PATH + "list";
 		String EVALUATE = PATH + "evaluate";
 		String HISTROY  = PATH + "histroy";
@@ -59,13 +59,9 @@ public class MangeMonthChkCtl {
 	MangeMonthChkFacade mangeMonthChkFacade;
 	
 	
-	@ModelAttribute("person")
-	public Person initPerson(@PathVariable("personId") Long personId){
-		return personRepository.find(personId);
-	}
-	
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String toList(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toList(Person person,Map<String,Object> map,HttpSession session){
 		YearAndPrevMonth queryBean=getYearAndPrevMonthFromSession();
 		List<MonthChk> monthChks=mangeMonthChkFacade.getAllPersonMonthChkByPeriod(queryBean.getYear(),queryBean.getMonth(),person.getDepartment());
 		map.put("dateTool", new DateTool());
@@ -92,7 +88,8 @@ public class MangeMonthChkCtl {
 	}
 	
 	@RequestMapping(value="/{monthchkId}",method=RequestMethod.GET)
-	public String toEvaluate(@ModelAttribute("person")Person person,@PathVariable("monthchkId") Long monthchkId,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toEvaluate(Person person,@PathVariable("monthchkId") Long monthchkId,Map<String,Object> map,HttpSession session){
 		MonthChk monthChk=monthChkRepository.find(monthchkId);
 		map.put("mange", person);
 		map.put("monthChk", monthChk);
@@ -101,7 +98,8 @@ public class MangeMonthChkCtl {
 	}
 	
 	@RequestMapping(value="/{monthchkId}/save",method=RequestMethod.POST)
-	public String save(@ModelAttribute("person")Person person,@PathVariable("monthchkId") Long monthchkId,HttpServletRequest request,HttpSession session){
+	@PersonIn(0)
+	public String save(Person person,@PathVariable("monthchkId") Long monthchkId,HttpServletRequest request,HttpSession session){
 		MonthChk monthChk=monthChkRepository.find(monthchkId);
 		ServletRequestDataBinder binder = new ServletRequestDataBinder(monthChk);//XXX 能否修改这里的逻辑？
 		binder.bind(request);	
@@ -111,7 +109,8 @@ public class MangeMonthChkCtl {
 	}
 
 	@RequestMapping(value="/{monthchkId}/finish",method=RequestMethod.POST)
-	public String finish(@ModelAttribute("person")Person person,@PathVariable("monthchkId") Long monthchkId, HttpServletRequest request,HttpSession session){
+	@PersonIn(0)
+	public String finish(Person person,@PathVariable("monthchkId") Long monthchkId, HttpServletRequest request,HttpSession session){
 		MonthChk monthChk=monthChkRepository.find(monthchkId);
 		ServletRequestDataBinder binder = new ServletRequestDataBinder(monthChk);//XXX 能否修改这里的逻辑？
 		binder.bind(request);	
@@ -128,7 +127,8 @@ public class MangeMonthChkCtl {
 
 
 	@RequestMapping(value="/{monthchkId}/back",method=RequestMethod.POST)
-	public String back(@ModelAttribute("person")Person person,@PathVariable("monthchkId") Long monthchkId,HttpSession session){
+	@PersonIn(0)
+	public String back(Person person,@PathVariable("monthchkId") Long monthchkId,HttpSession session){
 		String message="单据已打回！";
 		try {
 			monthChkService.back(monthchkId);
@@ -142,7 +142,8 @@ public class MangeMonthChkCtl {
 
 
 	@RequestMapping(value="/histroy",method=RequestMethod.GET)
-	public String histroy(YearAndMonthBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map){
+	@PersonIn(1)
+	public String histroy(YearAndMonthBean queryBean,Person person,Map<String,Object> map){
 		List<MonthChk> monthChks=monthChkRepository.getMonthChkByPeriodAndDepartmentAndState(queryBean.getYear(), queryBean.getMonth(),person.getDepartment(), MonthChkEnum.FINISHED);
 		map.put("dateTool", new DateTool());
 		map.put("mange", person);

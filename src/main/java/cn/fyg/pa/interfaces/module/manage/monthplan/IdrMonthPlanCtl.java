@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +28,7 @@ import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
 @Controller
@@ -37,14 +37,20 @@ public class IdrMonthPlanCtl {
 	
 	private static final Logger logger=LoggerFactory.getLogger(IdrMonthPlanCtl.class);
 	
-	public static Map<IdrMonthPlanEnum,String> PAGEMAP=new HashMap<IdrMonthPlanEnum,String>();
+	private static final String PATH="idrmonthplan/";
+	private interface Page {
+		String EDIT     = PATH + "edit";
+		String VIEW = PATH + "view";
+		String SUMMARY  = PATH + "summary";
+	}
 	
+	public static Map<IdrMonthPlanEnum,String> PAGEMAP=new HashMap<IdrMonthPlanEnum,String>();
 	static{
-		PAGEMAP.put(IdrMonthPlanEnum.NEW, "idrmonthplan/edit");
-		PAGEMAP.put(IdrMonthPlanEnum.SAVED, "idrmonthplan/edit");
-		PAGEMAP.put(IdrMonthPlanEnum.SUBMITTED, "idrmonthplan/view");
-		PAGEMAP.put(IdrMonthPlanEnum.EXECUTE, "idrmonthplan/summary");
-		PAGEMAP.put(IdrMonthPlanEnum.FINISHED, "idrmonthplan/view");
+		PAGEMAP.put(IdrMonthPlanEnum.NEW, Page.EDIT);
+		PAGEMAP.put(IdrMonthPlanEnum.SAVED, Page.EDIT);
+		PAGEMAP.put(IdrMonthPlanEnum.SUBMITTED, Page.VIEW);
+		PAGEMAP.put(IdrMonthPlanEnum.EXECUTE, Page.SUMMARY);
+		PAGEMAP.put(IdrMonthPlanEnum.FINISHED, Page.VIEW);
 	}
 	
 	@Resource
@@ -56,13 +62,9 @@ public class IdrMonthPlanCtl {
 	@Resource
 	DepartmentRepository departmentRepository;
 	
-	@ModelAttribute("person")
-	public Person initPerson(@PathVariable("personId") Long personId){
-		return personRepository.find(personId);
-	}
-	
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String toEdit(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toEdit(Person person,Map<String,Object> map,HttpSession session){
 		String departmentName=person.getDepartment();
 		Department department=departmentRepository.findDepartmentByName(departmentName);
 		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillService.getLastIdrMonthPlanBill(department);
@@ -139,7 +141,8 @@ public class IdrMonthPlanCtl {
 	}
 	
 	@RequestMapping(value="/history",method=RequestMethod.GET)
-	public String history(YearQueryBean queryBean,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	@PersonIn(1)
+	public String history(YearQueryBean queryBean,Person person,Map<String,Object> map,HttpSession session){
 		String departmentName=person.getDepartment();
 		Department department=departmentRepository.findDepartmentByName(departmentName);
 		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriodAndDepartmentAndState(queryBean.getYear(),null,department,IdrMonthPlanEnum.FINISHED);

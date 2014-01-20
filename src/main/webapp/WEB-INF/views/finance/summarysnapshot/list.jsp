@@ -16,14 +16,14 @@
 
 <script type="text/javascript">
 	var selChange=function(){
-		$('<form/>',{action:'/${ctx}/finance/${person.id}/summarysnapshot/history',method:'post'})
+		$('<form/>',{action:'/${ctx}/finance/${loginRet.personid}/summarysnapshot/history',method:'post'})
 		.append($('<input/>',{type:'hidden',name:'year',value:$("select[name=year]").val()}))
 	 	.appendTo($("body"))
 	 	.submit();
 	}
 	
-	function remove(summarysnapshotId){
-		$('<form/>',{action:'/${ctx}/finance/${person.id}/summarysnapshot/'+summarysnapshotId+'/remove',method:'post'})
+	function drop(summarysnapshotId){
+		$('<form/>',{action:'/${ctx}/finance/${loginRet.personid}/summarysnapshot/'+summarysnapshotId+'/remove',method:'post'})
 	 	.appendTo($("body"))
 	 	.submit();
 	}
@@ -36,7 +36,7 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="考核结果历史" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/finance/${person.id}/summarysnapshot/history" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/finance/${loginRet.personid}/summarysnapshot/history" />  
 
 <c:set var="pagesize" value="825" scope="request"/> 
 <body>
@@ -82,10 +82,10 @@
 		<div class="state ${fn:toLowerCase(item.state)}">${item.state.name}</div> 
 	</td>
 	<td>	
-		<input type="button" value="查看" onclick="javascript:window.open('/${ctx}/finance/${person.id}/summarysnapshot/history/${item.id}','_self')"/>
+		<input type="button" value="查看" onclick="javascript:window.open('/${ctx}/finance/${loginRet.personid}/summarysnapshot/history/${item.id}','_self')"/>
 		&nbsp;&nbsp;
 		<c:if test="${item.state=='RECEIVED'}">
-			<input type="button" value="删除" onclick="remove('${item.id}')"/>
+			<input type="button" value="删除" onclick="drop('${item.id}')"/>
 		</c:if>
 	</td>
 				

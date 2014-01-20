@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +18,7 @@ import cn.fyg.pa.domain.model.summary.Content;
 import cn.fyg.pa.domain.model.summary.PersonSummary;
 import cn.fyg.pa.domain.model.summary.SummaryEnum;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn;
 import cn.fyg.pa.interfaces.module.system.login.LoginRetBean;
 
 /**
@@ -46,13 +46,11 @@ public class SummaryCtl {
 	@Resource
 	PersonSummaryService personSummaryService;
 	
-	@ModelAttribute("person")
-	public Person initPerson(@PathVariable("personId") Long personId){
-		return personRepository.find(personId);
-	}
+
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String toEdit(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toEdit(Person person,Map<String,Object> map,HttpSession session){
 		PersonSummary personSummary = personSummaryService.findAndCreate(FIX_YEAR, person.getId());
 		map.put("personSummary", personSummary);
 		map.put("person", person);
@@ -95,7 +93,8 @@ public class SummaryCtl {
 	}
 	
 	@RequestMapping(value="{year}",method=RequestMethod.GET)
-	public String toViewYear(@PathVariable("year")Long year,@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	@PersonIn(1)
+	public String toViewYear(@PathVariable("year")Long year,Person person,Map<String,Object> map,HttpSession session){
 		PersonSummary personSummary = personSummaryService.find(year, person.getId());
 		map.put("personSummary", personSummary);
 		map.put("person", person);

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,10 +37,20 @@ import cn.fyg.pa.interfaces.module.person.yearchk.participation.PttUtil;
 import cn.fyg.pa.interfaces.module.person.yearchk.participation.impl.PttUtilFycheck;
 import cn.fyg.pa.interfaces.module.person.yearchk.participation.impl.PttUtilRowBean;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn;
 
 @Controller
 @RequestMapping("/person/{personId}/yearchk")
 public class PersonYearChkCtl {
+	
+	private static final String PATH = "yearchk/personchk/";
+	private interface Page {
+		String  EDIT= PATH + "yearchk";
+		String  COMMIT= PATH + "yearchk_commit";
+		String  NOTTIME= PATH + "nottime";
+		String  COMPARE_WORK= PATH + "comparework";
+		String  COMPARE_SUMMARY= PATH + "comparesummary";
+	}
 	
 	@Resource
 	PersonRepository personRepository;
@@ -52,24 +61,21 @@ public class PersonYearChkCtl {
 	@Resource
 	YearCheckService yearCheckService;
 	
-	@ModelAttribute("person")
-	public Person initPerson(@PathVariable("personId") Long personId){
-		return personRepository.find(personId);
-	}
-	
+
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String toYearChk(@ModelAttribute("person")Person chkPerson,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toYearChk(Person chkPerson,Map<String,Object> map,HttpSession session){
 		Long year=0L;
 		try {
 			year=yearConfigService.getEnableYear();
 		} catch (EnableYearNotExist e) {
 			map.put("message","年度横向评价功能暂时关闭！");
-			return "yearchk/personchk/nottime";
+			return Page.NOTTIME;
 		}
 		//添加无效人员过滤（部分返聘人员不参与年度绩效评价）
 		if(chkPerson.getState()==StateEnum.invalid){
 			map.put("message","你无须参与年度横向评价！");
-			return "yearchk/personchk/nottime";
+			return Page.NOTTIME;
 		}
 		
 		boolean commit = yearchkStateService.isCommit(year, chkPerson.getId());
@@ -112,9 +118,10 @@ public class PersonYearChkCtl {
 			map.put("resultBeanList", resultBeanList);
 		}
 		
+		map.put("person", chkPerson);
 		map.put("year", year);
 		map.put("message",new SessionMPR(session).getMessage());
-		return commit?"yearchk/personchk/yearchk_commit":"yearchk/personchk/yearchk";
+		return commit?Page.COMMIT:Page.EDIT;
 		
 	}
 	
@@ -172,7 +179,7 @@ public class PersonYearChkCtl {
 		map.put("rowPerson", rowPerson);
 		map.put("message",new SessionMPR(session).getMessage());
 		
-		return "yearchk/personchk/comparework";
+		return Page.COMPARE_WORK;
 	}
 
 	private List<MonthChkItem> fetchMonthChkItems(List<MonthChk> colMonthChk) {
@@ -204,7 +211,7 @@ public class PersonYearChkCtl {
 		map.put("rowSummary", rowSummary);
 		map.put("rowPerson", rowPerson);
 		
-		return "yearchk/personchk/comparesummary";
+		return Page.COMPARE_SUMMARY;
 	}
 	
 	@InitBinder
@@ -217,7 +224,8 @@ public class PersonYearChkCtl {
 	 *可以通过修改jetty.xml来取消限制
 	 */
 	@RequestMapping(value="/{year}/save",method=RequestMethod.POST)
-	public String save(@ModelAttribute("person")Person chkPerson,@PathVariable("year")Long year,RecvBean recvBean,HttpSession session){
+	@PersonIn(0)
+	public String save(Person chkPerson,@PathVariable("year")Long year,RecvBean recvBean,HttpSession session){
 		List<Fycheck> fycheck=recvBean.getFk();
 		fycheck=fillFycheck(fycheck,year,chkPerson);
 	    yearCheckService.saveFychecks(fycheck);
@@ -236,7 +244,8 @@ public class PersonYearChkCtl {
 
 	
 	@RequestMapping(value="/{year}/commit",method=RequestMethod.POST)
-	public String commit(@ModelAttribute("person")Person chkPerson,@PathVariable("year")Long year,RecvBean recvBean,HttpSession session){
+	@PersonIn(0)
+	public String commit(Person chkPerson,@PathVariable("year")Long year,RecvBean recvBean,HttpSession session){
 		List<Fycheck> fycheck=recvBean.getFk();
 		fycheck=fillFycheck(fycheck,year,chkPerson);
 	    yearCheckService.saveFychecks(fycheck);

@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +28,7 @@ import cn.fyg.pa.interfaces.module.manage.yearchk.dto.ChkmangeTab;
 import cn.fyg.pa.interfaces.module.manage.yearchk.dto.PersonPointBean;
 import cn.fyg.pa.interfaces.module.manage.yearchk.facade.YearchkFacade;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
+import cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn;
 import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 import cn.fyg.pa.interfaces.module.shared.token.annotation.CheckToken;
 import cn.fyg.pa.interfaces.module.shared.token.annotation.CreateToken;
@@ -53,13 +53,9 @@ public class ManageYearChkCtl {
 	SessionUtil sessionUtil; 
 	
 	
-	@ModelAttribute("person")
-	public Person initPerson(@PathVariable("personId") Long personId){
-		return personRepository.find(personId);
-	}
-	
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String toList(@ModelAttribute("person")Person person,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toList(Person person,Map<String,Object> map,HttpSession session){
 	
 		Long year = 0L;
 		try {
@@ -83,7 +79,8 @@ public class ManageYearChkCtl {
 
 	@RequestMapping(value="/person/{checkPersonId}",method=RequestMethod.GET)
 	@CreateToken(mapIndex=2)
-	public String toPersonchk(@ModelAttribute("person")Person person,@PathVariable("checkPersonId") Long checkPersonId,Map<String,Object> map,HttpSession session){
+	@PersonIn(0)
+	public String toPersonchk(Person person,@PathVariable("checkPersonId") Long checkPersonId,Map<String,Object> map,HttpSession session){
 		
 		Long year = 0L;
 		try {
@@ -119,7 +116,8 @@ public class ManageYearChkCtl {
 
 	@RequestMapping(value="/person/{checkPersonId}/save",method=RequestMethod.POST)
 	@CheckToken(redirectUrl="redirect:../../")
-	public String savePersonchk(@RequestParam("session_token")String session_token,CheckPage checkPage,@RequestParam("year") Long year,@ModelAttribute("person")Person person,@PathVariable("checkPersonId") Long checkPersonId,Map<String,Object> map,HttpSession session) {
+	@PersonIn(0)
+	public String savePersonchk(Person person,CheckPage checkPage,@RequestParam("year") Long year,@PathVariable("checkPersonId") Long checkPersonId,Map<String,Object> map,HttpSession session) {
 		
 		Person checkPerson=personRepository.find(checkPersonId);
 		
