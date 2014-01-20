@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use this definition if using a Java EE 6 container This also stops Eclipse 
+	from complaining that 3.0 is not a valid version <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" 
+	http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"> -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	
+	<display-name>pa</display-name>
+
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+		 	classpath:infrastructure.xml
+		</param-value>
+	</context-param>  
+
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+ 		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				classpath:servlet-context.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup> 
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- 浏览器不支持put,delete等method,由该filter将/blog?_method=delete转换为标准的http delete方法 -->
+	<filter>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<servlet-name>appServlet</servlet-name>
+	</filter-mapping>  
+	
+	<!-- Filter 登陆过滤开始-->
+	<filter>
+		<filter-name>urlFilter</filter-name>
+		<filter-class>cn.fyg.pa.interfaces.security.UrlFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>urlFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 使用sitemesh 来装饰-->
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	</filter>
+	<filter-mapping>  
+		<filter-name>sitemesh</filter-name>  
+		<url-pattern>/*</url-pattern>  
+	</filter-mapping> 
+	
+</web-app>

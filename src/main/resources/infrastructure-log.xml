@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+	<context:annotation-config/>
+	
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+   
+    <aop:config>
+    	 <!--过滤infterfaces 里任何一个ctl类 记录日志 -->
+        <aop:aspect id="aspect" ref="logAdvice">
+            <aop:pointcut expression="execution(* cn.fyg.pa.interfaces.module..*Ctl.*(..))" id="pointCut"/>
+            <aop:before method="before" pointcut-ref="pointCut"/>
+        </aop:aspect>
+         <!--过滤会产生数据重复保存的页面，保证数据不会被重复提交 -->
+        <aop:aspect id="createToken" ref="createTokenAdvice">
+             <aop:pointcut expression="execution(@cn.fyg.pa.interfaces.module.shared.token.annotation.CreateToken * *(..)) and @annotation(createToken)"  id="createTokenCut"/>
+          	 <aop:after method="after" arg-names="createToken" pointcut-ref="createTokenCut"/> 
+        </aop:aspect>
+        <aop:aspect id="checkToken" ref="checkTokenAdvice">
+             <aop:pointcut expression="execution(@cn.fyg.pa.interfaces.module.shared.token.annotation.CheckToken * *(..)) and @annotation(checkToken)"  id="checkTokenCut"/>
+          	 <aop:around method="around" arg-names="checkToken" pointcut-ref="checkTokenCut"/> 
+        </aop:aspect>
+        <!--获得session中的当前用户，注入方法中 -->
+        <aop:aspect id="personIn" ref="personInAdvice">
+        	<aop:pointcut expression="execution(@cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn * *(..)) and @annotation(personIn)" id="personInCut"/>
+        	<aop:around method="injectPerson" arg-names="personIn" pointcut-ref="personInCut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

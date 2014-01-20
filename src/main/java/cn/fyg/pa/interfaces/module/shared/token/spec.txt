@@ -1,0 +1,4 @@
+解决重复提交问题
+-- 采用spring aop的方式用注解来解决重复提交的问题
+1.用CreateToken注解产生一个随机字串，并保存在session中
+2.用CheckToken注解在保存方法前校验session中的随机字串

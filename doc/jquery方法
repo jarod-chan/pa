@@ -1,0 +1,8 @@
+
+隐藏一个表的某几个列
+$('#tbl tr').find('td:gt(2):lt(13)').hide();
+
+ie6 下创建name属性
+$("<input>").attr({type:'text',name:'idrCompany_number'})
+无法添加name属性，但是其实已经是有name属性了 ，提交时，数据一样提交到后台，页面上却无法取到name属性
+$("<input name='idrCompany_number' >")

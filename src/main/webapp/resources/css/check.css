@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+/*
+#tab {
+    font-size: 13px;
+    table-layout:fixed; 
+}
+#tab thead tr th{
+	table-layout:fixed; 
+	width:20px; 
+	overflow:hidden; 
+	word-wrap:break-word; 
+}
+
+#tab tr td {
+	table-layout:fixed; 
+	width:20px; 
+	overflow:hidden; 
+	word-wrap:break-word; 
+}
+
+*/
+
+
+#tab tr td div select {
+   width:80px; 
+}
+
+.cell{
+	width:80px;
+}
+
+
+
