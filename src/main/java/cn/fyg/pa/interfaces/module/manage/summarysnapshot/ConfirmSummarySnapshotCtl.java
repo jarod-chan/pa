@@ -8,14 +8,11 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.fyg.pa.application.SummarySnapshotService;
-import cn.fyg.pa.domain.model.person.Person;
-import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.model.summarysnapshot.SnapshotEnum;
 import cn.fyg.pa.domain.model.summarysnapshot.SummarySnapshot;
 import cn.fyg.pa.domain.model.summarysnapshot.SummarySnapshotRepository;
@@ -36,16 +33,14 @@ public class ConfirmSummarySnapshotCtl {
 	
 	private static final String QUERY_BEAN_LIST = "manage.summarysnapshot.confirmsummarysnapshotctl.list";
 	
+	private static final String PATH = "mange/summarysnapshot/";
 	private interface Page {
-		String PATH = "mange/summarysnapshot/";
 		String LIST = PATH + "list";
 		String VIEW = PATH + "view";
 	}
 	
 	@Resource
 	SessionUtil sessionUtil;
-	@Resource
-	PersonRepository personRepository;
 	@Resource
 	SummarySnapshotService summarySnapshotService;
 	@Resource
@@ -54,11 +49,6 @@ public class ConfirmSummarySnapshotCtl {
 	SummarySnapshotFacade summarySnapshotFacade;
 	@Resource
 	MessagePasser messagePasser;
-
-	@ModelAttribute("person")
-	public Person initPerson(@PathVariable("personId") Long personId){
-		return personRepository.find(personId);
-	}
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String  toList(Map<String,Object> map){
