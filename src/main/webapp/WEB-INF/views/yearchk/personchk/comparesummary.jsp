@@ -48,7 +48,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#btn_jump").click(function(){
-			window.open('/${ctx}/person/${loginRet.personid}/yearchk/personchk/${colPerson.id}/comparework/${rowPerson.id}','_self');
+			window.open('/${ctx}/personsc/personchk/${colPerson.id}/comparework/${rowPerson.id}','_self');
 		});
 	});
 </script>

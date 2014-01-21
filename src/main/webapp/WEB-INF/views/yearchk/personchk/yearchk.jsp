@@ -56,7 +56,7 @@
 	function personCompare(colPersonId,rowPersonId){
 		if(colPersonId=='') return;
 		if(rowPersonId=='') return;
-		OpenEnvDefineWin("/${ctx}/person/${person.id}/yearchk/personchk/"+colPersonId+"/comparework/"+rowPersonId,880,600);
+		OpenEnvDefineWin("/${ctx}/personsc/personchk/"+colPersonId+"/comparework/"+rowPersonId,880,600);
 	}
 	
 	$(function() {
