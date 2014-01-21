@@ -85,8 +85,8 @@ public class LoginCtl {
 			}
 		}
 		if (loginRetBean.getMange().equals("N")) {
-			menuList.add(new UrlNameBean("月度工作历史",String.format("person/%s/monthchk/histroy",personId)));
-			menuList.add(new UrlNameBean("部门计划查看",String.format("person/%s/monthchk/idrmonthplan",personId)));
+			menuList.add(new UrlNameBean("月度工作历史","monthsmy/histroy"));
+			menuList.add(new UrlNameBean("部门计划查看","monthsmy/idrmonthplan"));
 		}
 		
 		
@@ -122,9 +122,9 @@ public class LoginCtl {
 			}
 		}
 		if (loginRetBean.getMange().equals("N")) {
-			menuList.add(new UrlNameBean("月度工作小结",String.format("person/%s/monthchk",personId)));
-			menuList.add(new UrlNameBean("个人述职报告",String.format("person/%s/summary",personId)));
-			menuList.add(new UrlNameBean("年度横向评价",String.format("person/%s/yearchk",personId)));
+			menuList.add(new UrlNameBean("月度工作小结","monthsmy"));
+			menuList.add(new UrlNameBean("个人述职报告","yearsmy"));
+			menuList.add(new UrlNameBean("年度横向评价","personsc"));
 		}
 		
 		

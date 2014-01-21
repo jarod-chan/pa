@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.person.yearchk;
+package cn.fyg.pa.interfaces.module.yearpk.personsc;
 
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.yearchk.Fycheck;

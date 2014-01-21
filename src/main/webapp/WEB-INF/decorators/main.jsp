@@ -96,7 +96,7 @@ function logout(){
 					<div><img class="img_down" src="/${ctx}/resources/img/down.gif" />系统功能&nbsp;&nbsp;</div>
 					<ul>
 					
-						<li><a href="/${ctx}/common/settings/person/${loginRet.personid}/password">&nbsp;&nbsp;修改密码&nbsp;&nbsp;</a></li>
+						<li><a href="/${ctx}/password">&nbsp;&nbsp;修改密码&nbsp;&nbsp;</a></li>
 					
 						<li><a href="/${ctx}/login">&nbsp;&nbsp;退出系统&nbsp;&nbsp;</a></li>
 					

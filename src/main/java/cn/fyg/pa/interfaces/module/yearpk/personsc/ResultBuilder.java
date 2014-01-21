@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.person.yearchk;
+package cn.fyg.pa.interfaces.module.yearpk.personsc;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
-package cn.fyg.pa.interfaces.module.person.yearchk.participation.impl;
+package cn.fyg.pa.interfaces.module.yearpk.personsc.participation.impl;
 
 import java.util.List;
 
-import cn.fyg.pa.interfaces.module.person.yearchk.CellBean;
-import cn.fyg.pa.interfaces.module.person.yearchk.RowBean;
-import cn.fyg.pa.interfaces.module.person.yearchk.participation.Ptt;
-import cn.fyg.pa.interfaces.module.person.yearchk.participation.PttUtil;
+import cn.fyg.pa.interfaces.module.yearpk.personsc.CellBean;
+import cn.fyg.pa.interfaces.module.yearpk.personsc.RowBean;
+import cn.fyg.pa.interfaces.module.yearpk.personsc.participation.Ptt;
+import cn.fyg.pa.interfaces.module.yearpk.personsc.participation.PttUtil;
 
 public class PttUtilRowBean implements PttUtil {
 

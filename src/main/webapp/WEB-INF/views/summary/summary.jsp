@@ -148,7 +148,7 @@ function autosave(){
 </head>
 
 <c:set target="${pagefunc}" property="name" value="个人述职报告" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/${urlRole}/${person.id}/summary" />  
+<c:set target="${pagefunc}" property="url" value="/yearsmy" />  
 
 <c:set var="pagesize" value="1010" scope="request"/> 
 <body> 
@@ -156,7 +156,7 @@ function autosave(){
 
 <%@ include file="../common/message.jsp"%>
 
-<form  action="/${ctx}/${urlRole}/${person.id}/summary" method="post">
+<form  action="/${ctx}/yearsmy" method="post">
 <input name="id" type="hidden" value="${personSummary.id}" /> 
 <input name="year" type="hidden" value="${personSummary.year}" /> 
 <input name="personId" type="hidden" value="${personSummary.personId}" /> 

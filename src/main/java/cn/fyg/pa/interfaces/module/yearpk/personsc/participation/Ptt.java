@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.person.yearchk.participation;
+package cn.fyg.pa.interfaces.module.yearpk.personsc.participation;
 
 import java.math.BigDecimal;
 

@@ -6,6 +6,10 @@
 	<pattern>/mange/*</pattern>
 	<pattern>/gmange/*</pattern>
 	<pattern>/finance/*</pattern>
+	<pattern>/monthsmy*</pattern>
+	<pattern>/yearsmy*</pattern>
+	<pattern>/personsc*</pattern>
+	<pattern>/password*</pattern>
 </decorator>
 
 <!-- 此处用来定义不需要过滤的页面 --> 

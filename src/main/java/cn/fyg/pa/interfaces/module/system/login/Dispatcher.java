@@ -23,7 +23,7 @@ public class Dispatcher {
 			return "redirect:mange/"+loginRet.getPersonid()+"/idrmonthplan";
 		}
 		if (loginRet.getMange().equals("N")) {
-			return "redirect:person/"+loginRet.getPersonid()+"/monthchk";
+			return "redirect:monthsmy";
 		}
 		if (loginRet.getMange().equals("F")) {
 			return "redirect:finance/"+loginRet.getPersonid()+"/summarysnapshot";

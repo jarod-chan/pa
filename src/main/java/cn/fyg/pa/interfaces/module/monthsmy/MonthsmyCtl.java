@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.person.monthchk;
+package cn.fyg.pa.interfaces.module.monthsmy;
 
 
 import java.util.HashMap;
@@ -31,8 +31,8 @@ import cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
 @Controller
-@RequestMapping("/person/{personId}/monthchk")
-public class MonthChkCtl {
+@RequestMapping("/monthsmy")
+public class MonthsmyCtl {
 	
 	private static final String PATH="monthchk/";	
 	private interface Page {
@@ -83,7 +83,7 @@ public class MonthChkCtl {
 		monthChk.setState(MonthChkEnum.SAVED);
 		monthChkService.save(monthChk);
 		new SessionMPR(session).setMessage("保存成功！");
-		return "redirect:../monthchk"; 
+		return "redirect:/monthsmy"; 
 	}
 	
 	@RequestMapping(value="/commit",method=RequestMethod.POST)
@@ -97,7 +97,7 @@ public class MonthChkCtl {
 			message=String.format("提交失败，原因：%s", e.getMessage());
 		}
 		new SessionMPR(session).setMessage(message);
-		return "redirect:../monthchk";
+		return "redirect:/monthsmy";
 	}
 	
 	@RequestMapping(value="/histroy",method=RequestMethod.GET)

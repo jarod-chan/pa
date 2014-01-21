@@ -149,7 +149,7 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="月度工作小结" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${monthChk.person.id}/monthchk" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthsmy" />  
 
 <c:set var="pagesize" value="1010" scope="request"/> 
 <body>
@@ -164,7 +164,7 @@
 </div>
 <%@ include file="../common/message.jsp"%>
 
-<form id="monthChk" action="/${ctx}/person/${monthChk.person.id}/monthchk" method="post">
+<form id="monthChk" action="/${ctx}/monthsmy" method="post">
 <input name="id" type="hidden" value="${monthChk.id}" /> 
 <input name="person.id" type="hidden" value="${monthChk.person.id}" /> 
 <input name="year" type="hidden" value="${monthChk.year}" /> 

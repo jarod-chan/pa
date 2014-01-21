@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.common.password;
+package cn.fyg.pa.interfaces.module.password;
 
 import java.util.regex.Pattern;
 

@@ -1,10 +1,10 @@
-package cn.fyg.pa.interfaces.module.person.yearchk.participation.impl;
+package cn.fyg.pa.interfaces.module.yearpk.personsc.participation.impl;
 
 import java.util.List;
 
 import cn.fyg.pa.domain.model.yearchk.Fycheck;
-import cn.fyg.pa.interfaces.module.person.yearchk.participation.Ptt;
-import cn.fyg.pa.interfaces.module.person.yearchk.participation.PttUtil;
+import cn.fyg.pa.interfaces.module.yearpk.personsc.participation.Ptt;
+import cn.fyg.pa.interfaces.module.yearpk.personsc.participation.PttUtil;
 
 public class PttUtilFycheck implements PttUtil {
 

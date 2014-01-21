@@ -5,7 +5,7 @@
 <%@ include file="../common/head.jsp"%>
 </head>
 <c:set target="${pagefunc}" property="name" value="密码修改" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/common/settings/person/${person.id}/password" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/password" />  
 
 
 <c:set var="pagesize" value="400" scope="request"/> 
@@ -18,7 +18,7 @@
 </div>
 
 <%@ include file="../common/message.jsp"%>
-<form action="/${ctx}/common/settings/person/${person.id}/password" method="post">
+<form action="/${ctx}/password" method="post">
 用户名：${person.name}<br/>
 原密码：<br/>
 <input name="oldcsr" type="password" /><br/>

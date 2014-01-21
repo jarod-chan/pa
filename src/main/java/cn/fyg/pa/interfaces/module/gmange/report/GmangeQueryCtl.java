@@ -19,7 +19,7 @@ import cn.fyg.pa.domain.model.monthchk.MonthChk;
 import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
 import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.model.person.PersonRepository;
-import cn.fyg.pa.interfaces.module.person.monthchk.IdrMonthPlanQueryBean;
+import cn.fyg.pa.interfaces.module.monthsmy.IdrMonthPlanQueryBean;
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 
 @Controller

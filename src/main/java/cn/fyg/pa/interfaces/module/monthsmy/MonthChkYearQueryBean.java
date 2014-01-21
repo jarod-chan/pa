@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.person.monthchk;
+package cn.fyg.pa.interfaces.module.monthsmy;
 
 import cn.fyg.pa.interfaces.module.shared.tool.DateTool;
 

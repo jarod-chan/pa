@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.common.password;
+package cn.fyg.pa.interfaces.module.password;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ import cn.fyg.pa.interfaces.module.shared.session.SessionUtil;
 import cn.fyg.pa.interfaces.module.shared.tool.Constant;
 
 @Controller
-@RequestMapping("/common/settings/person/{personId}/password")
+@RequestMapping("/password")
 public class PasswordCtl {
 	
 	@Resource
@@ -43,7 +43,7 @@ public class PasswordCtl {
 		
 		if(!page.isPass()){
 			new SessionMPR(session).setMessage(page.getMessage());
-			return "redirect:password";
+			return "redirect:/password";
 		}
 		
 		person.setChkstr(page.getConfirmcsr());

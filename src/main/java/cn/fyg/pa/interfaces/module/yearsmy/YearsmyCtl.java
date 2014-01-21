@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.person.summary;
+package cn.fyg.pa.interfaces.module.yearsmy;
 
 import java.util.Map;
 
@@ -26,8 +26,8 @@ import cn.fyg.pa.interfaces.module.system.login.LoginRetBean;
  *TODO  要匹配两个url，在页面显示及url出要特殊处理，注意todo 注释处
  */
 @Controller
-@RequestMapping({"/person/{personId}/summary" ,"/mange/{personId}/summary"})
-public class SummaryCtl {
+@RequestMapping({"/yearsmy" })
+public class YearsmyCtl {
 	
 	/**
 	 * 固定年份
@@ -74,7 +74,7 @@ public class SummaryCtl {
 		personSummary.setSummaryEnum(SummaryEnum.save);
 		personSummaryService.save(personSummary);
 		new SessionMPR(session).setMessage("保存成功！");
-		return "redirect:../summary"; 
+		return "redirect:/yearsmy"; 
 	}
 	
 	@RequestMapping(value="/commit",method=RequestMethod.POST)
@@ -82,7 +82,7 @@ public class SummaryCtl {
 		personSummary.setSummaryEnum(SummaryEnum.commit);
 		personSummaryService.save(personSummary);
 		new SessionMPR(session).setMessage("提交成功！");
-		return "redirect:../summary"; 
+		return "redirect:/yearsmy"; 
 	}
 	
 	@RequestMapping(value="/content/save",method=RequestMethod.POST)

@@ -1,4 +1,4 @@
-package cn.fyg.pa.interfaces.module.person.yearchk;
+package cn.fyg.pa.interfaces.module.yearpk.personsc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,15 +32,15 @@ import cn.fyg.pa.domain.model.summary.PersonSummary;
 import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.model.yearchk.Fycheck;
 import cn.fyg.pa.domain.model.yearchk.YearChkRepositroy;
-import cn.fyg.pa.interfaces.module.person.yearchk.participation.Ptt;
-import cn.fyg.pa.interfaces.module.person.yearchk.participation.PttUtil;
-import cn.fyg.pa.interfaces.module.person.yearchk.participation.impl.PttUtilFycheck;
-import cn.fyg.pa.interfaces.module.person.yearchk.participation.impl.PttUtilRowBean;
 import cn.fyg.pa.interfaces.module.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn;
+import cn.fyg.pa.interfaces.module.yearpk.personsc.participation.Ptt;
+import cn.fyg.pa.interfaces.module.yearpk.personsc.participation.PttUtil;
+import cn.fyg.pa.interfaces.module.yearpk.personsc.participation.impl.PttUtilFycheck;
+import cn.fyg.pa.interfaces.module.yearpk.personsc.participation.impl.PttUtilRowBean;
 
 @Controller
-@RequestMapping("/person/{personId}/yearchk")
+@RequestMapping("/personsc")
 public class PersonYearChkCtl {
 	
 	private static final String PATH = "yearchk/personchk/";
@@ -230,7 +230,7 @@ public class PersonYearChkCtl {
 		fycheck=fillFycheck(fycheck,year,chkPerson);
 	    yearCheckService.saveFychecks(fycheck);
 		new SessionMPR(session).setMessage("保存成功！");
-		return "redirect:../../yearchk";
+		return "redirect:/personsc";
 	}
 	
 	private List<Fycheck> fillFycheck(List<Fycheck> fycheckList, Long year,Person chkPerson) {
@@ -258,7 +258,7 @@ public class PersonYearChkCtl {
 			new SessionMPR(session).setMessage("参与度没有达到要求，提交失败！");
 		}
 		
-		return "redirect:../../yearchk";
+		return "redirect:/personsc";
 	}
 
 
