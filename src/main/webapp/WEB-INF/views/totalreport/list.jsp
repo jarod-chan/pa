@@ -6,7 +6,7 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="公司考核情况查询" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/totalreport" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/totalreport" />  
 
 
 <c:set var="pagesize" value="825" scope="request"/> 
@@ -33,28 +33,28 @@
 	<tr>
 		<td>1</td>
 		<td>
-			<input type="button" value="公司部门月度工作查询" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/query/idrmonthplan','_self')"/>
+			<input type="button" value="公司部门月度工作查询" onclick="javascript:window.open('/${ctx}/report/query/idrmonthplan','_self')"/>
 		</td>
 		<td>按月显示所有部门的工作计划及总结情况。</td>		
    </tr>
    	<tr>
 		<td>2</td>
 		<td>
-			<input type="button" value="公司员工月度工作查询" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/query/monthchk','_self')"/>
+			<input type="button" value="公司员工月度工作查询" onclick="javascript:window.open('/${ctx}/report/query/monthchk','_self')"/>
 		</td>
 		<td>按月显示部门所有员工的工作总结及经理评价。</td>		
    </tr>
    	<tr>
 		<td>3</td>
 		<td>
-			<input type="button" value="公司部门月度工作概况" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/analysis/idrmonthplan','_self')"/>
+			<input type="button" value="公司部门月度工作概况" onclick="javascript:window.open('/${ctx}/report/analysis/idrmonthplan','_self')"/>
 		</td>
 		<td>按月显示所有部门计划的状态。</td>		
    </tr>
    	<tr>
 		<td>4</td>
 		<td>
-			<input type="button" value="公司员工月度工作概况" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/analysis/monthchk','_self')"/>
+			<input type="button" value="公司员工月度工作概况" onclick="javascript:window.open('/${ctx}/report/analysis/monthchk','_self')"/>
 		</td>
 		<td>按月显示所有员工工作总结的状态。</td>		
    </tr>

@@ -45,10 +45,10 @@
 </script>  
 </head>
 <c:set target="${pagefunc}" property="name" value="部门月度计划" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthplan/gm" />  
 
 <c:set target="${pagetitle}" property="name" value="部门月度计划审核" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan/${idrMonthPlanBill.id}" />
+<c:set target="${pagetitle}" property="url" value="/${ctx}/monthplan/gm/${idrMonthPlanBill.id}" />
 
 
 <c:set var="pagesize" value="670" scope="request"/>
@@ -64,7 +64,7 @@
 </div>
 
 <%@ include file="../common/message.jsp"%>
-<form  action="/${ctx}/gmange/${person.id}/idrmonthplan/${idrMonthPlanBill.id}" method="post">
+<form  action="/${ctx}/monthplan/gm/${idrMonthPlanBill.id}" method="post">
 
 <table border=1 style="table-layout:fixed;width:650px;" class="tbldef">
 <thead>
@@ -90,7 +90,7 @@
 <br/>
 <input type="button" value="打回部门经理修改" onclick="back()"/>
 <input type="button" value="通过当月计划" onclick="next()"/>
-<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/monthplan/gm/idrmonthplan','_self')"/>
 </form>
 
 </body>

@@ -6,7 +6,7 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="部门月度计划" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthplan/gm" />  
 
 
 <c:set var="pagesize" value="825" scope="request"/> 
@@ -45,10 +45,10 @@
 	<td>
 		<c:choose>
 		<c:when test="${item.state=='SUBMITTED'}">
-			<input type="button" value="审核" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan/${item.id}','_self')"/>    
+			<input type="button" value="审核" onclick="javascript:window.open('/${ctx}/monthplan/gm/${item.id}','_self')"/>    
 		</c:when>
 		<c:otherwise>
-			<input type="button" value="查看" onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan/${item.id}','_self')"/> 
+			<input type="button" value="查看" onclick="javascript:window.open('/${ctx}/monthplan/gm/${item.id}','_self')"/> 
 		</c:otherwise>  
 		</c:choose>		
 	</td>

@@ -21,7 +21,7 @@ $(document).ready(function() {
 </script>  
 </head>
 <c:set target="${pagefunc}" property="name" value="部门月度计划" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/idrmonthplan" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthplan" />  
 
 <c:set var="pagesize" value="670" scope="request"/> 
 <body>

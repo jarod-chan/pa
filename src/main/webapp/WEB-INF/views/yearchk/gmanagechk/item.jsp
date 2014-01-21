@@ -36,10 +36,10 @@
 
 </head>  
 <c:set target="${pagefunc}" property="name" value="年度考核评分查询" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/yearchk/department/${selDepartment.id}" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/yearpk/gm/department/${selDepartment.id}" />  
 
 <c:set target="${pagetitle}" property="name" value="年度考核评分详细" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${person.id}/yearchk/person/${checkPerson.id}/year/${year}" />
+<c:set target="${pagetitle}" property="url" value="/${ctx}/yearpk/gm/person/${checkPerson.id}/year/${year}" />
 
 <c:set var="pagesize" value="768" scope="request"/>
 <body>
@@ -50,7 +50,7 @@
 考核年份:${year}&nbsp;&nbsp;员工:${checkPerson.name}
 </div>
 <div class="headright" >
-<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/yearchk/department/${selDepartment.id}','_self')"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/yearpk/gm/department/${selDepartment.id}','_self')"/>
 </div>
 <div  class="headnone"></div>
 </div>
@@ -98,15 +98,6 @@
 			</c:choose>
 			
 		</c:if>
-	<%-- 	<select name="val"  >
-			<option value="5" <c:if test="${item.chkmange.val=='5'}">selected="true"</c:if> >优秀</option>
-			<option value="4" <c:if test="${item.chkmange.val=='4'}">selected="true"</c:if> >良好</option>
-			<option value="3" <c:if test="${item.chkmange.val=='3'}">selected="true"</c:if> >尽职</option>
-			<option value="2" <c:if test="${item.chkmange.val=='2'}">selected="true"</c:if> >需改进</option>
-			<option value="1" <c:if test="${item.chkmange.val=='1'}">selected="true"</c:if> >差</option>
-		  </select>
-		  <input type="hidden" name="id" value="${item.chkmange.id}">
-		  <input type="hidden" name="itemid" value="${item.chkitem.id}"> --%>
 	</td>
 	</tr>
 </c:forEach>

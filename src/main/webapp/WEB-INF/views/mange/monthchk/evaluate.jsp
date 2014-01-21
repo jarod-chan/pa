@@ -57,10 +57,10 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="月度小结评价" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${mange.id}/monthchk" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthsmy/manage" />  
 
 <c:set target="${pagetitle}" property="name" value="员工月度小结评价" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${mange.id}/monthchk/${monthChk.id}" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/monthsmy/manage/${monthChk.id}" /> 
 
 <c:set var="pagesize" value="990" scope="request"/>  
 
@@ -78,7 +78,7 @@
 
 <%@ include file="../../common/message.jsp"%>
 
-<form id="monthChk" action="/${ctx}/mange/${mange.id}/monthchk/${monthChk.id}" method="post">
+<form id="monthChk" action="/${ctx}/monthsmy/manage/${monthChk.id}" method="post">
 
 <table class="tbldef" border=1 style="table-layout:fixed;width:950px;">
 <thead>
@@ -125,7 +125,7 @@
 <input type="button" value="保存"  onclick="save()"/>
 <input type="button" value="完成评价"  onclick="finish()"/>
 <input type="button" value="打回员工修改"  onclick="back()"/>
-<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk','_self')"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/monthsmy/manage','_self')"/>
 </form>
 
 </body>

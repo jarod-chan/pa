@@ -17,10 +17,10 @@ public class Dispatcher {
 			return "redirect:admin/all";
 		}
 		if(loginRet.getMange().equals("G")){
-			return "redirect:gmange/"+loginRet.getPersonid()+"/idrmonthplan";
+			return "redirect:monthplan/gm";
 		}
 		if(loginRet.getMange().equals("Y")){
-			return "redirect:mange/"+loginRet.getPersonid()+"/idrmonthplan";
+			return "redirect:monthplan";
 		}
 		if (loginRet.getMange().equals("N")) {
 			return "redirect:monthsmy";

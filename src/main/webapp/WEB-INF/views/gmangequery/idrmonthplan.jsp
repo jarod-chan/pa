@@ -6,10 +6,10 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="公司考核情况查询" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${loginRet.personid}/totalreport" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/totalreport" />  
 
 <c:set target="${pagetitle}" property="name" value="公司部门月度工作查询" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${loginRet.personid}/query/idrmonthplan" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/report/query/idrmonthplan" /> 
 
 <body>
 

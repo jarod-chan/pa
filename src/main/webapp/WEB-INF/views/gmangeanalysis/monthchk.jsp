@@ -33,7 +33,7 @@ tbody ul li a:VISITED{color: #000000;}
 	
 	function monthchk(monthchkId){
 		if(monthchkId=='') return;
-		OpenEnvDefineWin("/${ctx}/gmange/${loginRet.personid}/analysis/monthchk/"+monthchkId,840,600);
+		OpenEnvDefineWin("/${ctx}/report/analysis/monthchk/"+monthchkId,840,600);
 	}
 	
 	$(document).ready(function() {
@@ -42,10 +42,10 @@ tbody ul li a:VISITED{color: #000000;}
 </script>
 </head>
 <c:set target="${pagefunc}" property="name" value="公司考核情况查询" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${loginRet.personid}/totalreport" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/totalreport" />  
 
 <c:set target="${pagetitle}" property="name" value="公司员工月度工作概况" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/$${loginRet.personid}/analysis/monthchk" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/report/analysis/monthchk" /> 
 
 <body>
 <form action="" method="get">

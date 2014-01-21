@@ -8,7 +8,7 @@
 	$(function(){
 		$("#selDepartment").change(function(){
 			var selDepartmentid=$(this).val();
-			window.open("/${ctx}/gmange/${person.id}/yearchk/department/"+selDepartmentid,"_self");
+			window.open("/${ctx}/yearpk/gm/department/"+selDepartmentid,"_self");
 		});
 	});
 
@@ -17,7 +17,7 @@
 </head> 
 
 <c:set target="${pagefunc}" property="name" value="年度考核评分查询" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/yearchk" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/yearpk/gm" />  
 
 
 
@@ -49,7 +49,7 @@
 	<td>${stauts.count} </td>
 	<td>${item.person.name} </td>
 	<td>${item.getPoint}</td>
-	<td><input type="button" value="详细"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/yearchk/person/${item.person.id}/year/${year}','_self')"/></td>
+	<td><input type="button" value="详细"  onclick="javascript:window.open('/${ctx}/yearpk/gm/person/${item.person.id}/year/${year}','_self')"/></td>
 	</tr>
 </c:forEach>
 </table>

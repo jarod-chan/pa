@@ -8,7 +8,7 @@
 <script type="text/javascript">
 
 	function drop(){
-		$('<form/>',{action:'/${ctx}/finance/${loginRet.personid}/summarysnapshot/${summarySnapshot.id}/remove',method:'post'})
+		$('<form/>',{action:'/${ctx}/monthlog/${summarySnapshot.id}/remove',method:'post'})
 	 	.appendTo($("body"))
 	 	.submit();
 	}
@@ -16,10 +16,10 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="考核结果历史" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/finance/${loginRet.personid}/summarysnapshot/history" />    
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthlog/history" />    
 
 <c:set target="${pagetitle}" property="name" value="考核结果查看" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/finance/${loginRet.personid}/summarysnapshot/history/${summarySnapshot.id}" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/monthlog/history/${summarySnapshot.id}" /> 
 
 <c:set var="pagesize" value="800" scope="request"/>  
 

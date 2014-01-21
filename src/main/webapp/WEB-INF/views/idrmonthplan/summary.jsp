@@ -139,13 +139,13 @@
 </script>  
 </head>
 <c:set target="${pagefunc}" property="name" value="部门月度计划" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/idrmonthplan" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthplan" />  
 
 <c:set var="pagesize" value="820" scope="request"/>
 <body>
 <%@ include file="personinfo.jsp"%>
 <%@ include file="../common/message.jsp"%>
-<form  action="/${ctx}/mange/${person.id}/idrmonthplan/${idrMonthPlanBill.id}" method="post">
+<form  action="/${ctx}/monthplan/${idrMonthPlanBill.id}" method="post">
 
 <input name="id" type="hidden" value="${idrMonthPlanBill.id}" /> 
 <input name="year" type="hidden" value="${idrMonthPlanBill.year}" /> 

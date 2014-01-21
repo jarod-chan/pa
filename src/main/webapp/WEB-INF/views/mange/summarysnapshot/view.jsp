@@ -9,7 +9,7 @@
 
 	function confirmSummarySnapshot(){
 		if(!confirm("考核结果一旦确认将被锁定，确定确认考核结果？")) return;
-		$('<form/>',{action:'/${ctx}/mange/${loginRet.personid}/summarysnapshot/${summarySnapshot.id}/confirm',method:'post'})
+		$('<form/>',{action:'/${ctx}/monthlog/cf/${summarySnapshot.id}/confirm',method:'post'})
 	 	.appendTo($("body"))
 	 	.submit();
 	}
@@ -17,10 +17,10 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="考核结果确认" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${loginRet.personid}/summarysnapshot" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthlog/cf" />  
 
 <c:set target="${pagetitle}" property="name" value="考核结果查看" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${loginRet.personid}/summarysnapshot/${summarySnapshot.id}" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/monthlog/cf/${summarySnapshot.id}" /> 
 
 <c:set var="pagesize" value="800" scope="request"/>  
 

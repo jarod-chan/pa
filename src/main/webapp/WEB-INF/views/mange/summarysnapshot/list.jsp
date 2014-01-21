@@ -6,14 +6,8 @@
 
 <script type="text/javascript">
 	var selChange=function(){
-		$('<form/>',{action:'/${ctx}/mange/${loginRet.personid}/summarysnapshot',method:'post'})
+		$('<form/>',{action:'/${ctx}/monthlog/cf',method:'post'})
 		.append($('<input/>',{type:'hidden',name:'year',value:$("select[name=year]").val()}))
-	 	.appendTo($("body"))
-	 	.submit();
-	}
-	
-	function remove(summarysnapshotId){
-		$('<form/>',{action:'/${ctx}/finance/${loginRet.personid}/summarysnapshot/'+summarysnapshotId+'/remove',method:'post'})
 	 	.appendTo($("body"))
 	 	.submit();
 	}
@@ -37,7 +31,7 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="考核结果确认" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${loginRet.personid}/summarysnapshot" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthlog/cf" />  
 
 <c:set var="pagesize" value="825" scope="request"/> 
 <body>
@@ -84,7 +78,7 @@
 	</td>
 	
 	<td>
-		<input type="button" value="查看" onclick="javascript:window.open('/${ctx}/mange/${loginRet.personid}/summarysnapshot/${item.id}','_self')"/>
+		<input type="button" value="查看" onclick="javascript:window.open('/${ctx}/monthlog/cf/${item.id}','_self')"/>
 	</td>
 				
    </tr>

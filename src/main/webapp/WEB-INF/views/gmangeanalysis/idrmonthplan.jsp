@@ -33,7 +33,7 @@ tbody ul li a:VISITED{color: #000000;}
 	
 	function monthplan(monthplanId){
 		if(monthplanId=='') return;
-		OpenEnvDefineWin("/${ctx}/gmange/${loginRet.personid}/analysis/idrmonthplan/"+monthplanId,860,600);
+		OpenEnvDefineWin("/${ctx}/report/analysis/idrmonthplan/"+monthplanId,860,600);
 	}
 
 	 $(document).ready(function() {
@@ -43,10 +43,10 @@ tbody ul li a:VISITED{color: #000000;}
 </head>
 
 <c:set target="${pagefunc}" property="name" value="公司考核情况查询" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${loginRet.personid}/totalreport" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/totalreport" />  
 
 <c:set target="${pagetitle}" property="name" value="公司部门月度工作概况" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${loginRet.personid}/analysis/idrmonthplan" /> 
+<c:set target="${pagetitle}" property="url" value="/${ctx}/report/analysis/idrmonthplan" /> 
 
 <body>
 

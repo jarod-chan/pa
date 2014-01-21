@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
 	var selChange=function(){
-		$('<form/>',{action:'/${ctx}/mange/${mange.id}/monthchk',method:'post'})
+		$('<form/>',{action:'/${ctx}/monthsmy/manage',method:'post'})
 		.append($('<input/>',{type:'hidden',name:'year',value:$("select[name=year]").val()}))
 		.append($('<input/>',{type:'hidden',name:'month',value:$("select[name=month]").val()}))
 	 	.appendTo($("body"))
@@ -21,7 +21,7 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="月度小结评价" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${mange.id}/monthchk" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthsmy/manage" />  
 
 <c:set var="pagesize" value="825" scope="request"/> 
 <body>
@@ -76,7 +76,7 @@
 		<c:choose>
 			<c:when test="${item.state=='NEW'||item.state=='SAVED'}"></c:when>
 			<c:when test="${item.state=='SUBMITTED'}">
-				<input type="button"  value="评价" onclick="javascript:window.open('/${ctx}/mange/${mange.id}/monthchk/${item.id}','_self')"/>
+				<input type="button"  value="评价" onclick="javascript:window.open('/${ctx}/monthsmy/manage/${item.id}','_self')"/>
 			</c:when>
 			<c:when test="${item.state=='FINISHED'}">
 			</c:when>

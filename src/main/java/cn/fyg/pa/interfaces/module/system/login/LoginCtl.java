@@ -67,20 +67,20 @@ public class LoginCtl {
 		if(loginRetBean.getMange().equals("A")){
 		}
 		if(loginRetBean.getMange().equals("G")){
-			menuList.add(new UrlNameBean("部门月度计划历史",String.format("gmange/%s/idrmonthplan/history",personId)));
-			menuList.add(new UrlNameBean("公司考核情况查询",String.format("gmange/%s/totalreport",personId)));
-			menuList.add(new UrlNameBean("年度考核评分查询",String.format("gmange/%s/yearchk",personId)));
+			menuList.add(new UrlNameBean("部门月度计划历史","monthplan/history"));
+			menuList.add(new UrlNameBean("公司考核情况查询","totalreport"));
+			menuList.add(new UrlNameBean("年度考核评分查询","yearpk/gm"));
 		}
 		if(loginRetBean.getMange().equals("Y")){
 			if(isSpecialPerson(personId)){
-				menuList.add(new UrlNameBean("部门月度计划历史",String.format("mange/%s/idrmonthplan/history",personId)));
+				menuList.add(new UrlNameBean("部门月度计划历史","monthplan/history"));
 			}else{				
-				menuList.add(new UrlNameBean("部门月度计划历史",String.format("mange/%s/idrmonthplan/history",personId)));
-				menuList.add(new UrlNameBean("员工工作评价历史",String.format("mange/%s/monthchk/histroy",personId)));
+				menuList.add(new UrlNameBean("部门月度计划历史","monthplan/history"));
+				menuList.add(new UrlNameBean("员工工作评价历史","monthsmy/manage/histroy"));
 				String name=loginRetBean.getName();
 				//XXX 办公室  潘普兵 考核结果历史
 				if(name.equals("潘普兵")) {
-					menuList.add(new UrlNameBean("考核结果历史",String.format("finance/%s/summarysnapshot/history",personId)));
+					menuList.add(new UrlNameBean("考核结果历史","monthlog/history"));
 				}
 			}
 		}
@@ -100,24 +100,24 @@ public class LoginCtl {
 		if(loginRetBean.getMange().equals("A")){
 		}
 		if(loginRetBean.getMange().equals("G")){
-			menuList.add(new UrlNameBean("部门月度计划",String.format("gmange/%s/idrmonthplan",personId)));
+			menuList.add(new UrlNameBean("部门月度计划","monthplan/gm"));
 		}
 		if(loginRetBean.getMange().equals("Y")){
 			if(isSpecialPerson(personId)){
-				menuList.add(new UrlNameBean("部门月度计划",String.format("mange/%s/idrmonthplan",personId)));
+				menuList.add(new UrlNameBean("部门月度计划","monthplan"));
 			}else{				
-				menuList.add(new UrlNameBean("部门月度计划",String.format("mange/%s/idrmonthplan",personId)));
-				menuList.add(new UrlNameBean("月度小结评价",String.format("mange/%s/monthchk",personId)));
-				menuList.add(new UrlNameBean("个人述职报告",String.format("mange/%s/summary",personId)));
-				menuList.add(new UrlNameBean("年度绩效评价",String.format("mange/%s/yearchk",personId)));
+				menuList.add(new UrlNameBean("部门月度计划","monthplan"));
+				menuList.add(new UrlNameBean("月度小结评价","monthsmy/manage"));
+				menuList.add(new UrlNameBean("个人述职报告","yearsmy"));
+				menuList.add(new UrlNameBean("年度绩效评价","mangesc"));
 				//XXX 财务部  胡吉运 增加考核结果确认菜单
 				String name=loginRetBean.getName();
 				if(name.equals("胡吉运")){
-					menuList.add(new UrlNameBean("考核结果确认",String.format("mange/%s/summarysnapshot",personId)));
+					menuList.add(new UrlNameBean("考核结果确认","monthlog/cf"));
 				}
 				//XXX 办公室  潘普兵 考核结果接收菜单
 				if(name.equals("潘普兵")) {
-					menuList.add(new UrlNameBean("考核结果接收",String.format("finance/%s/summarysnapshot",personId)));
+					menuList.add(new UrlNameBean("考核结果接收","monthlog"));
 				}
 			}
 		}

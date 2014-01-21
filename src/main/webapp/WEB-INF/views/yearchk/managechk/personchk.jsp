@@ -37,10 +37,10 @@
 </script> 
 </head>  
 <c:set target="${pagefunc}" property="name" value="年度绩效评价" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/yearchk" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/mangesc" />  
 
 <c:set target="${pagetitle}" property="name" value="部门员工年度绩效评价" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/mange/${person.id}/yearchk/person/${checkPerson.id}" />
+<c:set target="${pagetitle}" property="url" value="/${ctx}/mangesc/person/${checkPerson.id}" />
 
 <c:set var="pagesize" value="768" scope="request"/>
 <body>
@@ -57,7 +57,7 @@
 <%@ include file="../../common/message.jsp"%>
 
 
-<form action="/${ctx}/mange/${person.id}/yearchk/person/${checkPerson.id}" method="post">
+<form action="/${ctx}/mangesc/person/${checkPerson.id}" method="post">
 <input name="session_token" type="hidden" value="${session_token}"/>
 <input name="year" type="hidden" value="${year}"/>
 
@@ -93,7 +93,7 @@
 </table>
 <br>
 <input type="button" value="保存" onclick="save()"/>
-<input type="button" value="<<返回"  onclick="javascript:window.open('/pa/mange/${person.id}/yearchk','_self')"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/pa/mangesc','_self')"/>
 </form>
 </body>
 </html>

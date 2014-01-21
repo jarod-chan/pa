@@ -6,7 +6,7 @@
 </head> 
 
 <c:set target="${pagefunc}" property="name" value="年度绩效评价" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/mange/${person.id}/yearchk" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/mangesc" />  
 
 
 
@@ -32,7 +32,7 @@
 	<td>${stauts.count} </td>
 	<td>${item.person.name} </td>
 	<td>${item.getPoint}</td>
-	<td><input type="button" value="评价" " onclick="javascript:window.open('/${ctx}/mange/${person.id}/yearchk/person/${item.person.id}','_self')"/></td>
+	<td><input type="button" value="评价" " onclick="javascript:window.open('/${ctx}/mangesc/person/${item.person.id}','_self')"/></td>
 	</tr>
 </c:forEach>
 </table>

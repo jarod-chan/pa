@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
 	var selChange=function(){
-		$('<form/>',{action:'/${ctx}/finance/${loginRet.personid}/summarysnapshot',method:'post'})
+		$('<form/>',{action:'/${ctx}/monthlog',method:'post'})
 		.append($('<input/>',{type:'hidden',name:'year',value:$("select[name=year]").val()}))
 		.append($('<input/>',{type:'hidden',name:'month',value:$("select[name=month]").val()}))
 	 	.appendTo($("body"))
@@ -26,14 +26,14 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="考核结果接收" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/finance/${loginRet.personid}/summarysnapshot" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthlog" />  
 
 
 <c:set var="pagesize" value="800" scope="request"/>  
 
 <body>
 
-<form action="/${ctx}/finance/${loginRet.personid}/summarysnapshot/save" method="post">
+<form action="/${ctx}/monthlog/save" method="post">
 
 <div class="headdiv" >
 <div class="headleft"  style="width:70%;">
