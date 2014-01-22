@@ -8,9 +8,9 @@ import cn.fyg.pa.application.LoginService;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.model.person.StateEnum;
-import cn.fyg.pa.interfaces.module.shared.tool.Constant;
-import cn.fyg.pa.interfaces.module.system.login.LoginBean;
-import cn.fyg.pa.interfaces.module.system.login.LoginRetBean;
+import cn.fyg.pa.interfaces.web.module.system.login.LoginBean;
+import cn.fyg.pa.interfaces.web.module.system.login.LoginRetBean;
+import cn.fyg.pa.interfaces.web.shared.tool.Constant;
 
 @Service
 public class LoginServiceImpl implements LoginService {

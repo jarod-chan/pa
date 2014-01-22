@@ -24,16 +24,16 @@
         </aop:aspect>
          <!--过滤会产生数据重复保存的页面，保证数据不会被重复提交 -->
         <aop:aspect id="createToken" ref="createTokenAdvice">
-             <aop:pointcut expression="execution(@cn.fyg.pa.interfaces.module.shared.token.annotation.CreateToken * *(..)) and @annotation(createToken)"  id="createTokenCut"/>
+             <aop:pointcut expression="execution(@cn.fyg.pa.interfaces.web.advice.token.annotation.CreateToken * *(..)) and @annotation(createToken)"  id="createTokenCut"/>
           	 <aop:after method="after" arg-names="createToken" pointcut-ref="createTokenCut"/> 
         </aop:aspect>
         <aop:aspect id="checkToken" ref="checkTokenAdvice">
-             <aop:pointcut expression="execution(@cn.fyg.pa.interfaces.module.shared.token.annotation.CheckToken * *(..)) and @annotation(checkToken)"  id="checkTokenCut"/>
+             <aop:pointcut expression="execution(@cn.fyg.pa.interfaces.web.advice.token.annotation.CheckToken * *(..)) and @annotation(checkToken)"  id="checkTokenCut"/>
           	 <aop:around method="around" arg-names="checkToken" pointcut-ref="checkTokenCut"/> 
         </aop:aspect>
         <!--获得session中的当前用户，注入方法中 -->
         <aop:aspect id="personIn" ref="personInAdvice">
-        	<aop:pointcut expression="execution(@cn.fyg.pa.interfaces.module.shared.personin.annotation.PersonIn * *(..)) and @annotation(personIn)" id="personInCut"/>
+        	<aop:pointcut expression="execution(@cn.fyg.pa.interfaces.web.advice.personin.annotation.PersonIn * *(..)) and @annotation(personIn)" id="personInCut"/>
         	<aop:around method="injectPerson" arg-names="personIn" pointcut-ref="personInCut"/>
         </aop:aspect>
     </aop:config>

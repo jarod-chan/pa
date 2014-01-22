@@ -1,7 +1,7 @@
 package cn.fyg.pa.application;
 
-import cn.fyg.pa.interfaces.module.system.login.LoginBean;
-import cn.fyg.pa.interfaces.module.system.login.LoginRetBean;
+import cn.fyg.pa.interfaces.web.module.system.login.LoginBean;
+import cn.fyg.pa.interfaces.web.module.system.login.LoginRetBean;
 
 public interface LoginService {
 

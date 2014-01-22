@@ -54,7 +54,7 @@
 	<!-- Filter 登陆过滤开始-->
 	<filter>
 		<filter-name>urlFilter</filter-name>
-		<filter-class>cn.fyg.pa.interfaces.security.UrlFilter</filter-class>
+		<filter-class>cn.fyg.pa.interfaces.web.security.UrlFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>urlFilter</filter-name>
