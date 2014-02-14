@@ -102,7 +102,6 @@
 	}
 
 	function drop(obj) {
-		console.info(obj);
 		$(obj).parents("tr").remove();
 		reIndexTable();
 	}

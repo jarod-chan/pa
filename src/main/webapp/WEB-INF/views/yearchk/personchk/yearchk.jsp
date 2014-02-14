@@ -120,7 +120,6 @@
 		var holdstate=setInterval(function(){
 			$.get("/${ctx}/hold",
 				function(data){
-					console.info(data);
 					if(data!="success"){
 						errorDeal();							
 					}
