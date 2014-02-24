@@ -90,7 +90,7 @@
 <br/>
 <input type="button" value="打回部门经理修改" onclick="back()"/>
 <input type="button" value="通过当月计划" onclick="next()"/>
-<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/monthplan/gm/idrmonthplan','_self')"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/monthplan/gm','_self')"/>
 </form>
 
 </body>

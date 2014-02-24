@@ -37,10 +37,10 @@
 </head>
 
 <c:set target="${pagefunc}" property="name" value="部门月度计划" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthplan/gm" />  
 
 <c:set target="${pagetitle}" property="name" value="部门月度计划查看" /> 
-<c:set target="${pagetitle}" property="url" value="/${ctx}/gmange/${person.id}/idrmonthplan/${idrMonthPlanBill.id}" />
+<c:set target="${pagetitle}" property="url" value="/${ctx}/monthplan/gm/${idrMonthPlanBill.id}" />
 
 <c:set var="pagesize" value="670" scope="request"/>
 <body>
@@ -81,6 +81,6 @@
 </tbody>
 </table>
 <br/>
-<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/gmange/${person.id}/idrmonthplan','_self')"/>
+<input type="button" value="<<返回"  onclick="javascript:window.open('/${ctx}/monthplan/gm','_self')"/>
 </body>
 </html>
