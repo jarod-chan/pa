@@ -155,7 +155,7 @@ public class LoginCtl {
 	private LoginRetBean doChangeForSpecialPerson(LoginBean loginBean,
 			LoginRetBean loginRet) {
 		String username=loginBean.getUsername().trim();
-		if(username.equals("陆兆贤")){
+		if(username.equals("陆兆贤")||username.equals("王坚")||username.equals("胡玉友")){
 			loginRet.setMange(loginBean.getSpecialPerson());
 		}
 		return loginRet;
