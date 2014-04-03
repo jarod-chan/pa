@@ -1,6 +1,7 @@
 package cn.fyg.pa.interfaces.web.module.monthplan.gmange;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,8 +109,12 @@ public class GmangeIdrMonthPlanChkCtl {
 	public String history(Person person,Map<String,Object> map,HttpSession session){
 		List<Department> departments = departmentRepository.findDepartmentsByGmanage(person);
 		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByDepartmentAndState(departments,IdrMonthPlanEnum.FINISHED);
+		List<IdrMonthPlanBill> limitReturnBills=new ArrayList<IdrMonthPlanBill>();
+		for(int i=0;i<20;i++){
+			limitReturnBills.add(idrMonthPlanBills.get(i));
+		}
 		map.put("person", person);
-		map.put("idrMonthPlanBills", idrMonthPlanBills);
+		map.put("idrMonthPlanBills", limitReturnBills);
 		return "gmangeidrmonthplan/histroy";
 	}
 	

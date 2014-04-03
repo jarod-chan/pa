@@ -67,7 +67,7 @@ public class LoginCtl {
 		if(loginRetBean.getMange().equals("A")){
 		}
 		if(loginRetBean.getMange().equals("G")){
-			menuList.add(new UrlNameBean("部门月度计划历史","monthplan/history"));
+			menuList.add(new UrlNameBean("部门月度计划历史","monthplan/gm/history"));
 			menuList.add(new UrlNameBean("公司考核情况查询","totalreport"));
 			menuList.add(new UrlNameBean("年度考核评分查询","yearpk/gm"));
 		}
