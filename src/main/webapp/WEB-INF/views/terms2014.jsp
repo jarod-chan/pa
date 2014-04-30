@@ -49,6 +49,15 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 }
 
 </style>
+<div class="notification_title" style="color:red;"><h2>【方远绩效考核】微信号已开通！</h2></div>
+<div style=" border:2px solid #000; margin-top:10px;margin-bottom:30px;margin-left:${(pagewidth-500)/2}px;width:500px; padding:5px;">
+	1.关注【方远绩效考核】微信号。<br/>
+	2.输入{#用户名，密码}。（中括号以内部分）<br/>
+	3.绑定成功。<br/>
+	4.进行相关操作。<br/>
+	说明：总结，计划，审批等相关工作在绑定以后，都可以在手机上进行操作。<br/>
+	如果出现操作问题，请先点击微信号的【帮助】按钮查看文档，也可以联系集团信息中心解决。
+</div>
 
 <div class="notification_title"><h2>房产各部门2014年度《方远报》投稿指标</h2></div>
 <div class="notification_context">
@@ -115,3 +124,4 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 		</div>
 	</div>
 </div>
+
