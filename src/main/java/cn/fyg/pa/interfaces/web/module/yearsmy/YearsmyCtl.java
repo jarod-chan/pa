@@ -18,12 +18,10 @@ import cn.fyg.pa.domain.model.summary.Content;
 import cn.fyg.pa.domain.model.summary.PersonSummary;
 import cn.fyg.pa.domain.model.summary.SummaryEnum;
 import cn.fyg.pa.interfaces.web.advice.personin.annotation.PersonIn;
-import cn.fyg.pa.interfaces.web.module.system.login.LoginRetBean;
 import cn.fyg.pa.interfaces.web.shared.message.impl.SessionMPR;
 
 /**
  * @author jhon.chen@gmail.com
- *TODO  要匹配两个url，在页面显示及url出要特殊处理，注意todo 注释处
  */
 @Controller
 @RequestMapping({"/yearsmy" })
@@ -33,7 +31,7 @@ public class YearsmyCtl {
 	 * 固定年份
 	 * 后续可能改成从参数取
 	 */
-	public static final Long FIX_YEAR=2013L;
+	public static final Long FIX_YEAR=2014L;
 	
 	private static final String PATH = "summary/";
 	private interface Page {
@@ -55,16 +53,6 @@ public class YearsmyCtl {
 		map.put("personSummary", personSummary);
 		map.put("person", person);
 		map.put("message",new SessionMPR(session).getMessage());
-		
-		//TODO url特殊如理
-		map.put("urlRole", "person");
-		Object loginRetObj=session.getAttribute("loginRet");
-		if(loginRetObj!=null){	
-			LoginRetBean loginRet=(LoginRetBean)loginRetObj;
-			if(loginRet.getMange().equals("Y")){
-				map.put("urlRole", "mange");
-			}
-		}
 		
 		return personSummary.getSummaryEnum()==SummaryEnum.commit?Page.VIEW:Page.SUMMARY;
 	}
@@ -99,16 +87,6 @@ public class YearsmyCtl {
 		map.put("personSummary", personSummary);
 		map.put("person", person);
 		map.put("message",new SessionMPR(session).getMessage());
-		
-		//TODO url特殊如理
-		map.put("urlRole", "person");
-		Object loginRetObj=session.getAttribute("loginRet");
-		if(loginRetObj!=null){	
-			LoginRetBean loginRet=(LoginRetBean)loginRetObj;
-			if(loginRet.getMange().equals("Y")){
-				map.put("urlRole", "mange");
-			}
-		}
 		
 		return Page.VIEW;
 	}

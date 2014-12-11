@@ -109,7 +109,7 @@ function errorDeal() {
 	if(errorStatus==false){
 		errorStatus=true;
 		alert("页面出错，请重新登录！");
-		logout();
+		//logout();
 	} 
 }
 
@@ -121,7 +121,7 @@ function autosave(){
 	var content_text=$(".content_text");
 	title_flag.each(function(index,t_flag){
 		if($(t_flag).val()=="false"){
-			$.post("/${ctx}/${urlRole}/${person.id}/summary/content/save",
+			$.post("/${ctx}/yearsmy/content/save",
 					{
 					  id:content_id.eq(index).val(),
 					  titleId:content_titleId.eq(index).val(),
@@ -148,11 +148,11 @@ function autosave(){
 </head>
 
 <c:set target="${pagefunc}" property="name" value="个人述职报告" />
-<c:set target="${pagefunc}" property="url" value="/yearsmy" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/yearsmy" />  
 
 <c:set var="pagesize" value="1010" scope="request"/> 
 <body> 
-<!--  <input type="button" value="测试" onclick="autosave()">  -->
+<!--  <input type="button" value="测试" onclick="autosave()">   -->
 
 <%@ include file="../common/message.jsp"%>
 
