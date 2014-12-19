@@ -1,0 +1,44 @@
+/* body默认边距为左20px */
+body {
+    font-family:'Verdana','宋体';
+    font-size:14px;
+    margin:0 0 0 20px;
+}
+
+/*ie6 默认form 有距离*/
+form {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+h2{
+	margin:0 auto;
+}
+
+
+
+/*
+
+#container {margin:0 auto; width:100%;}
+#sidebar { float:left; width:100px; height:500px; }
+#content { margin-left:105px !important; margin-left:102px; }
+
+.head{
+	font-weight:800;
+}
+
+table.tbldef {
+	border-collapse: separate;
+	empty-cells: show
+}
+
+*/
+
+
+
+
+
+
+
+
+
+

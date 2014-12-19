@@ -1,0 +1,9 @@
+
+整个项目的编码设置成utf-8
+
+配置mysql驱动，使用maven
+
+jsp页面显示中文的方法,使jsp文件可以输入中文
+<%@ page language="java" pageEncoding="UTF-8"%>
+
+war 文件的名字就是主机下的第二级访问目录，可以通过修改war文件的

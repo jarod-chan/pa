@@ -1,0 +1,5 @@
+hibernate-validation 需要在jdk1.6的环境下才能使用   否则会找不到类
+java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException 
+
+Bad version number in .class file 
+java 版本问题    可以修改maven的  pom 文件 把系统的换件切换回当前运行的java版本

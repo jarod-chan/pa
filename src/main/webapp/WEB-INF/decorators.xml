@@ -1,0 +1,23 @@
+<decorators defaultdir="/WEB-INF/decorators">
+<!-- 用来定义装饰器要过滤的页面 -->  
+<decorator name="main" page="main.jsp">
+	<pattern>/monthsmy*</pattern>
+	<pattern>/yearsmy*</pattern>
+	<pattern>/personsc*</pattern>
+	<pattern>/password*</pattern>
+	<pattern>/userhome*</pattern>
+	<pattern>/monthplan*</pattern>
+	<pattern>/mangesc*</pattern>
+	<pattern>/monthlog*</pattern>
+	<pattern>/yearpk*</pattern>
+	<pattern>/totalreport*</pattern>
+	<pattern>/report*</pattern>
+</decorator>
+
+<!-- 此处用来定义不需要过滤的页面 --> 
+<decorator name="none" page=""/> 
+
+<!-- 此处用来定义不需要过滤的页面 -->  
+<excludes></excludes>
+
+</decorators>
