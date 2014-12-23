@@ -11,6 +11,12 @@ public class Ptt {
 	 */
 	private static final BigDecimal reqPercent=new BigDecimal("0.2");
 	
+	/**
+	 * 最多需要填写的参与个数, 如果根据参与度得出的结果大于这个数，
+	 * 那么就取该数
+	 */
+	private static final int reqNumber=20;
+	
 	private int winOrLose;
 	
 	private int draw;
@@ -32,6 +38,9 @@ public class Ptt {
 	private void initNeedCheck() {
 		this.totalCheck = reqPercent.multiply(new BigDecimal(this.draw+this.winOrLose))
 		.setScale(0, Constant.ROUND_MODEL).intValue();
+		if(this.totalCheck>reqNumber){
+			this.totalCheck=reqNumber;
+		}
 		int tempNeedCheck=this.totalCheck-this.winOrLose;
 		this.needCheck=tempNeedCheck>0?tempNeedCheck:0;
 	}

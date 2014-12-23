@@ -27,7 +27,6 @@ import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
 import cn.fyg.pa.domain.model.person.StateEnum;
-import cn.fyg.pa.domain.model.person.TypeEnum;
 import cn.fyg.pa.domain.model.summary.PersonSummary;
 import cn.fyg.pa.domain.model.yearchk.EnableYearNotExist;
 import cn.fyg.pa.domain.model.yearchk.Fycheck;
@@ -77,26 +76,24 @@ public class PersonYearChkCtl {
 			map.put("message","你无须参与年度横向评价！");
 			return Page.NOTTIME;
 		}
+		//如果部门参与人数太少，则不用参与横向评价
+		String chkPersonDept=chkPerson.getDepartment();
+		List<Person> sameDeptPerson=personRepository.getStaffByDeptValid(chkPersonDept);
+		sameDeptPerson=removePerson(sameDeptPerson,chkPerson);
+		if(sameDeptPerson==null || sameDeptPerson.size()<=1){
+			map.put("message","你部门的人数太少，无需参与评价！");
+			return Page.NOTTIME;
+		}
 		
 		boolean commit = yearchkStateService.isCommit(year, chkPerson.getId());
 		
-		String chkPersonDept=chkPerson.getDepartment();
-		TypeEnum chkPersonType = chkPerson.getType();
+		List<Fycheck> hasChkFycheck=yearChkRepositroy.getPersonYearChkByChkperson(year,chkPerson);
+		Map<String,Fycheck> hasChecksValues=changeChecksToMap(hasChkFycheck);
 		
-		if(!commit){
-			List<Fycheck> hasChkFycheck=yearChkRepositroy.getPersonYearChkByChkperson(year,chkPerson);
-			Map<String,Fycheck> hasChecksValues=changeChecksToMap(hasChkFycheck);
-				
-			List<Person> sameDeptPerson=personRepository.getStaffByDeptValid(chkPersonDept);
-			sameDeptPerson=removePerson(sameDeptPerson,chkPerson);
+		if(!commit){				
 			PageBuilder builder=new PageBuilder(year, chkPerson, sameDeptPerson, hasChecksValues);
 			List<RowBean> rowBeanList = builder.createRowBeanList();
 			int maxLen_dept=builder.getMaxLen();
-			
-			List<Person> otherDeptPerson=personRepository.getStaffByTypeNotDeptValid(chkPersonType,chkPersonDept);
-			builder=new PageBuilder(year, chkPerson, otherDeptPerson, hasChecksValues);
-			rowBeanList.addAll(builder.createRowBeanList());
-			int maxLen_otherDept=builder.getMaxLen();
 			
 			//计算参与度
 			PttUtil pttUtil=new PttUtilRowBean(rowBeanList);
@@ -104,18 +101,13 @@ public class PersonYearChkCtl {
 			map.put("ptt", ptt);
 			
 			map.put("rowBeanList", rowBeanList);
-			map.put("maxLen", maxLen_dept>=maxLen_otherDept?maxLen_dept:maxLen_otherDept);
-		}else{
-			List<Person> personList=new ArrayList<Person>();
-			List<Person> sameDeptPerson=personRepository.getStaffByDeptValid(chkPersonDept);
-			sameDeptPerson=removePerson(sameDeptPerson,chkPerson);
-			List<Person> otherDeptPerson=personRepository.getStaffByTypeNotDeptValid(chkPersonType,chkPersonDept);
-			personList.addAll(sameDeptPerson);
-			personList.addAll(otherDeptPerson);
+			map.put("maxLen", maxLen_dept);		
+		}else{		
+			
 			Map<Long, Object[]> personYearChkResult = yearChkRepositroy.getPersonYearChkResult(year, chkPerson);
-			ResultBuilder builder = new ResultBuilder(personList,personYearChkResult);
+			ResultBuilder builder = new ResultBuilder(sameDeptPerson,personYearChkResult);
 			List<ResultBean> resultBeanList = builder.create();
-			map.put("resultBeanList", resultBeanList);
+			map.put("resultBeanList", resultBeanList);		
 		}
 		
 		map.put("person", chkPerson);
