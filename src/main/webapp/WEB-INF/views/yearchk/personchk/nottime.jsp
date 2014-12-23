@@ -12,7 +12,7 @@
 </script>
 </head>
 <c:set target="${pagefunc}" property="name" value="年度横向评价" />
-<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/yearchk" />  
+<c:set target="${pagefunc}" property="url" value="/${ctx}/personsc" />  
 
 
 <c:set var="pagesize" value="825" scope="request"/> 

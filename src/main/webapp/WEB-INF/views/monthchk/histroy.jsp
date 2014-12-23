@@ -5,7 +5,7 @@
 <%@ include file="../common/head.jsp"%>
 </head> 
 <c:set target="${pagefunc}" property="name" value="月度工作历史" /> 
-<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/monthchk/histroy" /> 
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthsmy/histroy" /> 
 <c:set var="pagesize" value="800" scope="request"/> 
 <body>
 <form action="" method="get">
