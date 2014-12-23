@@ -110,7 +110,10 @@ public class GmangeIdrMonthPlanChkCtl {
 		List<Department> departments = departmentRepository.findDepartmentsByGmanage(person);
 		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByDepartmentAndState(departments,IdrMonthPlanEnum.FINISHED);
 		List<IdrMonthPlanBill> limitReturnBills=new ArrayList<IdrMonthPlanBill>();
-		for(int i=0;i<20;i++){
+		//TODO 数据过多时，限制返回结果临时解决方案,限制最多返回20条
+		int len=idrMonthPlanBills.size();
+		len= len>20? 20:len;
+		for(int i=0;i<len;i++){
 			limitReturnBills.add(idrMonthPlanBills.get(i));
 		}
 		map.put("person", person);
