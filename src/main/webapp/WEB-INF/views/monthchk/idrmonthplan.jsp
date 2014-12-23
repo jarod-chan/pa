@@ -5,7 +5,7 @@
 <%@ include file="../common/head.jsp"%>
 </head>
 <c:set target="${pagefunc}" property="name" value="部门计划查看" /> 
-<c:set target="${pagefunc}" property="url" value="/${ctx}/person/${person.id}/monthchk/idrmonthplan" /> 
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthsmy/idrmonthplan" />
 
 <c:set var="pagesize" value="720" scope="request"/> 
 <body>
