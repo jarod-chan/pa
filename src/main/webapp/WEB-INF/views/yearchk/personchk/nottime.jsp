@@ -18,15 +18,6 @@
 <c:set var="pagesize" value="825" scope="request"/> 
 <body>
 
-<div class="headdiv" >
-<div class="headleft"  >
-&nbsp;
-</div>
-<div class="headright" >
-&nbsp;
-</div>
-<div  class="headnone"></div>
-</div>
 <%@ include file="../../common/message.jsp"%>
 </body>
 </html>
