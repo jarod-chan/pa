@@ -9,7 +9,7 @@ public class Ptt {
 	/**
 	 * 需要达到的参与度
 	 */
-	private static final BigDecimal reqPercent=new BigDecimal("0.2");
+	private static final BigDecimal reqPercent=new BigDecimal("0.5");
 	
 	/**
 	 * 最多需要填写的参与个数, 如果根据参与度得出的结果大于这个数，
