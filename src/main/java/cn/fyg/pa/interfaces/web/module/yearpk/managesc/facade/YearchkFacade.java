@@ -71,7 +71,7 @@ public class YearchkFacade {
 			page.setPerson(fyperson);
 			Long point=personPoint.get(fyperson.getId());
 			if(point!=null){
-				String getPoint=Tool.format(new BigDecimal(point).divide(Constant.POINT_LEVEL,3,BigDecimal.ROUND_HALF_DOWN));
+				String getPoint=Tool.format(new BigDecimal(point).divide(Constant.POINT_LEVEL,3,BigDecimal.ROUND_HALF_UP));
 				page.setGetPoint(getPoint);
 			}
 			ret.add(page);
