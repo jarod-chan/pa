@@ -147,7 +147,7 @@ public class ManageYearChkCtl {
 		
 		yearMangeChkService.saveAndRemoveList(saveList,removeList);
 		
-		String getPoint=Tool.format(new BigDecimal(totalPoin).divide(Constant.POINT_LEVEL,3,BigDecimal.ROUND_HALF_DOWN));
+		String getPoint=Tool.format(new BigDecimal(totalPoin).divide(Constant.POINT_LEVEL,3,BigDecimal.ROUND_HALF_UP));
 		
 		new SessionMPR(session).setMessage("保存成功,"+checkPerson.getName()+"合计得"+getPoint+"分");
 		return "redirect:../../";
