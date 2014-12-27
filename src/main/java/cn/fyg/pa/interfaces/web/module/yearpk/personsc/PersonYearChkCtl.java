@@ -131,7 +131,7 @@ public class PersonYearChkCtl {
 			while (iterator.hasNext()) {
 				Person person = iterator.next();
 				if (person.getId().equals(comparePerson.getId())) {
-					sameTypePerson.remove(person);
+					iterator.remove();
 					break;
 				}
 			}
