@@ -60,7 +60,7 @@ table th, table td {border:solid #000000;border-width:0 1px 1px 0;padding:2px;te
 	<span style="color:red;">（使用时，请注意你的网络状况，可能产生较多流量。）</span>
 </div>
 
-<div class="notification_title"><h2>房产各部门2014年度《方远报》投稿指标</h2></div>
+<div class="notification_title"><h2>房产各部门2015年度《方远报》投稿指标</h2></div>
 <div class="notification_context">
 	<div class="context">
 		<div class="middle">
