@@ -67,7 +67,7 @@ public class PersonRepositoryJpa implements PersonRepository {
 	}
 	
 	@Override
-	public List<Person> findPersonByManageOrderByDepartment(ManageEnum... mangeEnum) {
+	public List<Person> findPersonByManageOrderByDepartmentValid(ManageEnum... mangeEnum) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Person> query = builder.createQuery(Person.class);
 		Root<Person> person = query.from(Person.class);
@@ -75,6 +75,8 @@ public class PersonRepositoryJpa implements PersonRepository {
 
 		Predicate criteria=person.get("manage").in((Object[])mangeEnum);
 		criteria=builder.and(builder.equal(person.get("department"), department.get("name")),criteria);
+		criteria=builder.and(criteria,builder.equal(person.get("state"), StateEnum.valid));
+		
 		query.select(person);
 		query.where(criteria);
 		query.orderBy(builder.asc(department.get("number")));
@@ -195,6 +197,19 @@ public class PersonRepositoryJpa implements PersonRepository {
 		query.select(person);
 		query.where(criteria);
 		query.orderBy(builder.asc(person.get("id")));
+		return entityManager.createQuery(query).getResultList();
+	}
+
+	@Override
+	public List<Person> getStaffByDeptAndStateOrderById(String department,StateEnum... stateEnums) {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Person> query=builder.createQuery(Person.class);
+		Root<Person> root=query.from(Person.class);
+		Predicate criteria=builder.equal(root.get("department"), department);
+		criteria=builder.and(criteria,builder.equal(root.get("manage"), ManageEnum.N));
+		criteria=builder.and(criteria,root.get("state").in((Object[])stateEnums));
+		query.where(criteria);
+		query.orderBy(builder.asc(root.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
 

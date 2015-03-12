@@ -20,7 +20,7 @@ public interface PersonRepository {
 
 	int countStaffByType(TypeEnum type);
 
-	List<Person> findPersonByManageOrderByDepartment(ManageEnum... mangeEnum);
+	List<Person> findPersonByManageOrderByDepartmentValid(ManageEnum... mangeEnum);
 
 	List<Person> getStaffByType(TypeEnum type);
 	
@@ -34,6 +34,8 @@ public interface PersonRepository {
 	List<Person> getStaffByTypeNotDeptValid(TypeEnum type,String department);
 
 	List<Person> getStaffByDept(String department);
+	
+	List<Person> getStaffByDeptAndStateOrderById(String department,StateEnum... stateEnums);
 	
 	/**
 	 * 获得部门人员，过滤掉无效人员
