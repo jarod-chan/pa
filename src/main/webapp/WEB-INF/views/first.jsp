@@ -111,7 +111,7 @@ body {
 	var blurUsername=function(){
 		var username=$(this).val().trim();
 		$(this).val(username);
-		if(username=='陆兆贤'||username=='王坚'||username=='胡玉友'){
+		if(username=='陆兆贤'||username=='王坚'||username=='胡玉友'||username=='潘普兵'){
 			$("#specSel").show();
 		}else{
 			$("#specSel").hide();
