@@ -45,7 +45,7 @@ public class MangeMonthChkCtl {
 	/**为了再页面url不变的情况下保持查询条件
 	 * 所以把查询年月存储在session中 
 	 */
-	private static final String QUERY_BEAN = "manage.monthchk.mangemonthchkctl";
+	private static final String QUERY_BEAN = "monthsmy/manage";
 
 	@Resource
 	SessionUtil sessionUtil;
@@ -82,7 +82,7 @@ public class MangeMonthChkCtl {
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.POST)
-	public String setQueryBean(YearAndPrevMonth queryBean,HttpSession session){
+	public String setQueryBean(YearAndPrevMonth queryBean){
 		sessionUtil.setValue(QUERY_BEAN, queryBean);
 		return "redirect:/monthsmy/manage";
 	}
