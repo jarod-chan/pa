@@ -11,6 +11,7 @@ import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.model.person.ManageEnum;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.model.person.PersonRepository;
+import cn.fyg.pa.domain.model.person.StateEnum;
 import cn.fyg.pa.interfaces.web.module.report.analysismonthchk.dto.AnalysisMonthChkBean;
 
 @Component
@@ -22,7 +23,7 @@ public class AnalysisMonthChkFacade {
 	PersonRepository personRepository;
 	
 	public AnalysisMonthChkBean analyseMonthChk(Long year,Long month){
-		List<Person> persons=personRepository.findPersonByManageOrderByDepartment(ManageEnum.N);
+		List<Person> persons=personRepository.findPersonByManageAndStateOrderByDepartment(ManageEnum.N,StateEnum.invalid,StateEnum.valid);
 		List<MonthChk> monthChks=monthChkReposity.findMonthChkByPeriod(year, month);
 		AnalysisMonthChkBuiler builder=new AnalysisMonthChkBuiler(persons, monthChks);
 		return builder.build(year,month);

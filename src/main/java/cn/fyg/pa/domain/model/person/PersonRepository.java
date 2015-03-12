@@ -5,6 +5,10 @@ import java.util.List;
 
 
 public interface PersonRepository {
+	
+	List<Person> findPersonByManageAndStateOrderByDepartment(ManageEnum mangeEnum,StateEnum... stateEnums);
+	
+	
 
 	Person find(Long id);
 
@@ -20,7 +24,7 @@ public interface PersonRepository {
 
 	int countStaffByType(TypeEnum type);
 
-	List<Person> findPersonByManageOrderByDepartmentValid(ManageEnum... mangeEnum);
+	
 
 	List<Person> getStaffByType(TypeEnum type);
 	

@@ -67,19 +67,19 @@ public class PersonRepositoryJpa implements PersonRepository {
 	}
 	
 	@Override
-	public List<Person> findPersonByManageOrderByDepartmentValid(ManageEnum... mangeEnum) {
+	public List<Person> findPersonByManageAndStateOrderByDepartment(ManageEnum mangeEnum,StateEnum... stateEnums){
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Person> query = builder.createQuery(Person.class);
 		Root<Person> person = query.from(Person.class);
 		Root<Department> department=query.from(Department.class);
 
-		Predicate criteria=person.get("manage").in((Object[])mangeEnum);
+		Predicate criteria=builder.equal(person.get("manage"), mangeEnum);
+		criteria=builder.and(criteria,person.get("state").in((Object[])stateEnums));
 		criteria=builder.and(builder.equal(person.get("department"), department.get("name")),criteria);
-		criteria=builder.and(criteria,builder.equal(person.get("state"), StateEnum.valid));
-		
+			
 		query.select(person);
 		query.where(criteria);
-		query.orderBy(builder.asc(department.get("number")));
+		query.orderBy(builder.asc(department.get("number")),builder.asc(person.get("id")));
 		return entityManager.createQuery(query).getResultList();
 	}
 
