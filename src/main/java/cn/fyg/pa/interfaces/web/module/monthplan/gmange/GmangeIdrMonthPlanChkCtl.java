@@ -60,9 +60,11 @@ public class GmangeIdrMonthPlanChkCtl {
 	@PersonIn(0)
 	public String toList(Person person,Map<String,Object> map,HttpSession session){
 		List<Department> departments = departmentRepository.findDepartmentsByGmanage(person);
-		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByDepartmentAndState(departments,IdrMonthPlanEnum.SUBMITTED,IdrMonthPlanEnum.EXECUTE);
+		if(departments!=null&&!departments.isEmpty()){			
+			List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByDepartmentAndState(departments,IdrMonthPlanEnum.SUBMITTED,IdrMonthPlanEnum.EXECUTE);
+			map.put("idrMonthPlanBills", idrMonthPlanBills);
+		}
 		map.put("person", person);
-		map.put("idrMonthPlanBills", idrMonthPlanBills);
 		map.put("message",new SessionMPR(session).getMessage());
 		return "gmangeidrmonthplan/list";
 	}
