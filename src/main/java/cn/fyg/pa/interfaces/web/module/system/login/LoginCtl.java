@@ -87,6 +87,11 @@ public class LoginCtl {
 		if (loginRetBean.getMange().equals("N")) {
 			menuList.add(new UrlNameBean("月度工作历史","monthsmy/histroy"));
 			menuList.add(new UrlNameBean("部门计划查看","monthsmy/idrmonthplan"));
+			String name=loginRetBean.getName();
+			//XXX 办公室  李君查看报表
+			if(name.equals("李君")) {
+				menuList.add(new UrlNameBean("公司考核情况查询","totalreport"));
+			}
 		}
 		
 		
