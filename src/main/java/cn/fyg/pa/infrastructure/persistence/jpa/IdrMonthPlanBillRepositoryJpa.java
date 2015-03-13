@@ -90,6 +90,12 @@ public class IdrMonthPlanBillRepositoryJpa implements IdrMonthPlanBillRepository
 		return findByPeriodAndDepartmentAndState(null,null,departmentsArray,state);
 	}
 
+	@Override
+	public List<IdrMonthPlanBill>findIdrMonthPlanBillByPeriodAndDepartmentAndState(Long year,Long month,List<Department> departments,IdrMonthPlanEnum... state) {
+		Department[] departmentsArray=departments.toArray(new Department[departments.size()]);
+		return findByPeriodAndDepartmentAndState(year,month,departmentsArray,state);
+	}
+
 	
 	@Override
 	public List<IdrMonthPlanBill> findIdrMonthPlanBillByPeriod(Long year, Long month) {
