@@ -9,9 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import cn.fyg.pa.application.MonthChkService;
 import cn.fyg.pa.domain.model.monthchk.MonthChk;
@@ -33,6 +35,7 @@ import cn.fyg.pa.interfaces.web.shared.tool.DateTool;
  */
 @Controller
 @RequestMapping("monthsmy/manage")
+@SessionAttributes("monthplan_manage") 
 public class MangeMonthChkCtl {
 	
 	private static final String PATH="mange/monthchk/";
@@ -42,10 +45,6 @@ public class MangeMonthChkCtl {
 		String HISTROY  = PATH + "histroy";
 	}
 	
-	/**为了再页面url不变的情况下保持查询条件
-	 * 所以把查询年月存储在session中 
-	 */
-	private static final String QUERY_BEAN = "monthsmy/manage";
 
 	@Resource
 	SessionUtil sessionUtil;
@@ -58,34 +57,22 @@ public class MangeMonthChkCtl {
 	@Resource
 	MangeMonthChkFacade mangeMonthChkFacade;
 	
+	@ModelAttribute("monthplan_manage")
+	public YearAndPrevMonth monthplan_manage(){
+		return new YearAndPrevMonth();
+	}
 	
-	@RequestMapping(value="",method=RequestMethod.GET)
-	@PersonIn(0)
-	public String toList(Person person,Map<String,Object> map,HttpSession session){
-		YearAndPrevMonth queryBean=getYearAndPrevMonthFromSession();
-		List<MonthChk> monthChks=mangeMonthChkFacade.getAllPersonMonthChkByPeriod(queryBean.getYear(),queryBean.getMonth(),person.getDepartment());
+	@RequestMapping(value="",method={RequestMethod.GET,RequestMethod.POST})
+	@PersonIn(1)
+	public String toList(@ModelAttribute("monthplan_manage")YearAndPrevMonth monthplan_manage,Person person,Map<String,Object> map,HttpSession session){
+		List<MonthChk> monthChks=mangeMonthChkFacade.getAllPersonMonthChkByPeriod(monthplan_manage.getYear(),monthplan_manage.getMonth(),person.getDepartment());
 		map.put("dateTool", new DateTool());
-		map.put("queryBean", queryBean);
 		map.put("mange", person);
 		map.put("monthChks", monthChks);
 		map.put("message",new SessionMPR(session).getMessage());
 		return Page.LIST;
 	}
 
-	private YearAndPrevMonth getYearAndPrevMonthFromSession() {
-		YearAndPrevMonth monthChkQueryBean =  sessionUtil.getValue(QUERY_BEAN);
-		if(monthChkQueryBean==null){
-			monthChkQueryBean=new YearAndPrevMonth();
-			sessionUtil.setValue(QUERY_BEAN, monthChkQueryBean);
-		}
-		return monthChkQueryBean;
-	}
-	
-	@RequestMapping(value="",method=RequestMethod.POST)
-	public String setQueryBean(YearAndPrevMonth queryBean){
-		sessionUtil.setValue(QUERY_BEAN, queryBean);
-		return "redirect:/monthsmy/manage";
-	}
 	
 	@RequestMapping(value="/{monthchkId}",method=RequestMethod.GET)
 	@PersonIn(0)
