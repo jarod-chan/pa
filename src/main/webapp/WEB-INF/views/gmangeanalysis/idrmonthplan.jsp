@@ -36,8 +36,11 @@ tbody ul li a:VISITED{color: #000000;}
 		OpenEnvDefineWin("/${ctx}/report/analysis/idrmonthplan/"+monthplanId,860,600);
 	}
 
-	 $(document).ready(function() {
+	 $(function() {
 		$("#swithbtn").bind("change",selchange);
+		$("#queryform select").bind("change",function(){
+			$("#queryform").submit();
+		});
 	 });
 </script>
 </head>
@@ -50,27 +53,25 @@ tbody ul li a:VISITED{color: #000000;}
 
 <body>
 
-<form action="" method="get">
+<form id="queryform" action="/${ctx}/report/analysis/idrmonthplan" method="post">
 年份：
 <select name="year">
 	<c:forEach var="item" items="${dateTool.allYears}">
-		<option value="${item}" <c:if test="${item==queryBean.year}">selected="true"</c:if> >${item}</option>
+		<option value="${item}" <c:if test="${item==report_analysis_idrmonthplan.year}">selected="true"</c:if> >${item}</option>
 	</c:forEach>
 </select>
 月份：
 <select name="month">
 	<c:forEach var="item" items="${dateTool.allMonths}">
-		<option value="${item}" <c:if test="${item==queryBean.month}">selected="true"</c:if> >${item}</option>
+		<option value="${item}" <c:if test="${item==report_analysis_idrmonthplan.month}">selected="true"</c:if> >${item}</option>
 	</c:forEach>
 </select>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="submit" value="查询" />
 </form>
 <%@ include file="../common/message.jsp"%>
 <table border=1  style="table-layout:fixed;width:810px;" class="tbldef">
 <thead>
 	<tr>
-		<th>公司部门${queryBean.year}年${queryBean.month}月工作概况</th>
+		<th>公司部门${report_analysis_idrmonthplan.year}年${report_analysis_idrmonthplan.month}月工作概况</th>
 	</tr>
 </thead>
 		<tbody>

@@ -38,6 +38,9 @@ tbody ul li a:VISITED{color: #000000;}
 	
 	$(document).ready(function() {
 		$("#swithbtn").bind("change",selchange);
+		$("#queryform select").bind("change",function(){
+			$("#queryform").submit();
+		});
 	});
 </script>
 </head>
@@ -48,27 +51,26 @@ tbody ul li a:VISITED{color: #000000;}
 <c:set target="${pagetitle}" property="url" value="/${ctx}/report/analysis/monthchk" /> 
 
 <body>
-<form action="" method="get">
+<form id="queryform" action="/${ctx}/report/analysis/monthchk" method="post">
 年份：
 <select name="year">
 	<c:forEach var="item" items="${dateTool.allYears}">
-		<option value="${item}" <c:if test="${item==queryBean.year}">selected="true"</c:if> >${item}</option>
+		<option value="${item}" <c:if test="${item==report_analysis_monthchk.year}">selected="true"</c:if> >${item}</option>
 	</c:forEach>
 </select>
 月份：
 <select name="month">
 	<c:forEach var="item" items="${dateTool.allMonths}">
-		<option value="${item}" <c:if test="${item==queryBean.month}">selected="true"</c:if> >${item}</option>
+		<option value="${item}" <c:if test="${item==report_analysis_monthchk.month}">selected="true"</c:if> >${item}</option>
 	</c:forEach>
 </select>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="submit" value="查询" />
 </form>
+
 <%@ include file="../common/message.jsp"%>
 <table border=1 style="table-layout:fixed;width:810px;" class="tbldef">
 <thead>
 	<tr>
-		<th>公司员工${queryBean.year}年${queryBean.month}月工作概况</th>
+		<th>公司员工${report_analysis_monthchk.year}年${report_analysis_monthchk.month}月工作概况</th>
 	</tr>
 </thead>
 		<tbody>
