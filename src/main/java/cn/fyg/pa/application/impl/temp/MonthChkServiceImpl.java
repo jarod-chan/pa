@@ -1,4 +1,4 @@
-package cn.fyg.pa.application.impl;
+package cn.fyg.pa.application.impl.temp;
 
 import javax.annotation.Resource;
 
@@ -7,13 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.fyg.pa.application.MonthChkService;
 import cn.fyg.pa.domain.model.monthchk.MonthChk;
-import cn.fyg.pa.domain.model.monthchk.MonthChkEnum;
 import cn.fyg.pa.domain.model.monthchk.MonthChkFactory;
 import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 
-//@Service
+@Service
 public class MonthChkServiceImpl implements MonthChkService{
 	
 	@Resource
@@ -21,18 +20,11 @@ public class MonthChkServiceImpl implements MonthChkService{
 	
 	@Override
 	public MonthChk getCurrentMonthChk(Person person) {
-		MonthChk monthChk=monthChkRepository.findLastMonthMonthChk(person);
+		MonthChk monthChk=monthChkRepository.findMonthChkByPeriodAndPerson(2015L, 3L, person);
 		if(monthChk==null){
-			return MonthChkFactory.createInitMonthChk(person);
-		}
-		if(isMaxMonthMonthChkFinished(monthChk)){
-			return MonthChkFactory.createNextMonthChk(person, monthChk.getYear(),monthChk.getMonth());
+			return MonthChkFactory.createMonthChk(person,2015L,3L);
 		}
 		return monthChk;
-	}
-
-	private boolean isMaxMonthMonthChkFinished(MonthChk monthChk) {
-		return monthChk.getState()==MonthChkEnum.FINISHED;
 	}
 	
 	@Override

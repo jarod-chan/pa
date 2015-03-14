@@ -1,4 +1,4 @@
-package cn.fyg.pa.application.impl;
+package cn.fyg.pa.application.impl.temp;
 
 import javax.annotation.Resource;
 
@@ -13,7 +13,7 @@ import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBillRepository;
 import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 
-//@Service
+@Service
 public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 	
 	@Resource
@@ -27,18 +27,11 @@ public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 
 	@Override
 	public IdrMonthPlanBill getLastIdrMonthPlanBill(Department department) {
-		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillRepository.findLastIdrMonthPlanBill(department);
+		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriodAndDepartment(2015L, 3L, department);
 		if(idrMonthPlanBill==null){
-			return IdrMonthPlanBillFactory.createInitIdrMonthPlanBill(department);
-		}
-		if(isMaxMonthFinished(idrMonthPlanBill)){
-			return IdrMonthPlanBillFactory.createNextIdrMonthPlanBill(department, idrMonthPlanBill.getYear(), idrMonthPlanBill.getMonth());
+			return IdrMonthPlanBillFactory.createIdrMonthPlanBill(department, 2015L, 3L);
 		}
 		return idrMonthPlanBill;
-	}
-
-	private boolean isMaxMonthFinished(IdrMonthPlanBill idrMonthPlanBill) {
-		return idrMonthPlanBill.getState()==IdrMonthPlanEnum.FINISHED;
 	}
 
 	

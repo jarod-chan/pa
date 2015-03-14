@@ -142,4 +142,15 @@ public class IdrMonthPlanBillRepositoryJpa implements IdrMonthPlanBillRepository
 		return entityManager.createQuery(query).getResultList();	
 	}
 
+	@Override
+	public IdrMonthPlanBill findIdrMonthPlanBillByPeriodAndDepartment(
+			Long year, Long month, Department department) {
+		List<IdrMonthPlanBill> list = findByPeriodAndDepartmentAndState(year, month, new Department[]{department});
+		if(list.isEmpty()){
+			return null;
+		}
+		return list.get(0);
+		
+	}
+
 }

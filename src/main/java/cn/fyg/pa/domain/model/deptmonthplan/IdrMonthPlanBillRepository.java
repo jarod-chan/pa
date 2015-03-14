@@ -14,6 +14,8 @@ public interface IdrMonthPlanBillRepository {
 	
 	IdrMonthPlanBill findLastIdrMonthPlanBill(Department department);
 	
+	IdrMonthPlanBill findIdrMonthPlanBillByPeriodAndDepartment(Long year, Long month,Department department);
+	
 	List<IdrMonthPlanBill> findIdrMonthPlanBillByPeriod(Long year, Long month);
 	
 	List<IdrMonthPlanBill> findIdrMonthPlanBillByDepartmentAndState(Department department,IdrMonthPlanEnum... state);

@@ -122,4 +122,14 @@ public class MonthChkRepositoryJpa implements MonthChkRepository {
 		return entityManager.createQuery(query).getResultList();
 	}
 
+	@Override
+	public MonthChk findMonthChkByPeriodAndPerson(Long year, Long month,
+			Person person) {
+		 List<MonthChk> list = findByPeriodAndDepartmentAndPersonAndState(year, month, null, person);
+		 if(list.isEmpty()){
+			 return null;
+		 }
+		 return list.get(0);
+	}
+
 }

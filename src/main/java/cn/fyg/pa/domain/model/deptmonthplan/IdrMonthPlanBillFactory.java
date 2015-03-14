@@ -21,7 +21,7 @@ public class IdrMonthPlanBillFactory {
 		return createIdrMonthPlanBill(department,year,month);
 	}
 	
-	private static IdrMonthPlanBill createIdrMonthPlanBill(Department department,Long year,Long month){
+	public static IdrMonthPlanBill createIdrMonthPlanBill(Department department,Long year,Long month){
 		IdrMonthPlanBill idrMonthPlanBill=new IdrMonthPlanBill();
 		idrMonthPlanBill.setDepartment(department);
 		idrMonthPlanBill.setState(IdrMonthPlanEnum.NEW);
