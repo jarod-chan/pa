@@ -9,8 +9,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import cn.fyg.pa.application.MonthChkService;
 import cn.fyg.pa.domain.model.department.Department;
@@ -27,11 +29,13 @@ import cn.fyg.pa.domain.model.worktype.WorkType;
 import cn.fyg.pa.domain.model.worktype.WorkTypeRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.interfaces.web.advice.personin.annotation.PersonIn;
+import cn.fyg.pa.interfaces.web.shared.bean.YearBean;
 import cn.fyg.pa.interfaces.web.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.web.shared.tool.DateTool;
 
 @Controller
 @RequestMapping("/monthsmy")
+@SessionAttributes("monthsmy_histroy")
 public class MonthsmyCtl {
 	
 	private static final String PATH="monthchk/";	
@@ -100,12 +104,16 @@ public class MonthsmyCtl {
 		return "redirect:/monthsmy";
 	}
 	
-	@RequestMapping(value="/histroy",method=RequestMethod.GET)
+	@ModelAttribute("monthsmy_histroy")
+	public YearBean monthsmy_histroy(){
+		return new YearBean();
+	}
+	
+	@RequestMapping(value="histroy",method={RequestMethod.GET,RequestMethod.POST})
 	@PersonIn(1)
-	public String histroy(MonthChkYearQueryBean queryBean,Person person,Map<String,Object> map,HttpSession session){
-		List<MonthChk> monthChks=monthChkRepository.getMonthChkByPersonAndState(queryBean.getYear(), person, MonthChkEnum.FINISHED);
+	public String histroy(@ModelAttribute("monthsmy_histroy")YearBean monthsmy_histroy,Person person,Map<String,Object> map,HttpSession session){
+		List<MonthChk> monthChks=monthChkRepository.getMonthChkByPersonAndState(monthsmy_histroy.getYear(), person, MonthChkEnum.FINISHED);
 		map.put("dateTool", new DateTool());
-		map.put("queryBean", queryBean);
 		map.put("monthChks", monthChks);
 		map.put("person", person);
 		map.put("message",new SessionMPR(session).getMessage());

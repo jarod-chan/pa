@@ -10,7 +10,6 @@ import cn.fyg.pa.domain.model.department.Department;
 import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBill;
 import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBillFactory;
 import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBillRepository;
-import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 
 @Service
