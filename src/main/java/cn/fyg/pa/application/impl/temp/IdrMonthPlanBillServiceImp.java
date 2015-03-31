@@ -26,9 +26,9 @@ public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 
 	@Override
 	public IdrMonthPlanBill getLastIdrMonthPlanBill(Department department) {
-		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriodAndDepartment(2015L, 3L, department);
+		IdrMonthPlanBill idrMonthPlanBill=idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriodAndDepartment(2015L, 4L, department);
 		if(idrMonthPlanBill==null){
-			return IdrMonthPlanBillFactory.createIdrMonthPlanBill(department, 2015L, 3L);
+			return IdrMonthPlanBillFactory.createIdrMonthPlanBill(department, 2015L, 4L);
 		}
 		return idrMonthPlanBill;
 	}
