@@ -13,7 +13,7 @@ import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanBillRepository;
 import cn.fyg.pa.domain.model.deptmonthplan.IdrMonthPlanEnum;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 
-//@Service
+@Service
 public class IdrMonthPlanBillServiceImp implements IdrMonthPlanBillService {
 	
 	@Resource

@@ -13,7 +13,7 @@ import cn.fyg.pa.domain.model.monthchk.MonthChkRepository;
 import cn.fyg.pa.domain.model.person.Person;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 
-//@Service
+@Service
 public class MonthChkServiceImpl implements MonthChkService{
 	
 	@Resource
