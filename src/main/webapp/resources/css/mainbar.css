@@ -4,11 +4,11 @@
 .nav,.nav li ul{margin:0;padding:0;}
 .nav {list-style-type:none;}
 .nav li {position:relative;float:left;}
-.nav li ul {display:none;position:absolute;top:15px;padding-top:3px;list-style-type:none;}
-.nav li ul li {padding-top:5px;padding-left:0px;background-color: #FFFFFF;clear: both;}
-.nav li ul li a{text-decoration: none;color:#000000;white-space:nowrap;}
-.nav li ul li a:HOVER{background-color: #5BADFF;}
-.nav li ul li a:VISITED{color: #000000;}
+.nav li ul {display:none;position:absolute;top:15px;padding-top:5px;list-style-type:none;}
+.nav li ul li {padding-left:0px;background-color: #FFFFFF;clear: both;}
+.nav li ul li a{text-decoration: none;color: #000000;white-space:nowrap; display:block;padding: 3px 0px;}
+.nav li ul li a:hover{background-color: #5BADFF; color: #FFFFFF;}
+
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -74,12 +74,12 @@
 
 /* 下左链接 */
 #mainbar .second_left a{
+	padding: 3px 3px;
 	text-decoration: none;
 	color:#000000;
 	white-space:nowrap;
 }
-#mainbar .second_left a:HOVER{background-color: #5BADFF;}
-#mainbar .second_left a:VISITED{color: #000000;}
+#mainbar .second_left a:HOVER{background-color: #5BADFF; color: #FFFFFF;}
 
 
 /* 下右 */
