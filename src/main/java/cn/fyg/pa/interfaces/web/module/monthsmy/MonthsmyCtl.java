@@ -29,13 +29,14 @@ import cn.fyg.pa.domain.model.worktype.WorkType;
 import cn.fyg.pa.domain.model.worktype.WorkTypeRepository;
 import cn.fyg.pa.domain.shared.state.StateChangeException;
 import cn.fyg.pa.interfaces.web.advice.personin.annotation.PersonIn;
+import cn.fyg.pa.interfaces.web.shared.bean.YearAndMonthBean;
 import cn.fyg.pa.interfaces.web.shared.bean.YearBean;
 import cn.fyg.pa.interfaces.web.shared.message.impl.SessionMPR;
 import cn.fyg.pa.interfaces.web.shared.tool.DateTool;
 
 @Controller
 @RequestMapping("/monthsmy")
-@SessionAttributes("monthsmy_histroy")
+@SessionAttributes({"monthsmy_histroy","monthsmy_monthplan"})
 public class MonthsmyCtl {
 	
 	private static final String PATH="monthchk/";	
@@ -43,7 +44,7 @@ public class MonthsmyCtl {
 		String EDIT = PATH + "edit";
 		String VIEW = PATH + "view";
 		String HISTROY = PATH + "histroy";
-		String IDRMONTHPLAN = PATH + "idrmonthplan";
+		String MONTHPLAN = PATH + "monthplan";
 	}
 	
 	public static Map<MonthChkEnum,String> PAGEMAP=new HashMap<MonthChkEnum,String>();
@@ -120,19 +121,23 @@ public class MonthsmyCtl {
 		return Page.HISTROY;
 	}
 	
-	@RequestMapping(value="/idrmonthplan",method=RequestMethod.GET)
+	@ModelAttribute("monthsmy_monthplan")
+	public YearAndMonthBean report_analysis_idrmonthplan(){
+		return new YearAndMonthBean();
+	}
+	
+	@RequestMapping(value="/monthplan",method={RequestMethod.GET,RequestMethod.POST})
 	@PersonIn(1)
-	public String idrMonthPlan(IdrMonthPlanQueryBean queryBean,Person person,Map<String,Object> map){
+	public String monthPlan(@ModelAttribute("monthsmy_monthplan")YearAndMonthBean monthsmy_monthplan,Person person,Map<String,Object> map){
 		Department department = departmentRepository.findDepartmentByName(person.getDepartment());
 		List<IdrMonthPlanBill> idrMonthPlanBills = idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriodAndDepartmentAndState(
-						queryBean.getYear(), 
-						queryBean.getMonth(), 
+						monthsmy_monthplan.getYear(), 
+						monthsmy_monthplan.getMonth(), 
 						department,
 						IdrMonthPlanEnum.EXECUTE, IdrMonthPlanEnum.FINISHED);
 		map.put("dateTool", new DateTool());
-		map.put("queryBean", queryBean);
 		map.put("idrMonthPlanBills", idrMonthPlanBills);
-		return Page.IDRMONTHPLAN;
+		return Page.MONTHPLAN;
 	}
 	
 }

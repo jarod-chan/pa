@@ -3,29 +3,35 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
+<script type="text/javascript">
+$(function() {
+	$("#queryform select").bind("change",function(){
+		$("#queryform").submit();
+	});
+});
+</script>
 </head>
+
 <c:set target="${pagefunc}" property="name" value="部门计划查看" /> 
-<c:set target="${pagefunc}" property="url" value="/${ctx}/monthsmy/idrmonthplan" />
+<c:set target="${pagefunc}" property="url" value="/${ctx}/monthsmy/monthplan" />
 
 <c:set var="pagesize" value="720" scope="request"/> 
 <body>
-<form action="" method="get">
+<form id="queryform" action="" method="post">
 <div class="headdiv" >
 <div class="headleft" >
 年份：
 <select name="year">
 	<c:forEach var="item" items="${dateTool.allYears}">
-		<option value="${item}" <c:if test="${item==queryBean.year}">selected="true"</c:if> >${item}</option>
+		<option value="${item}" <c:if test="${item==monthsmy_monthplan.year}">selected="true"</c:if> >${item}</option>
 	</c:forEach>
 </select>
 月份：
 <select name="month">
 	<c:forEach var="item" items="${dateTool.allMonths}">
-		<option value="${item}" <c:if test="${item==queryBean.month}">selected="true"</c:if> >${item}</option>
+		<option value="${item}" <c:if test="${item==monthsmy_monthplan.month}">selected="true"</c:if> >${item}</option>
 	</c:forEach>
 </select>
-&nbsp;&nbsp;
-<input type="submit" value="查询" />
 </div>
 <div class="headright">
 </div>
