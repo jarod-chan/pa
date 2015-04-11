@@ -11,6 +11,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import cn.fyg.pa.domain.model.department.Department;
+import cn.fyg.pa.domain.model.department.Department.State;
 import cn.fyg.pa.domain.model.department.DepartmentRepository;
 import cn.fyg.pa.domain.model.person.Person;
 
@@ -57,6 +58,17 @@ public class DepartmentRepositoryJpa implements DepartmentRepository {
 			return null;
 		}
 		return ret.get(0);
+	}
+
+	@Override
+	public List<Department> findAllDepartmentsOrderById(State state) {
+		CriteriaBuilder builder=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Department> query=builder.createQuery(Department.class);
+		Root<Department> root=query.from(Department.class);
+		query.select(root);
+		query.where(builder.equal(root.get("state"), state));
+		query.orderBy(builder.asc(root.get("id")));
+		return entityManager.createQuery(query).getResultList();
 	}
 
 }

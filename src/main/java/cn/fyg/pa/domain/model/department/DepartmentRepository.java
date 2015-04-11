@@ -2,6 +2,7 @@ package cn.fyg.pa.domain.model.department;
 
 import java.util.List;
 
+import cn.fyg.pa.domain.model.department.Department.State;
 import cn.fyg.pa.domain.model.person.Person;
 
 public interface DepartmentRepository {
@@ -13,4 +14,6 @@ public interface DepartmentRepository {
 	List<Department> findAllDepartmentsOrderById();
 
 	List<Department> findDepartmentsByGmanage(Person gmanage);
+	
+	List<Department> findAllDepartmentsOrderById(State state);
 }

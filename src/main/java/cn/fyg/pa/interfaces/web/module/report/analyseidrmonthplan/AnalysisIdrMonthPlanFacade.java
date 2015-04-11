@@ -22,7 +22,7 @@ public class AnalysisIdrMonthPlanFacade {
 	
 
 	public AnalysisIdrMonthPlanBean analysisIdrMonthPlan(Long year, Long month){
-		List<Department> departments=departmentRepository.findAllDepartmentsOrderById();
+		List<Department> departments=departmentRepository.findAllDepartmentsOrderById(Department.State.enable);
 		List<IdrMonthPlanBill> idrMonthPlanBills=idrMonthPlanBillRepository.findIdrMonthPlanBillByPeriod(year,month);
 		AnalysisIdrMonthPlanBuilder builder = new AnalysisIdrMonthPlanBuilder(departments,idrMonthPlanBills);
 		return builder.build(year, month);
