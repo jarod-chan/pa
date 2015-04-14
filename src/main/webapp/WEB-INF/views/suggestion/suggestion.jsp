@@ -88,7 +88,7 @@
 			val=content_text.val();
 			var len=Trim(val).length;
 			if(len<5){
-				$(".not_enough").show();
+				$(this).prev().show();
 				setTimeout(function(){
 					$(".not_enough").hide();
 				},5000);
