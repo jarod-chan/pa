@@ -47,14 +47,15 @@
 		</profile>
 	</profiles>
 	
-	
-	
-
 	<dependencies>
-
-
+		<!-- Jackson JSON Mapper 使用spring返回json对象 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.7.1</version>
+		</dependency>
+	
 		<!-- Bean Validation Dependencies -->
-
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -267,23 +268,6 @@
 		
 	</dependencies>
 
-	<repositories>
-		<!-- JBoss Repository used for Java EE 6 pieces -->
-		<repository>
-			<id>repository.jboss.org</id>
-			<name>JBoss Repository</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-		</repository>
-
-		<repository>
-			<id>org.springframework.maven.milestone</id>
-			<name>Spring Maven Milestone Repository</name>
-			<url>http://maven.springframework.org/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 
 	<build>
 		<finalName>pa</finalName>
