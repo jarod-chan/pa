@@ -6,8 +6,14 @@
 .nav li {position:relative;float:left;}
 .nav li ul {display:none;position:absolute;top:15px;padding-top:5px;list-style-type:none;}
 .nav li ul li {padding-left:0px;background-color: #FFFFFF;clear: both;}
-.nav li ul li a{text-decoration: none;color: #000000;white-space:nowrap; display:block;padding: 3px 0px;}
+.nav li ul li a{text-decoration: none;color: #000000;white-space:nowrap; display:block;padding: 3px 0px;background-color:#F0F0F0;}
 .nav li ul li a:hover{background-color: #5BADFF; color: #FFFFFF;}
+
+.nav li.spec a{
+	text-decoration: none;color: #000000;white-space:nowrap; display:block;padding-left:3px;padding-right:5px;
+}
+
+.nav li.spec a:hover{background-color: #5BADFF; color: #FFFFFF;}
 
 
 /*-----------------------------------------------------------------------------------------*/
@@ -20,10 +26,12 @@
 	border-style: none none solid none;
 	border-color: #000000; /*5BADFF*/
 	width: 1010px;
-	margin-top: 20px;
+	padding-top:20px;
+	padding-left:5px;
 	padding-bottom:2px;
 	margin-bottom: 20px;
 	font-weight:bold;
+	background-color: #F0F0F0;
 }
 
 /*取消浮动样式 ，通用  */
@@ -48,6 +56,7 @@
 /*上右  */
 #mainbar .top{
 	margin-bottom: 5px;
+	overflow: hidden;
 }
 
 #mainbar .top_right{
@@ -56,7 +65,7 @@
 }
 
 #mainbar .top_right .main_blank{
-	height:50px;
+	height:30px;
 	float:none;
 	text-align:right;
 }
@@ -79,7 +88,7 @@
 	color:#000000;
 	white-space:nowrap;
 }
-#mainbar .second_left a:HOVER{background-color: #5BADFF; color: #FFFFFF;}
+#mainbar .second_left a:hover{background-color: #5BADFF; color: #FFFFFF;}
 
 
 /* 下右 */

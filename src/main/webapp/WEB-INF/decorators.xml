@@ -12,6 +12,7 @@
 	<pattern>/yearpk*</pattern>
 	<pattern>/totalreport*</pattern>
 	<pattern>/report*</pattern>
+	<pattern>/suggestion*</pattern>
 </decorator>
 
 <!-- 此处用来定义不需要过滤的页面 --> 

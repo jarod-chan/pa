@@ -1,4 +1,4 @@
-<%@page import="org.springframework.context.annotation.Import"%>
+<%@	page import="org.springframework.context.annotation.Import"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -66,7 +66,6 @@ function logout(){
 			<div class="main_blank"><input type="button" value="退出" onclick="logout()"/>&nbsp;&nbsp;</div>
 			<div class="main_info">${loginInfo}&nbsp;&nbsp;</div>
 		</div>
-		<div class="clear_div"></div>
 	</div>
 	
 	<div class="second">
@@ -102,6 +101,7 @@ function logout(){
 					
 					</ul>
 				</li>
+				<li class="spec"><a href="/${ctx}/suggestion">意见建议!</a></li>
 			</ul>
 		</div>
 		<div class="clear_div"></div>

@@ -98,7 +98,7 @@ $(function() {
 	
 	//每5分钟执行自动保存
 	setInterval("autosave()",1000*60*5);
-	//文本最大长度控制在1000以内
+	//文本最大长度控制在10000以内
 	$(".content_text").attr({"maxlength":"10000"}).iemaxlength();
 });
 
