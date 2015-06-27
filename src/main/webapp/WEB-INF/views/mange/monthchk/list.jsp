@@ -65,6 +65,7 @@
 	</td>
 	<td>
 		${item.year}年${item.month}月份${item.person.name}工作完成情况
+		<c:if test="${item.state=='SUBMITTED'||item.state=='FINISHED'}"><input type="button"  value="查看" onclick="javascript:window.open('/${ctx}/monthsmy/manage/${item.id}/view','_self')"/></c:if>
 	</td>
 	<td>
 		${item.person.name}

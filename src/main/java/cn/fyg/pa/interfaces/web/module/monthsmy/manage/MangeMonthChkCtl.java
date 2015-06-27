@@ -43,6 +43,7 @@ public class MangeMonthChkCtl {
 		String LIST     = PATH + "list";
 		String EVALUATE = PATH + "evaluate";
 		String HISTROY  = PATH + "histroy";
+		String VIEW = PATH + "view";
 	}
 	
 
@@ -139,4 +140,11 @@ public class MangeMonthChkCtl {
 		return Page.HISTROY;
 	}
 	
+	@RequestMapping(value="{monthchkId}/view",method=RequestMethod.GET)
+	@PersonIn(0)
+	public String toView(Person person,@PathVariable("monthchkId") Long monthchkId,Map<String,Object> map){
+		MonthChk monthChk=monthChkRepository.find(monthchkId);
+		map.put("monthChk", monthChk);
+		return Page.VIEW;
+	}
 }
