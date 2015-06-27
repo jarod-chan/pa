@@ -130,9 +130,12 @@ public class LoginCtl {
 			menuList.add(new UrlNameBean("月度工作小结","monthsmy"));
 			menuList.add(new UrlNameBean("个人述职报告","yearsmy"));
 			menuList.add(new UrlNameBean("年度横向评价","personsc"));
+			String name=loginRetBean.getName();
+			if(name.equals("阮善友")){
+				menuList.add(new UrlNameBean("部门月度计划","monthplan"));
+				menuList.add(new UrlNameBean("月度小结评价","monthsmy/manage"));
+			}
 		}
-		
-		
 		
 		return menuList;
 	}
