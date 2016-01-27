@@ -114,7 +114,8 @@ public class LoginCtl {
 				menuList.add(new UrlNameBean("部门月度计划","monthplan"));
 				menuList.add(new UrlNameBean("月度小结评价","monthsmy/manage"));
 				menuList.add(new UrlNameBean("个人述职报告","yearsmy"));
-				menuList.add(new UrlNameBean("年度绩效评价","mangesc"));
+				//关闭年度绩效评价
+				//menuList.add(new UrlNameBean("年度绩效评价","mangesc"));
 				//XXX 财务部  胡吉运 增加考核结果确认菜单
 				String name=loginRetBean.getName();
 				if(name.equals("胡吉运")){

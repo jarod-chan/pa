@@ -60,6 +60,8 @@ public class ManageYearChkCtl {
 		Long year = 0L;
 		try {
 			year = yearConfigService.getEnableYear();
+			//2015年部门经理评价取消
+			if(year>=2015) throw new EnableYearNotExist();
 		} catch (EnableYearNotExist e) {
 			map.put("message","当前时间无法进行年终员工考核");
 			return "yearchk/managechk/nottime";
