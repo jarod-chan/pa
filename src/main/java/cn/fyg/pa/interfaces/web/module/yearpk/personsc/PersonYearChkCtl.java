@@ -72,7 +72,7 @@ public class PersonYearChkCtl {
 			return Page.NOTTIME;
 		}
 		//添加无效人员过滤（部分返聘人员不参与年度绩效评价）
-		if(chkPerson.getState()==StateEnum.invalid){
+		if(chkPerson.getState()!=StateEnum.valid){
 			map.put("message","你无须参与年度横向评价！");
 			return Page.NOTTIME;
 		}
