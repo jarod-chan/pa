@@ -31,7 +31,7 @@ public class YearsmyCtl {
 	 * 固定年份
 	 * 后续可能改成从参数取
 	 */
-	public static final Long FIX_YEAR=2016L;
+	public static final Long FIX_YEAR=2017L;
 	
 	private static final String PATH = "summary/";
 	private interface Page {
